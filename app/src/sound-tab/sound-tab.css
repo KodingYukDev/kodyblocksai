@@ -1,0 +1,112 @@
+/* Editor suara. */
+/* ---------- editor suara ---------- */
+.kb-sound {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 720px;
+  outline: none;
+}
+
+.kb-sound__spacer {
+  flex: 1;
+}
+
+.kb-sound__wave {
+  position: relative;
+  height: 160px;
+  border: 1px solid var(--at-line);
+  border-radius: 6px;
+  background: var(--at-soft);
+  cursor: text;
+  touch-action: none;
+}
+
+.kb-sound__wave:focus-visible {
+  outline: 3px solid var(--at-focus);
+}
+
+.kb-sound__wave svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.kb-sound__path {
+  fill: var(--kb-sound-primary, #cf63cf);
+  stroke: #a63fa6;
+  stroke-width: 1;
+}
+
+.kb-sound__sel {
+  fill: rgba(76, 151, 255, 0.25);
+  stroke: var(--kb-motion-primary, #4c97ff);
+  stroke-width: 2;
+}
+
+.kb-sound__playhead {
+  stroke: #575e75;
+  stroke-width: 2;
+}
+
+.kb-sound__warn {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #ffab19;
+  color: #3b2a00;
+  font-size: 12px;
+}
+
+.kb-sound__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.kb-sound__play {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--kb-sound-primary, #cf63cf);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.kb-sound__play:focus-visible {
+  outline: 3px solid var(--at-focus);
+  outline-offset: 2px;
+}
+
+.kb-sound__effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.kb-sound__effect {
+  min-width: 88px;
+  min-height: 40px;
+  padding: 6px 10px;
+  border: 1px solid var(--at-line);
+  border-radius: 8px;
+  background: var(--at-bg);
+  color: var(--at-ink);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.kb-sound__effect:hover:not(:disabled),
+.kb-sound__effect:focus-visible {
+  border-color: var(--kb-sound-primary, #cf63cf);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(207, 99, 207, 0.25);
+}
+

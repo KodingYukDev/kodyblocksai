@@ -1,0 +1,5194 @@
+{
+ "version": 1,
+ "license": "Aset orisinal KodingYuk untuk KodyBlocks. Maskot Kody milik KodingYuk. Semua gambar dan suara dibuat sendiri.",
+ "categories": {
+  "sprite": [
+   {
+    "id": "kody",
+    "name": "Kody",
+    "nameEn": "Kody"
+   },
+   {
+    "id": "hewan",
+    "name": "Hewan",
+    "nameEn": "Animals"
+   },
+   {
+    "id": "fantasi",
+    "name": "Fantasi",
+    "nameEn": "Fantasy"
+   },
+   {
+    "id": "olahraga",
+    "name": "Olahraga",
+    "nameEn": "Sports"
+   },
+   {
+    "id": "benda",
+    "name": "Benda",
+    "nameEn": "Things"
+   },
+   {
+    "id": "transportasi",
+    "name": "Transportasi",
+    "nameEn": "Transportation"
+   },
+   {
+    "id": "alam",
+    "name": "Alam",
+    "nameEn": "Nature"
+   },
+   {
+    "id": "makanan",
+    "name": "Makanan",
+    "nameEn": "Food"
+   },
+   {
+    "id": "antarmuka",
+    "name": "Antarmuka",
+    "nameEn": "Interface"
+   }
+  ],
+  "backdrop": [
+   {
+    "id": "luar",
+    "name": "Luar Ruang",
+    "nameEn": "Outdoors"
+   },
+   {
+    "id": "air",
+    "name": "Air",
+    "nameEn": "Underwater"
+   },
+   {
+    "id": "kota",
+    "name": "Kota",
+    "nameEn": "City"
+   },
+   {
+    "id": "angkasa",
+    "name": "Angkasa",
+    "nameEn": "Space"
+   },
+   {
+    "id": "dalam",
+    "name": "Dalam Ruang",
+    "nameEn": "Indoors"
+   },
+   {
+    "id": "olahraga",
+    "name": "Olahraga",
+    "nameEn": "Sports"
+   },
+   {
+    "id": "belajar",
+    "name": "Belajar",
+    "nameEn": "Learning"
+   },
+   {
+    "id": "fantasi",
+    "name": "Fantasi",
+    "nameEn": "Fantasy"
+   }
+  ],
+  "sound": [
+   {
+    "id": "efek",
+    "name": "Efek",
+    "nameEn": "Effects"
+   },
+   {
+    "id": "kartun",
+    "name": "Kartun",
+    "nameEn": "Cartoon"
+   },
+   {
+    "id": "musik",
+    "name": "Musik",
+    "nameEn": "Music"
+   },
+   {
+    "id": "alam",
+    "name": "Alam",
+    "nameEn": "Nature"
+   },
+   {
+    "id": "hewan",
+    "name": "Hewan",
+    "nameEn": "Animals"
+   },
+   {
+    "id": "antarmuka",
+    "name": "Antarmuka",
+    "nameEn": "Interface"
+   },
+   {
+    "id": "olahraga",
+    "name": "Olahraga",
+    "nameEn": "Sports"
+   },
+   {
+    "id": "makanan",
+    "name": "Makanan",
+    "nameEn": "Food"
+   },
+   {
+    "id": "transportasi",
+    "name": "Transportasi",
+    "nameEn": "Transportation"
+   },
+   {
+    "id": "game",
+    "name": "Game",
+    "nameEn": "Game"
+   },
+   {
+    "id": "perkusi",
+    "name": "Perkusi",
+    "nameEn": "Percussion"
+   }
+  ]
+ },
+ "sprites": [
+  {
+   "kind": "sprite",
+   "id": "kody",
+   "name": "Kody",
+   "nameEn": "Kody",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "robot",
+    "kodingyuk"
+   ],
+   "costumes": [
+    {
+     "name": "kody-a",
+     "assetId": "9ad03baed127ab3e25ff0e645eb4f1d1",
+     "md5ext": "9ad03baed127ab3e25ff0e645eb4f1d1.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "kody-b",
+     "assetId": "1fa591aa6a2645a05cce7a8a28fa39b3",
+     "md5ext": "1fa591aa6a2645a05cce7a8a28fa39b3.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "kody-c",
+     "assetId": "e05007e5e45f654e599443d037ed3b49",
+     "md5ext": "e05007e5e45f654e599443d037ed3b49.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kody-merah",
+   "name": "Kody Merah",
+   "nameEn": "Red Kody",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "merah"
+   ],
+   "costumes": [
+    {
+     "name": "kody-merah-a",
+     "assetId": "4519bc65fba9168c7103756b55ed212f",
+     "md5ext": "4519bc65fba9168c7103756b55ed212f.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "kody-merah-b",
+     "assetId": "50ad0d0c455b7817ea2c4b8bfbe4e313",
+     "md5ext": "50ad0d0c455b7817ea2c4b8bfbe4e313.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "kody-merah-c",
+     "assetId": "5634559ab03f613ca2ec2249cda20ed2",
+     "md5ext": "5634559ab03f613ca2ec2249cda20ed2.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Boing",
+     "assetId": "115c4502afa884e42bc81aab2230991d",
+     "md5ext": "115c4502afa884e42bc81aab2230991d.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 13230
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kody-hijau",
+   "name": "Kody Hijau",
+   "nameEn": "Green Kody",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "hijau"
+   ],
+   "costumes": [
+    {
+     "name": "kody-hijau-a",
+     "assetId": "e3959d940cde5916dc644326bc22e439",
+     "md5ext": "e3959d940cde5916dc644326bc22e439.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "kody-hijau-b",
+     "assetId": "283e7c7cdf5a8e9f07735ad2b1b62575",
+     "md5ext": "283e7c7cdf5a8e9f07735ad2b1b62575.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "kody-hijau-c",
+     "assetId": "11badd19a7401287e047ee68bf33b1dd",
+     "md5ext": "11badd19a7401287e047ee68bf33b1dd.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Denting",
+     "assetId": "7066262cb81e7d8e781f4b77e57c1a03",
+     "md5ext": "7066262cb81e7d8e781f4b77e57c1a03.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 26460
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kody-ungu",
+   "name": "Kody Ungu",
+   "nameEn": "Purple Kody",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "ungu"
+   ],
+   "costumes": [
+    {
+     "name": "kody-ungu-a",
+     "assetId": "987a9f5af2dad2f33e2b8937161a8d99",
+     "md5ext": "987a9f5af2dad2f33e2b8937161a8d99.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "kody-ungu-b",
+     "assetId": "4623d0c79c8e722d93702ff6af4d1d0e",
+     "md5ext": "4623d0c79c8e722d93702ff6af4d1d0e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "kody-ungu-c",
+     "assetId": "b18d818a2b761d8ac6d69575007fd2e2",
+     "md5ext": "b18d818a2b761d8ac6d69575007fd2e2.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kody-malam",
+   "name": "Kody Malam",
+   "nameEn": "Night Kody",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "malam",
+    "gelap"
+   ],
+   "costumes": [
+    {
+     "name": "kody-malam-a",
+     "assetId": "6f6c6cd108652d31084e7074bfe274a8",
+     "md5ext": "6f6c6cd108652d31084e7074bfe274a8.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    },
+    {
+     "name": "kody-malam-b",
+     "assetId": "702cc50a5f1759213d5004758313084f",
+     "md5ext": "702cc50a5f1759213d5004758313084f.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    },
+    {
+     "name": "kody-malam-c",
+     "assetId": "5a7601d205632903302e5d4d8b64647f",
+     "md5ext": "5a7601d205632903302e5d4d8b64647f.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Boing",
+     "assetId": "115c4502afa884e42bc81aab2230991d",
+     "md5ext": "115c4502afa884e42bc81aab2230991d.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 13230
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kody-pesta",
+   "name": "Kody Pesta",
+   "nameEn": "Party Kody",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "pesta",
+    "ulang tahun"
+   ],
+   "costumes": [
+    {
+     "name": "kody-pesta-a",
+     "assetId": "580f36657f372ce7ea8722f13ac69b21",
+     "md5ext": "580f36657f372ce7ea8722f13ac69b21.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    },
+    {
+     "name": "kody-pesta-b",
+     "assetId": "c44d5346e1337d000ec0641e8801a03f",
+     "md5ext": "c44d5346e1337d000ec0641e8801a03f.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    },
+    {
+     "name": "kody-pesta-c",
+     "assetId": "c31b2c3daa990afc9671f248b589be4e",
+     "md5ext": "c31b2c3daa990afc9671f248b589be4e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Denting",
+     "assetId": "7066262cb81e7d8e781f4b77e57c1a03",
+     "md5ext": "7066262cb81e7d8e781f4b77e57c1a03.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 26460
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kody-keren",
+   "name": "Kody Keren",
+   "nameEn": "Cool Kody",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "kacamata"
+   ],
+   "costumes": [
+    {
+     "name": "kody-keren-a",
+     "assetId": "9e4b3dc47176523a1e70d7b3c6247e0a",
+     "md5ext": "9e4b3dc47176523a1e70d7b3c6247e0a.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    },
+    {
+     "name": "kody-keren-b",
+     "assetId": "5e3a01d06db7e8873f659a861989fe14",
+     "md5ext": "5e3a01d06db7e8873f659a861989fe14.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    },
+    {
+     "name": "kody-keren-c",
+     "assetId": "086133f273053183233e712e55777783",
+     "md5ext": "086133f273053183233e712e55777783.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kody-astronot",
+   "name": "Kody Astronot",
+   "nameEn": "Astronaut Kody",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "luar angkasa",
+    "astronot"
+   ],
+   "costumes": [
+    {
+     "name": "kody-astronot-a",
+     "assetId": "8caba9c29243018e08b21b54a2346f7f",
+     "md5ext": "8caba9c29243018e08b21b54a2346f7f.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    },
+    {
+     "name": "kody-astronot-b",
+     "assetId": "8299a484a44b6eefc5afea9307642971",
+     "md5ext": "8299a484a44b6eefc5afea9307642971.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    },
+    {
+     "name": "kody-astronot-c",
+     "assetId": "65291b955f8e58035d82d400913f7e4e",
+     "md5ext": "65291b955f8e58035d82d400913f7e4e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Boing",
+     "assetId": "115c4502afa884e42bc81aab2230991d",
+     "md5ext": "115c4502afa884e42bc81aab2230991d.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 13230
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kody-raja",
+   "name": "Kody Raja",
+   "nameEn": "King Kody",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "raja",
+    "mahkota"
+   ],
+   "costumes": [
+    {
+     "name": "kody-raja-a",
+     "assetId": "06c984f41374c7e7f5ffda5168add9ee",
+     "md5ext": "06c984f41374c7e7f5ffda5168add9ee.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    },
+    {
+     "name": "kody-raja-b",
+     "assetId": "6593b9ba58365f6f30bf32cb6aea72e1",
+     "md5ext": "6593b9ba58365f6f30bf32cb6aea72e1.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    },
+    {
+     "name": "kody-raja-c",
+     "assetId": "76b4cfe07331117f1693355e0d181cd7",
+     "md5ext": "76b4cfe07331117f1693355e0d181cd7.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 66
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Denting",
+     "assetId": "7066262cb81e7d8e781f4b77e57c1a03",
+     "md5ext": "7066262cb81e7d8e781f4b77e57c1a03.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 26460
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "ikan",
+   "name": "Ikan",
+   "nameEn": "Fish",
+   "category": "hewan",
+   "tags": [
+    "laut",
+    "air",
+    "berenang"
+   ],
+   "costumes": [
+    {
+     "name": "ikan-a",
+     "assetId": "2e4926f27cfcef432fde903b39f98a91",
+     "md5ext": "2e4926f27cfcef432fde903b39f98a91.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 45,
+     "rotationCenterY": 40
+    },
+    {
+     "name": "ikan-b",
+     "assetId": "d94f8d9e831dc639c3fdad97235a537c",
+     "md5ext": "d94f8d9e831dc639c3fdad97235a537c.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 45,
+     "rotationCenterY": 40
+    },
+    {
+     "name": "ikan-c",
+     "assetId": "a8b10120856b202116815b430d7799e6",
+     "md5ext": "a8b10120856b202116815b430d7799e6.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 45,
+     "rotationCenterY": 40
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Gelembung",
+     "assetId": "5e8c71ae1b265771dff7d4237b750a01",
+     "md5ext": "5e8c71ae1b265771dff7d4237b750a01.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 7056
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "burung",
+   "name": "Burung",
+   "nameEn": "Bird",
+   "category": "hewan",
+   "tags": [
+    "terbang",
+    "sayap"
+   ],
+   "costumes": [
+    {
+     "name": "burung-a",
+     "assetId": "ec3dd7ba4e255b8de62417f16b9d0864",
+     "md5ext": "ec3dd7ba4e255b8de62417f16b9d0864.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 40
+    },
+    {
+     "name": "burung-b",
+     "assetId": "2449346dfc5425ee6bd701a5c8a39fbf",
+     "md5ext": "2449346dfc5425ee6bd701a5c8a39fbf.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 40
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Cicit Burung",
+     "assetId": "01497704a3280bcd5fc4e8569e922d63",
+     "md5ext": "01497704a3280bcd5fc4e8569e922d63.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 8354
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kupu-kupu",
+   "name": "Kupu-kupu",
+   "nameEn": "Butterfly",
+   "category": "hewan",
+   "tags": [
+    "terbang",
+    "serangga",
+    "taman"
+   ],
+   "costumes": [
+    {
+     "name": "kupu-kupu-a",
+     "assetId": "f082eee9511149962082889efb1643c2",
+     "md5ext": "f082eee9511149962082889efb1643c2.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 42
+    },
+    {
+     "name": "kupu-kupu-b",
+     "assetId": "49051932836d6b1f098869a5bcfbd625",
+     "md5ext": "49051932836d6b1f098869a5bcfbd625.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 42
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Sihir",
+     "assetId": "51b5ccf895ee713db65a7f2f77011151",
+     "md5ext": "51b5ccf895ee713db65a7f2f77011151.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 22050
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "hantu",
+   "name": "Hantu",
+   "nameEn": "Ghost",
+   "category": "fantasi",
+   "tags": [
+    "seram",
+    "halloween"
+   ],
+   "costumes": [
+    {
+     "name": "hantu-a",
+     "assetId": "af61042180b54d4ae7d9e03631bca664",
+     "md5ext": "af61042180b54d4ae7d9e03631bca664.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "hantu-b",
+     "assetId": "3bdc88e993b1caeb64bd08ae8d694813",
+     "md5ext": "3bdc88e993b1caeb64bd08ae8d694813.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Wus",
+     "assetId": "ece004864d7b463ee2e63feeb0473906",
+     "md5ext": "ece004864d7b463ee2e63feeb0473906.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 11025
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kepiting",
+   "name": "Kepiting",
+   "nameEn": "Crab",
+   "category": "hewan",
+   "tags": [
+    "laut",
+    "pantai"
+   ],
+   "costumes": [
+    {
+     "name": "kepiting-a",
+     "assetId": "99941e6913a8a67c983389959ad49092",
+     "md5ext": "99941e6913a8a67c983389959ad49092.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 42
+    },
+    {
+     "name": "kepiting-b",
+     "assetId": "40b0d5809e85ad7eb87bec2534627b1b",
+     "md5ext": "40b0d5809e85ad7eb87bec2534627b1b.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 42
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Klik",
+     "assetId": "88fdfae06e12e1fd72dd1e7aa38645f2",
+     "md5ext": "88fdfae06e12e1fd72dd1e7aa38645f2.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 882
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "dino",
+   "name": "Dino",
+   "nameEn": "Dino",
+   "category": "hewan",
+   "tags": [
+    "dinosaurus",
+    "purba"
+   ],
+   "costumes": [
+    {
+     "name": "dino-a",
+     "assetId": "b545c0b8944f2effc748412b136b3ed2",
+     "md5ext": "b545c0b8944f2effc748412b136b3ed2.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 60,
+     "rotationCenterY": 48
+    },
+    {
+     "name": "dino-b",
+     "assetId": "84e75601783e9bf625f121a862c3eba9",
+     "md5ext": "84e75601783e9bf625f121a862c3eba9.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 60,
+     "rotationCenterY": 48
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Auman",
+     "assetId": "5efee60cc2c17b174c40d95c2b3d0856",
+     "md5ext": "5efee60cc2c17b174c40d95c2b3d0856.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 22050
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "lebah",
+   "name": "Lebah",
+   "nameEn": "Bee",
+   "category": "hewan",
+   "tags": [
+    "serangga",
+    "terbang",
+    "madu"
+   ],
+   "costumes": [
+    {
+     "name": "lebah-a",
+     "assetId": "a384a003208ceae5c954a4ba22d5692a",
+     "md5ext": "a384a003208ceae5c954a4ba22d5692a.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 45,
+     "rotationCenterY": 35
+    },
+    {
+     "name": "lebah-b",
+     "assetId": "70b6ee1174009caba625665eb5baa990",
+     "md5ext": "70b6ee1174009caba625665eb5baa990.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 45,
+     "rotationCenterY": 35
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Dengung",
+     "assetId": "86651a58147e6e1c7c333e74ff747ded",
+     "md5ext": "86651a58147e6e1c7c333e74ff747ded.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 19845
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "anjing",
+   "name": "Anjing",
+   "nameEn": "Dog",
+   "category": "hewan",
+   "tags": [
+    "peliharaan"
+   ],
+   "costumes": [
+    {
+     "name": "anjing-a",
+     "assetId": "48402684cfc50982428ed9ba9c4d8fb7",
+     "md5ext": "48402684cfc50982428ed9ba9c4d8fb7.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 55,
+     "rotationCenterY": 48
+    },
+    {
+     "name": "anjing-b",
+     "assetId": "217766ff7053bc101ce372e0bea3fa2d",
+     "md5ext": "217766ff7053bc101ce372e0bea3fa2d.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 55,
+     "rotationCenterY": 48
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Guk",
+     "assetId": "afc205f80da845f02688a9f6ad263e9b",
+     "md5ext": "afc205f80da845f02688a9f6ad263e9b.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 10979
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kucing-abu",
+   "name": "Kucing Abu",
+   "nameEn": "Gray Cat",
+   "category": "hewan",
+   "tags": [
+    "peliharaan",
+    "kucing"
+   ],
+   "costumes": [
+    {
+     "name": "kucing-abu-a",
+     "assetId": "6e7985ad73fd5ada521facada30ab596",
+     "md5ext": "6e7985ad73fd5ada521facada30ab596.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "kucing-abu-b",
+     "assetId": "a13a13b6cd7efc769fa80c5b02372c6f",
+     "md5ext": "a13a13b6cd7efc769fa80c5b02372c6f.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Meong",
+     "assetId": "ce011b2c208d8d088a49612919e75956",
+     "md5ext": "ce011b2c208d8d088a49612919e75956.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 15435
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "bola",
+   "name": "Bola",
+   "nameEn": "Ball",
+   "category": "olahraga",
+   "tags": [
+    "bulat",
+    "mainan"
+   ],
+   "costumes": [
+    {
+     "name": "bola-a",
+     "assetId": "f7dee997459ab69ca7f1f73834988793",
+     "md5ext": "f7dee997459ab69ca7f1f73834988793.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 30,
+     "rotationCenterY": 30
+    },
+    {
+     "name": "bola-b",
+     "assetId": "900139651a2cf4c2eec9373d74ad4620",
+     "md5ext": "900139651a2cf4c2eec9373d74ad4620.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 30,
+     "rotationCenterY": 30
+    },
+    {
+     "name": "bola-c",
+     "assetId": "9232604e3cde6db137c778c97e89c7c2",
+     "md5ext": "9232604e3cde6db137c778c97e89c7c2.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 30,
+     "rotationCenterY": 30
+    },
+    {
+     "name": "bola-d",
+     "assetId": "83e6d740ca5276715298ac150fd56306",
+     "md5ext": "83e6d740ca5276715298ac150fd56306.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 30,
+     "rotationCenterY": 30
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Boing",
+     "assetId": "115c4502afa884e42bc81aab2230991d",
+     "md5ext": "115c4502afa884e42bc81aab2230991d.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 13230
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "bola-sepak",
+   "name": "Bola Sepak",
+   "nameEn": "Soccer Ball",
+   "category": "olahraga",
+   "tags": [
+    "sepak bola",
+    "futsal"
+   ],
+   "costumes": [
+    {
+     "name": "bola-sepak-a",
+     "assetId": "17f91087a097b2b62a7239d3cfc211f2",
+     "md5ext": "17f91087a097b2b62a7239d3cfc211f2.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 32,
+     "rotationCenterY": 32
+    },
+    {
+     "name": "bola-sepak-b",
+     "assetId": "366132276afb61058d5377a0653ce120",
+     "md5ext": "366132276afb61058d5377a0653ce120.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 32,
+     "rotationCenterY": 32
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Tendang",
+     "assetId": "b1be6611f5ac24761addb6bd3649f103",
+     "md5ext": "b1be6611f5ac24761addb6bd3649f103.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 4410
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "bintang",
+   "name": "Bintang",
+   "nameEn": "Star",
+   "category": "benda",
+   "tags": [
+    "langit",
+    "hadiah"
+   ],
+   "costumes": [
+    {
+     "name": "bintang-a",
+     "assetId": "86e17f0e7275c443d63f00ef14041646",
+     "md5ext": "86e17f0e7275c443d63f00ef14041646.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 40
+    },
+    {
+     "name": "bintang-b",
+     "assetId": "08209e7ea5b37b6ddb9ba53da33c8915",
+     "md5ext": "08209e7ea5b37b6ddb9ba53da33c8915.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 40
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Sihir",
+     "assetId": "51b5ccf895ee713db65a7f2f77011151",
+     "md5ext": "51b5ccf895ee713db65a7f2f77011151.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 22050
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "hati",
+   "name": "Hati",
+   "nameEn": "Heart",
+   "category": "benda",
+   "tags": [
+    "cinta",
+    "nyawa",
+    "game"
+   ],
+   "costumes": [
+    {
+     "name": "hati-a",
+     "assetId": "366af5ba08e816cc4664769ffc4d3150",
+     "md5ext": "366af5ba08e816cc4664769ffc4d3150.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 36
+    },
+    {
+     "name": "hati-b",
+     "assetId": "b0d4252ba132b8fc9a9660ba5a667367",
+     "md5ext": "b0d4252ba132b8fc9a9660ba5a667367.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 36
+    },
+    {
+     "name": "hati-c",
+     "assetId": "42414cf9fa7a95077503f44dfffbf232",
+     "md5ext": "42414cf9fa7a95077503f44dfffbf232.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 36
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "roket",
+   "name": "Roket",
+   "nameEn": "Rocket",
+   "category": "transportasi",
+   "tags": [
+    "luar angkasa",
+    "terbang"
+   ],
+   "costumes": [
+    {
+     "name": "roket-a",
+     "assetId": "bc9674e8631e265a68c3acaad1679fc8",
+     "md5ext": "bc9674e8631e265a68c3acaad1679fc8.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 60
+    },
+    {
+     "name": "roket-b",
+     "assetId": "bafba4d87216f7d9aa563ea820874d5e",
+     "md5ext": "bafba4d87216f7d9aa563ea820874d5e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 60
+    },
+    {
+     "name": "roket-c",
+     "assetId": "b9a37e086d03d04c9fd4e6ecc82a311f",
+     "md5ext": "b9a37e086d03d04c9fd4e6ecc82a311f.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 60
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Roket",
+     "assetId": "138aaabcec6b58b4cd9d6129a3a86320",
+     "md5ext": "138aaabcec6b58b4cd9d6129a3a86320.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 33075
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "robot",
+   "name": "Robot",
+   "nameEn": "Robot",
+   "category": "fantasi",
+   "tags": [
+    "mesin",
+    "teknologi"
+   ],
+   "costumes": [
+    {
+     "name": "robot-a",
+     "assetId": "5321612cc0f16f67df8cf3fea6bb7a2b",
+     "md5ext": "5321612cc0f16f67df8cf3fea6bb7a2b.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 60
+    },
+    {
+     "name": "robot-b",
+     "assetId": "9c43ed5f1bce285f03d42d3deaff9e3d",
+     "md5ext": "9c43ed5f1bce285f03d42d3deaff9e3d.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 60
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Bip Robot",
+     "assetId": "b1ba01053b5f73ddc5ade4ac72b26f5a",
+     "md5ext": "b1ba01053b5f73ddc5ade4ac72b26f5a.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 8820
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "pohon",
+   "name": "Pohon",
+   "nameEn": "Tree",
+   "category": "alam",
+   "tags": [
+    "taman",
+    "hutan"
+   ],
+   "costumes": [
+    {
+     "name": "pohon-a",
+     "assetId": "5f24d6c1bde08a2e584dfbce051f3c93",
+     "md5ext": "5f24d6c1bde08a2e584dfbce051f3c93.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 65
+    },
+    {
+     "name": "pohon-b",
+     "assetId": "bc5dc9966af22a158fcc8e677fa59dca",
+     "md5ext": "bc5dc9966af22a158fcc8e677fa59dca.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 65
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Angin",
+     "assetId": "9a57b64f94f312823110fc6846b5c16c",
+     "md5ext": "9a57b64f94f312823110fc6846b5c16c.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 35280
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "apel",
+   "name": "Apel",
+   "nameEn": "Apple",
+   "category": "makanan",
+   "tags": [
+    "buah"
+   ],
+   "costumes": [
+    {
+     "name": "apel-a",
+     "assetId": "78a6c026a8233e79adbb93782b50f471",
+     "md5ext": "78a6c026a8233e79adbb93782b50f471.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 35,
+     "rotationCenterY": 38
+    },
+    {
+     "name": "apel-b",
+     "assetId": "e01aea0afa30bb6dc5f8ba5e48d17f81",
+     "md5ext": "e01aea0afa30bb6dc5f8ba5e48d17f81.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 35,
+     "rotationCenterY": 38
+    },
+    {
+     "name": "apel-c",
+     "assetId": "509997c2c68496ee4c7c3fb4050c01cf",
+     "md5ext": "509997c2c68496ee4c7c3fb4050c01cf.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 35,
+     "rotationCenterY": 38
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Kriuk",
+     "assetId": "1afc7d32f9fef44f2e87208d593cad2e",
+     "md5ext": "1afc7d32f9fef44f2e87208d593cad2e.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 5709
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "mobil",
+   "name": "Mobil",
+   "nameEn": "Car",
+   "category": "transportasi",
+   "tags": [
+    "kendaraan",
+    "balap"
+   ],
+   "costumes": [
+    {
+     "name": "mobil-a",
+     "assetId": "9840fcf8cc08aa890a9943784f9a7e55",
+     "md5ext": "9840fcf8cc08aa890a9943784f9a7e55.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 65,
+     "rotationCenterY": 37
+    },
+    {
+     "name": "mobil-b",
+     "assetId": "133a6a28c0af25492d67aabe17817153",
+     "md5ext": "133a6a28c0af25492d67aabe17817153.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 65,
+     "rotationCenterY": 37
+    },
+    {
+     "name": "mobil-c",
+     "assetId": "2bf2cc807a16ef179c5920a42a8d8763",
+     "md5ext": "2bf2cc807a16ef179c5920a42a8d8763.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 65,
+     "rotationCenterY": 37
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Klakson",
+     "assetId": "44d2c27f2c014d85b55a944f7c340094",
+     "md5ext": "44d2c27f2c014d85b55a944f7c340094.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 15833
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "ufo",
+   "name": "UFO",
+   "nameEn": "UFO",
+   "category": "fantasi",
+   "tags": [
+    "luar angkasa",
+    "alien"
+   ],
+   "costumes": [
+    {
+     "name": "ufo-a",
+     "assetId": "69c21c9e897bc8e3e4ee8188973f3f3c",
+     "md5ext": "69c21c9e897bc8e3e4ee8188973f3f3c.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 60,
+     "rotationCenterY": 40
+    },
+    {
+     "name": "ufo-b",
+     "assetId": "4b8e409591eb3b8679cebd66bae1482f",
+     "md5ext": "4b8e409591eb3b8679cebd66bae1482f.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 60,
+     "rotationCenterY": 40
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Laser",
+     "assetId": "18c82548cc954ee9142aff2e7cd9e6b9",
+     "md5ext": "18c82548cc954ee9142aff2e7cd9e6b9.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 6174
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "matahari",
+   "name": "Matahari",
+   "nameEn": "Sun",
+   "category": "alam",
+   "tags": [
+    "langit",
+    "siang"
+   ],
+   "costumes": [
+    {
+     "name": "matahari-a",
+     "assetId": "823f7fb42910efc67c6d964e395316e4",
+     "md5ext": "823f7fb42910efc67c6d964e395316e4.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "matahari-b",
+     "assetId": "635607271e8bf018192d0305d92e0110",
+     "md5ext": "635607271e8bf018192d0305d92e0110.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Denting",
+     "assetId": "7066262cb81e7d8e781f4b77e57c1a03",
+     "md5ext": "7066262cb81e7d8e781f4b77e57c1a03.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 26460
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "awan",
+   "name": "Awan",
+   "nameEn": "Cloud",
+   "category": "alam",
+   "tags": [
+    "langit",
+    "cuaca"
+   ],
+   "costumes": [
+    {
+     "name": "awan-a",
+     "assetId": "9f616b6f22fc026d6ba5dee0a32a0581",
+     "md5ext": "9f616b6f22fc026d6ba5dee0a32a0581.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 70,
+     "rotationCenterY": 40
+    },
+    {
+     "name": "awan-b",
+     "assetId": "8a2e1a79e426c23cc3ff7be073c1f702",
+     "md5ext": "8a2e1a79e426c23cc3ff7be073c1f702.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 70,
+     "rotationCenterY": 40
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Angin",
+     "assetId": "9a57b64f94f312823110fc6846b5c16c",
+     "md5ext": "9a57b64f94f312823110fc6846b5c16c.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 35280
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "tombol",
+   "name": "Tombol Mulai",
+   "nameEn": "Start Button",
+   "category": "antarmuka",
+   "tags": [
+    "tombol",
+    "menu",
+    "game"
+   ],
+   "costumes": [
+    {
+     "name": "tombol-a",
+     "assetId": "49fba4e3822da7eaf7709bcd037c7d6f",
+     "md5ext": "49fba4e3822da7eaf7709bcd037c7d6f.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 60,
+     "rotationCenterY": 28
+    },
+    {
+     "name": "tombol-b",
+     "assetId": "3ef77e0fdccca676412ce1a67e004ffd",
+     "md5ext": "3ef77e0fdccca676412ce1a67e004ffd.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 60,
+     "rotationCenterY": 28
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Klik",
+     "assetId": "88fdfae06e12e1fd72dd1e7aa38645f2",
+     "md5ext": "88fdfae06e12e1fd72dd1e7aa38645f2.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 882
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "panah",
+   "name": "Panah",
+   "nameEn": "Arrow",
+   "category": "antarmuka",
+   "tags": [
+    "arah",
+    "petunjuk"
+   ],
+   "costumes": [
+    {
+     "name": "panah-a",
+     "assetId": "a8a08818fec8a7cc5e4300289ade5275",
+     "md5ext": "a8a08818fec8a7cc5e4300289ade5275.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 30
+    },
+    {
+     "name": "panah-b",
+     "assetId": "b71071529885b2369d27b6e6b96300b4",
+     "md5ext": "b71071529885b2369d27b6e6b96300b4.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 30
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Klik",
+     "assetId": "88fdfae06e12e1fd72dd1e7aa38645f2",
+     "md5ext": "88fdfae06e12e1fd72dd1e7aa38645f2.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 882
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "pensil",
+   "name": "Pensil",
+   "nameEn": "Pencil",
+   "category": "benda",
+   "tags": [
+    "sekolah",
+    "menggambar"
+   ],
+   "costumes": [
+    {
+     "name": "pensil-a",
+     "assetId": "de7498fb1e267ef50df5504be9082957",
+     "md5ext": "de7498fb1e267ef50df5504be9082957.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 20,
+     "rotationCenterY": 65
+    },
+    {
+     "name": "pensil-b",
+     "assetId": "cddc8bd69cd9314d5cb9697f8988c906",
+     "md5ext": "cddc8bd69cd9314d5cb9697f8988c906.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 20,
+     "rotationCenterY": 65
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Klik",
+     "assetId": "88fdfae06e12e1fd72dd1e7aa38645f2",
+     "md5ext": "88fdfae06e12e1fd72dd1e7aa38645f2.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 882
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "bunga",
+   "name": "Bunga",
+   "nameEn": "Flower",
+   "category": "alam",
+   "tags": [
+    "taman"
+   ],
+   "costumes": [
+    {
+     "name": "bunga-a",
+     "assetId": "1ccc430d59d591db3eae6218e7bc4416",
+     "md5ext": "1ccc430d59d591db3eae6218e7bc4416.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 65
+    },
+    {
+     "name": "bunga-b",
+     "assetId": "5e4ad285206b06ec1ced26995e5010f8",
+     "md5ext": "5e4ad285206b06ec1ced26995e5010f8.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 65
+    },
+    {
+     "name": "bunga-c",
+     "assetId": "392b1d456d7693288294b2c183a7645d",
+     "md5ext": "392b1d456d7693288294b2c183a7645d.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 65
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Denting",
+     "assetId": "7066262cb81e7d8e781f4b77e57c1a03",
+     "md5ext": "7066262cb81e7d8e781f4b77e57c1a03.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 26460
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "permata",
+   "name": "Permata",
+   "nameEn": "Gem",
+   "category": "benda",
+   "tags": [
+    "hadiah",
+    "game",
+    "koin"
+   ],
+   "costumes": [
+    {
+     "name": "permata-a",
+     "assetId": "32a786a4b309d8a5d58d35955621d049",
+     "md5ext": "32a786a4b309d8a5d58d35955621d049.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 35
+    },
+    {
+     "name": "permata-b",
+     "assetId": "4753d1dd49eee517598dcb47219c3e66",
+     "md5ext": "4753d1dd49eee517598dcb47219c3e66.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 35
+    },
+    {
+     "name": "permata-c",
+     "assetId": "52e91fc65afc798d4a2f9ce197d389a8",
+     "md5ext": "52e91fc65afc798d4a2f9ce197d389a8.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 35
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Koin",
+     "assetId": "1e87699f1710ae9d2efb112476bea9dd",
+     "md5ext": "1e87699f1710ae9d2efb112476bea9dd.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 8159
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kue",
+   "name": "Kue Mangkuk",
+   "nameEn": "Cupcake",
+   "category": "makanan",
+   "tags": [
+    "ulang tahun",
+    "manis"
+   ],
+   "costumes": [
+    {
+     "name": "kue-a",
+     "assetId": "9b4b7f5c0db66ef37755b9d67a3fca38",
+     "md5ext": "9b4b7f5c0db66ef37755b9d67a3fca38.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "kue-b",
+     "assetId": "99c99a94204b80b1608d14423dbb3a68",
+     "md5ext": "99c99a94204b80b1608d14423dbb3a68.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Ta-da",
+     "assetId": "0104ed2b4d2475d45aba8e2d3b4b7028",
+     "md5ext": "0104ed2b4d2475d45aba8e2d3b4b7028.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 24255
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "balon",
+   "name": "Balon",
+   "nameEn": "Balloon",
+   "category": "benda",
+   "tags": [
+    "pesta",
+    "terbang"
+   ],
+   "costumes": [
+    {
+     "name": "balon-a",
+     "assetId": "46550a60c11210e0dfa60d7bd30f11d6",
+     "md5ext": "46550a60c11210e0dfa60d7bd30f11d6.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 30,
+     "rotationCenterY": 60
+    },
+    {
+     "name": "balon-b",
+     "assetId": "023a52ca76b787a81f8ae2b333067237",
+     "md5ext": "023a52ca76b787a81f8ae2b333067237.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 30,
+     "rotationCenterY": 60
+    },
+    {
+     "name": "balon-c",
+     "assetId": "51b28d79f75fa66abb0542a35d7bfb5e",
+     "md5ext": "51b28d79f75fa66abb0542a35d7bfb5e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 30,
+     "rotationCenterY": 60
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "hadiah",
+   "name": "Kotak Hadiah",
+   "nameEn": "Gift Box",
+   "category": "benda",
+   "tags": [
+    "pesta",
+    "ulang tahun"
+   ],
+   "costumes": [
+    {
+     "name": "hadiah-a",
+     "assetId": "852c823953a9c0a1987b150641006e48",
+     "md5ext": "852c823953a9c0a1987b150641006e48.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 45,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "hadiah-b",
+     "assetId": "5dfea8027be1a6b2879395790c124c48",
+     "md5ext": "5dfea8027be1a6b2879395790c124c48.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 45,
+     "rotationCenterY": 50
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Ta-da",
+     "assetId": "0104ed2b4d2475d45aba8e2d3b4b7028",
+     "md5ext": "0104ed2b4d2475d45aba8e2d3b4b7028.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 24255
+    }
+   ]
+  }
+ ],
+ "costumes": [
+  {
+   "kind": "costume",
+   "id": "kody/kody-a",
+   "name": "kody-a",
+   "nameEn": "Kody a",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "robot",
+    "kodingyuk",
+    "kody"
+   ],
+   "costume": {
+    "name": "kody-a",
+    "assetId": "9ad03baed127ab3e25ff0e645eb4f1d1",
+    "md5ext": "9ad03baed127ab3e25ff0e645eb4f1d1.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody/kody-b",
+   "name": "kody-b",
+   "nameEn": "Kody b",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "robot",
+    "kodingyuk",
+    "kody"
+   ],
+   "costume": {
+    "name": "kody-b",
+    "assetId": "1fa591aa6a2645a05cce7a8a28fa39b3",
+    "md5ext": "1fa591aa6a2645a05cce7a8a28fa39b3.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody/kody-c",
+   "name": "kody-c",
+   "nameEn": "Kody c",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "robot",
+    "kodingyuk",
+    "kody"
+   ],
+   "costume": {
+    "name": "kody-c",
+    "assetId": "e05007e5e45f654e599443d037ed3b49",
+    "md5ext": "e05007e5e45f654e599443d037ed3b49.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-merah/kody-merah-a",
+   "name": "kody-merah-a",
+   "nameEn": "Red Kody a",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "merah",
+    "kody merah"
+   ],
+   "costume": {
+    "name": "kody-merah-a",
+    "assetId": "4519bc65fba9168c7103756b55ed212f",
+    "md5ext": "4519bc65fba9168c7103756b55ed212f.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-merah/kody-merah-b",
+   "name": "kody-merah-b",
+   "nameEn": "Red Kody b",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "merah",
+    "kody merah"
+   ],
+   "costume": {
+    "name": "kody-merah-b",
+    "assetId": "50ad0d0c455b7817ea2c4b8bfbe4e313",
+    "md5ext": "50ad0d0c455b7817ea2c4b8bfbe4e313.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-merah/kody-merah-c",
+   "name": "kody-merah-c",
+   "nameEn": "Red Kody c",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "merah",
+    "kody merah"
+   ],
+   "costume": {
+    "name": "kody-merah-c",
+    "assetId": "5634559ab03f613ca2ec2249cda20ed2",
+    "md5ext": "5634559ab03f613ca2ec2249cda20ed2.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-hijau/kody-hijau-a",
+   "name": "kody-hijau-a",
+   "nameEn": "Green Kody a",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "hijau",
+    "kody hijau"
+   ],
+   "costume": {
+    "name": "kody-hijau-a",
+    "assetId": "e3959d940cde5916dc644326bc22e439",
+    "md5ext": "e3959d940cde5916dc644326bc22e439.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-hijau/kody-hijau-b",
+   "name": "kody-hijau-b",
+   "nameEn": "Green Kody b",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "hijau",
+    "kody hijau"
+   ],
+   "costume": {
+    "name": "kody-hijau-b",
+    "assetId": "283e7c7cdf5a8e9f07735ad2b1b62575",
+    "md5ext": "283e7c7cdf5a8e9f07735ad2b1b62575.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-hijau/kody-hijau-c",
+   "name": "kody-hijau-c",
+   "nameEn": "Green Kody c",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "hijau",
+    "kody hijau"
+   ],
+   "costume": {
+    "name": "kody-hijau-c",
+    "assetId": "11badd19a7401287e047ee68bf33b1dd",
+    "md5ext": "11badd19a7401287e047ee68bf33b1dd.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-ungu/kody-ungu-a",
+   "name": "kody-ungu-a",
+   "nameEn": "Purple Kody a",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "ungu",
+    "kody ungu"
+   ],
+   "costume": {
+    "name": "kody-ungu-a",
+    "assetId": "987a9f5af2dad2f33e2b8937161a8d99",
+    "md5ext": "987a9f5af2dad2f33e2b8937161a8d99.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-ungu/kody-ungu-b",
+   "name": "kody-ungu-b",
+   "nameEn": "Purple Kody b",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "ungu",
+    "kody ungu"
+   ],
+   "costume": {
+    "name": "kody-ungu-b",
+    "assetId": "4623d0c79c8e722d93702ff6af4d1d0e",
+    "md5ext": "4623d0c79c8e722d93702ff6af4d1d0e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-ungu/kody-ungu-c",
+   "name": "kody-ungu-c",
+   "nameEn": "Purple Kody c",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "ungu",
+    "kody ungu"
+   ],
+   "costume": {
+    "name": "kody-ungu-c",
+    "assetId": "b18d818a2b761d8ac6d69575007fd2e2",
+    "md5ext": "b18d818a2b761d8ac6d69575007fd2e2.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-malam/kody-malam-a",
+   "name": "kody-malam-a",
+   "nameEn": "Night Kody a",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "malam",
+    "gelap",
+    "kody malam"
+   ],
+   "costume": {
+    "name": "kody-malam-a",
+    "assetId": "6f6c6cd108652d31084e7074bfe274a8",
+    "md5ext": "6f6c6cd108652d31084e7074bfe274a8.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-malam/kody-malam-b",
+   "name": "kody-malam-b",
+   "nameEn": "Night Kody b",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "malam",
+    "gelap",
+    "kody malam"
+   ],
+   "costume": {
+    "name": "kody-malam-b",
+    "assetId": "702cc50a5f1759213d5004758313084f",
+    "md5ext": "702cc50a5f1759213d5004758313084f.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-malam/kody-malam-c",
+   "name": "kody-malam-c",
+   "nameEn": "Night Kody c",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "malam",
+    "gelap",
+    "kody malam"
+   ],
+   "costume": {
+    "name": "kody-malam-c",
+    "assetId": "5a7601d205632903302e5d4d8b64647f",
+    "md5ext": "5a7601d205632903302e5d4d8b64647f.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-pesta/kody-pesta-a",
+   "name": "kody-pesta-a",
+   "nameEn": "Party Kody a",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "pesta",
+    "ulang tahun",
+    "kody pesta"
+   ],
+   "costume": {
+    "name": "kody-pesta-a",
+    "assetId": "580f36657f372ce7ea8722f13ac69b21",
+    "md5ext": "580f36657f372ce7ea8722f13ac69b21.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-pesta/kody-pesta-b",
+   "name": "kody-pesta-b",
+   "nameEn": "Party Kody b",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "pesta",
+    "ulang tahun",
+    "kody pesta"
+   ],
+   "costume": {
+    "name": "kody-pesta-b",
+    "assetId": "c44d5346e1337d000ec0641e8801a03f",
+    "md5ext": "c44d5346e1337d000ec0641e8801a03f.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-pesta/kody-pesta-c",
+   "name": "kody-pesta-c",
+   "nameEn": "Party Kody c",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "pesta",
+    "ulang tahun",
+    "kody pesta"
+   ],
+   "costume": {
+    "name": "kody-pesta-c",
+    "assetId": "c31b2c3daa990afc9671f248b589be4e",
+    "md5ext": "c31b2c3daa990afc9671f248b589be4e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-keren/kody-keren-a",
+   "name": "kody-keren-a",
+   "nameEn": "Cool Kody a",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "kacamata",
+    "kody keren"
+   ],
+   "costume": {
+    "name": "kody-keren-a",
+    "assetId": "9e4b3dc47176523a1e70d7b3c6247e0a",
+    "md5ext": "9e4b3dc47176523a1e70d7b3c6247e0a.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-keren/kody-keren-b",
+   "name": "kody-keren-b",
+   "nameEn": "Cool Kody b",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "kacamata",
+    "kody keren"
+   ],
+   "costume": {
+    "name": "kody-keren-b",
+    "assetId": "5e3a01d06db7e8873f659a861989fe14",
+    "md5ext": "5e3a01d06db7e8873f659a861989fe14.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-keren/kody-keren-c",
+   "name": "kody-keren-c",
+   "nameEn": "Cool Kody c",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "kacamata",
+    "kody keren"
+   ],
+   "costume": {
+    "name": "kody-keren-c",
+    "assetId": "086133f273053183233e712e55777783",
+    "md5ext": "086133f273053183233e712e55777783.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-astronot/kody-astronot-a",
+   "name": "kody-astronot-a",
+   "nameEn": "Astronaut Kody a",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "luar angkasa",
+    "astronot",
+    "kody astronot"
+   ],
+   "costume": {
+    "name": "kody-astronot-a",
+    "assetId": "8caba9c29243018e08b21b54a2346f7f",
+    "md5ext": "8caba9c29243018e08b21b54a2346f7f.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-astronot/kody-astronot-b",
+   "name": "kody-astronot-b",
+   "nameEn": "Astronaut Kody b",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "luar angkasa",
+    "astronot",
+    "kody astronot"
+   ],
+   "costume": {
+    "name": "kody-astronot-b",
+    "assetId": "8299a484a44b6eefc5afea9307642971",
+    "md5ext": "8299a484a44b6eefc5afea9307642971.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-astronot/kody-astronot-c",
+   "name": "kody-astronot-c",
+   "nameEn": "Astronaut Kody c",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "luar angkasa",
+    "astronot",
+    "kody astronot"
+   ],
+   "costume": {
+    "name": "kody-astronot-c",
+    "assetId": "65291b955f8e58035d82d400913f7e4e",
+    "md5ext": "65291b955f8e58035d82d400913f7e4e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-raja/kody-raja-a",
+   "name": "kody-raja-a",
+   "nameEn": "King Kody a",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "raja",
+    "mahkota",
+    "kody raja"
+   ],
+   "costume": {
+    "name": "kody-raja-a",
+    "assetId": "06c984f41374c7e7f5ffda5168add9ee",
+    "md5ext": "06c984f41374c7e7f5ffda5168add9ee.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-raja/kody-raja-b",
+   "name": "kody-raja-b",
+   "nameEn": "King Kody b",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "raja",
+    "mahkota",
+    "kody raja"
+   ],
+   "costume": {
+    "name": "kody-raja-b",
+    "assetId": "6593b9ba58365f6f30bf32cb6aea72e1",
+    "md5ext": "6593b9ba58365f6f30bf32cb6aea72e1.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kody-raja/kody-raja-c",
+   "name": "kody-raja-c",
+   "nameEn": "King Kody c",
+   "category": "kody",
+   "tags": [
+    "maskot",
+    "raja",
+    "mahkota",
+    "kody raja"
+   ],
+   "costume": {
+    "name": "kody-raja-c",
+    "assetId": "76b4cfe07331117f1693355e0d181cd7",
+    "md5ext": "76b4cfe07331117f1693355e0d181cd7.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 66
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "ikan/ikan-a",
+   "name": "ikan-a",
+   "nameEn": "Fish a",
+   "category": "hewan",
+   "tags": [
+    "laut",
+    "air",
+    "berenang",
+    "ikan"
+   ],
+   "costume": {
+    "name": "ikan-a",
+    "assetId": "2e4926f27cfcef432fde903b39f98a91",
+    "md5ext": "2e4926f27cfcef432fde903b39f98a91.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 45,
+    "rotationCenterY": 40
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "ikan/ikan-b",
+   "name": "ikan-b",
+   "nameEn": "Fish b",
+   "category": "hewan",
+   "tags": [
+    "laut",
+    "air",
+    "berenang",
+    "ikan"
+   ],
+   "costume": {
+    "name": "ikan-b",
+    "assetId": "d94f8d9e831dc639c3fdad97235a537c",
+    "md5ext": "d94f8d9e831dc639c3fdad97235a537c.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 45,
+    "rotationCenterY": 40
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "ikan/ikan-c",
+   "name": "ikan-c",
+   "nameEn": "Fish c",
+   "category": "hewan",
+   "tags": [
+    "laut",
+    "air",
+    "berenang",
+    "ikan"
+   ],
+   "costume": {
+    "name": "ikan-c",
+    "assetId": "a8b10120856b202116815b430d7799e6",
+    "md5ext": "a8b10120856b202116815b430d7799e6.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 45,
+    "rotationCenterY": 40
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "burung/burung-a",
+   "name": "burung-a",
+   "nameEn": "Bird a",
+   "category": "hewan",
+   "tags": [
+    "terbang",
+    "sayap",
+    "burung"
+   ],
+   "costume": {
+    "name": "burung-a",
+    "assetId": "ec3dd7ba4e255b8de62417f16b9d0864",
+    "md5ext": "ec3dd7ba4e255b8de62417f16b9d0864.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 40
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "burung/burung-b",
+   "name": "burung-b",
+   "nameEn": "Bird b",
+   "category": "hewan",
+   "tags": [
+    "terbang",
+    "sayap",
+    "burung"
+   ],
+   "costume": {
+    "name": "burung-b",
+    "assetId": "2449346dfc5425ee6bd701a5c8a39fbf",
+    "md5ext": "2449346dfc5425ee6bd701a5c8a39fbf.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 40
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kupu-kupu/kupu-kupu-a",
+   "name": "kupu-kupu-a",
+   "nameEn": "Butterfly a",
+   "category": "hewan",
+   "tags": [
+    "terbang",
+    "serangga",
+    "taman",
+    "kupu-kupu"
+   ],
+   "costume": {
+    "name": "kupu-kupu-a",
+    "assetId": "f082eee9511149962082889efb1643c2",
+    "md5ext": "f082eee9511149962082889efb1643c2.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 42
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kupu-kupu/kupu-kupu-b",
+   "name": "kupu-kupu-b",
+   "nameEn": "Butterfly b",
+   "category": "hewan",
+   "tags": [
+    "terbang",
+    "serangga",
+    "taman",
+    "kupu-kupu"
+   ],
+   "costume": {
+    "name": "kupu-kupu-b",
+    "assetId": "49051932836d6b1f098869a5bcfbd625",
+    "md5ext": "49051932836d6b1f098869a5bcfbd625.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 42
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "hantu/hantu-a",
+   "name": "hantu-a",
+   "nameEn": "Ghost a",
+   "category": "fantasi",
+   "tags": [
+    "seram",
+    "halloween",
+    "hantu"
+   ],
+   "costume": {
+    "name": "hantu-a",
+    "assetId": "af61042180b54d4ae7d9e03631bca664",
+    "md5ext": "af61042180b54d4ae7d9e03631bca664.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "hantu/hantu-b",
+   "name": "hantu-b",
+   "nameEn": "Ghost b",
+   "category": "fantasi",
+   "tags": [
+    "seram",
+    "halloween",
+    "hantu"
+   ],
+   "costume": {
+    "name": "hantu-b",
+    "assetId": "3bdc88e993b1caeb64bd08ae8d694813",
+    "md5ext": "3bdc88e993b1caeb64bd08ae8d694813.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kepiting/kepiting-a",
+   "name": "kepiting-a",
+   "nameEn": "Crab a",
+   "category": "hewan",
+   "tags": [
+    "laut",
+    "pantai",
+    "kepiting"
+   ],
+   "costume": {
+    "name": "kepiting-a",
+    "assetId": "99941e6913a8a67c983389959ad49092",
+    "md5ext": "99941e6913a8a67c983389959ad49092.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 42
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kepiting/kepiting-b",
+   "name": "kepiting-b",
+   "nameEn": "Crab b",
+   "category": "hewan",
+   "tags": [
+    "laut",
+    "pantai",
+    "kepiting"
+   ],
+   "costume": {
+    "name": "kepiting-b",
+    "assetId": "40b0d5809e85ad7eb87bec2534627b1b",
+    "md5ext": "40b0d5809e85ad7eb87bec2534627b1b.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 42
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "dino/dino-a",
+   "name": "dino-a",
+   "nameEn": "Dino a",
+   "category": "hewan",
+   "tags": [
+    "dinosaurus",
+    "purba",
+    "dino"
+   ],
+   "costume": {
+    "name": "dino-a",
+    "assetId": "b545c0b8944f2effc748412b136b3ed2",
+    "md5ext": "b545c0b8944f2effc748412b136b3ed2.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 60,
+    "rotationCenterY": 48
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "dino/dino-b",
+   "name": "dino-b",
+   "nameEn": "Dino b",
+   "category": "hewan",
+   "tags": [
+    "dinosaurus",
+    "purba",
+    "dino"
+   ],
+   "costume": {
+    "name": "dino-b",
+    "assetId": "84e75601783e9bf625f121a862c3eba9",
+    "md5ext": "84e75601783e9bf625f121a862c3eba9.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 60,
+    "rotationCenterY": 48
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "lebah/lebah-a",
+   "name": "lebah-a",
+   "nameEn": "Bee a",
+   "category": "hewan",
+   "tags": [
+    "serangga",
+    "terbang",
+    "madu",
+    "lebah"
+   ],
+   "costume": {
+    "name": "lebah-a",
+    "assetId": "a384a003208ceae5c954a4ba22d5692a",
+    "md5ext": "a384a003208ceae5c954a4ba22d5692a.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 45,
+    "rotationCenterY": 35
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "lebah/lebah-b",
+   "name": "lebah-b",
+   "nameEn": "Bee b",
+   "category": "hewan",
+   "tags": [
+    "serangga",
+    "terbang",
+    "madu",
+    "lebah"
+   ],
+   "costume": {
+    "name": "lebah-b",
+    "assetId": "70b6ee1174009caba625665eb5baa990",
+    "md5ext": "70b6ee1174009caba625665eb5baa990.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 45,
+    "rotationCenterY": 35
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "anjing/anjing-a",
+   "name": "anjing-a",
+   "nameEn": "Dog a",
+   "category": "hewan",
+   "tags": [
+    "peliharaan",
+    "anjing"
+   ],
+   "costume": {
+    "name": "anjing-a",
+    "assetId": "48402684cfc50982428ed9ba9c4d8fb7",
+    "md5ext": "48402684cfc50982428ed9ba9c4d8fb7.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 55,
+    "rotationCenterY": 48
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "anjing/anjing-b",
+   "name": "anjing-b",
+   "nameEn": "Dog b",
+   "category": "hewan",
+   "tags": [
+    "peliharaan",
+    "anjing"
+   ],
+   "costume": {
+    "name": "anjing-b",
+    "assetId": "217766ff7053bc101ce372e0bea3fa2d",
+    "md5ext": "217766ff7053bc101ce372e0bea3fa2d.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 55,
+    "rotationCenterY": 48
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kucing-abu/kucing-abu-a",
+   "name": "kucing-abu-a",
+   "nameEn": "Gray Cat a",
+   "category": "hewan",
+   "tags": [
+    "peliharaan",
+    "kucing",
+    "kucing abu"
+   ],
+   "costume": {
+    "name": "kucing-abu-a",
+    "assetId": "6e7985ad73fd5ada521facada30ab596",
+    "md5ext": "6e7985ad73fd5ada521facada30ab596.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kucing-abu/kucing-abu-b",
+   "name": "kucing-abu-b",
+   "nameEn": "Gray Cat b",
+   "category": "hewan",
+   "tags": [
+    "peliharaan",
+    "kucing",
+    "kucing abu"
+   ],
+   "costume": {
+    "name": "kucing-abu-b",
+    "assetId": "a13a13b6cd7efc769fa80c5b02372c6f",
+    "md5ext": "a13a13b6cd7efc769fa80c5b02372c6f.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "bola/bola-a",
+   "name": "bola-a",
+   "nameEn": "Ball a",
+   "category": "olahraga",
+   "tags": [
+    "bulat",
+    "mainan",
+    "bola"
+   ],
+   "costume": {
+    "name": "bola-a",
+    "assetId": "f7dee997459ab69ca7f1f73834988793",
+    "md5ext": "f7dee997459ab69ca7f1f73834988793.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 30,
+    "rotationCenterY": 30
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "bola/bola-b",
+   "name": "bola-b",
+   "nameEn": "Ball b",
+   "category": "olahraga",
+   "tags": [
+    "bulat",
+    "mainan",
+    "bola"
+   ],
+   "costume": {
+    "name": "bola-b",
+    "assetId": "900139651a2cf4c2eec9373d74ad4620",
+    "md5ext": "900139651a2cf4c2eec9373d74ad4620.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 30,
+    "rotationCenterY": 30
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "bola/bola-c",
+   "name": "bola-c",
+   "nameEn": "Ball c",
+   "category": "olahraga",
+   "tags": [
+    "bulat",
+    "mainan",
+    "bola"
+   ],
+   "costume": {
+    "name": "bola-c",
+    "assetId": "9232604e3cde6db137c778c97e89c7c2",
+    "md5ext": "9232604e3cde6db137c778c97e89c7c2.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 30,
+    "rotationCenterY": 30
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "bola/bola-d",
+   "name": "bola-d",
+   "nameEn": "Ball d",
+   "category": "olahraga",
+   "tags": [
+    "bulat",
+    "mainan",
+    "bola"
+   ],
+   "costume": {
+    "name": "bola-d",
+    "assetId": "83e6d740ca5276715298ac150fd56306",
+    "md5ext": "83e6d740ca5276715298ac150fd56306.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 30,
+    "rotationCenterY": 30
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "bola-sepak/bola-sepak-a",
+   "name": "bola-sepak-a",
+   "nameEn": "Soccer Ball a",
+   "category": "olahraga",
+   "tags": [
+    "sepak bola",
+    "futsal",
+    "bola sepak"
+   ],
+   "costume": {
+    "name": "bola-sepak-a",
+    "assetId": "17f91087a097b2b62a7239d3cfc211f2",
+    "md5ext": "17f91087a097b2b62a7239d3cfc211f2.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 32,
+    "rotationCenterY": 32
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "bola-sepak/bola-sepak-b",
+   "name": "bola-sepak-b",
+   "nameEn": "Soccer Ball b",
+   "category": "olahraga",
+   "tags": [
+    "sepak bola",
+    "futsal",
+    "bola sepak"
+   ],
+   "costume": {
+    "name": "bola-sepak-b",
+    "assetId": "366132276afb61058d5377a0653ce120",
+    "md5ext": "366132276afb61058d5377a0653ce120.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 32,
+    "rotationCenterY": 32
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "bintang/bintang-a",
+   "name": "bintang-a",
+   "nameEn": "Star a",
+   "category": "benda",
+   "tags": [
+    "langit",
+    "hadiah",
+    "bintang"
+   ],
+   "costume": {
+    "name": "bintang-a",
+    "assetId": "86e17f0e7275c443d63f00ef14041646",
+    "md5ext": "86e17f0e7275c443d63f00ef14041646.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 40
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "bintang/bintang-b",
+   "name": "bintang-b",
+   "nameEn": "Star b",
+   "category": "benda",
+   "tags": [
+    "langit",
+    "hadiah",
+    "bintang"
+   ],
+   "costume": {
+    "name": "bintang-b",
+    "assetId": "08209e7ea5b37b6ddb9ba53da33c8915",
+    "md5ext": "08209e7ea5b37b6ddb9ba53da33c8915.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 40
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "hati/hati-a",
+   "name": "hati-a",
+   "nameEn": "Heart a",
+   "category": "benda",
+   "tags": [
+    "cinta",
+    "nyawa",
+    "game",
+    "hati"
+   ],
+   "costume": {
+    "name": "hati-a",
+    "assetId": "366af5ba08e816cc4664769ffc4d3150",
+    "md5ext": "366af5ba08e816cc4664769ffc4d3150.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 36
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "hati/hati-b",
+   "name": "hati-b",
+   "nameEn": "Heart b",
+   "category": "benda",
+   "tags": [
+    "cinta",
+    "nyawa",
+    "game",
+    "hati"
+   ],
+   "costume": {
+    "name": "hati-b",
+    "assetId": "b0d4252ba132b8fc9a9660ba5a667367",
+    "md5ext": "b0d4252ba132b8fc9a9660ba5a667367.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 36
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "hati/hati-c",
+   "name": "hati-c",
+   "nameEn": "Heart c",
+   "category": "benda",
+   "tags": [
+    "cinta",
+    "nyawa",
+    "game",
+    "hati"
+   ],
+   "costume": {
+    "name": "hati-c",
+    "assetId": "42414cf9fa7a95077503f44dfffbf232",
+    "md5ext": "42414cf9fa7a95077503f44dfffbf232.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 36
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "roket/roket-a",
+   "name": "roket-a",
+   "nameEn": "Rocket a",
+   "category": "transportasi",
+   "tags": [
+    "luar angkasa",
+    "terbang",
+    "roket"
+   ],
+   "costume": {
+    "name": "roket-a",
+    "assetId": "bc9674e8631e265a68c3acaad1679fc8",
+    "md5ext": "bc9674e8631e265a68c3acaad1679fc8.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 60
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "roket/roket-b",
+   "name": "roket-b",
+   "nameEn": "Rocket b",
+   "category": "transportasi",
+   "tags": [
+    "luar angkasa",
+    "terbang",
+    "roket"
+   ],
+   "costume": {
+    "name": "roket-b",
+    "assetId": "bafba4d87216f7d9aa563ea820874d5e",
+    "md5ext": "bafba4d87216f7d9aa563ea820874d5e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 60
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "roket/roket-c",
+   "name": "roket-c",
+   "nameEn": "Rocket c",
+   "category": "transportasi",
+   "tags": [
+    "luar angkasa",
+    "terbang",
+    "roket"
+   ],
+   "costume": {
+    "name": "roket-c",
+    "assetId": "b9a37e086d03d04c9fd4e6ecc82a311f",
+    "md5ext": "b9a37e086d03d04c9fd4e6ecc82a311f.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 60
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "robot/robot-a",
+   "name": "robot-a",
+   "nameEn": "Robot a",
+   "category": "fantasi",
+   "tags": [
+    "mesin",
+    "teknologi",
+    "robot"
+   ],
+   "costume": {
+    "name": "robot-a",
+    "assetId": "5321612cc0f16f67df8cf3fea6bb7a2b",
+    "md5ext": "5321612cc0f16f67df8cf3fea6bb7a2b.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 60
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "robot/robot-b",
+   "name": "robot-b",
+   "nameEn": "Robot b",
+   "category": "fantasi",
+   "tags": [
+    "mesin",
+    "teknologi",
+    "robot"
+   ],
+   "costume": {
+    "name": "robot-b",
+    "assetId": "9c43ed5f1bce285f03d42d3deaff9e3d",
+    "md5ext": "9c43ed5f1bce285f03d42d3deaff9e3d.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 60
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "pohon/pohon-a",
+   "name": "pohon-a",
+   "nameEn": "Tree a",
+   "category": "alam",
+   "tags": [
+    "taman",
+    "hutan",
+    "pohon"
+   ],
+   "costume": {
+    "name": "pohon-a",
+    "assetId": "5f24d6c1bde08a2e584dfbce051f3c93",
+    "md5ext": "5f24d6c1bde08a2e584dfbce051f3c93.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 65
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "pohon/pohon-b",
+   "name": "pohon-b",
+   "nameEn": "Tree b",
+   "category": "alam",
+   "tags": [
+    "taman",
+    "hutan",
+    "pohon"
+   ],
+   "costume": {
+    "name": "pohon-b",
+    "assetId": "bc5dc9966af22a158fcc8e677fa59dca",
+    "md5ext": "bc5dc9966af22a158fcc8e677fa59dca.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 65
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "apel/apel-a",
+   "name": "apel-a",
+   "nameEn": "Apple a",
+   "category": "makanan",
+   "tags": [
+    "buah",
+    "apel"
+   ],
+   "costume": {
+    "name": "apel-a",
+    "assetId": "78a6c026a8233e79adbb93782b50f471",
+    "md5ext": "78a6c026a8233e79adbb93782b50f471.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 35,
+    "rotationCenterY": 38
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "apel/apel-b",
+   "name": "apel-b",
+   "nameEn": "Apple b",
+   "category": "makanan",
+   "tags": [
+    "buah",
+    "apel"
+   ],
+   "costume": {
+    "name": "apel-b",
+    "assetId": "e01aea0afa30bb6dc5f8ba5e48d17f81",
+    "md5ext": "e01aea0afa30bb6dc5f8ba5e48d17f81.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 35,
+    "rotationCenterY": 38
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "apel/apel-c",
+   "name": "apel-c",
+   "nameEn": "Apple c",
+   "category": "makanan",
+   "tags": [
+    "buah",
+    "apel"
+   ],
+   "costume": {
+    "name": "apel-c",
+    "assetId": "509997c2c68496ee4c7c3fb4050c01cf",
+    "md5ext": "509997c2c68496ee4c7c3fb4050c01cf.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 35,
+    "rotationCenterY": 38
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "mobil/mobil-a",
+   "name": "mobil-a",
+   "nameEn": "Car a",
+   "category": "transportasi",
+   "tags": [
+    "kendaraan",
+    "balap",
+    "mobil"
+   ],
+   "costume": {
+    "name": "mobil-a",
+    "assetId": "9840fcf8cc08aa890a9943784f9a7e55",
+    "md5ext": "9840fcf8cc08aa890a9943784f9a7e55.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 65,
+    "rotationCenterY": 37
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "mobil/mobil-b",
+   "name": "mobil-b",
+   "nameEn": "Car b",
+   "category": "transportasi",
+   "tags": [
+    "kendaraan",
+    "balap",
+    "mobil"
+   ],
+   "costume": {
+    "name": "mobil-b",
+    "assetId": "133a6a28c0af25492d67aabe17817153",
+    "md5ext": "133a6a28c0af25492d67aabe17817153.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 65,
+    "rotationCenterY": 37
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "mobil/mobil-c",
+   "name": "mobil-c",
+   "nameEn": "Car c",
+   "category": "transportasi",
+   "tags": [
+    "kendaraan",
+    "balap",
+    "mobil"
+   ],
+   "costume": {
+    "name": "mobil-c",
+    "assetId": "2bf2cc807a16ef179c5920a42a8d8763",
+    "md5ext": "2bf2cc807a16ef179c5920a42a8d8763.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 65,
+    "rotationCenterY": 37
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "ufo/ufo-a",
+   "name": "ufo-a",
+   "nameEn": "UFO a",
+   "category": "fantasi",
+   "tags": [
+    "luar angkasa",
+    "alien",
+    "ufo"
+   ],
+   "costume": {
+    "name": "ufo-a",
+    "assetId": "69c21c9e897bc8e3e4ee8188973f3f3c",
+    "md5ext": "69c21c9e897bc8e3e4ee8188973f3f3c.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 60,
+    "rotationCenterY": 40
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "ufo/ufo-b",
+   "name": "ufo-b",
+   "nameEn": "UFO b",
+   "category": "fantasi",
+   "tags": [
+    "luar angkasa",
+    "alien",
+    "ufo"
+   ],
+   "costume": {
+    "name": "ufo-b",
+    "assetId": "4b8e409591eb3b8679cebd66bae1482f",
+    "md5ext": "4b8e409591eb3b8679cebd66bae1482f.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 60,
+    "rotationCenterY": 40
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "matahari/matahari-a",
+   "name": "matahari-a",
+   "nameEn": "Sun a",
+   "category": "alam",
+   "tags": [
+    "langit",
+    "siang",
+    "matahari"
+   ],
+   "costume": {
+    "name": "matahari-a",
+    "assetId": "823f7fb42910efc67c6d964e395316e4",
+    "md5ext": "823f7fb42910efc67c6d964e395316e4.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "matahari/matahari-b",
+   "name": "matahari-b",
+   "nameEn": "Sun b",
+   "category": "alam",
+   "tags": [
+    "langit",
+    "siang",
+    "matahari"
+   ],
+   "costume": {
+    "name": "matahari-b",
+    "assetId": "635607271e8bf018192d0305d92e0110",
+    "md5ext": "635607271e8bf018192d0305d92e0110.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "awan/awan-a",
+   "name": "awan-a",
+   "nameEn": "Cloud a",
+   "category": "alam",
+   "tags": [
+    "langit",
+    "cuaca",
+    "awan"
+   ],
+   "costume": {
+    "name": "awan-a",
+    "assetId": "9f616b6f22fc026d6ba5dee0a32a0581",
+    "md5ext": "9f616b6f22fc026d6ba5dee0a32a0581.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 70,
+    "rotationCenterY": 40
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "awan/awan-b",
+   "name": "awan-b",
+   "nameEn": "Cloud b",
+   "category": "alam",
+   "tags": [
+    "langit",
+    "cuaca",
+    "awan"
+   ],
+   "costume": {
+    "name": "awan-b",
+    "assetId": "8a2e1a79e426c23cc3ff7be073c1f702",
+    "md5ext": "8a2e1a79e426c23cc3ff7be073c1f702.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 70,
+    "rotationCenterY": 40
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "tombol/tombol-a",
+   "name": "tombol-a",
+   "nameEn": "Start Button a",
+   "category": "antarmuka",
+   "tags": [
+    "tombol",
+    "menu",
+    "game",
+    "tombol mulai"
+   ],
+   "costume": {
+    "name": "tombol-a",
+    "assetId": "49fba4e3822da7eaf7709bcd037c7d6f",
+    "md5ext": "49fba4e3822da7eaf7709bcd037c7d6f.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 60,
+    "rotationCenterY": 28
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "tombol/tombol-b",
+   "name": "tombol-b",
+   "nameEn": "Start Button b",
+   "category": "antarmuka",
+   "tags": [
+    "tombol",
+    "menu",
+    "game",
+    "tombol mulai"
+   ],
+   "costume": {
+    "name": "tombol-b",
+    "assetId": "3ef77e0fdccca676412ce1a67e004ffd",
+    "md5ext": "3ef77e0fdccca676412ce1a67e004ffd.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 60,
+    "rotationCenterY": 28
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "panah/panah-a",
+   "name": "panah-a",
+   "nameEn": "Arrow a",
+   "category": "antarmuka",
+   "tags": [
+    "arah",
+    "petunjuk",
+    "panah"
+   ],
+   "costume": {
+    "name": "panah-a",
+    "assetId": "a8a08818fec8a7cc5e4300289ade5275",
+    "md5ext": "a8a08818fec8a7cc5e4300289ade5275.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 30
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "panah/panah-b",
+   "name": "panah-b",
+   "nameEn": "Arrow b",
+   "category": "antarmuka",
+   "tags": [
+    "arah",
+    "petunjuk",
+    "panah"
+   ],
+   "costume": {
+    "name": "panah-b",
+    "assetId": "b71071529885b2369d27b6e6b96300b4",
+    "md5ext": "b71071529885b2369d27b6e6b96300b4.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 30
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "pensil/pensil-a",
+   "name": "pensil-a",
+   "nameEn": "Pencil a",
+   "category": "benda",
+   "tags": [
+    "sekolah",
+    "menggambar",
+    "pensil"
+   ],
+   "costume": {
+    "name": "pensil-a",
+    "assetId": "de7498fb1e267ef50df5504be9082957",
+    "md5ext": "de7498fb1e267ef50df5504be9082957.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 20,
+    "rotationCenterY": 65
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "pensil/pensil-b",
+   "name": "pensil-b",
+   "nameEn": "Pencil b",
+   "category": "benda",
+   "tags": [
+    "sekolah",
+    "menggambar",
+    "pensil"
+   ],
+   "costume": {
+    "name": "pensil-b",
+    "assetId": "cddc8bd69cd9314d5cb9697f8988c906",
+    "md5ext": "cddc8bd69cd9314d5cb9697f8988c906.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 20,
+    "rotationCenterY": 65
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "bunga/bunga-a",
+   "name": "bunga-a",
+   "nameEn": "Flower a",
+   "category": "alam",
+   "tags": [
+    "taman",
+    "bunga"
+   ],
+   "costume": {
+    "name": "bunga-a",
+    "assetId": "1ccc430d59d591db3eae6218e7bc4416",
+    "md5ext": "1ccc430d59d591db3eae6218e7bc4416.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 65
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "bunga/bunga-b",
+   "name": "bunga-b",
+   "nameEn": "Flower b",
+   "category": "alam",
+   "tags": [
+    "taman",
+    "bunga"
+   ],
+   "costume": {
+    "name": "bunga-b",
+    "assetId": "5e4ad285206b06ec1ced26995e5010f8",
+    "md5ext": "5e4ad285206b06ec1ced26995e5010f8.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 65
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "bunga/bunga-c",
+   "name": "bunga-c",
+   "nameEn": "Flower c",
+   "category": "alam",
+   "tags": [
+    "taman",
+    "bunga"
+   ],
+   "costume": {
+    "name": "bunga-c",
+    "assetId": "392b1d456d7693288294b2c183a7645d",
+    "md5ext": "392b1d456d7693288294b2c183a7645d.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 65
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "permata/permata-a",
+   "name": "permata-a",
+   "nameEn": "Gem a",
+   "category": "benda",
+   "tags": [
+    "hadiah",
+    "game",
+    "koin",
+    "permata"
+   ],
+   "costume": {
+    "name": "permata-a",
+    "assetId": "32a786a4b309d8a5d58d35955621d049",
+    "md5ext": "32a786a4b309d8a5d58d35955621d049.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 35
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "permata/permata-b",
+   "name": "permata-b",
+   "nameEn": "Gem b",
+   "category": "benda",
+   "tags": [
+    "hadiah",
+    "game",
+    "koin",
+    "permata"
+   ],
+   "costume": {
+    "name": "permata-b",
+    "assetId": "4753d1dd49eee517598dcb47219c3e66",
+    "md5ext": "4753d1dd49eee517598dcb47219c3e66.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 35
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "permata/permata-c",
+   "name": "permata-c",
+   "nameEn": "Gem c",
+   "category": "benda",
+   "tags": [
+    "hadiah",
+    "game",
+    "koin",
+    "permata"
+   ],
+   "costume": {
+    "name": "permata-c",
+    "assetId": "52e91fc65afc798d4a2f9ce197d389a8",
+    "md5ext": "52e91fc65afc798d4a2f9ce197d389a8.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 35
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kue/kue-a",
+   "name": "kue-a",
+   "nameEn": "Cupcake a",
+   "category": "makanan",
+   "tags": [
+    "ulang tahun",
+    "manis",
+    "kue mangkuk"
+   ],
+   "costume": {
+    "name": "kue-a",
+    "assetId": "9b4b7f5c0db66ef37755b9d67a3fca38",
+    "md5ext": "9b4b7f5c0db66ef37755b9d67a3fca38.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kue/kue-b",
+   "name": "kue-b",
+   "nameEn": "Cupcake b",
+   "category": "makanan",
+   "tags": [
+    "ulang tahun",
+    "manis",
+    "kue mangkuk"
+   ],
+   "costume": {
+    "name": "kue-b",
+    "assetId": "99c99a94204b80b1608d14423dbb3a68",
+    "md5ext": "99c99a94204b80b1608d14423dbb3a68.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "balon/balon-a",
+   "name": "balon-a",
+   "nameEn": "Balloon a",
+   "category": "benda",
+   "tags": [
+    "pesta",
+    "terbang",
+    "balon"
+   ],
+   "costume": {
+    "name": "balon-a",
+    "assetId": "46550a60c11210e0dfa60d7bd30f11d6",
+    "md5ext": "46550a60c11210e0dfa60d7bd30f11d6.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 30,
+    "rotationCenterY": 60
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "balon/balon-b",
+   "name": "balon-b",
+   "nameEn": "Balloon b",
+   "category": "benda",
+   "tags": [
+    "pesta",
+    "terbang",
+    "balon"
+   ],
+   "costume": {
+    "name": "balon-b",
+    "assetId": "023a52ca76b787a81f8ae2b333067237",
+    "md5ext": "023a52ca76b787a81f8ae2b333067237.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 30,
+    "rotationCenterY": 60
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "balon/balon-c",
+   "name": "balon-c",
+   "nameEn": "Balloon c",
+   "category": "benda",
+   "tags": [
+    "pesta",
+    "terbang",
+    "balon"
+   ],
+   "costume": {
+    "name": "balon-c",
+    "assetId": "51b28d79f75fa66abb0542a35d7bfb5e",
+    "md5ext": "51b28d79f75fa66abb0542a35d7bfb5e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 30,
+    "rotationCenterY": 60
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "hadiah/hadiah-a",
+   "name": "hadiah-a",
+   "nameEn": "Gift Box a",
+   "category": "benda",
+   "tags": [
+    "pesta",
+    "ulang tahun",
+    "kotak hadiah"
+   ],
+   "costume": {
+    "name": "hadiah-a",
+    "assetId": "852c823953a9c0a1987b150641006e48",
+    "md5ext": "852c823953a9c0a1987b150641006e48.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 45,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "hadiah/hadiah-b",
+   "name": "hadiah-b",
+   "nameEn": "Gift Box b",
+   "category": "benda",
+   "tags": [
+    "pesta",
+    "ulang tahun",
+    "kotak hadiah"
+   ],
+   "costume": {
+    "name": "hadiah-b",
+    "assetId": "5dfea8027be1a6b2879395790c124c48",
+    "md5ext": "5dfea8027be1a6b2879395790c124c48.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 45,
+    "rotationCenterY": 50
+   }
+  }
+ ],
+ "backdrops": [
+  {
+   "kind": "backdrop",
+   "id": "langit-biru",
+   "name": "Langit Biru",
+   "nameEn": "Blue Sky",
+   "category": "luar",
+   "tags": [
+    "siang",
+    "awan"
+   ],
+   "costume": {
+    "name": "langit-biru",
+    "assetId": "fbbc222b8e799f608345b46791573d76",
+    "md5ext": "fbbc222b8e799f608345b46791573d76.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "malam-berbintang",
+   "name": "Malam Berbintang",
+   "nameEn": "Starry Night",
+   "category": "luar",
+   "tags": [
+    "malam",
+    "bulan",
+    "bintang"
+   ],
+   "costume": {
+    "name": "malam-berbintang",
+    "assetId": "5342cec78d61f98ec2901f2fee81e870",
+    "md5ext": "5342cec78d61f98ec2901f2fee81e870.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "laut",
+   "name": "Laut",
+   "nameEn": "Sea",
+   "category": "air",
+   "tags": [
+    "pantai",
+    "ombak",
+    "biru"
+   ],
+   "costume": {
+    "name": "laut",
+    "assetId": "959c448323bab9a7931575b349f74a8b",
+    "md5ext": "959c448323bab9a7931575b349f74a8b.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "bawah-laut",
+   "name": "Bawah Laut",
+   "nameEn": "Underwater",
+   "category": "air",
+   "tags": [
+    "laut",
+    "ikan",
+    "terumbu"
+   ],
+   "costume": {
+    "name": "bawah-laut",
+    "assetId": "40dfa9dd60d76e9bd57e2968fde3444e",
+    "md5ext": "40dfa9dd60d76e9bd57e2968fde3444e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "gurun",
+   "name": "Gurun",
+   "nameEn": "Desert",
+   "category": "luar",
+   "tags": [
+    "pasir",
+    "panas",
+    "kaktus"
+   ],
+   "costume": {
+    "name": "gurun",
+    "assetId": "de4893e813e080a287d3fb658946545c",
+    "md5ext": "de4893e813e080a287d3fb658946545c.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "hutan",
+   "name": "Hutan",
+   "nameEn": "Forest",
+   "category": "luar",
+   "tags": [
+    "pohon",
+    "alam",
+    "hijau"
+   ],
+   "costume": {
+    "name": "hutan",
+    "assetId": "dee955147ad2dd223cd580b57fd856d4",
+    "md5ext": "dee955147ad2dd223cd580b57fd856d4.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "kota",
+   "name": "Kota",
+   "nameEn": "City",
+   "category": "kota",
+   "tags": [
+    "gedung",
+    "jalan"
+   ],
+   "costume": {
+    "name": "kota",
+    "assetId": "ea63e70a3cde94bd5416716fe19a95a3",
+    "md5ext": "ea63e70a3cde94bd5416716fe19a95a3.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "luar-angkasa",
+   "name": "Luar Angkasa",
+   "nameEn": "Outer Space",
+   "category": "angkasa",
+   "tags": [
+    "planet",
+    "bintang",
+    "roket"
+   ],
+   "costume": {
+    "name": "luar-angkasa",
+    "assetId": "ac637082af1b73bf286b6407e5498c66",
+    "md5ext": "ac637082af1b73bf286b6407e5498c66.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "kelas",
+   "name": "Ruang Kelas",
+   "nameEn": "Classroom",
+   "category": "dalam",
+   "tags": [
+    "sekolah",
+    "papan tulis"
+   ],
+   "costume": {
+    "name": "kelas",
+    "assetId": "410d5cffabc7428c07cc77fda42a0eec",
+    "md5ext": "410d5cffabc7428c07cc77fda42a0eec.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "lapangan-bola",
+   "name": "Lapangan Bola",
+   "nameEn": "Soccer Field",
+   "category": "olahraga",
+   "tags": [
+    "sepak bola",
+    "rumput"
+   ],
+   "costume": {
+    "name": "lapangan-bola",
+    "assetId": "218f670a73bc1a7f808cb998d11d1b98",
+    "md5ext": "218f670a73bc1a7f808cb998d11d1b98.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "pantai",
+   "name": "Pantai",
+   "nameEn": "Beach",
+   "category": "air",
+   "tags": [
+    "pasir",
+    "laut",
+    "liburan"
+   ],
+   "costume": {
+    "name": "pantai",
+    "assetId": "ce3406a777a63b1e4990ffdd799de887",
+    "md5ext": "ce3406a777a63b1e4990ffdd799de887.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "gunung",
+   "name": "Pegunungan",
+   "nameEn": "Mountains",
+   "category": "luar",
+   "tags": [
+    "gunung",
+    "salju"
+   ],
+   "costume": {
+    "name": "gunung",
+    "assetId": "8e1bdb142e750b0f8c08d058b060bc53",
+    "md5ext": "8e1bdb142e750b0f8c08d058b060bc53.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "salju",
+   "name": "Musim Salju",
+   "nameEn": "Snowy Day",
+   "category": "luar",
+   "tags": [
+    "dingin",
+    "salju",
+    "musim dingin"
+   ],
+   "costume": {
+    "name": "salju",
+    "assetId": "81093ee693a386e5310572b50c606188",
+    "md5ext": "81093ee693a386e5310572b50c606188.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "senja",
+   "name": "Senja",
+   "nameEn": "Sunset",
+   "category": "luar",
+   "tags": [
+    "sore",
+    "matahari terbenam"
+   ],
+   "costume": {
+    "name": "senja",
+    "assetId": "6fa42ff815d046cfa43141d0f63d146a",
+    "md5ext": "6fa42ff815d046cfa43141d0f63d146a.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "panggung",
+   "name": "Panggung",
+   "nameEn": "Theater Stage",
+   "category": "dalam",
+   "tags": [
+    "pertunjukan",
+    "tirai",
+    "konser"
+   ],
+   "costume": {
+    "name": "panggung",
+    "assetId": "3cb0659b5f666c45b19f0cc83f32c1c5",
+    "md5ext": "3cb0659b5f666c45b19f0cc83f32c1c5.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "grid-xy",
+   "name": "Grid Koordinat",
+   "nameEn": "XY Grid",
+   "category": "belajar",
+   "tags": [
+    "koordinat",
+    "matematika",
+    "x y"
+   ],
+   "costume": {
+    "name": "grid-xy",
+    "assetId": "29c9c6e83cce0f4fbe8b3972d730d89b",
+    "md5ext": "29c9c6e83cce0f4fbe8b3972d730d89b.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "pelangi",
+   "name": "Pelangi",
+   "nameEn": "Rainbow",
+   "category": "luar",
+   "tags": [
+    "warna",
+    "langit"
+   ],
+   "costume": {
+    "name": "pelangi",
+    "assetId": "6adae55528213d2175d53b1c61725ae3",
+    "md5ext": "6adae55528213d2175d53b1c61725ae3.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "taman",
+   "name": "Taman",
+   "nameEn": "Park",
+   "category": "luar",
+   "tags": [
+    "bermain",
+    "pohon",
+    "rumput"
+   ],
+   "costume": {
+    "name": "taman",
+    "assetId": "49d91d7f742a6f45c2fa410320412633",
+    "md5ext": "49d91d7f742a6f45c2fa410320412633.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "peternakan",
+   "name": "Peternakan",
+   "nameEn": "Farm",
+   "category": "luar",
+   "tags": [
+    "kandang",
+    "desa"
+   ],
+   "costume": {
+    "name": "peternakan",
+    "assetId": "040e18f3b055d73094e33b42caf9d8f4",
+    "md5ext": "040e18f3b055d73094e33b42caf9d8f4.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "laboratorium",
+   "name": "Laboratorium",
+   "nameEn": "Laboratory",
+   "category": "dalam",
+   "tags": [
+    "sains",
+    "eksperimen",
+    "sekolah"
+   ],
+   "costume": {
+    "name": "laboratorium",
+    "assetId": "64a5211c35f22b5b6e4d4fbf4c5903a0",
+    "md5ext": "64a5211c35f22b5b6e4d4fbf4c5903a0.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "kastil",
+   "name": "Kastil",
+   "nameEn": "Castle",
+   "category": "fantasi",
+   "tags": [
+    "kerajaan",
+    "dongeng"
+   ],
+   "costume": {
+    "name": "kastil",
+    "assetId": "9938338d8eed6a748e7af38298e0c209",
+    "md5ext": "9938338d8eed6a748e7af38298e0c209.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  }
+ ],
+ "sounds": [
+  {
+   "kind": "sound",
+   "id": "pop",
+   "name": "Pop",
+   "nameEn": "Pop",
+   "category": "efek",
+   "tags": [
+    "pendek",
+    "gelembung",
+    "lucu"
+   ],
+   "sound": {
+    "name": "Pop",
+    "assetId": "596257450505cdbf34159fcb79017891",
+    "md5ext": "596257450505cdbf34159fcb79017891.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 1985
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "boing",
+   "name": "Boing",
+   "nameEn": "Boing",
+   "category": "kartun",
+   "tags": [
+    "pantul",
+    "lucu",
+    "lompat"
+   ],
+   "sound": {
+    "name": "Boing",
+    "assetId": "115c4502afa884e42bc81aab2230991d",
+    "md5ext": "115c4502afa884e42bc81aab2230991d.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 13230
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "chime",
+   "name": "Denting",
+   "nameEn": "Chime",
+   "category": "musik",
+   "tags": [
+    "lonceng",
+    "lembut"
+   ],
+   "sound": {
+    "name": "Denting",
+    "assetId": "7066262cb81e7d8e781f4b77e57c1a03",
+    "md5ext": "7066262cb81e7d8e781f4b77e57c1a03.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 26460
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "gelembung",
+   "name": "Gelembung",
+   "nameEn": "Bubbles",
+   "category": "alam",
+   "tags": [
+    "air",
+    "laut"
+   ],
+   "sound": {
+    "name": "Gelembung",
+    "assetId": "5e8c71ae1b265771dff7d4237b750a01",
+    "md5ext": "5e8c71ae1b265771dff7d4237b750a01.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 7056
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "cicit",
+   "name": "Cicit Burung",
+   "nameEn": "Chirp",
+   "category": "hewan",
+   "tags": [
+    "burung",
+    "kicau"
+   ],
+   "sound": {
+    "name": "Cicit Burung",
+    "assetId": "01497704a3280bcd5fc4e8569e922d63",
+    "md5ext": "01497704a3280bcd5fc4e8569e922d63.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 8354
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "sihir",
+   "name": "Sihir",
+   "nameEn": "Magic",
+   "category": "efek",
+   "tags": [
+    "kilau",
+    "fantasi"
+   ],
+   "sound": {
+    "name": "Sihir",
+    "assetId": "51b5ccf895ee713db65a7f2f77011151",
+    "md5ext": "51b5ccf895ee713db65a7f2f77011151.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 22050
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "whoosh",
+   "name": "Wus",
+   "nameEn": "Whoosh",
+   "category": "efek",
+   "tags": [
+    "angin",
+    "cepat",
+    "gerak"
+   ],
+   "sound": {
+    "name": "Wus",
+    "assetId": "ece004864d7b463ee2e63feeb0473906",
+    "md5ext": "ece004864d7b463ee2e63feeb0473906.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 11025
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "klik",
+   "name": "Klik",
+   "nameEn": "Click",
+   "category": "antarmuka",
+   "tags": [
+    "tombol",
+    "pendek"
+   ],
+   "sound": {
+    "name": "Klik",
+    "assetId": "88fdfae06e12e1fd72dd1e7aa38645f2",
+    "md5ext": "88fdfae06e12e1fd72dd1e7aa38645f2.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 882
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "auman",
+   "name": "Auman",
+   "nameEn": "Roar",
+   "category": "hewan",
+   "tags": [
+    "dinosaurus",
+    "singa",
+    "seram"
+   ],
+   "sound": {
+    "name": "Auman",
+    "assetId": "5efee60cc2c17b174c40d95c2b3d0856",
+    "md5ext": "5efee60cc2c17b174c40d95c2b3d0856.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 22050
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "dengung",
+   "name": "Dengung",
+   "nameEn": "Buzz",
+   "category": "hewan",
+   "tags": [
+    "lebah",
+    "serangga"
+   ],
+   "sound": {
+    "name": "Dengung",
+    "assetId": "86651a58147e6e1c7c333e74ff747ded",
+    "md5ext": "86651a58147e6e1c7c333e74ff747ded.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 19845
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "guk",
+   "name": "Guk",
+   "nameEn": "Woof",
+   "category": "hewan",
+   "tags": [
+    "anjing",
+    "gonggong"
+   ],
+   "sound": {
+    "name": "Guk",
+    "assetId": "afc205f80da845f02688a9f6ad263e9b",
+    "md5ext": "afc205f80da845f02688a9f6ad263e9b.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 10979
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "meong",
+   "name": "Meong",
+   "nameEn": "Meow",
+   "category": "hewan",
+   "tags": [
+    "kucing"
+   ],
+   "sound": {
+    "name": "Meong",
+    "assetId": "ce011b2c208d8d088a49612919e75956",
+    "md5ext": "ce011b2c208d8d088a49612919e75956.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 15435
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "tendang",
+   "name": "Tendang",
+   "nameEn": "Kick",
+   "category": "olahraga",
+   "tags": [
+    "bola",
+    "pukul"
+   ],
+   "sound": {
+    "name": "Tendang",
+    "assetId": "b1be6611f5ac24761addb6bd3649f103",
+    "md5ext": "b1be6611f5ac24761addb6bd3649f103.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 4410
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "roket",
+   "name": "Roket",
+   "nameEn": "Rocket",
+   "category": "efek",
+   "tags": [
+    "luar angkasa",
+    "meluncur"
+   ],
+   "sound": {
+    "name": "Roket",
+    "assetId": "138aaabcec6b58b4cd9d6129a3a86320",
+    "md5ext": "138aaabcec6b58b4cd9d6129a3a86320.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 33075
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "robot-bip",
+   "name": "Bip Robot",
+   "nameEn": "Robot Beeps",
+   "category": "efek",
+   "tags": [
+    "robot",
+    "komputer",
+    "mesin"
+   ],
+   "sound": {
+    "name": "Bip Robot",
+    "assetId": "b1ba01053b5f73ddc5ade4ac72b26f5a",
+    "md5ext": "b1ba01053b5f73ddc5ade4ac72b26f5a.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 8820
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "angin",
+   "name": "Angin",
+   "nameEn": "Wind",
+   "category": "alam",
+   "tags": [
+    "cuaca",
+    "udara"
+   ],
+   "sound": {
+    "name": "Angin",
+    "assetId": "9a57b64f94f312823110fc6846b5c16c",
+    "md5ext": "9a57b64f94f312823110fc6846b5c16c.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 35280
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "kriuk",
+   "name": "Kriuk",
+   "nameEn": "Crunch",
+   "category": "makanan",
+   "tags": [
+    "makan",
+    "gigit"
+   ],
+   "sound": {
+    "name": "Kriuk",
+    "assetId": "1afc7d32f9fef44f2e87208d593cad2e",
+    "md5ext": "1afc7d32f9fef44f2e87208d593cad2e.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 5709
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "klakson",
+   "name": "Klakson",
+   "nameEn": "Car Horn",
+   "category": "transportasi",
+   "tags": [
+    "mobil",
+    "jalan"
+   ],
+   "sound": {
+    "name": "Klakson",
+    "assetId": "44d2c27f2c014d85b55a944f7c340094",
+    "md5ext": "44d2c27f2c014d85b55a944f7c340094.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 15833
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "laser",
+   "name": "Laser",
+   "nameEn": "Laser",
+   "category": "game",
+   "tags": [
+    "tembak",
+    "luar angkasa"
+   ],
+   "sound": {
+    "name": "Laser",
+    "assetId": "18c82548cc954ee9142aff2e7cd9e6b9",
+    "md5ext": "18c82548cc954ee9142aff2e7cd9e6b9.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 6174
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "koin",
+   "name": "Koin",
+   "nameEn": "Coin",
+   "category": "game",
+   "tags": [
+    "hadiah",
+    "poin",
+    "uang"
+   ],
+   "sound": {
+    "name": "Koin",
+    "assetId": "1e87699f1710ae9d2efb112476bea9dd",
+    "md5ext": "1e87699f1710ae9d2efb112476bea9dd.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 8159
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "tada",
+   "name": "Ta-da",
+   "nameEn": "Ta-da",
+   "category": "musik",
+   "tags": [
+    "menang",
+    "selesai",
+    "fanfare"
+   ],
+   "sound": {
+    "name": "Ta-da",
+    "assetId": "0104ed2b4d2475d45aba8e2d3b4b7028",
+    "md5ext": "0104ed2b4d2475d45aba8e2d3b4b7028.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 24255
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "lompat",
+   "name": "Lompat",
+   "nameEn": "Jump",
+   "category": "game",
+   "tags": [
+    "platformer",
+    "loncat"
+   ],
+   "sound": {
+    "name": "Lompat",
+    "assetId": "afbef97a44eb3c0fce38c8974aa03f62",
+    "md5ext": "afbef97a44eb3c0fce38c8974aa03f62.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 4410
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "ledakan",
+   "name": "Ledakan",
+   "nameEn": "Explosion",
+   "category": "game",
+   "tags": [
+    "bom",
+    "keras"
+   ],
+   "sound": {
+    "name": "Ledakan",
+    "assetId": "7ca2dceab98e0cbb62582ddc16f7a60c",
+    "md5ext": "7ca2dceab98e0cbb62582ddc16f7a60c.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 26460
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "power-up",
+   "name": "Naik Level",
+   "nameEn": "Power Up",
+   "category": "game",
+   "tags": [
+    "level",
+    "bonus"
+   ],
+   "sound": {
+    "name": "Naik Level",
+    "assetId": "b7ecd811db5c77adfec80799f921019d",
+    "md5ext": "b7ecd811db5c77adfec80799f921019d.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 9923
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "power-down",
+   "name": "Turun Level",
+   "nameEn": "Power Down",
+   "category": "game",
+   "tags": [
+    "kalah",
+    "nyawa"
+   ],
+   "sound": {
+    "name": "Turun Level",
+    "assetId": "5da249704309eadd4152a93f9fe2b324",
+    "md5ext": "5da249704309eadd4152a93f9fe2b324.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 14112
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "beep",
+   "name": "Bip",
+   "nameEn": "Beep",
+   "category": "antarmuka",
+   "tags": [
+    "notifikasi",
+    "pendek"
+   ],
+   "sound": {
+    "name": "Bip",
+    "assetId": "8035bc858e83274a42cc29d4d4e807b1",
+    "md5ext": "8035bc858e83274a42cc29d4d4e807b1.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 3308
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "salah",
+   "name": "Salah",
+   "nameEn": "Wrong",
+   "category": "antarmuka",
+   "tags": [
+    "gagal",
+    "error",
+    "kuis"
+   ],
+   "sound": {
+    "name": "Salah",
+    "assetId": "565037ade266642f9aecdd18d658851f",
+    "md5ext": "565037ade266642f9aecdd18d658851f.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 12486
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "benar",
+   "name": "Benar",
+   "nameEn": "Correct",
+   "category": "antarmuka",
+   "tags": [
+    "sukses",
+    "kuis",
+    "jawaban"
+   ],
+   "sound": {
+    "name": "Benar",
+    "assetId": "caf15a97e75674d1ab9752b8de299dcb",
+    "md5ext": "caf15a97e75674d1ab9752b8de299dcb.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 9482
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "sirene",
+   "name": "Sirene",
+   "nameEn": "Siren",
+   "category": "transportasi",
+   "tags": [
+    "polisi",
+    "darurat"
+   ],
+   "sound": {
+    "name": "Sirene",
+    "assetId": "1caf9049755d0496edd6ddd4744b4255",
+    "md5ext": "1caf9049755d0496edd6ddd4744b4255.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 35280
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "tetes",
+   "name": "Tetes Air",
+   "nameEn": "Water Drop",
+   "category": "alam",
+   "tags": [
+    "air",
+    "hujan"
+   ],
+   "sound": {
+    "name": "Tetes Air",
+    "assetId": "4b3e79675f712d3015edb2c04f12ec42",
+    "md5ext": "4b3e79675f712d3015edb2c04f12ec42.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 2646
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "hujan",
+   "name": "Hujan",
+   "nameEn": "Rain",
+   "category": "alam",
+   "tags": [
+    "cuaca",
+    "air"
+   ],
+   "sound": {
+    "name": "Hujan",
+    "assetId": "7a17364e965b2a8e5cbecc74be19d702",
+    "md5ext": "7a17364e965b2a8e5cbecc74be19d702.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 35280
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "detak-jantung",
+   "name": "Detak Jantung",
+   "nameEn": "Heartbeat",
+   "category": "efek",
+   "tags": [
+    "tegang",
+    "jantung"
+   ],
+   "sound": {
+    "name": "Detak Jantung",
+    "assetId": "601016fea759b8d8c6200fd1fc755dc3",
+    "md5ext": "601016fea759b8d8c6200fd1fc755dc3.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 26460
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "alarm",
+   "name": "Alarm",
+   "nameEn": "Alarm",
+   "category": "antarmuka",
+   "tags": [
+    "jam",
+    "bangun",
+    "peringatan"
+   ],
+   "sound": {
+    "name": "Alarm",
+    "assetId": "710ed17c333945e60760d2870c84caee",
+    "md5ext": "710ed17c333945e60760d2870c84caee.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 15876
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "lonceng",
+   "name": "Lonceng",
+   "nameEn": "Bell",
+   "category": "musik",
+   "tags": [
+    "sekolah",
+    "dering"
+   ],
+   "sound": {
+    "name": "Lonceng",
+    "assetId": "46a09b1a05cac10cde983e4eb68a9a98",
+    "md5ext": "46a09b1a05cac10cde983e4eb68a9a98.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 30870
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "drum-kick",
+   "name": "Drum Bass",
+   "nameEn": "Kick Drum",
+   "category": "perkusi",
+   "tags": [
+    "drum",
+    "ketukan"
+   ],
+   "sound": {
+    "name": "Drum Bass",
+    "assetId": "a6e4fe7d6f821483b89425d61f6c630c",
+    "md5ext": "a6e4fe7d6f821483b89425d61f6c630c.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 7717
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "snare",
+   "name": "Snare",
+   "nameEn": "Snare Drum",
+   "category": "perkusi",
+   "tags": [
+    "drum",
+    "ketukan"
+   ],
+   "sound": {
+    "name": "Snare",
+    "assetId": "cafb5c345744e7ab0caceebda8bda0c9",
+    "md5ext": "cafb5c345744e7ab0caceebda8bda0c9.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 5513
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "hi-hat",
+   "name": "Hi-hat",
+   "nameEn": "Hi-hat",
+   "category": "perkusi",
+   "tags": [
+    "drum",
+    "simbal"
+   ],
+   "sound": {
+    "name": "Hi-hat",
+    "assetId": "655d3e91236ae1051de92dce5e300948",
+    "md5ext": "655d3e91236ae1051de92dce5e300948.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 2205
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "tepuk",
+   "name": "Tepuk Tangan",
+   "nameEn": "Clap",
+   "category": "perkusi",
+   "tags": [
+    "tangan",
+    "ketukan"
+   ],
+   "sound": {
+    "name": "Tepuk Tangan",
+    "assetId": "4bb5a3ce4487be3e0af4383a2ff6febb",
+    "md5ext": "4bb5a3ce4487be3e0af4383a2ff6febb.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 6615
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "piano-do",
+   "name": "Piano Do",
+   "nameEn": "Piano C",
+   "category": "musik",
+   "tags": [
+    "piano",
+    "nada",
+    "c"
+   ],
+   "sound": {
+    "name": "Piano Do",
+    "assetId": "3f976f55df07753e3cf4f35914c295cf",
+    "md5ext": "3f976f55df07753e3cf4f35914c295cf.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 22050
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "piano-mi",
+   "name": "Piano Mi",
+   "nameEn": "Piano E",
+   "category": "musik",
+   "tags": [
+    "piano",
+    "nada",
+    "e"
+   ],
+   "sound": {
+    "name": "Piano Mi",
+    "assetId": "e37ddde6d48d9e74eda1af5e06581e18",
+    "md5ext": "e37ddde6d48d9e74eda1af5e06581e18.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 22050
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "piano-sol",
+   "name": "Piano Sol",
+   "nameEn": "Piano G",
+   "category": "musik",
+   "tags": [
+    "piano",
+    "nada",
+    "g"
+   ],
+   "sound": {
+    "name": "Piano Sol",
+    "assetId": "a8bdfcc29905e9c50c1408921bbea9e9",
+    "md5ext": "a8bdfcc29905e9c50c1408921bbea9e9.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 22050
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "gitar",
+   "name": "Petik Gitar",
+   "nameEn": "Guitar Pluck",
+   "category": "musik",
+   "tags": [
+    "gitar",
+    "senar"
+   ],
+   "sound": {
+    "name": "Petik Gitar",
+    "assetId": "4f533ebd1c85c1150eb79e810e8fce5f",
+    "md5ext": "4f533ebd1c85c1150eb79e810e8fce5f.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 26460
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "xilofon",
+   "name": "Xilofon",
+   "nameEn": "Xylophone",
+   "category": "musik",
+   "tags": [
+    "nada",
+    "pukul"
+   ],
+   "sound": {
+    "name": "Xilofon",
+    "assetId": "837fa1900c4d8c3856d07e390a369e7d",
+    "md5ext": "837fa1900c4d8c3856d07e390a369e7d.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 15876
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "bass",
+   "name": "Bass",
+   "nameEn": "Bass",
+   "category": "musik",
+   "tags": [
+    "nada",
+    "rendah"
+   ],
+   "sound": {
+    "name": "Bass",
+    "assetId": "fb74c9431149bab628e76f1c0f0c0a26",
+    "md5ext": "fb74c9431149bab628e76f1c0f0c0a26.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 19845
+   }
+  }
+ ]
+}

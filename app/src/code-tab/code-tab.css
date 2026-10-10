@@ -1,0 +1,215 @@
+.kb-code-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.kb-code-panel__actions {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.kb-code-panel__ext,
+.kb-code-panel__lab {
+  pointer-events: auto;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.kb-code-panel__ext {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  background: var(--kb-extensions, #0fbd8c);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.kb-code-panel__ext:focus-visible,
+.kb-code-panel__lab:focus-visible,
+.kb-extlib__card:focus-visible,
+.kb-extlib__back:focus-visible {
+  outline: 3px solid #4c97ff;
+  outline-offset: 2px;
+}
+
+.kb-code-panel__lab {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: #08786f;
+  border-radius: 4px;
+  padding: 4px 6px;
+  min-height: 24px;
+}
+
+.kb-extlib {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #e9f1fc;
+  display: flex;
+  flex-direction: column;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.kb-extlib__header {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  color: #fff;
+  background: linear-gradient(105deg, #15364c, #08786f);
+}
+
+.kb-extlib__header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.kb-extlib__back {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  color: #fff;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.kb-extlib__grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+  gap: 16px;
+  align-content: start;
+}
+
+.kb-extlib__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  text-align: left;
+  border: 1px solid #d9e3f2;
+  border-radius: 8px;
+  background: #fff;
+  padding: 0 0 12px;
+  overflow: hidden;
+  cursor: pointer;
+  color: #575e75;
+}
+
+.kb-extlib__card:hover {
+  border-color: #4c97ff;
+}
+
+.kb-extlib__banner {
+  width: 100%;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  background: #0fbd8c;
+}
+
+.kb-extlib__card--ai .kb-extlib__banner {
+  background: linear-gradient(105deg, #15364c, #08786f);
+}
+
+.kb-extlib__name,
+.kb-extlib__desc,
+.kb-extlib__req {
+  padding: 0 12px;
+}
+
+.kb-extlib__name {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.kb-extlib__desc {
+  font-size: 13px;
+}
+
+.kb-extlib__req {
+  font-size: 12px;
+  color: #855cd6;
+}
+
+.kb-extlib__badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #fff;
+  color: #0b8e69;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+}
+
+.kb-ailab {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(21, 54, 76, 0.55);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.kb-ailab__box {
+  position: relative;
+  background: #fff;
+  border-radius: 8px;
+  max-width: min(720px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+}
+
+.kb-ailab__close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+  color: #575e75;
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.kb-ailab__loading {
+  padding: 24px;
+}
+
+/* Ruang untuk tombol Tambah Ekstensi & AI Lab di bawah menu kategori (scratch-gui: area tetap di kiri bawah). */
+.kb-code-panel .kb-ws-categories {
+  padding-bottom: 96px;
+  overflow-y: auto;
+}
+.kb-code-panel__actions {
+  background: #fff;
+  border-top: 1px solid #d9e3f2;
+  pointer-events: auto;
+}

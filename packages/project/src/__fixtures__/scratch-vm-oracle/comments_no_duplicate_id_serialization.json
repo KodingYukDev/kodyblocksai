@@ -1,0 +1,139 @@
+{
+ "targets": [
+  {
+   "isStage": true,
+   "name": "Stage",
+   "variables": {
+    "`jEk@4|i[#Fk?(8x)AV.-my variable": [
+     "my variable",
+     0
+    ]
+   },
+   "lists": {},
+   "broadcasts": {},
+   "blocks": {},
+   "comments": {},
+   "currentCostume": 0,
+   "costumes": [
+    {
+     "name": "backdrop1",
+     "dataFormat": "svg",
+     "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+     "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+     "rotationCenterX": 1,
+     "rotationCenterY": 1
+    }
+   ],
+   "sounds": [
+    {
+     "name": "pop",
+     "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+     "dataFormat": "wav",
+     "format": "",
+     "rate": 44100,
+     "sampleCount": 1032,
+     "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+    }
+   ],
+   "volume": 100,
+   "tempo": 60,
+   "videoTransparency": 50,
+   "videoState": "off",
+   "textToSpeechLanguage": null
+  },
+  {
+   "isStage": false,
+   "name": "Sprite1",
+   "variables": {},
+   "lists": {},
+   "broadcasts": {},
+   "blocks": {
+    "WX=(vTWI!OPnTw6rqh-4": {
+     "opcode": "motion_movesteps",
+     "next": null,
+     "parent": null,
+     "inputs": {
+      "STEPS": [
+       1,
+       [
+        4,
+        "10"
+       ]
+      ]
+     },
+     "fields": {},
+     "shadow": false,
+     "topLevel": true,
+     "x": 237,
+     "y": 268,
+     "comment": "rd;C[QJ@d]owz+$J@H)s"
+    }
+   },
+   "comments": {
+    "rd;C[QJ@d]owz+$J@H)s": {
+     "blockId": "WX=(vTWI!OPnTw6rqh-4",
+     "x": 422.40109705041954,
+     "y": 276.44444444444446,
+     "width": 200,
+     "height": 200,
+     "minimized": false,
+     "text": "This is a block comment."
+    },
+    ":~,$HKb)*q8M,ynRqnX2": {
+     "blockId": null,
+     "x": 426.66666666666663,
+     "y": 552.5925925925925,
+     "width": 200,
+     "height": 200,
+     "minimized": false,
+     "text": "This is a workspace comment."
+    }
+   },
+   "currentCostume": 0,
+   "costumes": [
+    {
+     "name": "costume1",
+     "bitmapResolution": 1,
+     "dataFormat": "svg",
+     "assetId": "f9a1c175dbe2e5dee472858dd30d16bb",
+     "md5ext": "f9a1c175dbe2e5dee472858dd30d16bb.svg",
+     "rotationCenterX": 47,
+     "rotationCenterY": 55
+    },
+    {
+     "name": "costume2",
+     "bitmapResolution": 1,
+     "dataFormat": "svg",
+     "assetId": "6e8bd9ae68fdb02b7e1e3df656a75635",
+     "md5ext": "6e8bd9ae68fdb02b7e1e3df656a75635.svg",
+     "rotationCenterX": 47,
+     "rotationCenterY": 55
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Meow",
+     "assetId": "83c36d806dc92327b9e7049a565c6bff",
+     "dataFormat": "wav",
+     "format": "",
+     "rate": 44100,
+     "sampleCount": 37376,
+     "md5ext": "83c36d806dc92327b9e7049a565c6bff.wav"
+    }
+   ],
+   "volume": 100,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "size": 100,
+   "direction": 90,
+   "draggable": false,
+   "rotationStyle": "all around"
+  }
+ ],
+ "monitors": [],
+ "extensions": [],
+ "meta": {
+  "semver": "3.0.0"
+ }
+}

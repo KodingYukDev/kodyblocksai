@@ -1,0 +1,11 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.vite/
+.env
+.env.*
+
+# AI models (69 MB) — regenerate with: node packages/ai/tools/vendor-models.mjs
+app/public/models/

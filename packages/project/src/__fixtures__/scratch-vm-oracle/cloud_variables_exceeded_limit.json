@@ -1,0 +1,166 @@
+{
+ "targets": [
+  {
+   "isStage": true,
+   "name": "Stage",
+   "variables": {
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud1-": [
+     "☁ cloud1",
+     0,
+     true
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud2-": [
+     "☁ cloud2",
+     0,
+     true
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud3-": [
+     "☁ cloud3",
+     0,
+     true
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud4-": [
+     "☁ cloud4",
+     0,
+     true
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud5-": [
+     "☁ cloud5",
+     0,
+     true
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud6-": [
+     "☁ cloud6",
+     0,
+     true
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud7-": [
+     "☁ cloud7",
+     0,
+     true
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud8-": [
+     "☁ cloud8",
+     0,
+     true
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud9-": [
+     "☁ cloud9",
+     0,
+     true
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud10-": [
+     "☁ cloud10",
+     0,
+     true
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud11-": [
+     "☁ cloud11",
+     0
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud12-": [
+     "☁ cloud12",
+     0
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud13-": [
+     "☁ cloud13",
+     0
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud14-": [
+     "☁ cloud14",
+     0
+    ],
+    "k)O]OWi/*gjy*iV.N2=V-☁ cloud15-": [
+     "☁ cloud15",
+     0
+    ]
+   },
+   "lists": {},
+   "broadcasts": {},
+   "blocks": {},
+   "comments": {},
+   "currentCostume": 0,
+   "costumes": [
+    {
+     "name": "backdrop1",
+     "bitmapResolution": 2,
+     "dataFormat": "png",
+     "assetId": "797b03bdb8cf6ccfc30c0692d533d998",
+     "md5ext": "797b03bdb8cf6ccfc30c0692d533d998.png",
+     "rotationCenterX": 480,
+     "rotationCenterY": 360
+    }
+   ],
+   "sounds": [
+    {
+     "name": "pop",
+     "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+     "dataFormat": "wav",
+     "format": "",
+     "rate": 44100,
+     "sampleCount": 1032,
+     "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+    }
+   ],
+   "volume": 100,
+   "tempo": 60,
+   "videoTransparency": 50,
+   "videoState": "on",
+   "textToSpeechLanguage": null
+  },
+  {
+   "isStage": false,
+   "name": "Sprite1",
+   "variables": {},
+   "lists": {},
+   "broadcasts": {},
+   "blocks": {},
+   "comments": {},
+   "currentCostume": 0,
+   "costumes": [
+    {
+     "name": "costume1",
+     "bitmapResolution": 1,
+     "dataFormat": "svg",
+     "assetId": "4490f27a28b3c677348f330297a3bb89",
+     "md5ext": "4490f27a28b3c677348f330297a3bb89.svg",
+     "rotationCenterX": 47,
+     "rotationCenterY": 55
+    },
+    {
+     "name": "costume2",
+     "bitmapResolution": 1,
+     "dataFormat": "svg",
+     "assetId": "d15c553bc1cd08d2d9d15eba9df5cd1b",
+     "md5ext": "d15c553bc1cd08d2d9d15eba9df5cd1b.svg",
+     "rotationCenterX": 47,
+     "rotationCenterY": 55
+    }
+   ],
+   "sounds": [
+    {
+     "name": "meow",
+     "assetId": "83c36d806dc92327b9e7049a565c6bff",
+     "dataFormat": "wav",
+     "format": "",
+     "rate": 44100,
+     "sampleCount": 37376,
+     "md5ext": "83c36d806dc92327b9e7049a565c6bff.wav"
+    }
+   ],
+   "volume": 100,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "size": 100,
+   "direction": 90,
+   "draggable": false,
+   "rotationStyle": "all around"
+  }
+ ],
+ "monitors": [],
+ "extensions": [],
+ "meta": {
+  "semver": "3.0.0"
+ }
+}

@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": false,
+    "useDefineForClassFields": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "types": ["node", "vite/client"],
+    "baseUrl": ".",
+    "paths": {
+      "@kody/engine": ["packages/engine/src/index.ts"],
+      "@kody/engine/*": ["packages/engine/src/*"],
+      "@kody/renderer": ["packages/renderer/src/index.ts"],
+      "@kody/renderer/*": ["packages/renderer/src/*"],
+      "@kody/audio": ["packages/audio/src/index.ts"],
+      "@kody/audio/*": ["packages/audio/src/*"],
+      "@kody/blocks-ui": ["packages/blocks-ui/src/index.ts"],
+      "@kody/blocks-ui/*": ["packages/blocks-ui/src/*"],
+      "@kody/project": ["packages/project/src/index.ts"],
+      "@kody/project/*": ["packages/project/src/*"],
+      "@kody/ai": ["packages/ai/src/index.ts"],
+      "@kody/ai/*": ["packages/ai/src/*"],
+      "@kody/ext-pen": ["packages/ext-pen/src/index.ts"],
+      "@kody/ext-pen/*": ["packages/ext-pen/src/*"],
+      "@kody/ext-music": ["packages/ext-music/src/index.ts"],
+      "@kody/ext-music/*": ["packages/ext-music/src/*"]
+    }
+  },
+  "include": ["packages", "app", "tests", "scripts/*.ts", "vite.config.ts", "vitest.config.ts", "playwright.config.ts", "aliases.ts"]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "kodyblocks-ai-v2",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "KodyBlocks AI v2 - editor blok ala Scratch 3 dengan engine sendiri + ekstensi AI",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 8620",
+    "build": "npm run typecheck && vite build",
+    "typecheck": "tsc --noEmit -p .",
+    "preview": "vite preview --host 127.0.0.1 --port 8620",
+    "test": "vitest run",
+    "test:parity": "vitest run tests/parity",
+    "test:e2e": "playwright test",
+    "check:no-scratch-import": "node scripts/check-no-scratch-import.mjs",
+    "check": "npm run check:no-scratch-import && npm run typecheck && npm run test"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "0.10.32",
+    "@tensorflow-models/coco-ssd": "2.2.3",
+    "@tensorflow-models/mobilenet": "2.1.1",
+    "@tensorflow/tfjs": "4.22.0",
+    "idb": "8.0.3",
+    "jszip": "3.10.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "twgl.js": "5.5.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.0",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^25.0.1",
+    "scratch-vm": "5.0.300",
+    "typescript": "~5.7.3",
+    "vite": "^6.1.0",
+    "vitest": "^3.0.5"
+  }
+}

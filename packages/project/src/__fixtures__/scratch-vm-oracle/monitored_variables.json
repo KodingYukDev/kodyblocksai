@@ -1,0 +1,231 @@
+{
+ "targets": [
+  {
+   "isStage": true,
+   "name": "Stage",
+   "variables": {
+    "`jEk@4|i[#Fk?(8x)AV.-my variable": [
+     "my variable",
+     "0"
+    ]
+   },
+   "lists": {},
+   "broadcasts": {},
+   "blocks": {},
+   "comments": {},
+   "currentCostume": 0,
+   "costumes": [
+    {
+     "name": "backdrop1",
+     "dataFormat": "svg",
+     "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+     "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+     "rotationCenterX": 240,
+     "rotationCenterY": 180
+    }
+   ],
+   "sounds": [
+    {
+     "name": "pop",
+     "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+     "dataFormat": "wav",
+     "format": "",
+     "rate": 48000,
+     "sampleCount": 1123,
+     "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+    }
+   ],
+   "volume": 100,
+   "tempo": 60,
+   "videoTransparency": 50,
+   "videoState": "off",
+   "textToSpeechLanguage": null
+  },
+  {
+   "isStage": false,
+   "name": "Referee",
+   "variables": {
+    "(22K?IHrHfKVonvkPNt)": [
+     "refereevar1",
+     "cat"
+    ]
+   },
+   "lists": {},
+   "broadcasts": {},
+   "blocks": {},
+   "comments": {},
+   "currentCostume": 0,
+   "costumes": [
+    {
+     "name": "referee-a",
+     "bitmapResolution": 1,
+     "dataFormat": "svg",
+     "assetId": "bb9376eb458bc1581eecc62bdaba04e6",
+     "md5ext": "bb9376eb458bc1581eecc62bdaba04e6.svg",
+     "rotationCenterX": 76,
+     "rotationCenterY": 68
+    },
+    {
+     "name": "referee-b",
+     "bitmapResolution": 1,
+     "dataFormat": "svg",
+     "assetId": "75c2b020601f2cfec7d3d848d2cbd005",
+     "md5ext": "75c2b020601f2cfec7d3d848d2cbd005.svg",
+     "rotationCenterX": 76,
+     "rotationCenterY": 68
+    },
+    {
+     "name": "referee-c",
+     "bitmapResolution": 1,
+     "dataFormat": "svg",
+     "assetId": "362b1ede1c46342297caeba3812977f7",
+     "md5ext": "362b1ede1c46342297caeba3812977f7.svg",
+     "rotationCenterX": 76,
+     "rotationCenterY": 68
+    },
+    {
+     "name": "referee-d",
+     "bitmapResolution": 1,
+     "dataFormat": "svg",
+     "assetId": "05c30fe1c8d98e3183f9b9567cd490ab",
+     "md5ext": "05c30fe1c8d98e3183f9b9567cd490ab.svg",
+     "rotationCenterX": 76,
+     "rotationCenterY": 68
+    }
+   ],
+   "sounds": [
+    {
+     "name": "pop",
+     "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+     "dataFormat": "wav",
+     "format": "",
+     "rate": 48000,
+     "sampleCount": 1123,
+     "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+    }
+   ],
+   "volume": 100,
+   "visible": true,
+   "x": -140.43983402489627,
+   "y": 12.93922651933702,
+   "size": 100,
+   "direction": 90,
+   "draggable": false,
+   "rotationStyle": "all around"
+  },
+  {
+   "isStage": false,
+   "name": "Jamal",
+   "variables": {
+    "sUDH6t(ZgJ~vId~c*_]c": [
+     "jamalvar",
+     "12"
+    ]
+   },
+   "lists": {},
+   "broadcasts": {},
+   "blocks": {},
+   "comments": {},
+   "currentCostume": 0,
+   "costumes": [
+    {
+     "name": "jamal-a",
+     "bitmapResolution": 1,
+     "dataFormat": "svg",
+     "assetId": "3b1f1e0732c0f7ac854960183f320b0d",
+     "md5ext": "3b1f1e0732c0f7ac854960183f320b0d.svg",
+     "rotationCenterX": 82,
+     "rotationCenterY": 105
+    },
+    {
+     "name": "jamal-b",
+     "bitmapResolution": 1,
+     "dataFormat": "svg",
+     "assetId": "ef6c95b9459d5e452adf453ec7e9a4d9",
+     "md5ext": "ef6c95b9459d5e452adf453ec7e9a4d9.svg",
+     "rotationCenterX": 82,
+     "rotationCenterY": 105
+    },
+    {
+     "name": "jamal-c",
+     "bitmapResolution": 1,
+     "dataFormat": "svg",
+     "assetId": "34a232a7442d0d8718bef8c4794a5d23",
+     "md5ext": "34a232a7442d0d8718bef8c4794a5d23.svg",
+     "rotationCenterX": 82,
+     "rotationCenterY": 105
+    },
+    {
+     "name": "jamal-d",
+     "bitmapResolution": 1,
+     "dataFormat": "svg",
+     "assetId": "3a0ade5e357298ff60dc353192ab50d9",
+     "md5ext": "3a0ade5e357298ff60dc353192ab50d9.svg",
+     "rotationCenterX": 82,
+     "rotationCenterY": 105
+    }
+   ],
+   "sounds": [
+    {
+     "name": "pop",
+     "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+     "dataFormat": "wav",
+     "format": "",
+     "rate": 48000,
+     "sampleCount": 1123,
+     "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+    }
+   ],
+   "volume": 100,
+   "visible": true,
+   "x": 56,
+   "y": 37,
+   "size": 100,
+   "direction": 90,
+   "draggable": false,
+   "rotationStyle": "all around"
+  }
+ ],
+ "monitors": [
+  {
+   "id": "sUDH6t(ZgJ~vId~c*_]c",
+   "mode": "default",
+   "opcode": "data_variable",
+   "params": {
+    "VARIABLE": "jamalvar"
+   },
+   "spriteName": "Jamal",
+   "value": "12",
+   "width": 0,
+   "height": 0,
+   "x": 5,
+   "y": 5,
+   "visible": true,
+   "sliderMin": 0,
+   "sliderMax": 100,
+   "isDiscrete": true
+  },
+  {
+   "id": "(22K?IHrHfKVonvkPNt)",
+   "mode": "default",
+   "opcode": "data_variable",
+   "params": {
+    "VARIABLE": "refereevar1"
+   },
+   "spriteName": "Referee",
+   "value": "cat",
+   "width": 0,
+   "height": 0,
+   "x": 5,
+   "y": 33,
+   "visible": true,
+   "sliderMin": 0,
+   "sliderMax": 100,
+   "isDiscrete": true
+  }
+ ],
+ "extensions": [],
+ "meta": {
+  "semver": "3.0.0"
+ }
+}

@@ -1,0 +1,27 @@
+/* Token tema KodyBlocks AI v2. Warna kategori = scratch-blocks; brand = KodyBlocks. */
+:root {
+  --kb-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --kb-menu-bar-height: 48px;
+  --kb-menu-bar-bg: linear-gradient(105deg, #15364c, #08786f);
+  --kb-menu-bar-text: #ffffff;
+
+  --kb-ui-primary: #e5f0ff;
+  --kb-ui-secondary: #e9f1fc;
+  --kb-ui-tertiary: #d9e3f2;
+  --kb-ui-white: #ffffff;
+  --kb-text-primary: #575e75;
+  --kb-border: rgba(0, 0, 0, 0.15);
+  --kb-motion-primary: #4c97ff;
+  --kb-looks-primary: #9966ff;
+  --kb-sound-primary: #cf63cf;
+  --kb-events-primary: #ffbf00;
+  --kb-control-primary: #ffab19;
+  --kb-sensing-primary: #5cb1d6;
+  --kb-operators-primary: #59c059;
+  --kb-variables-primary: #ff8c1a;
+  --kb-lists-primary: #ff661a;
+  --kb-myblocks-primary: #ff6680;
+  --kb-extensions-primary: #0fbd8c;
+  --kb-stage-width: 480px;
+  --kb-stage-height: 360px;
+}
