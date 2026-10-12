@@ -19,6 +19,21 @@
     "nameEn": "Fantasy"
    },
    {
+    "id": "orang",
+    "name": "Orang",
+    "nameEn": "People"
+   },
+   {
+    "id": "ai",
+    "name": "Proyek AI",
+    "nameEn": "AI Projects"
+   },
+   {
+    "id": "huruf",
+    "name": "Huruf & Angka",
+    "nameEn": "Letters & Numbers"
+   },
+   {
     "id": "olahraga",
     "name": "Olahraga",
     "nameEn": "Sports"
@@ -982,6 +997,2192 @@
      "dataFormat": "wav",
      "rate": 22050,
      "sampleCount": 15435
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "gajah",
+   "name": "Gajah",
+   "nameEn": "Elephant",
+   "category": "hewan",
+   "tags": [
+    "belalai",
+    "besar",
+    "kebun binatang"
+   ],
+   "costumes": [
+    {
+     "name": "gajah-a",
+     "assetId": "eeabca76cd7b5a01e95e09fefda2b669",
+     "md5ext": "eeabca76cd7b5a01e95e09fefda2b669.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 56,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "gajah-b",
+     "assetId": "22d1c0f9053f1cdf43f01103300b1ddc",
+     "md5ext": "22d1c0f9053f1cdf43f01103300b1ddc.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 56,
+     "rotationCenterY": 50
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Auman",
+     "assetId": "5efee60cc2c17b174c40d95c2b3d0856",
+     "md5ext": "5efee60cc2c17b174c40d95c2b3d0856.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 22050
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "singa",
+   "name": "Singa",
+   "nameEn": "Lion",
+   "category": "hewan",
+   "tags": [
+    "raja hutan",
+    "kebun binatang"
+   ],
+   "costumes": [
+    {
+     "name": "singa-a",
+     "assetId": "2b3b82f8d9ed141ab3e42f8e12ae6927",
+     "md5ext": "2b3b82f8d9ed141ab3e42f8e12ae6927.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "singa-b",
+     "assetId": "5880b1460ac5b96f86a7f573210c5b7c",
+     "md5ext": "5880b1460ac5b96f86a7f573210c5b7c.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Auman",
+     "assetId": "5efee60cc2c17b174c40d95c2b3d0856",
+     "md5ext": "5efee60cc2c17b174c40d95c2b3d0856.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 22050
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "panda",
+   "name": "Panda",
+   "nameEn": "Panda",
+   "category": "hewan",
+   "tags": [
+    "beruang",
+    "lucu"
+   ],
+   "costumes": [
+    {
+     "name": "panda-a",
+     "assetId": "1cf7aecc7cfcb224d87d6faf12fdaf49",
+     "md5ext": "1cf7aecc7cfcb224d87d6faf12fdaf49.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 55
+    },
+    {
+     "name": "panda-b",
+     "assetId": "849de8d2284db7fcde6e6e504251de46",
+     "md5ext": "849de8d2284db7fcde6e6e504251de46.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 55
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kelinci",
+   "name": "Kelinci",
+   "nameEn": "Rabbit",
+   "category": "hewan",
+   "tags": [
+    "lompat",
+    "peliharaan",
+    "wortel"
+   ],
+   "costumes": [
+    {
+     "name": "kelinci-a",
+     "assetId": "2c887fd634b84b496480d8e732708ac7",
+     "md5ext": "2c887fd634b84b496480d8e732708ac7.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 48,
+     "rotationCenterY": 52
+    },
+    {
+     "name": "kelinci-b",
+     "assetId": "cbf52bbc623fbe43f8ba6f141469b0df",
+     "md5ext": "cbf52bbc623fbe43f8ba6f141469b0df.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 48,
+     "rotationCenterY": 52
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Boing",
+     "assetId": "115c4502afa884e42bc81aab2230991d",
+     "md5ext": "115c4502afa884e42bc81aab2230991d.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 13230
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "penguin",
+   "name": "Penguin",
+   "nameEn": "Penguin",
+   "category": "hewan",
+   "tags": [
+    "es",
+    "salju",
+    "burung"
+   ],
+   "costumes": [
+    {
+     "name": "penguin-a",
+     "assetId": "d9b508d7562bc44cfa48cc0b6882062f",
+     "md5ext": "d9b508d7562bc44cfa48cc0b6882062f.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 46,
+     "rotationCenterY": 52
+    },
+    {
+     "name": "penguin-b",
+     "assetId": "f606d354460ea1b823597af1d8062aa1",
+     "md5ext": "f606d354460ea1b823597af1d8062aa1.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 46,
+     "rotationCenterY": 52
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Cicit Burung",
+     "assetId": "01497704a3280bcd5fc4e8569e922d63",
+     "md5ext": "01497704a3280bcd5fc4e8569e922d63.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 8354
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "katak",
+   "name": "Katak",
+   "nameEn": "Frog",
+   "category": "hewan",
+   "tags": [
+    "lompat",
+    "kolam",
+    "hijau"
+   ],
+   "costumes": [
+    {
+     "name": "katak-a",
+     "assetId": "e3648bfbbf49a92be8e7bc68202e0b8c",
+     "md5ext": "e3648bfbbf49a92be8e7bc68202e0b8c.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 46,
+     "rotationCenterY": 48
+    },
+    {
+     "name": "katak-b",
+     "assetId": "3af664806f3d07be9d78c0aa6de5f699",
+     "md5ext": "3af664806f3d07be9d78c0aa6de5f699.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 46,
+     "rotationCenterY": 48
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Boing",
+     "assetId": "115c4502afa884e42bc81aab2230991d",
+     "md5ext": "115c4502afa884e42bc81aab2230991d.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 13230
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "kura-kura",
+   "name": "Kura-kura",
+   "nameEn": "Turtle",
+   "category": "hewan",
+   "tags": [
+    "lambat",
+    "cangkang",
+    "pantai"
+   ],
+   "costumes": [
+    {
+     "name": "kura-kura-a",
+     "assetId": "8ab9287b3df71a67619a73b6af262801",
+     "md5ext": "8ab9287b3df71a67619a73b6af262801.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 52,
+     "rotationCenterY": 40
+    },
+    {
+     "name": "kura-kura-b",
+     "assetId": "4511f61aba3b77ff7ddf3efb02d15a89",
+     "md5ext": "4511f61aba3b77ff7ddf3efb02d15a89.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 52,
+     "rotationCenterY": 40
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "budi",
+   "name": "Budi",
+   "nameEn": "Budi",
+   "category": "orang",
+   "tags": [
+    "anak",
+    "laki-laki",
+    "teman",
+    "cerita",
+    "kid",
+    "boy"
+   ],
+   "costumes": [
+    {
+     "name": "budi-a",
+     "assetId": "8ca291445b05d4028e33b510f9086249",
+     "md5ext": "8ca291445b05d4028e33b510f9086249.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 46,
+     "rotationCenterY": 65
+    },
+    {
+     "name": "budi-b",
+     "assetId": "b7f5629b77899370b23a5528026ca957",
+     "md5ext": "b7f5629b77899370b23a5528026ca957.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 46,
+     "rotationCenterY": 65
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Ta-da",
+     "assetId": "0104ed2b4d2475d45aba8e2d3b4b7028",
+     "md5ext": "0104ed2b4d2475d45aba8e2d3b4b7028.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 24255
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "rani",
+   "name": "Rani",
+   "nameEn": "Rani",
+   "category": "orang",
+   "tags": [
+    "anak",
+    "perempuan",
+    "teman",
+    "cerita",
+    "kid",
+    "girl"
+   ],
+   "costumes": [
+    {
+     "name": "rani-a",
+     "assetId": "ebb5a3b6e47e778207d26bb85d2a7fdb",
+     "md5ext": "ebb5a3b6e47e778207d26bb85d2a7fdb.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 46,
+     "rotationCenterY": 65
+    },
+    {
+     "name": "rani-b",
+     "assetId": "206d1535c373aa0f3f446b0858eaca77",
+     "md5ext": "206d1535c373aa0f3f446b0858eaca77.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 46,
+     "rotationCenterY": 65
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Ta-da",
+     "assetId": "0104ed2b4d2475d45aba8e2d3b4b7028",
+     "md5ext": "0104ed2b4d2475d45aba8e2d3b4b7028.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 24255
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "suit",
+   "name": "Suit Tangan",
+   "nameEn": "Rock Paper Scissors",
+   "category": "ai",
+   "tags": [
+    "batu",
+    "gunting",
+    "kertas",
+    "tangan",
+    "ai",
+    "game",
+    "rock",
+    "paper",
+    "scissors"
+   ],
+   "costumes": [
+    {
+     "name": "batu",
+     "assetId": "c03b58bcf8dd983a52894dc6287968a8",
+     "md5ext": "c03b58bcf8dd983a52894dc6287968a8.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 52,
+     "rotationCenterY": 60
+    },
+    {
+     "name": "gunting",
+     "assetId": "d455033ef7f7231ab33e4eda5c61d4e2",
+     "md5ext": "d455033ef7f7231ab33e4eda5c61d4e2.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 52,
+     "rotationCenterY": 60
+    },
+    {
+     "name": "kertas",
+     "assetId": "b968e6d6089ba30089b7fd24a9df7134",
+     "md5ext": "b968e6d6089ba30089b7fd24a9df7134.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 52,
+     "rotationCenterY": 60
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Tepuk Tangan",
+     "assetId": "4bb5a3ce4487be3e0af4383a2ff6febb",
+     "md5ext": "4bb5a3ce4487be3e0af4383a2ff6febb.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 6615
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "wajah-emosi",
+   "name": "Wajah Emosi",
+   "nameEn": "Emotion Face",
+   "category": "ai",
+   "tags": [
+    "senang",
+    "sedih",
+    "kaget",
+    "marah",
+    "perasaan",
+    "ekspresi",
+    "ai",
+    "emoji"
+   ],
+   "costumes": [
+    {
+     "name": "senang",
+     "assetId": "3b47d4d59f409dffceddf48ecec3c7b4",
+     "md5ext": "3b47d4d59f409dffceddf48ecec3c7b4.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "sedih",
+     "assetId": "f3de5d8aca2daf11bf13e9a899fef1da",
+     "md5ext": "f3de5d8aca2daf11bf13e9a899fef1da.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "kaget",
+     "assetId": "9639776d4c38eae4fc57b73b0ea31ec0",
+     "md5ext": "9639776d4c38eae4fc57b73b0ea31ec0.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "marah",
+     "assetId": "9d36078c408a122a401b69e3abaed0c0",
+     "md5ext": "9d36078c408a122a401b69e3abaed0c0.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    },
+    {
+     "name": "biasa",
+     "assetId": "c1b061d3f7ee4f7b89020a2e62c47f08",
+     "md5ext": "c1b061d3f7ee4f7b89020a2e62c47f08.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 50
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "lampu-lalu-lintas",
+   "name": "Lampu Lalu Lintas",
+   "nameEn": "Traffic Light",
+   "category": "ai",
+   "tags": [
+    "merah",
+    "kuning",
+    "hijau",
+    "jalan",
+    "warna",
+    "ai"
+   ],
+   "costumes": [
+    {
+     "name": "merah",
+     "assetId": "f298111b21f792dbeefa5fa8b0ecf2ce",
+     "md5ext": "f298111b21f792dbeefa5fa8b0ecf2ce.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 85
+    },
+    {
+     "name": "kuning",
+     "assetId": "963753a7ad66eced8733c176ea58b08c",
+     "md5ext": "963753a7ad66eced8733c176ea58b08c.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 85
+    },
+    {
+     "name": "hijau",
+     "assetId": "9bea97da5ca44e94dd77b2ab8536d7bf",
+     "md5ext": "9bea97da5ca44e94dd77b2ab8536d7bf.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 40,
+     "rotationCenterY": 85
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Bip",
+     "assetId": "8035bc858e83274a42cc29d4d4e807b1",
+     "md5ext": "8035bc858e83274a42cc29d4d4e807b1.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 3308
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "tempat-sampah",
+   "name": "Tempat Sampah",
+   "nameEn": "Trash Bin",
+   "category": "ai",
+   "tags": [
+    "organik",
+    "anorganik",
+    "pilah",
+    "lingkungan",
+    "ai",
+    "daur ulang"
+   ],
+   "costumes": [
+    {
+     "name": "organik",
+     "assetId": "2db19b95ea718a9f5810b4387f18c329",
+     "md5ext": "2db19b95ea718a9f5810b4387f18c329.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 55
+    },
+    {
+     "name": "anorganik",
+     "assetId": "18997d9dd91f73d7e1459989cd2fe85b",
+     "md5ext": "18997d9dd91f73d7e1459989cd2fe85b.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 50,
+     "rotationCenterY": 55
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Benar",
+     "assetId": "caf15a97e75674d1ab9752b8de299dcb",
+     "md5ext": "caf15a97e75674d1ab9752b8de299dcb.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 9482
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-a",
+   "name": "A",
+   "nameEn": "A",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "A-a",
+     "assetId": "5a873fbbc8c8cac0f1a745115e6f2d4e",
+     "md5ext": "5a873fbbc8c8cac0f1a745115e6f2d4e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "A-b",
+     "assetId": "cb145783343747f269d57447ca423edd",
+     "md5ext": "cb145783343747f269d57447ca423edd.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-b",
+   "name": "B",
+   "nameEn": "B",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "B-a",
+     "assetId": "2886e7c38320c4903bd1930fd151f0ef",
+     "md5ext": "2886e7c38320c4903bd1930fd151f0ef.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "B-b",
+     "assetId": "50299e92ad4f31a3bf074b5145465ccc",
+     "md5ext": "50299e92ad4f31a3bf074b5145465ccc.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-c",
+   "name": "C",
+   "nameEn": "C",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "C-a",
+     "assetId": "74f6f213d7b75f14656fa94a9e4a973f",
+     "md5ext": "74f6f213d7b75f14656fa94a9e4a973f.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "C-b",
+     "assetId": "0b759a0ca343f42a5e060983ea03e2df",
+     "md5ext": "0b759a0ca343f42a5e060983ea03e2df.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-d",
+   "name": "D",
+   "nameEn": "D",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "D-a",
+     "assetId": "48fad2d6c26ac57aa50d43855e19648c",
+     "md5ext": "48fad2d6c26ac57aa50d43855e19648c.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "D-b",
+     "assetId": "a632bbae308d47a480c8c91ca9c356ba",
+     "md5ext": "a632bbae308d47a480c8c91ca9c356ba.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-e",
+   "name": "E",
+   "nameEn": "E",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "E-a",
+     "assetId": "41df3e8cff6a024cde937c92a4b523e3",
+     "md5ext": "41df3e8cff6a024cde937c92a4b523e3.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "E-b",
+     "assetId": "3d06bde4a92a69caff7aafb7345a823e",
+     "md5ext": "3d06bde4a92a69caff7aafb7345a823e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-f",
+   "name": "F",
+   "nameEn": "F",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "F-a",
+     "assetId": "82386659cc8dda1687f34a437a7905f3",
+     "md5ext": "82386659cc8dda1687f34a437a7905f3.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "F-b",
+     "assetId": "7b29b6a9a59f2cdd8f30ccdc8919b234",
+     "md5ext": "7b29b6a9a59f2cdd8f30ccdc8919b234.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-g",
+   "name": "G",
+   "nameEn": "G",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "G-a",
+     "assetId": "6ceaa805152516c7599f5cf45e8f4cd8",
+     "md5ext": "6ceaa805152516c7599f5cf45e8f4cd8.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "G-b",
+     "assetId": "f7d399091b53ea1021f405777443f00c",
+     "md5ext": "f7d399091b53ea1021f405777443f00c.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-h",
+   "name": "H",
+   "nameEn": "H",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "H-a",
+     "assetId": "f4f4b36eb5d9584513f04c75daaa588a",
+     "md5ext": "f4f4b36eb5d9584513f04c75daaa588a.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "H-b",
+     "assetId": "5cab12747ef3a5f1e9d45470b435637f",
+     "md5ext": "5cab12747ef3a5f1e9d45470b435637f.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-i",
+   "name": "I",
+   "nameEn": "I",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "I-a",
+     "assetId": "f427ffb445a606eacffa88d0dc029b14",
+     "md5ext": "f427ffb445a606eacffa88d0dc029b14.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "I-b",
+     "assetId": "6209b1b332d5ae1d6eef49ab9c970872",
+     "md5ext": "6209b1b332d5ae1d6eef49ab9c970872.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-j",
+   "name": "J",
+   "nameEn": "J",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "J-a",
+     "assetId": "dc9982716e94159f8a6b17d0dd6db57f",
+     "md5ext": "dc9982716e94159f8a6b17d0dd6db57f.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "J-b",
+     "assetId": "8d3109e10a35c11f47bf6e09f8670fe0",
+     "md5ext": "8d3109e10a35c11f47bf6e09f8670fe0.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-k",
+   "name": "K",
+   "nameEn": "K",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "K-a",
+     "assetId": "1609e9b032d97fdbd6f3ac01830bd47e",
+     "md5ext": "1609e9b032d97fdbd6f3ac01830bd47e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "K-b",
+     "assetId": "5e9309f52ec7f5ef03eeb864a12deb34",
+     "md5ext": "5e9309f52ec7f5ef03eeb864a12deb34.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-l",
+   "name": "L",
+   "nameEn": "L",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "L-a",
+     "assetId": "8342376393d7f9ec511a1b6a5b3a518e",
+     "md5ext": "8342376393d7f9ec511a1b6a5b3a518e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "L-b",
+     "assetId": "934a09e505b0cbc18f78c70f76517bcf",
+     "md5ext": "934a09e505b0cbc18f78c70f76517bcf.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-m",
+   "name": "M",
+   "nameEn": "M",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "M-a",
+     "assetId": "32b96056cbdac8492e0055a83af9fe24",
+     "md5ext": "32b96056cbdac8492e0055a83af9fe24.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "M-b",
+     "assetId": "3fbd45694d2ce230ef25f6a4560e0458",
+     "md5ext": "3fbd45694d2ce230ef25f6a4560e0458.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-n",
+   "name": "N",
+   "nameEn": "N",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "N-a",
+     "assetId": "def8354d92d82f4e11aaa2cf87046ad8",
+     "md5ext": "def8354d92d82f4e11aaa2cf87046ad8.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "N-b",
+     "assetId": "a556c65cd4a5cbca4697c054ce8c26cb",
+     "md5ext": "a556c65cd4a5cbca4697c054ce8c26cb.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-o",
+   "name": "O",
+   "nameEn": "O",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "O-a",
+     "assetId": "81e69439e298a106cffbe60bba5cdc50",
+     "md5ext": "81e69439e298a106cffbe60bba5cdc50.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "O-b",
+     "assetId": "8dae41b9dc227c84265eec2c8379b5c8",
+     "md5ext": "8dae41b9dc227c84265eec2c8379b5c8.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-p",
+   "name": "P",
+   "nameEn": "P",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "P-a",
+     "assetId": "28e8564b062867714beeab10c83237cf",
+     "md5ext": "28e8564b062867714beeab10c83237cf.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "P-b",
+     "assetId": "00e005a694486bb597f7f4743baa66e2",
+     "md5ext": "00e005a694486bb597f7f4743baa66e2.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-q",
+   "name": "Q",
+   "nameEn": "Q",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "Q-a",
+     "assetId": "963af04d665f8f382b608ffe3e1f5099",
+     "md5ext": "963af04d665f8f382b608ffe3e1f5099.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "Q-b",
+     "assetId": "1b631bd42d1b268dbb944b7e1fd3db6c",
+     "md5ext": "1b631bd42d1b268dbb944b7e1fd3db6c.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-r",
+   "name": "R",
+   "nameEn": "R",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "R-a",
+     "assetId": "7b0ca708d24693e508d75560b6906a26",
+     "md5ext": "7b0ca708d24693e508d75560b6906a26.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "R-b",
+     "assetId": "76ba79997887e75e20b51b80da71c8ef",
+     "md5ext": "76ba79997887e75e20b51b80da71c8ef.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-s",
+   "name": "S",
+   "nameEn": "S",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "S-a",
+     "assetId": "4b8b1948c8495534bb6b9c73b2e28edc",
+     "md5ext": "4b8b1948c8495534bb6b9c73b2e28edc.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "S-b",
+     "assetId": "8f0a05ce2d70e6c2f9a02992ccb094b0",
+     "md5ext": "8f0a05ce2d70e6c2f9a02992ccb094b0.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-t",
+   "name": "T",
+   "nameEn": "T",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "T-a",
+     "assetId": "bda1e061a3f7ea36a15eeabf52300724",
+     "md5ext": "bda1e061a3f7ea36a15eeabf52300724.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "T-b",
+     "assetId": "cb8e490ae3963add40c6bd263c477fcd",
+     "md5ext": "cb8e490ae3963add40c6bd263c477fcd.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-u",
+   "name": "U",
+   "nameEn": "U",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "U-a",
+     "assetId": "e30e87a395f03958247c44f6d4de96ad",
+     "md5ext": "e30e87a395f03958247c44f6d4de96ad.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "U-b",
+     "assetId": "4c5099578271265f6173502738dc9836",
+     "md5ext": "4c5099578271265f6173502738dc9836.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-v",
+   "name": "V",
+   "nameEn": "V",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "V-a",
+     "assetId": "b5c5c26e4320ac9e4e58ecec8debf54d",
+     "md5ext": "b5c5c26e4320ac9e4e58ecec8debf54d.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "V-b",
+     "assetId": "252e18df91db6fc0863c8cd1523d3c3d",
+     "md5ext": "252e18df91db6fc0863c8cd1523d3c3d.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-w",
+   "name": "W",
+   "nameEn": "W",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "W-a",
+     "assetId": "bebfd67f45c6ab24beb82511fdc57da0",
+     "md5ext": "bebfd67f45c6ab24beb82511fdc57da0.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "W-b",
+     "assetId": "3116596f5be786894386333a2b659805",
+     "md5ext": "3116596f5be786894386333a2b659805.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-x",
+   "name": "X",
+   "nameEn": "X",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "X-a",
+     "assetId": "2a8ee1e47735d3451b0a5a90f301e551",
+     "md5ext": "2a8ee1e47735d3451b0a5a90f301e551.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "X-b",
+     "assetId": "91bcb3c5ceb18257866ffd1a3a7dedec",
+     "md5ext": "91bcb3c5ceb18257866ffd1a3a7dedec.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-y",
+   "name": "Y",
+   "nameEn": "Y",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "Y-a",
+     "assetId": "855f86d9484340c876b0a4d4a18f7b48",
+     "md5ext": "855f86d9484340c876b0a4d4a18f7b48.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "Y-b",
+     "assetId": "a17e8faeb72acc9aa51d0c598c42882e",
+     "md5ext": "a17e8faeb72acc9aa51d0c598c42882e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "huruf-z",
+   "name": "Z",
+   "nameEn": "Z",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama"
+   ],
+   "costumes": [
+    {
+     "name": "Z-a",
+     "assetId": "17f50a296f0c6716ab7205dbf34a7315",
+     "md5ext": "17f50a296f0c6716ab7205dbf34a7315.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "Z-b",
+     "assetId": "8e00d6e9f5541333f567c09bb5df3645",
+     "md5ext": "8e00d6e9f5541333f567c09bb5df3645.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "angka-0",
+   "name": "0",
+   "nameEn": "0",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung"
+   ],
+   "costumes": [
+    {
+     "name": "0-a",
+     "assetId": "297eeece76b261b054cf710f813ff760",
+     "md5ext": "297eeece76b261b054cf710f813ff760.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "0-b",
+     "assetId": "68e4476d913786fe074c78f73c529362",
+     "md5ext": "68e4476d913786fe074c78f73c529362.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "angka-1",
+   "name": "1",
+   "nameEn": "1",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung"
+   ],
+   "costumes": [
+    {
+     "name": "1-a",
+     "assetId": "f56e52951667896a1f30272cfa65d1a3",
+     "md5ext": "f56e52951667896a1f30272cfa65d1a3.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "1-b",
+     "assetId": "dde5acda946b6f6ba38a6099c5c3285e",
+     "md5ext": "dde5acda946b6f6ba38a6099c5c3285e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "angka-2",
+   "name": "2",
+   "nameEn": "2",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung"
+   ],
+   "costumes": [
+    {
+     "name": "2-a",
+     "assetId": "f67ee5bfb6eead2e0561455e283cac02",
+     "md5ext": "f67ee5bfb6eead2e0561455e283cac02.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "2-b",
+     "assetId": "8ba2c4b93752d1aeedd6f8aa8fbb268e",
+     "md5ext": "8ba2c4b93752d1aeedd6f8aa8fbb268e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "angka-3",
+   "name": "3",
+   "nameEn": "3",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung"
+   ],
+   "costumes": [
+    {
+     "name": "3-a",
+     "assetId": "b5a7bc320523a9ba17243f0716021060",
+     "md5ext": "b5a7bc320523a9ba17243f0716021060.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "3-b",
+     "assetId": "b47282999f4cbd04b67af61031ff7744",
+     "md5ext": "b47282999f4cbd04b67af61031ff7744.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "angka-4",
+   "name": "4",
+   "nameEn": "4",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung"
+   ],
+   "costumes": [
+    {
+     "name": "4-a",
+     "assetId": "6f466627fa47bf835c5335a93b48b18e",
+     "md5ext": "6f466627fa47bf835c5335a93b48b18e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "4-b",
+     "assetId": "494eeca61ee40d1874a1f1607d9650d9",
+     "md5ext": "494eeca61ee40d1874a1f1607d9650d9.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "angka-5",
+   "name": "5",
+   "nameEn": "5",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung"
+   ],
+   "costumes": [
+    {
+     "name": "5-a",
+     "assetId": "8c00d6803ce28881b1471a67f3f244a3",
+     "md5ext": "8c00d6803ce28881b1471a67f3f244a3.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "5-b",
+     "assetId": "8dfaab5ea9a52e049f429cfed21df0e0",
+     "md5ext": "8dfaab5ea9a52e049f429cfed21df0e0.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "angka-6",
+   "name": "6",
+   "nameEn": "6",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung"
+   ],
+   "costumes": [
+    {
+     "name": "6-a",
+     "assetId": "082edfcf9882bea1b396ca056196fe9c",
+     "md5ext": "082edfcf9882bea1b396ca056196fe9c.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "6-b",
+     "assetId": "aebc74907c7e0babfbde806e287e56af",
+     "md5ext": "aebc74907c7e0babfbde806e287e56af.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "angka-7",
+   "name": "7",
+   "nameEn": "7",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung"
+   ],
+   "costumes": [
+    {
+     "name": "7-a",
+     "assetId": "b9680e930515bb65349f83d5b16a9310",
+     "md5ext": "b9680e930515bb65349f83d5b16a9310.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "7-b",
+     "assetId": "b3252c3bca4a09fbdb44c1327122fe00",
+     "md5ext": "b3252c3bca4a09fbdb44c1327122fe00.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "angka-8",
+   "name": "8",
+   "nameEn": "8",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung"
+   ],
+   "costumes": [
+    {
+     "name": "8-a",
+     "assetId": "d935748a1e8ede1d3031743c70e6626e",
+     "md5ext": "d935748a1e8ede1d3031743c70e6626e.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "8-b",
+     "assetId": "bd3d16948ef99fdf30f8026cedc74355",
+     "md5ext": "bd3d16948ef99fdf30f8026cedc74355.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
+    }
+   ]
+  },
+  {
+   "kind": "sprite",
+   "id": "angka-9",
+   "name": "9",
+   "nameEn": "9",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung"
+   ],
+   "costumes": [
+    {
+     "name": "9-a",
+     "assetId": "1a21303eef237916fd02eddbe1336c98",
+     "md5ext": "1a21303eef237916fd02eddbe1336c98.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    },
+    {
+     "name": "9-b",
+     "assetId": "cf0ca143237108ed6efbb567d9deac1d",
+     "md5ext": "cf0ca143237108ed6efbb567d9deac1d.svg",
+     "dataFormat": "svg",
+     "bitmapResolution": 1,
+     "rotationCenterX": 34,
+     "rotationCenterY": 45
+    }
+   ],
+   "sounds": [
+    {
+     "name": "Pop",
+     "assetId": "596257450505cdbf34159fcb79017891",
+     "md5ext": "596257450505cdbf34159fcb79017891.wav",
+     "dataFormat": "wav",
+     "rate": 22050,
+     "sampleCount": 1985
     }
    ]
   },
@@ -2877,6 +5078,2462 @@
   },
   {
    "kind": "costume",
+   "id": "gajah/gajah-a",
+   "name": "gajah-a",
+   "nameEn": "Elephant a",
+   "category": "hewan",
+   "tags": [
+    "belalai",
+    "besar",
+    "kebun binatang",
+    "gajah"
+   ],
+   "costume": {
+    "name": "gajah-a",
+    "assetId": "eeabca76cd7b5a01e95e09fefda2b669",
+    "md5ext": "eeabca76cd7b5a01e95e09fefda2b669.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 56,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "gajah/gajah-b",
+   "name": "gajah-b",
+   "nameEn": "Elephant b",
+   "category": "hewan",
+   "tags": [
+    "belalai",
+    "besar",
+    "kebun binatang",
+    "gajah"
+   ],
+   "costume": {
+    "name": "gajah-b",
+    "assetId": "22d1c0f9053f1cdf43f01103300b1ddc",
+    "md5ext": "22d1c0f9053f1cdf43f01103300b1ddc.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 56,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "singa/singa-a",
+   "name": "singa-a",
+   "nameEn": "Lion a",
+   "category": "hewan",
+   "tags": [
+    "raja hutan",
+    "kebun binatang",
+    "singa"
+   ],
+   "costume": {
+    "name": "singa-a",
+    "assetId": "2b3b82f8d9ed141ab3e42f8e12ae6927",
+    "md5ext": "2b3b82f8d9ed141ab3e42f8e12ae6927.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "singa/singa-b",
+   "name": "singa-b",
+   "nameEn": "Lion b",
+   "category": "hewan",
+   "tags": [
+    "raja hutan",
+    "kebun binatang",
+    "singa"
+   ],
+   "costume": {
+    "name": "singa-b",
+    "assetId": "5880b1460ac5b96f86a7f573210c5b7c",
+    "md5ext": "5880b1460ac5b96f86a7f573210c5b7c.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "panda/panda-a",
+   "name": "panda-a",
+   "nameEn": "Panda a",
+   "category": "hewan",
+   "tags": [
+    "beruang",
+    "lucu",
+    "panda"
+   ],
+   "costume": {
+    "name": "panda-a",
+    "assetId": "1cf7aecc7cfcb224d87d6faf12fdaf49",
+    "md5ext": "1cf7aecc7cfcb224d87d6faf12fdaf49.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 55
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "panda/panda-b",
+   "name": "panda-b",
+   "nameEn": "Panda b",
+   "category": "hewan",
+   "tags": [
+    "beruang",
+    "lucu",
+    "panda"
+   ],
+   "costume": {
+    "name": "panda-b",
+    "assetId": "849de8d2284db7fcde6e6e504251de46",
+    "md5ext": "849de8d2284db7fcde6e6e504251de46.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 55
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kelinci/kelinci-a",
+   "name": "kelinci-a",
+   "nameEn": "Rabbit a",
+   "category": "hewan",
+   "tags": [
+    "lompat",
+    "peliharaan",
+    "wortel",
+    "kelinci"
+   ],
+   "costume": {
+    "name": "kelinci-a",
+    "assetId": "2c887fd634b84b496480d8e732708ac7",
+    "md5ext": "2c887fd634b84b496480d8e732708ac7.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 48,
+    "rotationCenterY": 52
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kelinci/kelinci-b",
+   "name": "kelinci-b",
+   "nameEn": "Rabbit b",
+   "category": "hewan",
+   "tags": [
+    "lompat",
+    "peliharaan",
+    "wortel",
+    "kelinci"
+   ],
+   "costume": {
+    "name": "kelinci-b",
+    "assetId": "cbf52bbc623fbe43f8ba6f141469b0df",
+    "md5ext": "cbf52bbc623fbe43f8ba6f141469b0df.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 48,
+    "rotationCenterY": 52
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "penguin/penguin-a",
+   "name": "penguin-a",
+   "nameEn": "Penguin a",
+   "category": "hewan",
+   "tags": [
+    "es",
+    "salju",
+    "burung",
+    "penguin"
+   ],
+   "costume": {
+    "name": "penguin-a",
+    "assetId": "d9b508d7562bc44cfa48cc0b6882062f",
+    "md5ext": "d9b508d7562bc44cfa48cc0b6882062f.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 46,
+    "rotationCenterY": 52
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "penguin/penguin-b",
+   "name": "penguin-b",
+   "nameEn": "Penguin b",
+   "category": "hewan",
+   "tags": [
+    "es",
+    "salju",
+    "burung",
+    "penguin"
+   ],
+   "costume": {
+    "name": "penguin-b",
+    "assetId": "f606d354460ea1b823597af1d8062aa1",
+    "md5ext": "f606d354460ea1b823597af1d8062aa1.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 46,
+    "rotationCenterY": 52
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "katak/katak-a",
+   "name": "katak-a",
+   "nameEn": "Frog a",
+   "category": "hewan",
+   "tags": [
+    "lompat",
+    "kolam",
+    "hijau",
+    "katak"
+   ],
+   "costume": {
+    "name": "katak-a",
+    "assetId": "e3648bfbbf49a92be8e7bc68202e0b8c",
+    "md5ext": "e3648bfbbf49a92be8e7bc68202e0b8c.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 46,
+    "rotationCenterY": 48
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "katak/katak-b",
+   "name": "katak-b",
+   "nameEn": "Frog b",
+   "category": "hewan",
+   "tags": [
+    "lompat",
+    "kolam",
+    "hijau",
+    "katak"
+   ],
+   "costume": {
+    "name": "katak-b",
+    "assetId": "3af664806f3d07be9d78c0aa6de5f699",
+    "md5ext": "3af664806f3d07be9d78c0aa6de5f699.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 46,
+    "rotationCenterY": 48
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kura-kura/kura-kura-a",
+   "name": "kura-kura-a",
+   "nameEn": "Turtle a",
+   "category": "hewan",
+   "tags": [
+    "lambat",
+    "cangkang",
+    "pantai",
+    "kura-kura"
+   ],
+   "costume": {
+    "name": "kura-kura-a",
+    "assetId": "8ab9287b3df71a67619a73b6af262801",
+    "md5ext": "8ab9287b3df71a67619a73b6af262801.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 52,
+    "rotationCenterY": 40
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "kura-kura/kura-kura-b",
+   "name": "kura-kura-b",
+   "nameEn": "Turtle b",
+   "category": "hewan",
+   "tags": [
+    "lambat",
+    "cangkang",
+    "pantai",
+    "kura-kura"
+   ],
+   "costume": {
+    "name": "kura-kura-b",
+    "assetId": "4511f61aba3b77ff7ddf3efb02d15a89",
+    "md5ext": "4511f61aba3b77ff7ddf3efb02d15a89.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 52,
+    "rotationCenterY": 40
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "budi/budi-a",
+   "name": "budi-a",
+   "nameEn": "Budi a",
+   "category": "orang",
+   "tags": [
+    "anak",
+    "laki-laki",
+    "teman",
+    "cerita",
+    "kid",
+    "boy",
+    "budi"
+   ],
+   "costume": {
+    "name": "budi-a",
+    "assetId": "8ca291445b05d4028e33b510f9086249",
+    "md5ext": "8ca291445b05d4028e33b510f9086249.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 46,
+    "rotationCenterY": 65
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "budi/budi-b",
+   "name": "budi-b",
+   "nameEn": "Budi b",
+   "category": "orang",
+   "tags": [
+    "anak",
+    "laki-laki",
+    "teman",
+    "cerita",
+    "kid",
+    "boy",
+    "budi"
+   ],
+   "costume": {
+    "name": "budi-b",
+    "assetId": "b7f5629b77899370b23a5528026ca957",
+    "md5ext": "b7f5629b77899370b23a5528026ca957.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 46,
+    "rotationCenterY": 65
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "rani/rani-a",
+   "name": "rani-a",
+   "nameEn": "Rani a",
+   "category": "orang",
+   "tags": [
+    "anak",
+    "perempuan",
+    "teman",
+    "cerita",
+    "kid",
+    "girl",
+    "rani"
+   ],
+   "costume": {
+    "name": "rani-a",
+    "assetId": "ebb5a3b6e47e778207d26bb85d2a7fdb",
+    "md5ext": "ebb5a3b6e47e778207d26bb85d2a7fdb.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 46,
+    "rotationCenterY": 65
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "rani/rani-b",
+   "name": "rani-b",
+   "nameEn": "Rani b",
+   "category": "orang",
+   "tags": [
+    "anak",
+    "perempuan",
+    "teman",
+    "cerita",
+    "kid",
+    "girl",
+    "rani"
+   ],
+   "costume": {
+    "name": "rani-b",
+    "assetId": "206d1535c373aa0f3f446b0858eaca77",
+    "md5ext": "206d1535c373aa0f3f446b0858eaca77.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 46,
+    "rotationCenterY": 65
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "suit/batu",
+   "name": "batu",
+   "nameEn": "Rock Paper Scissors u",
+   "category": "ai",
+   "tags": [
+    "batu",
+    "gunting",
+    "kertas",
+    "tangan",
+    "ai",
+    "game",
+    "rock",
+    "paper",
+    "scissors",
+    "suit tangan"
+   ],
+   "costume": {
+    "name": "batu",
+    "assetId": "c03b58bcf8dd983a52894dc6287968a8",
+    "md5ext": "c03b58bcf8dd983a52894dc6287968a8.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 52,
+    "rotationCenterY": 60
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "suit/gunting",
+   "name": "gunting",
+   "nameEn": "Rock Paper Scissors g",
+   "category": "ai",
+   "tags": [
+    "batu",
+    "gunting",
+    "kertas",
+    "tangan",
+    "ai",
+    "game",
+    "rock",
+    "paper",
+    "scissors",
+    "suit tangan"
+   ],
+   "costume": {
+    "name": "gunting",
+    "assetId": "d455033ef7f7231ab33e4eda5c61d4e2",
+    "md5ext": "d455033ef7f7231ab33e4eda5c61d4e2.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 52,
+    "rotationCenterY": 60
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "suit/kertas",
+   "name": "kertas",
+   "nameEn": "Rock Paper Scissors s",
+   "category": "ai",
+   "tags": [
+    "batu",
+    "gunting",
+    "kertas",
+    "tangan",
+    "ai",
+    "game",
+    "rock",
+    "paper",
+    "scissors",
+    "suit tangan"
+   ],
+   "costume": {
+    "name": "kertas",
+    "assetId": "b968e6d6089ba30089b7fd24a9df7134",
+    "md5ext": "b968e6d6089ba30089b7fd24a9df7134.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 52,
+    "rotationCenterY": 60
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "wajah-emosi/senang",
+   "name": "senang",
+   "nameEn": "Emotion Face g",
+   "category": "ai",
+   "tags": [
+    "senang",
+    "sedih",
+    "kaget",
+    "marah",
+    "perasaan",
+    "ekspresi",
+    "ai",
+    "emoji",
+    "wajah emosi"
+   ],
+   "costume": {
+    "name": "senang",
+    "assetId": "3b47d4d59f409dffceddf48ecec3c7b4",
+    "md5ext": "3b47d4d59f409dffceddf48ecec3c7b4.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "wajah-emosi/sedih",
+   "name": "sedih",
+   "nameEn": "Emotion Face h",
+   "category": "ai",
+   "tags": [
+    "senang",
+    "sedih",
+    "kaget",
+    "marah",
+    "perasaan",
+    "ekspresi",
+    "ai",
+    "emoji",
+    "wajah emosi"
+   ],
+   "costume": {
+    "name": "sedih",
+    "assetId": "f3de5d8aca2daf11bf13e9a899fef1da",
+    "md5ext": "f3de5d8aca2daf11bf13e9a899fef1da.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "wajah-emosi/kaget",
+   "name": "kaget",
+   "nameEn": "Emotion Face t",
+   "category": "ai",
+   "tags": [
+    "senang",
+    "sedih",
+    "kaget",
+    "marah",
+    "perasaan",
+    "ekspresi",
+    "ai",
+    "emoji",
+    "wajah emosi"
+   ],
+   "costume": {
+    "name": "kaget",
+    "assetId": "9639776d4c38eae4fc57b73b0ea31ec0",
+    "md5ext": "9639776d4c38eae4fc57b73b0ea31ec0.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "wajah-emosi/marah",
+   "name": "marah",
+   "nameEn": "Emotion Face h",
+   "category": "ai",
+   "tags": [
+    "senang",
+    "sedih",
+    "kaget",
+    "marah",
+    "perasaan",
+    "ekspresi",
+    "ai",
+    "emoji",
+    "wajah emosi"
+   ],
+   "costume": {
+    "name": "marah",
+    "assetId": "9d36078c408a122a401b69e3abaed0c0",
+    "md5ext": "9d36078c408a122a401b69e3abaed0c0.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "wajah-emosi/biasa",
+   "name": "biasa",
+   "nameEn": "Emotion Face a",
+   "category": "ai",
+   "tags": [
+    "senang",
+    "sedih",
+    "kaget",
+    "marah",
+    "perasaan",
+    "ekspresi",
+    "ai",
+    "emoji",
+    "wajah emosi"
+   ],
+   "costume": {
+    "name": "biasa",
+    "assetId": "c1b061d3f7ee4f7b89020a2e62c47f08",
+    "md5ext": "c1b061d3f7ee4f7b89020a2e62c47f08.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 50
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "lampu-lalu-lintas/merah",
+   "name": "merah",
+   "nameEn": "Traffic Light h",
+   "category": "ai",
+   "tags": [
+    "merah",
+    "kuning",
+    "hijau",
+    "jalan",
+    "warna",
+    "ai",
+    "lampu lalu lintas"
+   ],
+   "costume": {
+    "name": "merah",
+    "assetId": "f298111b21f792dbeefa5fa8b0ecf2ce",
+    "md5ext": "f298111b21f792dbeefa5fa8b0ecf2ce.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 85
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "lampu-lalu-lintas/kuning",
+   "name": "kuning",
+   "nameEn": "Traffic Light g",
+   "category": "ai",
+   "tags": [
+    "merah",
+    "kuning",
+    "hijau",
+    "jalan",
+    "warna",
+    "ai",
+    "lampu lalu lintas"
+   ],
+   "costume": {
+    "name": "kuning",
+    "assetId": "963753a7ad66eced8733c176ea58b08c",
+    "md5ext": "963753a7ad66eced8733c176ea58b08c.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 85
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "lampu-lalu-lintas/hijau",
+   "name": "hijau",
+   "nameEn": "Traffic Light u",
+   "category": "ai",
+   "tags": [
+    "merah",
+    "kuning",
+    "hijau",
+    "jalan",
+    "warna",
+    "ai",
+    "lampu lalu lintas"
+   ],
+   "costume": {
+    "name": "hijau",
+    "assetId": "9bea97da5ca44e94dd77b2ab8536d7bf",
+    "md5ext": "9bea97da5ca44e94dd77b2ab8536d7bf.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 40,
+    "rotationCenterY": 85
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "tempat-sampah/organik",
+   "name": "organik",
+   "nameEn": "Trash Bin k",
+   "category": "ai",
+   "tags": [
+    "organik",
+    "anorganik",
+    "pilah",
+    "lingkungan",
+    "ai",
+    "daur ulang",
+    "tempat sampah"
+   ],
+   "costume": {
+    "name": "organik",
+    "assetId": "2db19b95ea718a9f5810b4387f18c329",
+    "md5ext": "2db19b95ea718a9f5810b4387f18c329.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 55
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "tempat-sampah/anorganik",
+   "name": "anorganik",
+   "nameEn": "Trash Bin k",
+   "category": "ai",
+   "tags": [
+    "organik",
+    "anorganik",
+    "pilah",
+    "lingkungan",
+    "ai",
+    "daur ulang",
+    "tempat sampah"
+   ],
+   "costume": {
+    "name": "anorganik",
+    "assetId": "18997d9dd91f73d7e1459989cd2fe85b",
+    "md5ext": "18997d9dd91f73d7e1459989cd2fe85b.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 50,
+    "rotationCenterY": 55
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-a/A-a",
+   "name": "A-a",
+   "nameEn": "A a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "a"
+   ],
+   "costume": {
+    "name": "A-a",
+    "assetId": "5a873fbbc8c8cac0f1a745115e6f2d4e",
+    "md5ext": "5a873fbbc8c8cac0f1a745115e6f2d4e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-a/A-b",
+   "name": "A-b",
+   "nameEn": "A b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "a"
+   ],
+   "costume": {
+    "name": "A-b",
+    "assetId": "cb145783343747f269d57447ca423edd",
+    "md5ext": "cb145783343747f269d57447ca423edd.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-b/B-a",
+   "name": "B-a",
+   "nameEn": "B a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "b"
+   ],
+   "costume": {
+    "name": "B-a",
+    "assetId": "2886e7c38320c4903bd1930fd151f0ef",
+    "md5ext": "2886e7c38320c4903bd1930fd151f0ef.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-b/B-b",
+   "name": "B-b",
+   "nameEn": "B b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "b"
+   ],
+   "costume": {
+    "name": "B-b",
+    "assetId": "50299e92ad4f31a3bf074b5145465ccc",
+    "md5ext": "50299e92ad4f31a3bf074b5145465ccc.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-c/C-a",
+   "name": "C-a",
+   "nameEn": "C a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "c"
+   ],
+   "costume": {
+    "name": "C-a",
+    "assetId": "74f6f213d7b75f14656fa94a9e4a973f",
+    "md5ext": "74f6f213d7b75f14656fa94a9e4a973f.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-c/C-b",
+   "name": "C-b",
+   "nameEn": "C b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "c"
+   ],
+   "costume": {
+    "name": "C-b",
+    "assetId": "0b759a0ca343f42a5e060983ea03e2df",
+    "md5ext": "0b759a0ca343f42a5e060983ea03e2df.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-d/D-a",
+   "name": "D-a",
+   "nameEn": "D a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "d"
+   ],
+   "costume": {
+    "name": "D-a",
+    "assetId": "48fad2d6c26ac57aa50d43855e19648c",
+    "md5ext": "48fad2d6c26ac57aa50d43855e19648c.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-d/D-b",
+   "name": "D-b",
+   "nameEn": "D b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "d"
+   ],
+   "costume": {
+    "name": "D-b",
+    "assetId": "a632bbae308d47a480c8c91ca9c356ba",
+    "md5ext": "a632bbae308d47a480c8c91ca9c356ba.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-e/E-a",
+   "name": "E-a",
+   "nameEn": "E a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "e"
+   ],
+   "costume": {
+    "name": "E-a",
+    "assetId": "41df3e8cff6a024cde937c92a4b523e3",
+    "md5ext": "41df3e8cff6a024cde937c92a4b523e3.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-e/E-b",
+   "name": "E-b",
+   "nameEn": "E b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "e"
+   ],
+   "costume": {
+    "name": "E-b",
+    "assetId": "3d06bde4a92a69caff7aafb7345a823e",
+    "md5ext": "3d06bde4a92a69caff7aafb7345a823e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-f/F-a",
+   "name": "F-a",
+   "nameEn": "F a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "f"
+   ],
+   "costume": {
+    "name": "F-a",
+    "assetId": "82386659cc8dda1687f34a437a7905f3",
+    "md5ext": "82386659cc8dda1687f34a437a7905f3.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-f/F-b",
+   "name": "F-b",
+   "nameEn": "F b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "f"
+   ],
+   "costume": {
+    "name": "F-b",
+    "assetId": "7b29b6a9a59f2cdd8f30ccdc8919b234",
+    "md5ext": "7b29b6a9a59f2cdd8f30ccdc8919b234.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-g/G-a",
+   "name": "G-a",
+   "nameEn": "G a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "g"
+   ],
+   "costume": {
+    "name": "G-a",
+    "assetId": "6ceaa805152516c7599f5cf45e8f4cd8",
+    "md5ext": "6ceaa805152516c7599f5cf45e8f4cd8.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-g/G-b",
+   "name": "G-b",
+   "nameEn": "G b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "g"
+   ],
+   "costume": {
+    "name": "G-b",
+    "assetId": "f7d399091b53ea1021f405777443f00c",
+    "md5ext": "f7d399091b53ea1021f405777443f00c.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-h/H-a",
+   "name": "H-a",
+   "nameEn": "H a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "h"
+   ],
+   "costume": {
+    "name": "H-a",
+    "assetId": "f4f4b36eb5d9584513f04c75daaa588a",
+    "md5ext": "f4f4b36eb5d9584513f04c75daaa588a.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-h/H-b",
+   "name": "H-b",
+   "nameEn": "H b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "h"
+   ],
+   "costume": {
+    "name": "H-b",
+    "assetId": "5cab12747ef3a5f1e9d45470b435637f",
+    "md5ext": "5cab12747ef3a5f1e9d45470b435637f.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-i/I-a",
+   "name": "I-a",
+   "nameEn": "I a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "i"
+   ],
+   "costume": {
+    "name": "I-a",
+    "assetId": "f427ffb445a606eacffa88d0dc029b14",
+    "md5ext": "f427ffb445a606eacffa88d0dc029b14.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-i/I-b",
+   "name": "I-b",
+   "nameEn": "I b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "i"
+   ],
+   "costume": {
+    "name": "I-b",
+    "assetId": "6209b1b332d5ae1d6eef49ab9c970872",
+    "md5ext": "6209b1b332d5ae1d6eef49ab9c970872.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-j/J-a",
+   "name": "J-a",
+   "nameEn": "J a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "j"
+   ],
+   "costume": {
+    "name": "J-a",
+    "assetId": "dc9982716e94159f8a6b17d0dd6db57f",
+    "md5ext": "dc9982716e94159f8a6b17d0dd6db57f.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-j/J-b",
+   "name": "J-b",
+   "nameEn": "J b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "j"
+   ],
+   "costume": {
+    "name": "J-b",
+    "assetId": "8d3109e10a35c11f47bf6e09f8670fe0",
+    "md5ext": "8d3109e10a35c11f47bf6e09f8670fe0.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-k/K-a",
+   "name": "K-a",
+   "nameEn": "K a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "k"
+   ],
+   "costume": {
+    "name": "K-a",
+    "assetId": "1609e9b032d97fdbd6f3ac01830bd47e",
+    "md5ext": "1609e9b032d97fdbd6f3ac01830bd47e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-k/K-b",
+   "name": "K-b",
+   "nameEn": "K b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "k"
+   ],
+   "costume": {
+    "name": "K-b",
+    "assetId": "5e9309f52ec7f5ef03eeb864a12deb34",
+    "md5ext": "5e9309f52ec7f5ef03eeb864a12deb34.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-l/L-a",
+   "name": "L-a",
+   "nameEn": "L a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "l"
+   ],
+   "costume": {
+    "name": "L-a",
+    "assetId": "8342376393d7f9ec511a1b6a5b3a518e",
+    "md5ext": "8342376393d7f9ec511a1b6a5b3a518e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-l/L-b",
+   "name": "L-b",
+   "nameEn": "L b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "l"
+   ],
+   "costume": {
+    "name": "L-b",
+    "assetId": "934a09e505b0cbc18f78c70f76517bcf",
+    "md5ext": "934a09e505b0cbc18f78c70f76517bcf.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-m/M-a",
+   "name": "M-a",
+   "nameEn": "M a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "m"
+   ],
+   "costume": {
+    "name": "M-a",
+    "assetId": "32b96056cbdac8492e0055a83af9fe24",
+    "md5ext": "32b96056cbdac8492e0055a83af9fe24.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-m/M-b",
+   "name": "M-b",
+   "nameEn": "M b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "m"
+   ],
+   "costume": {
+    "name": "M-b",
+    "assetId": "3fbd45694d2ce230ef25f6a4560e0458",
+    "md5ext": "3fbd45694d2ce230ef25f6a4560e0458.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-n/N-a",
+   "name": "N-a",
+   "nameEn": "N a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "n"
+   ],
+   "costume": {
+    "name": "N-a",
+    "assetId": "def8354d92d82f4e11aaa2cf87046ad8",
+    "md5ext": "def8354d92d82f4e11aaa2cf87046ad8.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-n/N-b",
+   "name": "N-b",
+   "nameEn": "N b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "n"
+   ],
+   "costume": {
+    "name": "N-b",
+    "assetId": "a556c65cd4a5cbca4697c054ce8c26cb",
+    "md5ext": "a556c65cd4a5cbca4697c054ce8c26cb.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-o/O-a",
+   "name": "O-a",
+   "nameEn": "O a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "o"
+   ],
+   "costume": {
+    "name": "O-a",
+    "assetId": "81e69439e298a106cffbe60bba5cdc50",
+    "md5ext": "81e69439e298a106cffbe60bba5cdc50.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-o/O-b",
+   "name": "O-b",
+   "nameEn": "O b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "o"
+   ],
+   "costume": {
+    "name": "O-b",
+    "assetId": "8dae41b9dc227c84265eec2c8379b5c8",
+    "md5ext": "8dae41b9dc227c84265eec2c8379b5c8.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-p/P-a",
+   "name": "P-a",
+   "nameEn": "P a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "p"
+   ],
+   "costume": {
+    "name": "P-a",
+    "assetId": "28e8564b062867714beeab10c83237cf",
+    "md5ext": "28e8564b062867714beeab10c83237cf.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-p/P-b",
+   "name": "P-b",
+   "nameEn": "P b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "p"
+   ],
+   "costume": {
+    "name": "P-b",
+    "assetId": "00e005a694486bb597f7f4743baa66e2",
+    "md5ext": "00e005a694486bb597f7f4743baa66e2.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-q/Q-a",
+   "name": "Q-a",
+   "nameEn": "Q a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "q"
+   ],
+   "costume": {
+    "name": "Q-a",
+    "assetId": "963af04d665f8f382b608ffe3e1f5099",
+    "md5ext": "963af04d665f8f382b608ffe3e1f5099.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-q/Q-b",
+   "name": "Q-b",
+   "nameEn": "Q b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "q"
+   ],
+   "costume": {
+    "name": "Q-b",
+    "assetId": "1b631bd42d1b268dbb944b7e1fd3db6c",
+    "md5ext": "1b631bd42d1b268dbb944b7e1fd3db6c.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-r/R-a",
+   "name": "R-a",
+   "nameEn": "R a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "r"
+   ],
+   "costume": {
+    "name": "R-a",
+    "assetId": "7b0ca708d24693e508d75560b6906a26",
+    "md5ext": "7b0ca708d24693e508d75560b6906a26.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-r/R-b",
+   "name": "R-b",
+   "nameEn": "R b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "r"
+   ],
+   "costume": {
+    "name": "R-b",
+    "assetId": "76ba79997887e75e20b51b80da71c8ef",
+    "md5ext": "76ba79997887e75e20b51b80da71c8ef.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-s/S-a",
+   "name": "S-a",
+   "nameEn": "S a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "s"
+   ],
+   "costume": {
+    "name": "S-a",
+    "assetId": "4b8b1948c8495534bb6b9c73b2e28edc",
+    "md5ext": "4b8b1948c8495534bb6b9c73b2e28edc.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-s/S-b",
+   "name": "S-b",
+   "nameEn": "S b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "s"
+   ],
+   "costume": {
+    "name": "S-b",
+    "assetId": "8f0a05ce2d70e6c2f9a02992ccb094b0",
+    "md5ext": "8f0a05ce2d70e6c2f9a02992ccb094b0.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-t/T-a",
+   "name": "T-a",
+   "nameEn": "T a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "t"
+   ],
+   "costume": {
+    "name": "T-a",
+    "assetId": "bda1e061a3f7ea36a15eeabf52300724",
+    "md5ext": "bda1e061a3f7ea36a15eeabf52300724.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-t/T-b",
+   "name": "T-b",
+   "nameEn": "T b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "t"
+   ],
+   "costume": {
+    "name": "T-b",
+    "assetId": "cb8e490ae3963add40c6bd263c477fcd",
+    "md5ext": "cb8e490ae3963add40c6bd263c477fcd.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-u/U-a",
+   "name": "U-a",
+   "nameEn": "U a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "u"
+   ],
+   "costume": {
+    "name": "U-a",
+    "assetId": "e30e87a395f03958247c44f6d4de96ad",
+    "md5ext": "e30e87a395f03958247c44f6d4de96ad.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-u/U-b",
+   "name": "U-b",
+   "nameEn": "U b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "u"
+   ],
+   "costume": {
+    "name": "U-b",
+    "assetId": "4c5099578271265f6173502738dc9836",
+    "md5ext": "4c5099578271265f6173502738dc9836.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-v/V-a",
+   "name": "V-a",
+   "nameEn": "V a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "v"
+   ],
+   "costume": {
+    "name": "V-a",
+    "assetId": "b5c5c26e4320ac9e4e58ecec8debf54d",
+    "md5ext": "b5c5c26e4320ac9e4e58ecec8debf54d.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-v/V-b",
+   "name": "V-b",
+   "nameEn": "V b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "v"
+   ],
+   "costume": {
+    "name": "V-b",
+    "assetId": "252e18df91db6fc0863c8cd1523d3c3d",
+    "md5ext": "252e18df91db6fc0863c8cd1523d3c3d.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-w/W-a",
+   "name": "W-a",
+   "nameEn": "W a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "w"
+   ],
+   "costume": {
+    "name": "W-a",
+    "assetId": "bebfd67f45c6ab24beb82511fdc57da0",
+    "md5ext": "bebfd67f45c6ab24beb82511fdc57da0.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-w/W-b",
+   "name": "W-b",
+   "nameEn": "W b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "w"
+   ],
+   "costume": {
+    "name": "W-b",
+    "assetId": "3116596f5be786894386333a2b659805",
+    "md5ext": "3116596f5be786894386333a2b659805.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-x/X-a",
+   "name": "X-a",
+   "nameEn": "X a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "x"
+   ],
+   "costume": {
+    "name": "X-a",
+    "assetId": "2a8ee1e47735d3451b0a5a90f301e551",
+    "md5ext": "2a8ee1e47735d3451b0a5a90f301e551.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-x/X-b",
+   "name": "X-b",
+   "nameEn": "X b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "x"
+   ],
+   "costume": {
+    "name": "X-b",
+    "assetId": "91bcb3c5ceb18257866ffd1a3a7dedec",
+    "md5ext": "91bcb3c5ceb18257866ffd1a3a7dedec.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-y/Y-a",
+   "name": "Y-a",
+   "nameEn": "Y a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "y"
+   ],
+   "costume": {
+    "name": "Y-a",
+    "assetId": "855f86d9484340c876b0a4d4a18f7b48",
+    "md5ext": "855f86d9484340c876b0a4d4a18f7b48.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-y/Y-b",
+   "name": "Y-b",
+   "nameEn": "Y b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "y"
+   ],
+   "costume": {
+    "name": "Y-b",
+    "assetId": "a17e8faeb72acc9aa51d0c598c42882e",
+    "md5ext": "a17e8faeb72acc9aa51d0c598c42882e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-z/Z-a",
+   "name": "Z-a",
+   "nameEn": "Z a",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "z"
+   ],
+   "costume": {
+    "name": "Z-a",
+    "assetId": "17f50a296f0c6716ab7205dbf34a7315",
+    "md5ext": "17f50a296f0c6716ab7205dbf34a7315.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "huruf-z/Z-b",
+   "name": "Z-b",
+   "nameEn": "Z b",
+   "category": "huruf",
+   "tags": [
+    "huruf",
+    "abjad",
+    "alfabet",
+    "letter",
+    "nama",
+    "z"
+   ],
+   "costume": {
+    "name": "Z-b",
+    "assetId": "8e00d6e9f5541333f567c09bb5df3645",
+    "md5ext": "8e00d6e9f5541333f567c09bb5df3645.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-0/0-a",
+   "name": "0-a",
+   "nameEn": "0 a",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "0"
+   ],
+   "costume": {
+    "name": "0-a",
+    "assetId": "297eeece76b261b054cf710f813ff760",
+    "md5ext": "297eeece76b261b054cf710f813ff760.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-0/0-b",
+   "name": "0-b",
+   "nameEn": "0 b",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "0"
+   ],
+   "costume": {
+    "name": "0-b",
+    "assetId": "68e4476d913786fe074c78f73c529362",
+    "md5ext": "68e4476d913786fe074c78f73c529362.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-1/1-a",
+   "name": "1-a",
+   "nameEn": "1 a",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "1"
+   ],
+   "costume": {
+    "name": "1-a",
+    "assetId": "f56e52951667896a1f30272cfa65d1a3",
+    "md5ext": "f56e52951667896a1f30272cfa65d1a3.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-1/1-b",
+   "name": "1-b",
+   "nameEn": "1 b",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "1"
+   ],
+   "costume": {
+    "name": "1-b",
+    "assetId": "dde5acda946b6f6ba38a6099c5c3285e",
+    "md5ext": "dde5acda946b6f6ba38a6099c5c3285e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-2/2-a",
+   "name": "2-a",
+   "nameEn": "2 a",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "2"
+   ],
+   "costume": {
+    "name": "2-a",
+    "assetId": "f67ee5bfb6eead2e0561455e283cac02",
+    "md5ext": "f67ee5bfb6eead2e0561455e283cac02.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-2/2-b",
+   "name": "2-b",
+   "nameEn": "2 b",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "2"
+   ],
+   "costume": {
+    "name": "2-b",
+    "assetId": "8ba2c4b93752d1aeedd6f8aa8fbb268e",
+    "md5ext": "8ba2c4b93752d1aeedd6f8aa8fbb268e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-3/3-a",
+   "name": "3-a",
+   "nameEn": "3 a",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "3"
+   ],
+   "costume": {
+    "name": "3-a",
+    "assetId": "b5a7bc320523a9ba17243f0716021060",
+    "md5ext": "b5a7bc320523a9ba17243f0716021060.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-3/3-b",
+   "name": "3-b",
+   "nameEn": "3 b",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "3"
+   ],
+   "costume": {
+    "name": "3-b",
+    "assetId": "b47282999f4cbd04b67af61031ff7744",
+    "md5ext": "b47282999f4cbd04b67af61031ff7744.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-4/4-a",
+   "name": "4-a",
+   "nameEn": "4 a",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "4"
+   ],
+   "costume": {
+    "name": "4-a",
+    "assetId": "6f466627fa47bf835c5335a93b48b18e",
+    "md5ext": "6f466627fa47bf835c5335a93b48b18e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-4/4-b",
+   "name": "4-b",
+   "nameEn": "4 b",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "4"
+   ],
+   "costume": {
+    "name": "4-b",
+    "assetId": "494eeca61ee40d1874a1f1607d9650d9",
+    "md5ext": "494eeca61ee40d1874a1f1607d9650d9.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-5/5-a",
+   "name": "5-a",
+   "nameEn": "5 a",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "5"
+   ],
+   "costume": {
+    "name": "5-a",
+    "assetId": "8c00d6803ce28881b1471a67f3f244a3",
+    "md5ext": "8c00d6803ce28881b1471a67f3f244a3.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-5/5-b",
+   "name": "5-b",
+   "nameEn": "5 b",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "5"
+   ],
+   "costume": {
+    "name": "5-b",
+    "assetId": "8dfaab5ea9a52e049f429cfed21df0e0",
+    "md5ext": "8dfaab5ea9a52e049f429cfed21df0e0.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-6/6-a",
+   "name": "6-a",
+   "nameEn": "6 a",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "6"
+   ],
+   "costume": {
+    "name": "6-a",
+    "assetId": "082edfcf9882bea1b396ca056196fe9c",
+    "md5ext": "082edfcf9882bea1b396ca056196fe9c.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-6/6-b",
+   "name": "6-b",
+   "nameEn": "6 b",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "6"
+   ],
+   "costume": {
+    "name": "6-b",
+    "assetId": "aebc74907c7e0babfbde806e287e56af",
+    "md5ext": "aebc74907c7e0babfbde806e287e56af.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-7/7-a",
+   "name": "7-a",
+   "nameEn": "7 a",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "7"
+   ],
+   "costume": {
+    "name": "7-a",
+    "assetId": "b9680e930515bb65349f83d5b16a9310",
+    "md5ext": "b9680e930515bb65349f83d5b16a9310.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-7/7-b",
+   "name": "7-b",
+   "nameEn": "7 b",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "7"
+   ],
+   "costume": {
+    "name": "7-b",
+    "assetId": "b3252c3bca4a09fbdb44c1327122fe00",
+    "md5ext": "b3252c3bca4a09fbdb44c1327122fe00.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-8/8-a",
+   "name": "8-a",
+   "nameEn": "8 a",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "8"
+   ],
+   "costume": {
+    "name": "8-a",
+    "assetId": "d935748a1e8ede1d3031743c70e6626e",
+    "md5ext": "d935748a1e8ede1d3031743c70e6626e.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-8/8-b",
+   "name": "8-b",
+   "nameEn": "8 b",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "8"
+   ],
+   "costume": {
+    "name": "8-b",
+    "assetId": "bd3d16948ef99fdf30f8026cedc74355",
+    "md5ext": "bd3d16948ef99fdf30f8026cedc74355.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-9/9-a",
+   "name": "9-a",
+   "nameEn": "9 a",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "9"
+   ],
+   "costume": {
+    "name": "9-a",
+    "assetId": "1a21303eef237916fd02eddbe1336c98",
+    "md5ext": "1a21303eef237916fd02eddbe1336c98.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
+   "id": "angka-9/9-b",
+   "name": "9-b",
+   "nameEn": "9 b",
+   "category": "huruf",
+   "tags": [
+    "angka",
+    "nomor",
+    "number",
+    "hitung",
+    "9"
+   ],
+   "costume": {
+    "name": "9-b",
+    "assetId": "cf0ca143237108ed6efbb567d9deac1d",
+    "md5ext": "cf0ca143237108ed6efbb567d9deac1d.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 34,
+    "rotationCenterY": 45
+   }
+  },
+  {
+   "kind": "costume",
    "id": "bola/bola-a",
    "name": "bola-a",
    "nameEn": "Ball a",
@@ -4339,6 +8996,116 @@
     "rotationCenterX": 240,
     "rotationCenterY": 180
    }
+  },
+  {
+   "kind": "backdrop",
+   "id": "sawah",
+   "name": "Sawah",
+   "nameEn": "Rice Field",
+   "category": "luar",
+   "tags": [
+    "desa",
+    "padi",
+    "gunung",
+    "indonesia",
+    "petani"
+   ],
+   "costume": {
+    "name": "sawah",
+    "assetId": "37b2ae8a3d89bde84ebc4b5dd31aa2cc",
+    "md5ext": "37b2ae8a3d89bde84ebc4b5dd31aa2cc.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "sekolah",
+   "name": "Sekolah",
+   "nameEn": "School",
+   "category": "kota",
+   "tags": [
+    "sekolah",
+    "bendera",
+    "belajar",
+    "indonesia"
+   ],
+   "costume": {
+    "name": "sekolah",
+    "assetId": "35afd9650ee4d1e27b5316fdf3bbcc4d",
+    "md5ext": "35afd9650ee4d1e27b5316fdf3bbcc4d.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "kamar",
+   "name": "Kamar",
+   "nameEn": "Bedroom",
+   "category": "dalam",
+   "tags": [
+    "rumah",
+    "tidur",
+    "kasur"
+   ],
+   "costume": {
+    "name": "kamar",
+    "assetId": "f7d280393fbd12137ab1d5b1a96f1606",
+    "md5ext": "f7d280393fbd12137ab1d5b1a96f1606.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "jalan-raya",
+   "name": "Jalan Raya",
+   "nameEn": "Street",
+   "category": "kota",
+   "tags": [
+    "jalan",
+    "mobil",
+    "zebra cross",
+    "gedung"
+   ],
+   "costume": {
+    "name": "jalan-raya",
+    "assetId": "b96387953b48b2ff32cc56cb1788e641",
+    "md5ext": "b96387953b48b2ff32cc56cb1788e641.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
+  },
+  {
+   "kind": "backdrop",
+   "id": "bulan",
+   "name": "Permukaan Bulan",
+   "nameEn": "Moon Surface",
+   "category": "angkasa",
+   "tags": [
+    "bulan",
+    "bumi",
+    "astronot",
+    "luar angkasa"
+   ],
+   "costume": {
+    "name": "bulan",
+    "assetId": "35e02e27ba8b9dfc4c76f9f37acbc9cc",
+    "md5ext": "35e02e27ba8b9dfc4c76f9f37acbc9cc.svg",
+    "dataFormat": "svg",
+    "bitmapResolution": 1,
+    "rotationCenterX": 240,
+    "rotationCenterY": 180
+   }
   }
  ],
  "sounds": [
@@ -5188,6 +9955,131 @@
     "dataFormat": "wav",
     "rate": 22050,
     "sampleCount": 19845
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "angklung",
+   "name": "Angklung",
+   "nameEn": "Angklung",
+   "category": "musik",
+   "tags": [
+    "bambu",
+    "sunda",
+    "indonesia",
+    "nada"
+   ],
+   "sound": {
+    "name": "Angklung",
+    "assetId": "3ed24e79d2b258ca53b6eea223ad85a6",
+    "md5ext": "3ed24e79d2b258ca53b6eea223ad85a6.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 22050
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "gong",
+   "name": "Gong",
+   "nameEn": "Gong",
+   "category": "musik",
+   "tags": [
+    "gamelan",
+    "jawa",
+    "indonesia",
+    "pukul"
+   ],
+   "sound": {
+    "name": "Gong",
+    "assetId": "78abfeb44c18718e5f328b9ff082734d",
+    "md5ext": "78abfeb44c18718e5f328b9ff082734d.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 41895
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "kentongan",
+   "name": "Kentongan",
+   "nameEn": "Wooden Knock",
+   "category": "perkusi",
+   "tags": [
+    "kayu",
+    "pukul",
+    "indonesia",
+    "ronda"
+   ],
+   "sound": {
+    "name": "Kentongan",
+    "assetId": "e590dbbd9596d55e254821836cae4e98",
+    "md5ext": "e590dbbd9596d55e254821836cae4e98.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 10492
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "hore",
+   "name": "Hore!",
+   "nameEn": "Hooray",
+   "category": "efek",
+   "tags": [
+    "menang",
+    "senang",
+    "sorak",
+    "berhasil"
+   ],
+   "sound": {
+    "name": "Hore!",
+    "assetId": "fddf006949b83a2bafa5ced124488b6f",
+    "md5ext": "fddf006949b83a2bafa5ced124488b6f.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 26460
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "jam",
+   "name": "Tik Tok Jam",
+   "nameEn": "Clock Tick",
+   "category": "efek",
+   "tags": [
+    "waktu",
+    "detik",
+    "menunggu"
+   ],
+   "sound": {
+    "name": "Tik Tok Jam",
+    "assetId": "6f0509eaf7bca5c05ecc18f48d73e182",
+    "md5ext": "6f0509eaf7bca5c05ecc18f48d73e182.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 33078
+   }
+  },
+  {
+   "kind": "sound",
+   "id": "notifikasi",
+   "name": "Notifikasi",
+   "nameEn": "Notification",
+   "category": "antarmuka",
+   "tags": [
+    "pesan",
+    "ding",
+    "pemberitahuan",
+    "ai"
+   ],
+   "sound": {
+    "name": "Notifikasi",
+    "assetId": "3e8859c86afcb2dfdbbf78a896e267db",
+    "md5ext": "3e8859c86afcb2dfdbbf78a896e267db.wav",
+    "dataFormat": "wav",
+    "rate": 22050,
+    "sampleCount": 16538
    }
   }
  ]

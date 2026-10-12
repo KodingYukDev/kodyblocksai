@@ -5,6 +5,7 @@
  */
 import type { IMediaLoader, IRuntime, ITarget } from "@kody/engine";
 import { asRenderedTarget, createSprite, StringUtil } from "@kody/engine";
+import { isSprite3Name, loadSprite3 } from "@kody/project";
 import { costumesFromFile } from "../costume-tab/costume-media";
 import { emptyCostume } from "../costume-tab/new-asset";
 import type { NewCostume, NewSound } from "../costume-tab/types";
@@ -13,6 +14,7 @@ import type { LibraryLoader } from "../library/library-loader";
 import type { LibraryBackdropEntry, LibraryKind, LibrarySpriteEntry } from "../library/library-types";
 import type { AssetActions } from "../shell/runtime-controller";
 import type { AddMethod, PickedFile } from "../shell/types";
+import { installSprite } from "./sprite-install";
 
 export interface AssetActionDeps {
   runtime: IRuntime;
@@ -22,17 +24,21 @@ export interface AssetActionDeps {
   chooseFromLibrary(kind: Extract<LibraryKind, "sprite" | "backdrop">): Promise<LibrarySpriteEntry | LibraryBackdropEntry | null>;
   locale?: "id" | "en";
   random?: () => number;
+  /** Muat ekstensi yang dipakai sprite .sprite3; kembalikan id yang tidak dikenal. */
+  loadExtensions?: (ids: readonly string[]) => Promise<string[]>;
+  /** Peringatan non-fatal saat impor (mis. asset sprite hilang). */
+  onWarnings?: (warnings: readonly string[]) => void;
 }
 
 export class UnsupportedUploadError extends Error {
   constructor(name: string) {
-    super(`File ${name} belum didukung (unggah gambar .svg/.png/.jpg/.bmp/.gif)`);
+    super(`File ${name} belum didukung (unggah gambar .svg/.png/.jpg/.bmp/.gif atau sprite .sprite3)`);
     this.name = "UnsupportedUploadError";
   }
 }
 
-function isSpriteArchive(name: string): boolean {
-  return /\.sprite[23]$/i.test(name);
+function isSprite2(name: string): boolean {
+  return /\.sprite2$/i.test(name);
 }
 
 export function createAssetActions(deps: AssetActionDeps): AssetActions {
@@ -74,7 +80,7 @@ export function createAssetActions(deps: AssetActionDeps): AssetActions {
   const costumesFromFiles = async (files: readonly PickedFile[] | undefined): Promise<{ name: string; costumes: NewCostume[] }[]> => {
     const out: { name: string; costumes: NewCostume[] }[] = [];
     for (const f of files ?? []) {
-      if (isSpriteArchive(f.name)) throw new UnsupportedUploadError(f.name);
+      if (isSprite2(f.name) || isSprite3Name(f.name)) throw new UnsupportedUploadError(f.name);
       const costumes = await costumesFromFile({ name: f.name, type: f.type, bytes: f.bytes });
       out.push({ name: f.name.replace(/\.[^.]+$/, ""), costumes });
     }
@@ -104,8 +110,16 @@ export function createAssetActions(deps: AssetActionDeps): AssetActions {
           return;
         }
         case "upload": {
-          for (const { name, costumes } of await costumesFromFiles(files)) {
-            if (costumes.length) await addSpriteTarget(name, costumes, []);
+          for (const f of files ?? []) {
+            if (isSprite3Name(f.name)) {
+              const loaded = await loadSprite3(f.bytes);
+              if (loaded.warnings.length) deps.onWarnings?.(loaded.warnings);
+              await installSprite({ runtime, media, ...(deps.loadExtensions ? { loadExtensions: deps.loadExtensions } : {}) }, loaded);
+              continue;
+            }
+            for (const { name, costumes } of await costumesFromFiles([f])) {
+              if (costumes.length) await addSpriteTarget(name, costumes, []);
+            }
           }
           return;
         }

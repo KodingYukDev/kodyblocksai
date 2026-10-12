@@ -77,7 +77,24 @@ export class ExtensionHost {
   private readonly pending = new Map<string, Promise<ExtensionInfo>>();
   private readonly listeners = new Set<() => void>();
 
-  constructor(private readonly runtime: IRuntime) {}
+  constructor(private readonly runtime: IRuntime) {
+    // Menu dinamis (mis. kelas AI dari AI Lab) berubah -> daftarkan ulang ke registri SEBELUM editor
+    // membangun ulang definisi (listener ini terpasang lebih dulu daripada listener editor).
+    try {
+      runtime.on("BLOCKSINFO_UPDATE", ({ info }) => {
+        const loaded = this.loaded.get(info.id);
+        if (loaded) this.registerBlocks(loaded.module, info);
+      });
+    } catch {
+      /* runtime tiruan tanpa event */
+    }
+  }
+
+  private registerBlocks(module: ExtensionModule, info: ExtensionInfo): void {
+    getDefaultRegistry().registerExtension(info, {
+      resolveDynamicMenu: (_menu, fn) => module.getDynamicMenus?.()[fn]?.(this.runtime.getEditingTarget()?.id ?? null) ?? [],
+    });
+  }
 
   isLoaded(id: string): boolean {
     return this.loaded.has(id);
@@ -130,9 +147,7 @@ export class ExtensionHost {
     const module = factory(this.runtime);
     const info = module.getInfo();
     // Registri blok dulu: EXTENSION_ADDED dari runtime memicu workspace membangun ulang definisi.
-    getDefaultRegistry().registerExtension(info, {
-      resolveDynamicMenu: (_menu, fn) => module.getDynamicMenus?.()[fn]?.(this.runtime.getEditingTarget()?.id ?? null) ?? [],
-    });
+    this.registerBlocks(module, info);
     this.loaded.set(info.id, { module, info });
     const registered = this.runtime.registerExtension(module);
     for (const l of [...this.listeners]) l();

@@ -7,6 +7,7 @@ import type { ExtensionLabelResolver } from "./monitors/monitor-adapter";
 import { MonitorOverlay } from "./monitors/MonitorOverlay";
 import { QuestionPrompt } from "./QuestionPrompt";
 import { canvasToStagePoint, type StageDimensions } from "./stage-geometry";
+import { KeyPad } from "./KeyPad";
 import { StageHeader } from "./StageHeader";
 import { createStagePointer, keyForIO, shouldPreventKeyScroll } from "./stage-pointer";
 
@@ -24,6 +25,10 @@ export interface StagePaneProps {
   onSizeMode(mode: StageSizeMode): void;
   extensionLabel?: ExtensionLabelResolver;
   onAlert?(message: string): void;
+  /** Tombol panah/spasi di layar tampil di bawah panggung. */
+  keypad?: boolean;
+  /** Ada = tombol toggle keypad tampil di header panggung. */
+  onToggleKeypad?(): void;
 }
 
 /** Keyboard dokumen -> runtime (lib/vm-listener-hoc.jsx scratch-gui). */
@@ -133,7 +138,11 @@ export function StagePane(props: StagePaneProps) {
   }, [controller, editorDrag, dims.width, dims.height]);
 
   return (
-    <section className={`kb-stage-pane${full ? " kb-stage-pane--fullscreen" : ""}`} aria-label="Panggung">
+    <section
+      className={`kb-stage-pane${full ? " kb-stage-pane--fullscreen" : ""}`}
+      aria-label="Panggung"
+      style={full ? undefined : { width: dims.width + 2 }}
+    >
       <StageHeader
         running={props.running}
         turbo={props.turbo}
@@ -142,6 +151,8 @@ export function StagePane(props: StagePaneProps) {
         onGreenFlag={() => controller.greenFlag()}
         onStop={() => controller.stopAll()}
         onSizeMode={props.onSizeMode}
+        keypadOpen={!!props.keypad}
+        onToggleKeypad={props.onToggleKeypad}
       />
       <div className="kb-stage-wrapper">
         <div className="kb-stage" style={{ width: dims.width, height: dims.height }}>
@@ -164,6 +175,7 @@ export function StagePane(props: StagePaneProps) {
           )}
         </div>
       </div>
+      {props.keypad && <KeyPad controller={controller} width={dims.width + 2} />}
     </section>
   );
 }

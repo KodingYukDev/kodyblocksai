@@ -3,7 +3,7 @@ export * from "./types";
 export { SB3_PRIMITIVE } from "./sb3-types";
 export { deserializeProject, deserializeProjectWithReport, convertValidatedProject } from "./deserialize";
 export type { DeserializeHooks, DeserializeResult } from "./deserialize";
-export { serializeProject, stringifyProject, KODY_VM_VERSION } from "./serialize";
+export { serializeProject, serializeSprite, stringifyProject, KODY_VM_VERSION } from "./serialize";
 export type { SerializeOptions } from "./serialize";
 export { validateProjectJson } from "./validate";
 export type { ValidateOptions, ValidationResult } from "./validate";
@@ -22,6 +22,8 @@ export { readImageSize } from "./image-size";
 export type { ImageSize } from "./image-size";
 export { loadSb3, saveSb3, saveSb3WithReport, parseProjectJsonText } from "./sb3-file";
 export type { SaveSb3Result } from "./sb3-file";
+export { loadSprite3, saveSprite3, isSprite3Name } from "./sprite3";
+export type { LoadedSprite } from "./sprite3";
 export { createAutosaveStore, createAutosaveStoreWithBackend, createAutosaver } from "./autosave";
 export type {
   AutosaveEntry,

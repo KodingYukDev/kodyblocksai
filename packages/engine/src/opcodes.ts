@@ -325,8 +325,12 @@ const visionCommon = (id: string): Row[] => [
   [`${id}_videoToggle`, "command"],
   [`${id}_setVideoTransparency`, "command"],
   [`${id}_analyse`, "command"],
+  [`${id}_setCamera`, "command"],
+  [`${id}_startAuto`, "command"],
+  [`${id}_stopAuto`, "command"],
   [`${id}_menu_VIDEO_STATE`, "shadow", "s"],
   [`${id}_menu_SOURCE`, "shadow", "s"],
+  [`${id}_menu_CAMERA`, "shadow", "s"],
 ];
 
 export const AI_OPCODES: readonly OpcodeSpec[] = [
@@ -353,6 +357,11 @@ export const AI_OPCODES: readonly OpcodeSpec[] = [
     ["aiHand_menu_LANDMARK", "shadow", "s"],
     ["aiHand_menu_AXIS", "shadow", "s"],
     ["aiHand_menu_GESTURE", "shadow", "s"],
+    ["aiHand_handClass", "reporter", "m"],
+    ["aiHand_handClassConfidence", "reporter"],
+    ["aiHand_isHandClass", "boolean"],
+    ["aiHand_whenHandClass", "hat", "ep"],
+    ["aiHand_menu_CLASS", "shadow", "s"],
   ]),
   ...rows("ai", AI + "pose.ts", [
     ...visionCommon("aiPose"),
@@ -360,6 +369,11 @@ export const AI_OPCODES: readonly OpcodeSpec[] = [
     ["aiPose_keypointPosition", "reporter"],
     ["aiPose_menu_KEYPOINT", "shadow", "s"],
     ["aiPose_menu_AXIS", "shadow", "s"],
+    ["aiPose_poseClass", "reporter", "m"],
+    ["aiPose_poseClassConfidence", "reporter"],
+    ["aiPose_isPoseClass", "boolean"],
+    ["aiPose_whenPoseClass", "hat", "ep"],
+    ["aiPose_menu_CLASS", "shadow", "s"],
   ]),
   ...rows("ai", AI + "image.ts", [
     ...visionCommon("aiImage"),
@@ -382,6 +396,9 @@ export const AI_OPCODES: readonly OpcodeSpec[] = [
     ["aiText_isTextClass", "boolean"],
     ["aiText_textConfidence", "reporter"],
     ["aiText_menu_CLASS", "shadow", "s"],
+    ["aiText_speak", "command"],
+    ["aiText_setSpeechLanguage", "command"],
+    ["aiText_menu_LANGUAGE", "shadow", "s"],
   ]),
   ...rows("ai", AI + "audio.ts", [
     ["aiAudio_startListening", "command"],
@@ -390,6 +407,10 @@ export const AI_OPCODES: readonly OpcodeSpec[] = [
     ["aiAudio_isSoundClass", "boolean"],
     ["aiAudio_whenSoundClass", "hat", "ep"],
     ["aiAudio_menu_CLASS", "shadow", "s"],
+    ["aiAudio_soundConfidence", "reporter"],
+    ["aiAudio_recognizeSpeech", "command"],
+    ["aiAudio_speechText", "reporter", "m"],
+    ["aiAudio_menu_LANGUAGE", "shadow", "s"],
   ]),
 ];
 

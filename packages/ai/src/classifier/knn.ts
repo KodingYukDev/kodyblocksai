@@ -5,6 +5,9 @@
  */
 import { AI_LIMITS, sanitizeLabel, validateTrainedClassifier } from "../security";
 import type { ClassificationResult, TrainedClassifier } from "../types";
+
+/** Jenis model vektor fitur (semua kecuali teks). */
+export type VectorKind = "image" | "audio" | "pose" | "hand";
 import { decodeInt8Vector, dot, encodeInt8Vector, isFiniteVector, l2Normalize, softmax } from "./vector";
 
 export const KNN_LIMITS = {
@@ -69,6 +72,23 @@ export class KnnClassifier {
     if (this.labels.length >= AI_LIMITS.maxLabels) throw new Error(`Maksimum ${AI_LIMITS.maxLabels} kelas.`);
     this.labels.push(label);
     return label;
+  }
+
+  /** Ganti nama kelas (label baru disanitasi, tidak boleh bentrok). Mengembalikan label bersih. */
+  renameLabel(oldLabel: string, raw: unknown): string {
+    const idx = this.labels.indexOf(oldLabel);
+    if (idx < 0) throw new Error(`Kelas "${oldLabel}" belum ada.`);
+    const label = sanitizeLabel(raw);
+    if (!label) throw new Error("Nama kelas tidak boleh kosong.");
+    if (label !== oldLabel && this.labels.includes(label)) throw new Error(`Kelas "${label}" sudah ada.`);
+    this.labels[idx] = label;
+    return label;
+  }
+
+  /** Semua contoh (vektor ternormalisasi) per label, urut sesuai urutan ditambahkan. */
+  examplesOf(label: string): Float32Array[] {
+    const idx = this.labels.indexOf(label);
+    return idx < 0 ? [] : this.examples.filter((e) => e.label === idx).map((e) => e.vector);
   }
 
   removeLabel(label: string): void {
@@ -155,7 +175,7 @@ export class KnnClassifier {
     return softmax(sims, 12);
   }
 
-  toTrained(kind: "image" | "audio", now = Date.now()): TrainedClassifier {
+  toTrained(kind: VectorKind, now = Date.now()): TrainedClassifier {
     const payload: KnnPayload = {
       format: "knn-int8",
       mode: this.mode,
@@ -170,7 +190,7 @@ export class KnnClassifier {
   }
 
   /** Muat dari data project (TAK TEPERCAYA). Melempar Error dengan pesan jelas bila rusak. */
-  static fromTrained(value: unknown, expectedKind: "image" | "audio"): KnnClassifier {
+  static fromTrained(value: unknown, expectedKind: VectorKind): KnnClassifier {
     const problems = validateTrainedClassifier(value);
     if (problems.length > 0) throw new Error(`Model AI tidak valid: ${problems.join(", ")}`);
     const tc = value as TrainedClassifier;

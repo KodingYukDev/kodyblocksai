@@ -35,6 +35,30 @@ export function wasmSimdSupported(): boolean {
   }
 }
 
+/** WebGL tersedia (syarat delegasi GPU MediaPipe & backend webgl tfjs). */
+export function webglAvailable(): boolean {
+  try {
+    if (typeof document === "undefined") return false;
+    const c = document.createElement("canvas");
+    return !!(c.getContext("webgl2") ?? c.getContext("webgl"));
+  } catch {
+    return false;
+  }
+}
+
+/** tfjs siap dengan backend webgl, atau cpu bila WebGL tidak ada/gagal (lambat tapi jalan). */
+async function tfReady(): Promise<typeof import("@tensorflow/tfjs")> {
+  const tf = await import("@tensorflow/tfjs");
+  try {
+    if (!webglAvailable()) await tf.setBackend("cpu");
+    await tf.ready();
+  } catch {
+    await tf.setBackend("cpu");
+    await tf.ready();
+  }
+  return tf;
+}
+
 export interface LoaderDeps {
   fetchVerified: (path: string) => Promise<ArrayBuffer>;
 }
@@ -70,69 +94,110 @@ export function createDefaultDetectorFactories(deps: LoaderDeps): DetectorFactor
 
   const taskBuffer = async (path: string): Promise<Uint8Array> => new Uint8Array(await deps.fetchVerified(path));
 
-  /** Coba delegasi GPU lalu CPU (GPU gagal di sebagian perangkat). */
-  async function createTask<T>(make: (delegate: "GPU" | "CPU") => Promise<T>): Promise<T> {
+  /**
+   * Task MediaPipe dengan delegasi GPU, jatuh ke CPU bila GPU gagal dibuat ATAU gagal saat deteksi
+   * pertama (sebagian iPad/Android membuat task GPU tetapi gagal saat detectForVideo).
+   */
+  async function resilientTask<T extends { close(): void }>(
+    make: (delegate: "GPU" | "CPU") => Promise<T>,
+  ): Promise<{ current: () => T; fallback: () => Promise<T | null>; close: () => void }> {
+    let delegate: "GPU" | "CPU" = webglAvailable() ? "GPU" : "CPU";
+    let task: T;
     try {
-      return await make("GPU");
-    } catch {
-      return make("CPU");
+      task = await make(delegate);
+    } catch (err) {
+      if (delegate === "CPU") throw err;
+      delegate = "CPU";
+      task = await make("CPU");
     }
+    return {
+      current: () => task,
+      fallback: async () => {
+        if (delegate === "CPU") return null;
+        delegate = "CPU";
+        try {
+          task.close();
+        } catch {
+          // abaikan
+        }
+        task = await make("CPU");
+        return task;
+      },
+      close: () => task.close(),
+    };
+  }
+
+  /** detectForVideo dengan satu kali coba ulang di CPU bila delegasi GPU melempar error. */
+  async function mediapipeDetector<T extends { close(): void }, Raw, R>(
+    make: (delegate: "GPU" | "CPU") => Promise<T>,
+    detectRaw: (task: T, frame: FrameSource, ts: number) => Raw,
+    convert: (raw: Raw, mirrored: boolean) => R,
+  ): Promise<VisionDetector<R>> {
+    const h = await resilientTask(make);
+    return {
+      detect: async (frame, ts, opts) => {
+        try {
+          return convert(detectRaw(h.current(), frame, ts), opts.mirrored);
+        } catch (err) {
+          const cpu = await h.fallback();
+          if (!cpu) throw err;
+          return convert(detectRaw(cpu, frame, ts + 1), opts.mirrored);
+        }
+      },
+      dispose: () => h.close(),
+    };
   }
 
   const hand = async (): Promise<VisionDetector<HandResult[]>> => {
     const vision = await import("@mediapipe/tasks-vision");
     const [fs, model] = await Promise.all([fileset(), taskBuffer(MODEL_PATHS.hand)]);
-    const task = await createTask((delegate) =>
-      vision.HandLandmarker.createFromOptions(fs, {
-        baseOptions: { modelAssetBuffer: model, delegate },
-        runningMode: "VIDEO",
-        numHands: 2,
-      }),
+    return mediapipeDetector(
+      (delegate) =>
+        vision.HandLandmarker.createFromOptions(fs, {
+          baseOptions: { modelAssetBuffer: model, delegate },
+          runningMode: "VIDEO",
+          numHands: 2,
+        }),
+      (task, frame, ts) => task.detectForVideo(frame as TexImageSource, ts),
+      (raw, mirrored) => handsFromMediaPipe(raw, mirrored),
     );
-    return {
-      detect: async (frame, ts, opts) => handsFromMediaPipe(task.detectForVideo(frame as TexImageSource, ts), opts.mirrored),
-      dispose: () => task.close(),
-    };
   };
 
   const face = async (): Promise<VisionDetector<FaceResult[]>> => {
     const vision = await import("@mediapipe/tasks-vision");
     const [fs, model] = await Promise.all([fileset(), taskBuffer(MODEL_PATHS.face)]);
-    const task = await createTask((delegate) =>
-      vision.FaceLandmarker.createFromOptions(fs, {
-        baseOptions: { modelAssetBuffer: model, delegate },
-        runningMode: "VIDEO",
-        numFaces: 4,
-        outputFaceBlendshapes: true,
-        outputFacialTransformationMatrixes: false,
-      }),
+    return mediapipeDetector(
+      (delegate) =>
+        vision.FaceLandmarker.createFromOptions(fs, {
+          baseOptions: { modelAssetBuffer: model, delegate },
+          runningMode: "VIDEO",
+          numFaces: 4,
+          outputFaceBlendshapes: true,
+          outputFacialTransformationMatrixes: false,
+        }),
+      (task, frame, ts) => task.detectForVideo(frame as TexImageSource, ts),
+      (raw) => facesFromMediaPipe(raw),
     );
-    return {
-      detect: async (frame, ts) => facesFromMediaPipe(task.detectForVideo(frame as TexImageSource, ts)),
-      dispose: () => task.close(),
-    };
   };
 
   const pose = async (): Promise<VisionDetector<PoseResult[]>> => {
     const vision = await import("@mediapipe/tasks-vision");
     const [fs, model] = await Promise.all([fileset(), taskBuffer(MODEL_PATHS.pose)]);
-    const task = await createTask((delegate) =>
-      vision.PoseLandmarker.createFromOptions(fs, {
-        baseOptions: { modelAssetBuffer: model, delegate },
-        runningMode: "VIDEO",
-        numPoses: 1,
-        outputSegmentationMasks: false,
-      }),
+    return mediapipeDetector(
+      (delegate) =>
+        vision.PoseLandmarker.createFromOptions(fs, {
+          baseOptions: { modelAssetBuffer: model, delegate },
+          runningMode: "VIDEO",
+          numPoses: 1,
+          outputSegmentationMasks: false,
+        }),
+      (task, frame, ts) => task.detectForVideo(frame as TexImageSource, ts),
+      (raw) => posesFromMediaPipe(raw),
     );
-    return {
-      detect: async (frame, ts) => posesFromMediaPipe(task.detectForVideo(frame as TexImageSource, ts)),
-      dispose: () => task.close(),
-    };
   };
 
   const object = async (): Promise<VisionDetector<ObjectResult[]>> => {
-    const tf = await import("@tensorflow/tfjs");
-    await tf.ready();
+    const tf = await tfReady();
     const coco = await import("@tensorflow-models/coco-ssd");
     const artifacts = await loadGraphModelArtifacts(MODEL_PATHS.cocoSsd, deps.fetchVerified);
     const graph = await tf.loadGraphModel(tf.io.fromMemory(artifacts as unknown as TfModelArtifacts));
@@ -151,8 +216,7 @@ export function createDefaultDetectorFactories(deps: LoaderDeps): DetectorFactor
   };
 
   const imageEmbedder = async (): Promise<ImageEmbedder> => {
-    const tf = await import("@tensorflow/tfjs");
-    await tf.ready();
+    const tf = await tfReady();
     const mobilenet = await import("@tensorflow-models/mobilenet");
     const artifacts = await loadGraphModelArtifacts(MODEL_PATHS.mobilenet, deps.fetchVerified);
     const net = await mobilenet.load({

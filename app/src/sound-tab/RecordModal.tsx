@@ -23,7 +23,7 @@ export function RecordModal({ strings: t, onClose, onSave, onDeviceActive }: Rec
   const deviceActive = useRef(onDeviceActive);
   deviceActive.current = onDeviceActive;
   const [level, setLevel] = useState(0);
-  const [state, setState] = useState<"starting" | "ready" | "recording" | "done" | "error">("starting");
+  const [state, setState] = useState<"starting" | "ready" | "recording" | "processing" | "done" | "error">("starting");
   const [result, setResult] = useState<RecordingResult | null>(null);
 
   useEffect(() => {
@@ -49,18 +49,28 @@ export function RecordModal({ strings: t, onClose, onSave, onDeviceActive }: Rec
   function finish(): void {
     const r = rec.current;
     if (!r) return;
-    setResult(r.stop());
-    setState("done");
+    setState("processing");
+    r.stop()
+      .then((res) => {
+        if (rec.current !== r) return;
+        if (res.samples.length === 0) {
+          setState("ready");
+          return;
+        }
+        setResult(res);
+        setState("done");
+      })
+      .catch(() => setState("error"));
   }
 
   const selection = result ? { trimStart: result.trimStart, trimEnd: result.trimEnd } : null;
 
   return (
-    <div className="kb-modal" role="dialog" aria-modal="true" aria-label={t.recordSound} onKeyDown={(e) => e.key === "Escape" && onClose()}>
-      <div className="kb-modal__box kb-record">
-        <header className="kb-modal__header">
+    <div className="kb-amodal" role="dialog" aria-modal="true" aria-label={t.recordSound} onKeyDown={(e) => e.key === "Escape" && onClose()}>
+      <div className="kb-amodal__box kb-record">
+        <header className="kb-amodal__header">
           <h2>{t.recordSound}</h2>
-          <button type="button" className="kb-modal__close" onClick={onClose} aria-label={t.close}>
+          <button type="button" className="kb-amodal__close" onClick={onClose} aria-label={t.close}>
             {t.close}
           </button>
         </header>
@@ -81,7 +91,7 @@ export function RecordModal({ strings: t, onClose, onSave, onDeviceActive }: Rec
             </svg>
           ) : null}
         </div>
-        <footer className="kb-modal__footer">
+        <footer className="kb-amodal__footer">
           {state === "ready" ? (
             <button type="button" className="kb-btn kb-btn--record" onClick={() => (rec.current?.startRecording(), setState("recording"))}>
               {t.startRecording}

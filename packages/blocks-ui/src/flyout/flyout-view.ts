@@ -91,6 +91,10 @@ export class FlyoutView {
       } else if (p.stack) {
         if (p.checkbox) {
           const cb = svg(doc, "g", { class: "kb-checkbox", transform: `translate(${p.checkbox.x},${p.checkbox.y})`, "data-checkbox": it.rootId, role: "checkbox" }, this.canvas);
+          // Area sentuh lebih besar dari kotaknya (jari anak di tablet): melebar ke kiri/atas/bawah saja.
+          // Tidak melebar ke kanan: penyesuaian sentuh Chrome Android memilih target "bisa diklik" terdekat,
+          // jadi area yang mendekati blok membuat seret reporter dari tepi kirinya malah mencentang kotak.
+          svg(doc, "rect", { class: "kb-hit", x: -10, y: -10, width: CHECKBOX_SIZE + 10, height: CHECKBOX_SIZE + 20 }, cb);
           svg(doc, "rect", { width: CHECKBOX_SIZE, height: CHECKBOX_SIZE, rx: 4, ry: 4 }, cb);
           svg(doc, "path", { d: CHECK_PATH }, cb);
           const isOn = checked(it.rootId);

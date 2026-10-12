@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createFakeRuntime, fakeAudioContext, fakeCanvas, fakeMediaEnv, fakeServices, fakeVideo } from "../testing/fakes";
 import { AudioListener } from "./audio-listener";
-import { CAMERA_CONSTRAINTS, CameraController } from "./camera";
+import { CameraController, cameraConstraints } from "./camera";
 import { MicrophoneController } from "./microphone";
 
 function camera(opts: { hidden?: boolean } = {}) {
@@ -26,7 +26,7 @@ describe("CameraController", () => {
     expect(cam.getFrame({ format: "canvas" })).toBeNull();
     expect(media.requests).toHaveLength(0);
     expect(await cam.enableVideo()).toBe(true);
-    expect(media.requests[0]).toEqual(CAMERA_CONSTRAINTS);
+    expect(media.requests[0]).toEqual(cameraConstraints("user"));
     expect(media.requests[0]?.audio).toBe(false);
     expect(events).toEqual(["granted", "on"]);
   });

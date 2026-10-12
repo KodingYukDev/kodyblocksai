@@ -180,3 +180,34 @@ export const SoundIcon = (p: IconProps) => (
     <path d="M13 7a4 4 0 0 1 0 6M15.2 4.8a7 7 0 0 1 0 10.4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
   </Svg>
 );
+
+export const KeyboardIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <rect x="1.5" y="5" width="17" height="10" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M4.5 8h1M8 8h1M11.5 8h1M15 8h.5M4.5 11h1M6.5 12h7M15 11h.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+  </Svg>
+);
+
+/** Panah segitiga; `dir` memutar ke atas/bawah/kiri/kanan. */
+export const ArrowIcon = ({ dir = "up", ...p }: IconProps & { dir?: "up" | "down" | "left" | "right" }) => {
+  const rot = { up: 0, right: 90, down: 180, left: 270 }[dir];
+  return (
+    <Svg {...p}>
+      <path d="M10 4l6 9H4z" fill="currentColor" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" transform={`rotate(${rot} 10 10)`} />
+    </Svg>
+  );
+};
+
+export const SparkleIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M9 2l1.6 4.4L15 8l-4.4 1.6L9 14l-1.6-4.4L3 8l4.4-1.6z" fill="currentColor" />
+    <path d="M15.5 12.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="currentColor" />
+  </Svg>
+);
+
+export const FileIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M5 2.5h6.5L15.5 6.5V17a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+    <path d="M11.5 2.5v4h4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+  </Svg>
+);

@@ -8,6 +8,7 @@
  */
 import type { IVideoProvider, VideoFrameRequest } from "@kody/engine";
 import { TypedEmitter } from "@kody/engine";
+import type { CameraFacing } from "../types";
 
 export interface MediaTrackLike {
   stop(): void;
@@ -17,6 +18,7 @@ export interface MediaStreamLike {
 }
 export interface VideoElementLike {
   srcObject: unknown;
+  setAttribute?(name: string, value: string): void;
   muted: boolean;
   playsInline: boolean;
   readonly videoWidth: number;
@@ -60,6 +62,14 @@ export const CAMERA_CONSTRAINTS: MediaStreamConstraints = {
   video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: "user" },
 };
 
+/** Batasan kamera untuk sisi tertentu. facingMode "ideal" supaya laptop tanpa kamera belakang tetap jalan. */
+export function cameraConstraints(facing: CameraFacing): MediaStreamConstraints {
+  return { audio: false, video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: { ideal: facing } } };
+}
+
+/** Batasan paling longgar (cadangan bila perangkat menolak batasan di atas, mis. iPad lama). */
+export const FALLBACK_CAMERA_CONSTRAINTS: MediaStreamConstraints = { audio: false, video: true };
+
 function defaultGetUserMedia(): CameraDeps["getUserMedia"] {
   const md = globalThis.navigator?.mediaDevices;
   if (!md?.getUserMedia) return undefined;
@@ -73,7 +83,10 @@ export class CameraController implements IVideoProvider {
   private pending: Promise<boolean> | null = null;
   private generation = 0;
   private mirrored = true;
+  private facing: CameraFacing = "user";
   private canvas: CanvasLike | null = null;
+  /** Kanvas terpisah per pemakai supaya pratinjau AI Lab tidak menimpa frame yang sedang dianalisis. */
+  private readonly keyed = new Map<string, CanvasLike>();
 
   constructor(private readonly deps: CameraDeps = {}) {}
 
@@ -105,21 +118,23 @@ export class CameraController implements IVideoProvider {
         return false;
       }
       this.events.emit("permission-requested", undefined);
-      let stream: MediaStreamLike;
-      try {
-        stream = await getUserMedia(CAMERA_CONSTRAINTS);
-      } catch (err) {
-        const name = (err as { name?: string }).name ?? "Error";
-        this.events.emit("permission-result", { granted: false, reason: name });
+      const opened = await openStream(getUserMedia, this.facing);
+      if (!opened.stream) {
+        this.events.emit("permission-result", { granted: false, reason: opened.reason });
         return false;
       }
+      const stream = opened.stream;
       if (generation !== this.generation) {
         stopStream(stream);
         return false;
       }
       const video = this.video ?? this.createVideo();
+      // iOS Safari: video hanya diputar inline tanpa gestur bila muted + playsinline (atribut juga).
       video.muted = true;
       video.playsInline = true;
+      video.setAttribute?.("playsinline", "");
+      video.setAttribute?.("muted", "");
+      video.setAttribute?.("autoplay", "");
       video.srcObject = stream;
       try {
         await video.play();
@@ -161,15 +176,32 @@ export class CameraController implements IVideoProvider {
       }
       this.video.srcObject = null;
     }
-    if (this.canvas) {
+    for (const c of [this.canvas, ...this.keyed.values()]) {
       // Hapus sisa frame terakhir dari memori kanvas.
-      this.canvas.getContext("2d")?.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      if (c) c.getContext("2d")?.clearRect(0, 0, c.width, c.height);
     }
     if (wasActive) this.events.emit("active-change", { active: false });
   }
 
   setMirrored(mirrored: boolean): void {
     this.mirrored = mirrored;
+  }
+
+  get facingMode(): CameraFacing {
+    return this.facing;
+  }
+
+  /**
+   * Pilih kamera depan/belakang. Kamera belakang tidak dicerminkan. Bila kamera sedang menyala,
+   * stream diganti (track lama dihentikan dulu). Mengembalikan status kamera setelahnya.
+   */
+  async setFacingMode(facing: CameraFacing): Promise<boolean> {
+    const changed = facing !== this.facing;
+    this.facing = facing;
+    this.mirrored = facing === "user";
+    if (!changed || (!this.stream && !this.pending)) return this.enabled;
+    this.disableVideo();
+    return this.enableVideo();
   }
 
   /**
@@ -194,10 +226,38 @@ export class CameraController implements IVideoProvider {
     return canvas as unknown as HTMLCanvasElement;
   }
 
+  /**
+   * Seperti getFrame tetapi menggambar ke kanvas milik `key` sendiri. Dipakai saat frame harus tetap
+   * utuh selama analisis async (AI Lab, ekstensi) walau pemakai lain meminta frame lain.
+   */
+  getFrameFor(key: string, dimensions: [number, number] = DEFAULT_FRAME_SIZE): HTMLCanvasElement | null {
+    const video = this.getVideoElement();
+    if (!video) return null;
+    const [w, h] = dimensions;
+    let canvas = this.keyed.get(key);
+    if (!canvas) {
+      canvas = this.createCanvas(w, h);
+      this.keyed.set(key, canvas);
+    }
+    if (canvas.width !== w) canvas.width = w;
+    if (canvas.height !== h) canvas.height = h;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return null;
+    ctx.save();
+    if (this.mirrored) {
+      ctx.translate(w, 0);
+      ctx.scale(-1, 1);
+    }
+    ctx.drawImage(video, 0, 0, w, h);
+    ctx.restore();
+    return canvas as unknown as HTMLCanvasElement;
+  }
+
   dispose(): void {
     this.disableVideo();
     this.video = null;
     this.canvas = null;
+    this.keyed.clear();
     this.events.removeAllListeners();
   }
 
@@ -210,7 +270,12 @@ export class CameraController implements IVideoProvider {
 
   private createVideo(): VideoElementLike {
     if (this.deps.createVideo) return this.deps.createVideo();
-    return document.createElement("video");
+    const v = document.createElement("video");
+    v.muted = true;
+    v.playsInline = true;
+    v.setAttribute("playsinline", "");
+    v.setAttribute("webkit-playsinline", "");
+    return v;
   }
 
   private createCanvas(w: number, h: number): CanvasLike {
@@ -219,6 +284,26 @@ export class CameraController implements IVideoProvider {
     c.width = w;
     c.height = h;
     return c as unknown as CanvasLike;
+  }
+}
+
+/** getUserMedia dengan satu percobaan ulang tanpa batasan bila batasan tidak bisa dipenuhi. */
+async function openStream(
+  getUserMedia: NonNullable<CameraDeps["getUserMedia"]>,
+  facing: CameraFacing,
+): Promise<{ stream: MediaStreamLike | null; reason: string }> {
+  try {
+    return { stream: await getUserMedia(cameraConstraints(facing)), reason: "" };
+  } catch (err) {
+    const name = (err as { name?: string }).name ?? "Error";
+    if (name !== "OverconstrainedError" && name !== "ConstraintNotSatisfiedError" && name !== "TypeError") {
+      return { stream: null, reason: name };
+    }
+  }
+  try {
+    return { stream: await getUserMedia(FALLBACK_CAMERA_CONSTRAINTS), reason: "" };
+  } catch (err) {
+    return { stream: null, reason: (err as { name?: string }).name ?? "Error" };
   }
 }
 

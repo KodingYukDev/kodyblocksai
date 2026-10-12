@@ -8,6 +8,14 @@ export function assetBlobUrl(asset: AssetData | null, dataFormat?: string): stri
   return URL.createObjectURL(new Blob([asset.data as BlobPart], { type: mimeForFormat(dataFormat ?? asset.dataFormat) }));
 }
 
+/**
+ * Cabut blob URL sedikit terlambat: <img> yang masih memuat URL lama (remount StrictMode, ganti
+ * costume cepat) tidak gagal dengan ERR_FILE_NOT_FOUND. Memori tetap dibebaskan.
+ */
+function revokeLater(url: string): void {
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
 export function useAssetUrl(asset: AssetData | null, dataFormat?: string): string | null {
   // Dibuat di effect (bukan useMemo) agar StrictMode yang melepas-memasang ulang tidak memakai URL yang sudah dicabut.
   const [url, setUrl] = useState<string | null>(null);
@@ -15,7 +23,7 @@ export function useAssetUrl(asset: AssetData | null, dataFormat?: string): strin
     const u = assetBlobUrl(asset, dataFormat);
     setUrl(u);
     return () => {
-      if (u) URL.revokeObjectURL(u);
+      if (u) revokeLater(u);
     };
   }, [asset, dataFormat]);
   return url;
@@ -42,7 +50,7 @@ export function useAssetUrls(items: readonly { asset: AssetData | null; dataForm
   useEffect(() => {
     for (const [key, url] of cache) {
       if (!live.has(url)) {
-        URL.revokeObjectURL(url);
+        revokeLater(url);
         cache.delete(key);
       }
     }
@@ -52,7 +60,7 @@ export function useAssetUrls(items: readonly { asset: AssetData | null; dataForm
     // StrictMode: unmount sementara mencabut semua URL; saat dipasang lagi render ulang agar URL dibuat baru.
     if (cache.size === 0 && hasAssets) rerender();
     return () => {
-      for (const url of cache.values()) URL.revokeObjectURL(url);
+      for (const url of cache.values()) revokeLater(url);
       cache.clear();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

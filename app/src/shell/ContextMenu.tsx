@@ -40,6 +40,8 @@ export function ContextMenu({ state, items, onClose, label }: ContextMenuProps) 
   }, [state]);
   if (!state || items.length === 0 || typeof document === "undefined") return null;
   const maxX = Math.max(0, (typeof window === "undefined" ? 9999 : window.innerWidth) - 180);
+  // Jangan keluar dari bawah layar (item setinggi 44px di layar sentuh).
+  const maxY = Math.max(0, (typeof window === "undefined" ? 9999 : window.innerHeight) - items.length * 44 - 8);
   const onKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>): void => {
     if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
     e.preventDefault();
@@ -54,7 +56,7 @@ export function ContextMenu({ state, items, onClose, label }: ContextMenuProps) 
       className="kb-context-menu"
       role="menu"
       aria-label={label}
-      style={{ left: Math.min(state.x, maxX), top: state.y }}
+      style={{ left: Math.min(state.x, maxX), top: Math.min(state.y, maxY) }}
       onKeyDown={onKeyDown}
     >
       {items.map((item) => (
@@ -87,6 +89,7 @@ export function ContextMenu({ state, items, onClose, label }: ContextMenuProps) 
 export function useContextMenuTrigger(enabled: boolean, holdMs: number) {
   const [state, setState] = useState<ContextMenuState | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const start = useRef<{ x: number; y: number } | null>(null);
   const clear = (): void => {
     if (timer.current !== null) clearTimeout(timer.current);
     timer.current = null;
@@ -107,14 +110,30 @@ export function useContextMenuTrigger(enabled: boolean, holdMs: number) {
       if (!t) return;
       const pos = { x: t.clientX, y: t.clientY };
       clear();
-      timer.current = setTimeout(() => setState(pos), holdMs);
+      start.current = pos;
+      timer.current = setTimeout(() => {
+        timer.current = null;
+        // Getar singkat sebagai tanda menu terbuka (Android); iOS mengabaikan.
+        try {
+          navigator.vibrate?.(15);
+        } catch {
+          // tidak didukung
+        }
+        setState(pos);
+      }, holdMs);
     },
     [enabled, holdMs],
   );
+  const onTouchMove = useCallback((e: ReactTouchEvent) => {
+    const t = e.touches[0];
+    const s0 = start.current;
+    // Jari sedikit bergeser tetap dihitung "tahan"; geser jauh (menggulir) membatalkan.
+    if (!t || !s0 || Math.hypot(t.clientX - s0.x, t.clientY - s0.y) > 10) clear();
+  }, []);
   const close = useCallback(() => setState(null), []);
   return {
     state,
     close,
-    triggerProps: { onContextMenu, onTouchStart, onTouchEnd: clear, onTouchMove: clear },
+    triggerProps: { onContextMenu, onTouchStart, onTouchEnd: clear, onTouchMove, onTouchCancel: clear },
   };
 }

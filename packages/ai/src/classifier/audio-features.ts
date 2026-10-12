@@ -9,6 +9,8 @@ export const AUDIO_FEATURE_DIM = AUDIO_BANDS * 2;
 const MIN_HZ = 100;
 const MAX_HZ = 8000;
 const FLOOR_DB = -100;
+/** Nama kelas suara latar (dibuat otomatis AI Lab, seperti "Background Noise" Teachable Machine). */
+export const BACKGROUND_LABEL = "Suara latar";
 /** Di bawah level ini dianggap hening (tidak diklasifikasi). */
 export const SILENCE_LEVEL = 0.08;
 

@@ -225,7 +225,8 @@ describe("primitive Sound", () => {
     audio.log.length = 0;
     emitter.emit("PROJECT_STOP_ALL", undefined);
     expect(effectsOf(cat).pan).toBe(0);
-    expect(audio.log).toEqual(["stopAll stage", "stopAll cat"]);
+    // Per target (seperti Scratch) lalu global: suara clone yang sudah dihapus ikut berhenti.
+    expect(audio.log).toEqual(["stopAll stage", "stopAll cat", "stopAll *"]);
   });
 
   it("clone menyalin state suara (salinan dalam) dan menyinkronkan efek", () => {

@@ -52,7 +52,9 @@ export function LibraryModal({ kind, loader, strings: t, locale = "id", title, o
       .loadCatalog()
       .then((c) => alive && setCatalog(c))
       .catch((e: unknown) => alive && setError(e instanceof Error ? e.message : String(e)));
-    searchRef.current?.focus();
+    // Di tablet/HP fokus otomatis memunculkan keyboard layar yang menutupi separuh pustaka.
+    const finePointer = typeof window.matchMedia === "function" && window.matchMedia("(pointer: fine)").matches;
+    if (finePointer) searchRef.current?.focus();
     return () => {
       alive = false;
     };
@@ -81,9 +83,9 @@ export function LibraryModal({ kind, loader, strings: t, locale = "id", title, o
   };
 
   return (
-    <div className="kb-modal kb-library" role="dialog" aria-modal="true" aria-label={title} onKeyDown={(e) => e.key === "Escape" && onClose()}>
-      <div className="kb-modal__box kb-library__box">
-        <header className="kb-modal__header kb-library__header">
+    <div className="kb-amodal kb-library" role="dialog" aria-modal="true" aria-label={title} onKeyDown={(e) => e.key === "Escape" && onClose()}>
+      <div className="kb-amodal__box kb-library__box">
+        <header className="kb-amodal__header kb-library__header">
           <button type="button" className="kb-library__back" onClick={onClose}>
             {t.back}
           </button>
@@ -114,8 +116,17 @@ export function LibraryModal({ kind, loader, strings: t, locale = "id", title, o
                   type="button"
                   className={`kb-library__card kb-library__card--${kind}`}
                   onClick={() => onSelect(entry)}
-                  onPointerEnter={() => (setHover(entry.id), playPreview(entry))}
-                  onPointerLeave={() => (setHover(null), audio.current?.pause())}
+                  onPointerEnter={(e) => {
+                    // Sentuhan: tidak ada "hover"; ketukan langsung memilih, pratinjau lewat tombol putar.
+                    if (e.pointerType !== "mouse") return;
+                    setHover(entry.id);
+                    playPreview(entry);
+                  }}
+                  onPointerLeave={(e) => {
+                    if (e.pointerType !== "mouse") return;
+                    setHover(null);
+                    audio.current?.pause();
+                  }}
                   onFocus={() => setHover(entry.id)}
                   onBlur={() => setHover(null)}
                 >

@@ -220,6 +220,15 @@ export const createLooksBlocks: BlockPackageFactory = (runtime: IRuntime): Block
     runtime.emit("SAY", { target, type, text: message as string });
   };
 
+  /**
+   * Browser mengubah delay NaN/Infinity menjadi 0 (WebIDL long); dinormalkan di sini agar perilaku
+   * sama di semua lingkungan dan Node tidak memberi TimeoutNaNWarning.
+   */
+  const secsToTimeoutMs = (secs: unknown): number => {
+    const ms = 1000 * (typeof secs === "symbol" ? NaN : Number(secs));
+    return Number.isFinite(ms) ? ms : 0;
+  };
+
   const sayOrThinkForSecs = (type: SayType, message: unknown, secs: unknown, util: BlockUtility) => {
     emitSay(util.target, type, message);
     const target = util.target;
@@ -234,7 +243,7 @@ export const createLooksBlocks: BlockPackageFactory = (runtime: IRuntime): Block
           }
           resolve();
         },
-        1000 * (typeof secs === "symbol" ? NaN : Number(secs)),
+        secsToTimeoutMs(secs),
       );
     });
   };

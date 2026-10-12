@@ -132,7 +132,10 @@ export class TextToSpeech {
     u.pitch = 1;
     u.volume = 1;
     await new Promise<void>((resolve) => {
+      // Safari iOS kadang tidak pernah memanggil onend: batas waktu supaya skrip tidak macet.
+      const guard = setTimeout(() => finish(), 4000 + text.length * 120);
       const finish = (): void => {
+        clearTimeout(guard);
         this.pending.delete(finish);
         u.onend = u.onerror = null;
         resolve();

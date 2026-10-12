@@ -50,6 +50,15 @@ function defaultCtor(): SpeechRecognitionCtor | null {
   return g.SpeechRecognition ?? g.webkitSpeechRecognition ?? null;
 }
 
+/** true bila browser punya Web Speech API pengenalan ucapan (Chrome/Edge/Safari baru; bukan Firefox). */
+export function isSpeechRecognitionSupported(): boolean {
+  return defaultCtor() !== null;
+}
+
+export const SPEECH_UNSUPPORTED_MESSAGE =
+  "Browser ini belum bisa mengubah ucapan jadi tulisan (misalnya Firefox atau Safari versi lama). " +
+  "Coba pakai Chrome atau Edge, atau latih model suaramu sendiri di AI Lab (tab Suara) - itu jalan di semua browser.";
+
 export class SpeechRecognizer {
   private networkConsent: boolean | null = null;
   private current: { rec: SpeechRecognitionLike; finish: (text: string) => void } | null = null;
@@ -71,11 +80,15 @@ export class SpeechRecognizer {
     }
   }
 
+  get supported(): boolean {
+    return (this.deps.ctor === undefined ? defaultCtor() : this.deps.ctor) !== null;
+  }
+
   /** Dengarkan satu ucapan. Selalu resolve (string kosong bila gagal/ditolak/timeout). */
   async recognizeOnce(lang: string, timeoutMs = MAX_LISTEN_MS): Promise<string> {
     const ctor = this.deps.ctor === undefined ? defaultCtor() : this.deps.ctor;
     if (!ctor) {
-      this.notify("warning", "speech-unsupported", "Browser ini tidak mendukung pengenalan suara.");
+      this.notify("warning", "speech-unsupported", SPEECH_UNSUPPORTED_MESSAGE);
       return "";
     }
     this.cancel();

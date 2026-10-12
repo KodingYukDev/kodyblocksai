@@ -24,6 +24,10 @@ describe("costume-upload", () => {
     expect(classifyCostumeFile("a.JPEG", "")).toBe("jpg");
     expect(classifyCostumeFile("a", "", new Uint8Array([0x47, 0x49, 0x46, 0x38]))).toBe("gif");
     expect(classifyCostumeFile("a.exe", "application/x-msdownload")).toBeNull();
+    // Foto iPad (HEIC), WebP, AVIF: didekode browser lalu disimpan PNG.
+    expect(classifyCostumeFile("IMG_0001.HEIC", "image/heic")).toBe("raster");
+    expect(classifyCostumeFile("a.webp", "")).toBe("raster");
+    expect(classifyCostumeFile("x", "", new Uint8Array([0x52, 0x49, 0x46, 0x46, 1, 2, 3, 4, 0x57, 0x45, 0x42, 0x50]))).toBe("raster");
     expect(sniffImage(new TextEncoder().encode('<?xml version="1.0"?><svg/>'))).toBe("svg");
   });
 

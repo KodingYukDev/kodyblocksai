@@ -45,7 +45,7 @@ export function getAiFaceInfo(): ExtensionInfo {
     name: "Deteksi Wajah",
     ...AI_COLOURS,
     blocks: [
-      ...commonVisionBlocks(),
+      ...commonVisionBlocks({ startAuto: "mulai deteksi wajah terus-menerus", stopAuto: "berhenti deteksi wajah" }),
       "---",
       { opcode: "faceCount", blockType: "reporter", text: "jumlah wajah" },
       { opcode: "isFaceDetected", blockType: "Boolean", text: "wajah terdeteksi?" },

@@ -62,6 +62,12 @@ const EN = {
   CATEGORY_OPERATORS: "Operators",
   CATEGORY_VARIABLES: "Variables",
   CATEGORY_MYBLOCKS: "My Blocks",
+  COMMENT_PLACEHOLDER: "Say something...",
+  COMMENT_MINIMIZE: "Minimize comment",
+  COMMENT_EXPAND: "Expand comment",
+  COMMENT_RESIZE: "Resize comment",
+  NUMPAD_BACKSPACE: "Erase",
+  NUMPAD_DONE: "Done",
 } as const;
 
 export type MsgKey = keyof typeof EN;
@@ -127,6 +133,12 @@ const ID: Record<MsgKey, string> = {
   CATEGORY_OPERATORS: "Operator",
   CATEGORY_VARIABLES: "Variabel",
   CATEGORY_MYBLOCKS: "Blok Saya",
+  COMMENT_PLACEHOLDER: "Tulis catatan...",
+  COMMENT_MINIMIZE: "Kecilkan komentar",
+  COMMENT_EXPAND: "Buka komentar",
+  COMMENT_RESIZE: "Ubah ukuran komentar",
+  NUMPAD_BACKSPACE: "Hapus",
+  NUMPAD_DONE: "Selesai",
 };
 
 export function msg(locale: Locale, key: MsgKey, ...args: string[]): string {

@@ -2,13 +2,55 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#15364c" />
-    <link rel="icon" type="image/svg+xml" href="/kody.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
     <title>KodyBlocks AI</title>
+    <meta
+      name="description"
+      content="KodyBlocks AI: belajar coding blok ala Scratch dan kecerdasan buatan. Latih AI-mu sendiri dengan kamera, suara, dan teks, lalu pakai di game dan animasi. Semua AI berjalan di perangkatmu."
+    />
+    <meta name="theme-color" content="#15364c" />
+    <meta name="color-scheme" content="light" />
+    <meta name="application-name" content="KodyBlocks AI" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Ikon & PWA (dibuat oleh scripts/generate-icons.mjs) -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- iPad / iPhone: bisa ditambahkan ke Layar Utama dan dibuka layar penuh -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="KodyBlocks" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Pratinjau tautan (WhatsApp, Telegram, dll.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="KodyBlocks AI" />
+    <meta property="og:title" content="KodyBlocks AI - coding blok + latih AI-mu sendiri" />
+    <meta
+      property="og:description"
+      content="Editor blok ala Scratch dari KodingYuk dengan ekstensi AI: kenali gambar, tangan, wajah, suara, dan teks. Semua AI berjalan di perangkatmu."
+    />
+    <meta property="og:url" content="https://kodyblocksai.kodingyuk.id/" />
+    <meta property="og:image" content="https://kodyblocksai.kodingyuk.id/icons/og-image.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:locale" content="id_ID" />
+    <meta name="twitter:card" content="summary" />
+
+    <style>
+      /* Latar sebelum React termuat (cegah kilatan putih di layar penuh iPad). */
+      html { background: #15364c; }
+      body { margin: 0; }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>KodyBlocks AI butuh JavaScript. Aktifkan JavaScript di browser lalu muat ulang halaman ini.</noscript>
     <script type="module" src="/app/src/main.tsx"></script>
   </body>
 </html>

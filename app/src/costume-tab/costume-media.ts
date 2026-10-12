@@ -85,11 +85,12 @@ function resizeNearest(img: CanvasImageSource, srcW: number, srcH: number, w: nu
 }
 
 /** BitmapAdapter.importBitmap + load-costume default center: costume bitmap resolusi 2. */
-async function bitmapCostume(name: string, bytes: Uint8Array, kind: "png" | "jpg" | "bmp"): Promise<NewCostume> {
-  const img = await loadImage(bytes, mimeForFormat(kind));
+async function bitmapCostume(name: string, bytes: Uint8Array, kind: "png" | "jpg" | "bmp" | "raster", mime?: string): Promise<NewCostume> {
+  const img = await loadImage(bytes, kind === "raster" ? mime || "image/webp" : mimeForFormat(kind));
+  if (!img.naturalWidth || !img.naturalHeight) throw new CostumeImportError("Gambar kosong atau tidak bisa dibuka");
   const size = getResizedWidthHeight(img.naturalWidth, img.naturalHeight);
   const unchanged = size.width === img.naturalWidth && size.height === img.naturalHeight;
-  if (unchanged && kind !== "bmp") {
+  if (unchanged && kind !== "bmp" && kind !== "raster") {
     const [cx, cy] = defaultBitmapRotationCenter(img.naturalWidth, img.naturalHeight);
     return makeCostume(name, kind, bytes, 2, cx, cy);
   }
@@ -125,6 +126,8 @@ export async function costumesFromFile(file: InputFile): Promise<NewCostume[]> {
     case "jpg":
     case "bmp":
       return [await bitmapCostume(base, file.bytes, kind)];
+    case "raster":
+      return [await bitmapCostume(base, file.bytes, "raster", file.type)];
     case "gif": {
       const frames = decodeGif(file.bytes);
       const out: NewCostume[] = [];
@@ -173,8 +176,9 @@ export async function pixelsToCostume(name: string, p: Pixels, rotationCenterX: 
 
 /** Tangkap frame video (kamera) sebagai costume bitmap, dicerminkan seperti scratch-gui camera modal. */
 export async function captureVideoFrame(video: HTMLVideoElement, name: string, mirror = true): Promise<NewCostume> {
-  const w = video.videoWidth || 480;
-  const h = video.videoHeight || 360;
+  const w = video.videoWidth;
+  const h = video.videoHeight;
+  if (!w || !h) throw new CostumeImportError("Kamera belum siap");
   const size = getResizedWidthHeight(w, h);
   const c = canvas(size.width, size.height);
   const g = ctx2d(c);

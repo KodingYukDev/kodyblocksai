@@ -11,17 +11,19 @@ interface SpriteItemProps {
   onSelect(id: string): void;
   onDelete(id: string): void;
   onDuplicate(id: string): void;
+  onExport?: ((id: string) => void) | undefined;
 }
 
-const SpriteItem = memo(function SpriteItem({ sprite, selected, onSelect, onDelete, onDuplicate }: SpriteItemProps) {
+const SpriteItem = memo(function SpriteItem({ sprite, selected, onSelect, onDelete, onDuplicate, onExport }: SpriteItemProps) {
   const t = useT();
-  const menu = useContextMenuTrigger(true, 1000);
+  const menu = useContextMenuTrigger(true, 600);
   const items: ContextMenuItem[] = [
     { key: "duplicate", label: t("sprite.duplicate"), onSelect: () => onDuplicate(sprite.id) },
+    ...(onExport ? [{ key: "export", label: t("sprite.export"), onSelect: () => onExport(sprite.id) }] : []),
     { key: "delete", label: t("sprite.delete"), danger: true, onSelect: () => onDelete(sprite.id) },
   ];
   return (
-    <li className={`kb-sprite-item${selected ? " kb-sprite-item--selected" : ""}`}>
+    <li className={`kb-sprite-item${selected ? " kb-sprite-item--selected" : ""}`} data-target-id={sprite.id}>
       <button
         type="button"
         className="kb-sprite-item__button"
@@ -64,6 +66,7 @@ interface SpriteSelectorProps {
   onSelect(id: string): void;
   onDelete(id: string): void;
   onDuplicate(id: string): void;
+  onExport?: ((id: string) => void) | undefined;
 }
 
 export function SpriteSelector(props: SpriteSelectorProps) {
@@ -78,6 +81,7 @@ export function SpriteSelector(props: SpriteSelectorProps) {
           onSelect={props.onSelect}
           onDelete={props.onDelete}
           onDuplicate={props.onDuplicate}
+          onExport={props.onExport}
         />
       ))}
     </ul>

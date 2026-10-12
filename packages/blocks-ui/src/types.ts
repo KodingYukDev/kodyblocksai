@@ -87,5 +87,7 @@ export interface WorkspaceController {
   scrollToCategory(categoryId: string): void;
   /** Muat ulang dari target.blocks (ganti target / load project). */
   reload(): void;
+  /** Bangun ulang palet & label blok (mis. kelas AI baru setelah latihan, nama aset berubah). */
+  refreshToolbox?(): void;
   dispose(): void;
 }

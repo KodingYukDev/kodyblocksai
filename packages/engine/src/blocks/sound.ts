@@ -84,7 +84,12 @@ class SoundBlocks {
   readonly waitingSounds: Record<string, Set<string>> = {};
 
   constructor(private readonly runtime: IRuntime) {
-    runtime.on("PROJECT_STOP_ALL", () => this.stopAllSounds());
+    runtime.on("PROJECT_STOP_ALL", () => {
+      this.stopAllSounds();
+      // Tombol stop membungkam semuanya, termasuk suara clone yang sudah dihapus (di Scratch suara
+      // itu berbunyi sampai habis karena targetnya tidak lagi ada di runtime.targets).
+      this.runtime.audioEngine?.stopAllSounds();
+    });
     runtime.on("PROJECT_STOP_ALL", () => this.clearEffectsForAllTargets());
     runtime.on("STOP_FOR_TARGET", ({ target }) => this.stopWaitingSoundsForTarget(target));
     runtime.on("PROJECT_START", () => this.clearEffectsForAllTargets());

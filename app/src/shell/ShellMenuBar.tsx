@@ -1,28 +1,24 @@
-/** Menu bar 48px bergradien KodyBlocks: logo, Pengaturan, File, Edit, judul project. */
+/** Menu bar 48px bergradien KodyBlocks: logo, File, Edit, Belajar AI, judul project. */
 import { useState } from "react";
 import logoUrl from "../assets/kodyblocks-logo.png";
-import type { AppLocale } from "../app-events";
 import { useT } from "./i18n";
-import { GlobeIcon } from "./icons";
-import { MenuDropdown } from "./MenuDropdown";
+import { FileIcon, SparkleIcon } from "./icons";
+import { MenuDropdown, type DropdownItem } from "./MenuDropdown";
 import { normalizeTitle } from "./project-file";
 
 export interface ShellMenuBarProps {
   title: string;
-  locale: AppLocale;
   turbo: boolean;
+  /** Layar sempit: label menu diringkas. */
+  compact?: boolean;
   onTitleChange(title: string): void;
-  onLocaleChange(locale: AppLocale): void;
   onToggleTurbo(): void;
   onNew(): void;
   onLoad(): void;
   onSave(): void;
+  onOpenTutorials?(): void;
+  onOpenAiLab?(): void;
 }
-
-const LOCALES: { id: AppLocale; label: string }[] = [
-  { id: "id", label: "Bahasa Indonesia" },
-  { id: "en", label: "English" },
-];
 
 /** Judul project: diedit di tempat, dikirim saat blur / Enter (BufferedInput scratch-gui). */
 function TitleInput({ title, onSubmit }: { title: string; onSubmit(title: string): void }) {
@@ -41,6 +37,9 @@ function TitleInput({ title, onSubmit }: { title: string; onSubmit(title: string
       maxLength={100}
       value={draft ?? title}
       spellCheck={false}
+      autoComplete="off"
+      autoCorrect="off"
+      enterKeyHint="done"
       onChange={(e) => setDraft(e.target.value)}
       onBlur={flush}
       onKeyDown={(e) => {
@@ -58,6 +57,9 @@ function TitleInput({ title, onSubmit }: { title: string; onSubmit(title: string
 
 export function ShellMenuBar(props: ShellMenuBarProps) {
   const t = useT();
+  const learnItems: DropdownItem[] = [];
+  if (props.onOpenTutorials) learnItems.push({ key: "tutorials", label: t("menu.tutorials"), onSelect: props.onOpenTutorials });
+  if (props.onOpenAiLab) learnItems.push({ key: "ailab", label: t("menu.aiLab"), onSelect: props.onOpenAiLab });
   return (
     <header className="kb-menu-bar" role="banner">
       <a className="kb-menu-bar__brand" href="https://kodingyuk.id" target="_blank" rel="noopener noreferrer">
@@ -65,23 +67,13 @@ export function ShellMenuBar(props: ShellMenuBarProps) {
       </a>
       <nav className="kb-menu-bar__menus" aria-label="Menu utama">
         <MenuDropdown
-          label={<span className="kb-menu-bar__hide-narrow">{t("menu.settings")}</span>}
-          ariaLabel={t("menu.settings")}
-          icon={<GlobeIcon size={18} />}
-          items={LOCALES.map((l, i) => ({
-            key: l.id,
-            label: l.label,
-            checked: props.locale === l.id,
-            separatorBefore: i === 0 ? false : undefined,
-            onSelect: () => props.onLocaleChange(l.id),
-          }))}
-        />
-        <MenuDropdown
-          label={t("menu.file")}
+          label={props.compact ? null : t("menu.file")}
+          ariaLabel={t("menu.file")}
+          icon={props.compact ? <FileIcon size={18} /> : undefined}
           items={[
             { key: "new", label: t("menu.new"), onSelect: props.onNew },
-            { key: "load", label: t("menu.load"), onSelect: props.onLoad, separatorBefore: true },
-            { key: "save", label: t("menu.save"), onSelect: props.onSave },
+            { key: "load", label: t("menu.load.short"), onSelect: props.onLoad, separatorBefore: true },
+            { key: "save", label: t("menu.save.short"), onSelect: props.onSave },
           ]}
         />
         <MenuDropdown
@@ -94,6 +86,15 @@ export function ShellMenuBar(props: ShellMenuBarProps) {
             },
           ]}
         />
+        {learnItems.length > 0 && (
+          <MenuDropdown
+            label={props.compact ? null : t("menu.learn")}
+            ariaLabel={t("menu.learn")}
+            icon={<SparkleIcon size={18} />}
+            items={learnItems}
+            highlight
+          />
+        )}
       </nav>
       <div className="kb-menu-bar__title-wrap">
         <TitleInput title={props.title} onSubmit={props.onTitleChange} />

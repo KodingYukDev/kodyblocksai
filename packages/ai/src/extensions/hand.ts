@@ -6,7 +6,12 @@
 import { Cast } from "@kody/engine";
 import type { ExtensionFactory, ExtensionInfo, ExtensionModule, IRuntime } from "@kody/engine";
 import { AI_COLOURS } from "../colours";
-import type { HandResult } from "../types";
+import { handFeatures } from "../classifier/landmark-features";
+import { TrainedModelCache } from "../classifier/storage";
+import { getAiServices } from "../services";
+import type { ClassificationResult, HandResult } from "../types";
+import { round2 } from "../vision/coords";
+import { classMenuItems, watchProjectModels } from "./class-menu";
 import { GESTURES, GESTURE_LABELS_ID } from "../vision/gestures";
 import { AXIS_MENU, axisOf, commonVisionBlocks, commonVisionMenus, createVisionCore, toIndex } from "../vision/vision-common";
 
@@ -30,7 +35,7 @@ export function getAiHandInfo(): ExtensionInfo {
     name: "Deteksi Tangan",
     ...AI_COLOURS,
     blocks: [
-      ...commonVisionBlocks(),
+      ...commonVisionBlocks({ startAuto: "mulai deteksi tangan terus-menerus", stopAuto: "berhenti deteksi tangan" }),
       "---",
       { opcode: "handCount", blockType: "reporter", text: "jumlah tangan" },
       { opcode: "isHandDetected", blockType: "Boolean", text: "tangan terdeteksi?" },
@@ -66,6 +71,28 @@ export function getAiHandInfo(): ExtensionInfo {
         isEdgeActivated: true,
         arguments: { GESTURE: { type: "string", menu: "GESTURE", defaultValue: "Thumb_Up" } },
       },
+      "---",
+      { opcode: "handClass", blockType: "reporter", text: "label gestur dari model AI Lab" },
+      {
+        opcode: "handClassConfidence",
+        blockType: "reporter",
+        text: "kepercayaan untuk gestur [CLASS] (%)",
+        disableMonitor: true,
+        arguments: { CLASS: { type: "string", menu: "CLASS" } },
+      },
+      {
+        opcode: "isHandClass",
+        blockType: "Boolean",
+        text: "AI mengenali gestur [CLASS]?",
+        arguments: { CLASS: { type: "string", menu: "CLASS" } },
+      },
+      {
+        opcode: "whenHandClass",
+        blockType: "hat",
+        text: "ketika AI mengenali gestur [CLASS]",
+        isEdgeActivated: true,
+        arguments: { CLASS: { type: "string", menu: "CLASS" } },
+      },
     ],
     menus: {
       ...commonVisionMenus(),
@@ -75,6 +102,7 @@ export function getAiHandInfo(): ExtensionInfo {
         acceptReporters: true,
         items: [{ text: "apa saja", value: ANY_GESTURE }, ...GESTURES.map((g) => ({ text: GESTURE_LABELS_ID[g], value: g }))],
       },
+      CLASS: { acceptReporters: true, items: "getClassMenu" },
     },
   };
 }
@@ -91,31 +119,64 @@ function matchesGesture(hands: readonly HandResult[], wanted: string): boolean {
   return hands.some((h) => h.gesture !== null && (h.gesture === wanted || gestureText(h.gesture) === wanted));
 }
 
+interface HandFrame {
+  hands: HandResult[];
+  /** Hasil model AI Lab (gestur buatan anak) untuk tangan pertama, atau null. */
+  cls: ClassificationResult | null;
+}
+
 export const createAiHandExtension: ExtensionFactory = (runtime: IRuntime): ExtensionModule => {
-  const core = createVisionCore<HandResult[]>(runtime, {
+  let cache: TrainedModelCache<"hand"> | null = null;
+  const model = (): TrainedModelCache<"hand"> =>
+    (cache ??= new TrainedModelCache(runtime, "hand", (message) =>
+      getAiServices(runtime).notice({ level: "error", code: "hand-model-invalid", message }),
+    ));
+  const core = createVisionCore<HandFrame>(runtime, {
     extensionId: AIHAND_ID,
-    empty: () => [],
-    analyse: async (services, frame, ts, mirrored) => (await services.detector("hand")).detect(frame, ts, { mirrored }),
+    empty: () => ({ hands: [], cls: null }),
+    analyse: async (services, frame, ts, mirrored) => {
+      const hands = await (await services.detector("hand")).detect(frame, ts, { mirrored });
+      const clf = model().get();
+      const features = clf?.isTrained() ? handFeatures(hands[0]) : null;
+      return { hands, cls: clf && features ? clf.predict(features) : null };
+    },
   });
+  const offProject = watchProjectModels(runtime, "hand");
+  const hands = (): HandResult[] => core.result().hands;
+  const isClass = (label: unknown): boolean => {
+    const r = core.result().cls;
+    const wanted = Cast.toString(label);
+    return r !== null && wanted !== "" && r.label === wanted;
+  };
   return {
     getInfo: getAiHandInfo,
     getPrimitives: () => ({
       ...core.primitives,
-      handCount: () => core.result().length,
-      isHandDetected: () => core.result().length > 0,
+      handCount: () => hands().length,
+      isHandDetected: () => hands().length > 0,
       landmarkPosition: (args) => {
-        const hands = core.result();
-        const hand = hands[toIndex(args.HAND, hands.length)];
+        const list = hands();
+        const hand = list[toIndex(args.HAND, list.length)];
         const idx = Math.floor(Cast.toNumber(args.LANDMARK));
         return axisOf(hand?.landmarks[idx], args.AXIS);
       },
       gesture: (args) => {
-        const hands = core.result();
-        return gestureText(hands[toIndex(args.HAND, hands.length)]?.gesture ?? null);
+        const list = hands();
+        return gestureText(list[toIndex(args.HAND, list.length)]?.gesture ?? null);
       },
-      isGesture: (args) => matchesGesture(core.result(), Cast.toString(args.GESTURE)),
-      whenGesture: (args) => matchesGesture(core.result(), Cast.toString(args.GESTURE)),
+      isGesture: (args) => matchesGesture(hands(), Cast.toString(args.GESTURE)),
+      whenGesture: (args) => matchesGesture(hands(), Cast.toString(args.GESTURE)),
+      handClass: () => core.result().cls?.label ?? "",
+      handClassConfidence: (args) => round2((core.result().cls?.scores[Cast.toString(args.CLASS)] ?? 0) * 100),
+      isHandClass: (args) => isClass(args.CLASS),
+      whenHandClass: (args) => isClass(args.CLASS),
     }),
-    dispose: () => core.dispose(),
+    getDynamicMenus: () => ({
+      getClassMenu: () => classMenuItems(model().labels()),
+    }),
+    dispose: () => {
+      offProject();
+      core.dispose();
+    },
   };
 };

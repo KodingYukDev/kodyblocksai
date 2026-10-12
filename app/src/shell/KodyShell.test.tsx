@@ -4,7 +4,8 @@ import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { DEFAULT_MONITOR } from "@kody/engine";
 import { createAppBus } from "../app-events";
-import { KodyShell } from "./KodyShell";
+import { createMemoryAutosaveStore, type ShellAutosaveStore } from "./autosave";
+import { KodyShell, type KodyShellProps } from "./KodyShell";
 import { createMockController, type MockController } from "./mock-controller";
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
@@ -25,9 +26,18 @@ afterEach(() => {
   document.body.innerHTML = "";
 });
 
-function render(ctrl: MockController, bus = createAppBus()) {
+function render(ctrl: MockController, bus = createAppBus(), extra: Partial<KodyShellProps> = {}) {
   act(() => {
-    root.render(<KodyShell controller={ctrl} bus={bus} panels={{ code: <div data-testid="code">kode</div> }} confirm={() => true} />);
+    root.render(
+      <KodyShell
+        controller={ctrl}
+        bus={bus}
+        panels={{ code: <div data-testid="code">kode</div> }}
+        confirm={() => true}
+        autosaveStore={null}
+        {...extra}
+      />,
+    );
   });
   return bus;
 }
@@ -103,11 +113,18 @@ describe("KodyShell", () => {
     expect(input.value).toBe("Game Robot");
   });
 
-  it("ganti bahasa ke English", () => {
+  it("menu Belajar AI hanya tampil bila ada handler, dan memanggilnya", () => {
     render(createMockController());
-    click(byLabel("Pengaturan"));
-    click([...document.querySelectorAll('[role="menuitemcheckbox"]')].find((b) => b.textContent?.includes("English"))!);
-    expect([...document.querySelectorAll('[role="tab"]')].map((t) => t.textContent)).toEqual(["Code", "Costumes", "Sounds"]);
+    expect(document.querySelector('[aria-label="Belajar AI"]')).toBeNull();
+    const lab = vi.fn();
+    const tutorials = vi.fn();
+    render(createMockController(), createAppBus(), { onOpenAiLab: lab, onOpenTutorials: tutorials });
+    click(byLabel("Belajar AI"));
+    const items = [...document.querySelectorAll('[role="menuitem"]')].map((b) => b.textContent);
+    expect(items.some((x) => x?.includes("Tutorial"))).toBe(true);
+    click([...document.querySelectorAll('[role="menuitem"]')].find((b) => b.textContent?.includes("Latih AI"))!);
+    expect(lab).toHaveBeenCalled();
+    expect(tutorials).not.toHaveBeenCalled();
   });
 
   it("ukuran panggung kecil/normal/layar penuh + Esc", () => {
@@ -127,13 +144,112 @@ describe("KodyShell", () => {
     expect(canvas.style.width).toBe("240px");
   });
 
-  it("layar sempit: tata letak tumpuk tanpa tombol ukuran", () => {
+  it("ponsel: panggung di atas, panel sprite pindah ke tab Sprite", () => {
     Object.defineProperty(window, "innerWidth", { configurable: true, value: 375 });
+    Object.defineProperty(window, "innerHeight", { configurable: true, value: 800 });
     render(createMockController());
+    expect(q(".kb-shell").className).toContain("kb-shell--phone");
     expect(q(".kb-shell").className).toContain("kb-shell--stacked");
-    expect(document.querySelector('[aria-label="Panggung kecil"]')).toBeNull();
     const w = parseInt(q<HTMLCanvasElement>(".kb-stage__canvas").style.width, 10);
     expect(w).toBeLessThanOrEqual(375 - 18);
+    // Panel sprite tidak di kolom panggung, tetapi tersedia lewat tab.
+    expect(q(".kb-shell__stage-column").querySelector(".kb-target-pane")).toBeNull();
+    const spritesTab = [...document.querySelectorAll('[role="tab"]')].find((b) => b.textContent === "Sprite")!;
+    click(spritesTab);
+    expect(q("#kb-tabpanel-sprites").querySelector(".kb-target-pane")).not.toBeNull();
+    // Tombol ukuran panggung tetap ada di ponsel.
+    expect(document.querySelector('[aria-label="Panggung kecil"]')).not.toBeNull();
+  });
+
+  it("tablet potret: panggung dan panel sprite berdampingan di atas kode", () => {
+    Object.defineProperty(window, "innerWidth", { configurable: true, value: 768 });
+    Object.defineProperty(window, "innerHeight", { configurable: true, value: 1024 });
+    render(createMockController());
+    expect(q(".kb-shell").className).toContain("kb-shell--split");
+    expect(q(".kb-shell__stage-column").querySelector(".kb-target-pane")).not.toBeNull();
+    expect([...document.querySelectorAll('[role="tab"]')].some((b) => b.textContent === "Sprite")).toBe(false);
+  });
+
+  it("tombol panah di layar mengirim keydown/keyup ke runtime", () => {
+    const mm = window.matchMedia;
+    window.matchMedia = ((query: string) => ({
+      matches: query.includes("coarse"),
+      media: query,
+      addEventListener() {},
+      removeEventListener() {},
+    })) as unknown as typeof window.matchMedia;
+    try {
+      const ctrl = createMockController();
+      render(ctrl);
+      click(byLabel("Tombol panah di layar"));
+      const left = byLabel("Panah kiri");
+      // jsdom belum punya PointerEvent: MouseEvent bertipe pointer* + pointerId sudah cukup untuk React.
+      const pointer = (type: string): Event => {
+        const ev = new MouseEvent(type, { bubbles: true, cancelable: true });
+        Object.defineProperty(ev, "pointerId", { value: 7 });
+        return ev;
+      };
+      act(() => {
+        left.dispatchEvent(pointer("pointerdown"));
+      });
+      act(() => {
+        left.dispatchEvent(pointer("pointerup"));
+      });
+      const keys = ctrl.calls.filter((c) => c.method === "postKeyboard").map((c) => c.args[0]);
+      expect(keys).toEqual([
+        { key: "ArrowLeft", isDown: true },
+        { key: "ArrowLeft", isDown: false },
+      ]);
+    } finally {
+      window.matchMedia = mm;
+      try {
+        window.localStorage.removeItem("kb.keypad");
+      } catch {
+        // abaikan
+      }
+    }
+  });
+
+  it("simpan otomatis: perubahan disimpan, ditawarkan saat dibuka lagi, dan bisa dipulihkan", async () => {
+    vi.useFakeTimers();
+    try {
+      const store = createMemoryAutosaveStore();
+      let emit: () => void = () => {};
+      const subscribe = (l: () => void) => {
+        emit = l;
+        return () => {
+          emit = () => {};
+        };
+      };
+      const ctrl = createMockController();
+      render(ctrl, createAppBus(), { autosaveStore: store, subscribeProjectChanges: subscribe });
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(1000);
+      });
+      act(() => emit());
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(4000);
+      });
+      expect(store.record?.dirty).toBe(true);
+      expect(store.record?.title).toBe("Project KodyBlocks");
+
+      // Buka ulang: dialog pulihkan muncul, "Lanjutkan" memuat bytes simpanan.
+      act(() => root.unmount());
+      root = createRoot(container);
+      const ctrl2 = createMockController();
+      render(ctrl2, createAppBus(), { autosaveStore: store as ShellAutosaveStore });
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(10);
+      });
+      expect(document.body.textContent).toContain("Lanjutkan project terakhir?");
+      await act(async () => {
+        [...document.querySelectorAll("button")].find((b) => b.textContent === "Lanjutkan")!.click();
+        await vi.advanceTimersByTimeAsync(10);
+      });
+      expect(ctrl2.calls.some((c) => c.method === "loadProjectFile")).toBe(true);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("info sprite: x dikirim sebagai angka saat blur, teks bukan angka diabaikan", () => {

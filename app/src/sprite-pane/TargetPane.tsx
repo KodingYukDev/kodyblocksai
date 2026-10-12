@@ -2,7 +2,7 @@
 import { useCallback } from "react";
 import { useT } from "../shell/i18n";
 import { CatIcon, PaintIcon, SearchIcon, SurpriseIcon, UploadIcon } from "../shell/icons";
-import { pickFiles, readPickedFile } from "../shell/project-file";
+import { downloadBytes, pickFiles, readPickedFile, saveFile } from "../shell/project-file";
 import type { AddMethod, PickedFile, ShellController, ShellSnapshot, SpriteInfoPatch } from "../shell/types";
 import { ActionMenu } from "./ActionMenu";
 import { SpriteInfo } from "./SpriteInfo";
@@ -10,8 +10,9 @@ import { SpriteSelector } from "./SpriteSelector";
 import { StageSelector } from "./StageSelector";
 
 /** Tipe file yang diterima unggah sprite / latar (scratch-gui). */
-export const SPRITE_UPLOAD_ACCEPT = ".svg,.png,.bmp,.jpg,.jpeg,.gif,.sprite2,.sprite3";
-export const BACKDROP_UPLOAD_ACCEPT = ".svg,.png,.bmp,.jpg,.jpeg,.gif";
+/** `image/*` agar pemilih iPad menampilkan Foto (HEIC diubah Safari / didekode browser). */
+export const SPRITE_UPLOAD_ACCEPT = "image/*,.svg,.png,.bmp,.jpg,.jpeg,.gif,.webp,.sprite3,.sprite2";
+export const BACKDROP_UPLOAD_ACCEPT = "image/*,.svg,.png,.bmp,.jpg,.jpeg,.gif,.webp";
 /** Batas ukuran satu file unggahan (input tak tepercaya). */
 export const MAX_UPLOAD_BYTES = 20 * 1024 * 1024;
 
@@ -59,6 +60,17 @@ export function TargetPane({ controller, snapshot, compact, onError, onOpenCostu
   const onSelect = useCallback((id: string) => guard(() => controller.selectTarget(id)), [controller, guard]);
   const onDelete = useCallback((id: string) => guard(() => controller.deleteSprite(id)), [controller, guard]);
   const onDuplicate = useCallback((id: string) => guard(() => controller.duplicateSprite(id)), [controller, guard]);
+  const onExport = useCallback(
+    (id: string) =>
+      guard(async () => {
+        const out = await controller.exportSprite?.(id);
+        if (!out) return;
+        // iPad: lembar Bagikan; bila Safari menolak tanpa ketukan baru, coba unduhan biasa.
+        const r = await saveFile(out.fileName, out.data, "application/x.scratch.sprite3");
+        if (r === "needs-gesture") downloadBytes(out.fileName, out.data, "application/octet-stream");
+      }),
+    [controller, guard],
+  );
 
   const add = (kind: "sprite" | "backdrop", method: AddMethod): void => {
     guard(async () => {
@@ -81,6 +93,7 @@ export function TargetPane({ controller, snapshot, compact, onError, onOpenCostu
             onSelect={onSelect}
             onDelete={onDelete}
             onDuplicate={onDuplicate}
+            onExport={controller.exportSprite ? onExport : undefined}
           />
         </div>
         <ActionMenu

@@ -14,7 +14,7 @@ interface StageSelectorProps {
 export function StageSelector({ stage, selected, onSelect, onAddBackdrop }: StageSelectorProps) {
   const t = useT();
   return (
-    <div className={`kb-stage-selector${selected ? " kb-stage-selector--selected" : ""}`}>
+    <div className={`kb-stage-selector${selected ? " kb-stage-selector--selected" : ""}`} data-target-id={stage?.id}>
       <button
         type="button"
         className="kb-stage-selector__button"

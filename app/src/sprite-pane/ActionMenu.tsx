@@ -1,5 +1,6 @@
 /** Tombol aksi bulat yang membuka sub-tombol saat disorot (scratch-gui action-menu). */
-import { useRef, useState, type ReactNode } from "react";
+import { useCallback, useRef, useState, type ReactNode } from "react";
+import { useDismiss } from "../shell/hooks";
 import type { AddMethod } from "../shell/types";
 
 export interface ActionItem {
@@ -22,6 +23,12 @@ const CLOSE_DELAY_MS = 120;
 export function ActionMenu({ main, more, className, onAction }: ActionMenuProps) {
   const [open, setOpen] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const root = useRef<HTMLDivElement>(null);
+  /** Jenis penunjuk terakhir yang menekan tombol utama (sentuh tidak punya "hover"). */
+  const lastPointer = useRef<string>("mouse");
+  const pointerDownAt = useRef(0);
+  const close = useCallback(() => setOpen(false), []);
+  useDismiss(root, open, close);
   const cancelClose = (): void => {
     if (timer.current !== null) clearTimeout(timer.current);
     timer.current = null;
@@ -36,13 +43,19 @@ export function ActionMenu({ main, more, className, onAction }: ActionMenuProps)
   };
   return (
     <div
+      ref={root}
       className={`kb-action-menu${open ? " kb-action-menu--open" : ""} ${className ?? ""}`}
-      onMouseEnter={() => {
+      onPointerEnter={(e) => {
+        if (e.pointerType !== "mouse") return;
         cancelClose();
         setOpen(true);
       }}
-      onMouseLeave={scheduleClose}
+      onPointerLeave={(e) => {
+        if (e.pointerType === "mouse") scheduleClose();
+      }}
       onFocus={() => {
+        // Fokus akibat ketukan sentuh ditangani onClick (agar ketukan pertama tidak langsung menjalankan aksi).
+        if (lastPointer.current !== "mouse" && Date.now() - pointerDownAt.current < 800) return;
         cancelClose();
         setOpen(true);
       }}
@@ -70,7 +83,20 @@ export function ActionMenu({ main, more, className, onAction }: ActionMenuProps)
         className="kb-action-menu__button kb-action-menu__button--main"
         aria-label={main.title}
         title={main.title}
-        onClick={() => run(main.method)}
+        aria-expanded={open}
+        onPointerDown={(e) => {
+          lastPointer.current = e.pointerType;
+          pointerDownAt.current = Date.now();
+        }}
+        onClick={() => {
+          // Sentuh: ketukan pertama membuka pilihan (tidak ada hover), ketukan kedua menjalankan aksi utama.
+          if (lastPointer.current !== "mouse" && !open) {
+            cancelClose();
+            setOpen(true);
+            return;
+          }
+          run(main.method);
+        }}
       >
         {main.icon}
       </button>

@@ -19,7 +19,8 @@ import { SpeechRecognizer } from "./speech/speech-recognition";
 import type { SpeechDeps } from "./speech/speech-recognition";
 import { TextToSpeech } from "./speech/tts";
 import type { TtsDeps } from "./speech/tts";
-import type { AiDevice, AiNotice, AiSource, DetectorFactories, DetectorKind, FrameSource, NetworkFeature } from "./types";
+import type { IntervalTimers } from "./devices/audio-listener";
+import type { AiDevice, AiNotice, AiSource, CameraFacing, DetectorFactories, DetectorKind, FrameSource, NetworkFeature } from "./types";
 
 export type ResetReason = "stop" | "hidden" | "project" | "user" | "dispose";
 
@@ -52,7 +53,14 @@ export interface AiServicesOptions {
   tts?: Pick<TtsDeps, "synth" | "createUtterance" | "voicesTimeoutMs">;
   /** Ubah snapshot panggung (data URL PNG) jadi frame. Default: HTMLImageElement -> kanvas. */
   decodeSnapshot?: (dataUrl: string) => Promise<FrameSource | null>;
+  /** Timer untuk analisis terus-menerus (tes bisa mengganti). */
+  timers?: IntervalTimers;
 }
+
+const defaultTimers: IntervalTimers = {
+  setInterval: (fn, ms) => setInterval(fn, ms),
+  clearInterval: (h) => clearInterval(h as ReturnType<typeof setInterval>),
+};
 
 export interface AcquiredFrame {
   frame: FrameSource;
@@ -98,12 +106,14 @@ export class AiServices {
   private videoLayerShown = false;
   private disposed = false;
   private readonly now: () => number;
+  readonly timers: IntervalTimers;
 
   constructor(
     readonly runtime: IRuntime,
     private readonly options: AiServicesOptions = {},
   ) {
     this.now = options.now ?? (() => (typeof performance !== "undefined" ? performance.now() : Date.now()));
+    this.timers = options.timers ?? defaultTimers;
     this.visibility = options.visibility === undefined ? documentVisibility() : options.visibility;
     const isHidden = (): boolean => this.visibility?.isHidden() ?? false;
 
@@ -216,8 +226,23 @@ export class AiServices {
       return frame ? { frame, mirrored: false } : null;
     }
     if (!(await this.ensureCamera(extensionId))) return null;
-    const frame = this.camera.getFrame({ format: "canvas" });
+    // Kanvas khusus analisis: pratinjau AI Lab / lapisan video tidak menimpa frame ini.
+    const frame = this.camera.getFrameFor(`analysis-${extensionId}`);
     return frame ? { frame, mirrored: this.camera.isMirrored } : null;
+  }
+
+  /** Ganti kamera depan/belakang (kamera belakang tidak dicerminkan). */
+  async setCameraFacing(facing: CameraFacing): Promise<boolean> {
+    const stage = this.stage();
+    const ok = await this.camera.setFacingMode(facing);
+    if (stage && stage.videoState !== "off") stage.videoState = facing === "user" ? "on" : "on-flipped";
+    this.updateVideoLayer();
+    return ok;
+  }
+
+  /** Dipanggil app dari gestur pengguna pertama (iOS: AudioContext harus dimulai oleh gestur). */
+  unlockAudio(): void {
+    this.microphone.unlock();
   }
 
   /** Timestamp naik ketat (syarat MediaPipe VIDEO mode). */

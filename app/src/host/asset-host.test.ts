@@ -5,6 +5,7 @@ import { emptyCostume, makeSound } from "../costume-tab/new-asset";
 import { createAssetActions } from "./asset-actions";
 import { createRuntimeAssetHost } from "./asset-host";
 import { createMediaLoader } from "./media-loader";
+import { exportSprite } from "./sprite-install";
 import type { LibraryLoader } from "../library/library-loader";
 
 const KODY = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><rect width="10" height="10"/></svg>';
@@ -71,6 +72,25 @@ describe("createRuntimeAssetHost (padanan vm.addCostume/deleteCostume/...)", () 
   });
 });
 
+describe("ganti nama asset memperbarui blok (blocks.updateAssetName)", () => {
+  it("kostum dan suara yang dipakai blok ikut berganti nama", async () => {
+    const { host, runtime } = await setup();
+    const t = runtime.getEditingTarget()!;
+    await host.addSounds([makeSound("pop", "wav", new Uint8Array([1, 2, 3]), 22050, 3)]);
+    t.blocks.applyEditorEvent({
+      type: "create",
+      blocks: [
+        { id: "m", opcode: "looks_costume", inputs: {}, fields: { COSTUME: { name: "COSTUME", value: "kostum1" } }, next: null, parent: null, shadow: true, topLevel: true, x: 0, y: 0 },
+        { id: "s", opcode: "sound_sounds_menu", inputs: {}, fields: { SOUND_MENU: { name: "SOUND_MENU", value: "pop" } }, next: null, parent: null, shadow: true, topLevel: true, x: 0, y: 0 },
+      ],
+    });
+    host.renameCostume(0, "lari");
+    host.renameSound(0, "dor");
+    expect(t.blocks.getBlock("m")?.fields.COSTUME?.value).toBe("lari");
+    expect(t.blocks.getBlock("s")?.fields.SOUND_MENU?.value).toBe("dor");
+  });
+});
+
 describe("createAssetActions", () => {
   const loader = { loadCatalog: () => Promise.reject(new Error("tidak dipakai")) } as unknown as LibraryLoader;
 
@@ -99,9 +119,64 @@ describe("createAssetActions", () => {
     expect(runtime.targets.length).toBe(2);
   });
 
-  it("menolak .sprite3 dengan pesan jelas", async () => {
+  it(".sprite3 rusak ditolak dengan pesan jelas; .sprite2 belum didukung", async () => {
     const { runtime, media } = await setup();
     const actions = createAssetActions({ runtime, media, loader, chooseFromLibrary: async () => null });
-    await expect(actions.addSprite("upload", [{ name: "a.sprite3", type: "", bytes: new Uint8Array() }])).rejects.toThrow(/belum didukung/);
+    await expect(actions.addSprite("upload", [{ name: "a.sprite3", type: "", bytes: new Uint8Array([1, 2]) }])).rejects.toThrow(/bukan sprite/);
+    await expect(actions.addSprite("upload", [{ name: "a.sprite2", type: "", bytes: new Uint8Array() }])).rejects.toThrow(/belum didukung/);
+    expect(runtime.targets.length).toBe(2);
+  });
+
+  it("ekspor sprite lalu unggah .sprite3: sprite baru lengkap dengan blok, variabel, costume", async () => {
+    const { runtime, media } = await setup();
+    const kody = runtime.targets.find((t) => !t.isStage)!;
+    const stage = runtime.getTargetForStage()!;
+    stage.createVariable("g1", "skor", "");
+    kody.createVariable("l1", "nyawa", "");
+    kody.blocks.applyEditorEvent({
+      type: "create",
+      blocks: [
+        { id: "h", opcode: "event_whenflagclicked", inputs: {}, fields: {}, next: "set", parent: null, shadow: false, topLevel: true, x: 0, y: 0 },
+        { id: "set", opcode: "data_changevariableby", inputs: {}, fields: { VARIABLE: { name: "VARIABLE", value: "skor", id: "g1", variableType: "" } }, next: "b", parent: "h", shadow: false, topLevel: false },
+        { id: "b", opcode: "event_broadcast", inputs: { BROADCAST_INPUT: { name: "BROADCAST_INPUT", block: "bm", shadow: "bm" } }, fields: {}, next: null, parent: "set", shadow: false, topLevel: false },
+        { id: "bm", opcode: "event_broadcast_menu", inputs: {}, fields: { BROADCAST_OPTION: { name: "BROADCAST_OPTION", value: "menang", id: "bc1", variableType: "broadcast_msg" } }, next: null, parent: "b", shadow: true, topLevel: false },
+      ],
+    });
+    const { data, fileName } = await exportSprite(runtime, kody.id);
+    expect(fileName).toBe("Kody.sprite3");
+
+    // Project baru tanpa variabel "skor": variabel global dibuat ulang di Stage.
+    const fresh = await setup();
+    const actions = createAssetActions({ runtime: fresh.runtime, media: fresh.media, loader, chooseFromLibrary: async () => null });
+    await actions.addSprite("upload", [{ name: fileName, type: "", bytes: data }]);
+    const added = fresh.runtime.getEditingTarget()!;
+    expect(added.sprite.name).toBe("Kody2");
+    expect(added.isOriginal).toBe(true);
+    expect(fresh.runtime.targets).toContain(added);
+    expect(Object.values(added.blocks.toRecord()).map((b) => b.opcode)).toContain("data_changevariableby");
+    expect(Object.values(added.variables).map((v) => v.name)).toContain("nyawa");
+    expect(added.getCostumes().length).toBe(1);
+    const freshStage = fresh.runtime.getTargetForStage()!;
+    expect(freshStage.lookupVariableByNameAndType("skor", "")).toBeTruthy();
+    expect(freshStage.lookupBroadcastByInputValue("menang")).toBeTruthy();
+
+    // Unggah lagi ke project yang SUDAH punya "skor": rujukan digabung ke variabel global yang ada.
+    const before = Object.keys(freshStage.variables).length;
+    await actions.addSprite("upload", [{ name: fileName, type: "", bytes: data }]);
+    const again = fresh.runtime.getEditingTarget()!;
+    expect(again.sprite.name).toBe("Kody3");
+    expect(Object.keys(freshStage.variables).length).toBe(before);
+  });
+
+  it("variabel lokal yang bentrok dengan variabel global diganti nama (fixUpVariableReferences)", async () => {
+    const { runtime, media } = await setup();
+    const kody = runtime.targets.find((t) => !t.isStage)!;
+    kody.createVariable("l1", "skor", "");
+    const { data } = await exportSprite(runtime, kody.id);
+    runtime.getTargetForStage()!.createVariable("g9", "skor", "");
+    const actions = createAssetActions({ runtime, media, loader, chooseFromLibrary: async () => null });
+    await actions.addSprite("upload", [{ name: "Kody.sprite3", type: "", bytes: data }]);
+    const added = runtime.getEditingTarget()!;
+    expect(Object.values(added.variables).map((v) => v.name)).toEqual(["Kody2: skor"]);
   });
 });

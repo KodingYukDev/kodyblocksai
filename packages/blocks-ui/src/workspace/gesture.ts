@@ -2,6 +2,7 @@
  * Gesture pointer (mouse + touch) padanan Blockly.Gesture: klik vs seret (DRAG_RADIUS 3,
  * FLYOUT_DRAG_RADIUS 10, sudut seret palet 70 derajat), seret blok dengan pratinjau, seret latar untuk
  * scroll, long-press 750 ms = context menu, wheel = scroll/zoom, pintasan keyboard undo/redo/hapus.
+ * Sentuh: dua jari = cubit untuk zoom + geser workspace (seperti Scratch di tablet).
  */
 import type { Block, EditorWorkspaceEvent } from "@kody/engine";
 import { allPlacements } from "./connections";
@@ -14,7 +15,7 @@ import { buildPreview } from "./preview";
 import { DRAG_RADIUS, FLYOUT_DRAG_RADIUS } from "./snap";
 import { getDescendants, getRootBlock, type BlockMap } from "./tree";
 import { layoutStack } from "./layout";
-import { applyWheel, toScreen } from "./viewport";
+import { applyWheel, clampScale, toScreen, toWorkspace } from "./viewport";
 import { showAlert } from "./dialogs";
 
 export const LONGPRESS = 750;
@@ -60,7 +61,33 @@ interface ScrollDrag {
   startScrollY: number;
 }
 
-type State = Pending | BlockDrag | ScrollDrag | null;
+interface Pinch {
+  kind: "pinch";
+  ids: [number, number];
+  startDist: number;
+  startCenter: { x: number; y: number };
+  startView: { scrollX: number; scrollY: number; scale: number };
+}
+
+type State = Pending | BlockDrag | ScrollDrag | Pinch | null;
+
+/** Hitung tampilan baru saat dua jari mencubit: titik workspace di bawah pusat awal tetap di bawah pusat sekarang. */
+export function pinchView(
+  start: { scrollX: number; scrollY: number; scale: number },
+  startCenter: { x: number; y: number },
+  startDist: number,
+  center: { x: number; y: number },
+  dist: number,
+): { scrollX: number; scrollY: number; scale: number } {
+  const scale = clampScale(start.scale * (startDist > 0 ? dist / startDist : 1));
+  const anchor = toWorkspace({ ...start, viewWidth: 0, viewHeight: 0 }, startCenter.x, startCenter.y);
+  return { scale, scrollX: center.x - anchor.x * scale, scrollY: center.y - anchor.y * scale };
+}
+
+function deferToNextFrame(fn: () => void): void {
+  if (typeof requestAnimationFrame === "function") requestAnimationFrame(() => fn());
+  else setTimeout(fn, 0);
+}
 
 export function isDragTowardWorkspace(dx: number, dy: number): boolean {
   const dir = (Math.atan2(dy, dx) / Math.PI) * 180;
@@ -83,6 +110,10 @@ export function resolveDraggable(blocks: BlockMap, id: string): string | null {
 
 export class GestureHandler {
   private state: State = null;
+  /** Posisi jari yang sedang menempel (untuk cubit dua jari). */
+  private readonly touches = new Map<number, { x: number; y: number; region: Region }>();
+  /** Jenis pointer terakhir (touch -> papan angka layar untuk field angka). */
+  lastPointerType = "mouse";
   private readonly listeners: [EventTarget, string, EventListener, AddEventListenerOptions?][] = [];
 
   constructor(private readonly ws: BlocksWorkspace) {
@@ -94,6 +125,10 @@ export class GestureHandler {
     this.listen(root, "contextmenu", (e) => this.onContextMenu(e as MouseEvent));
     this.listen(ws.main, "wheel", (e) => this.onWheel(e as WheelEvent), { passive: false });
     this.listen(root, "keydown", (e) => this.onKey(e as KeyboardEvent));
+    // Safari iOS/macOS: cegah zoom halaman bawaan saat mencubit di atas editor.
+    const stop = (e: Event): void => e.preventDefault();
+    this.listen(root, "gesturestart", stop);
+    this.listen(root, "gesturechange", stop);
   }
 
   private listen(t: EventTarget, type: string, fn: EventListener, opts?: AddEventListenerOptions): void {
@@ -112,6 +147,12 @@ export class GestureHandler {
   }
 
   private onDown(e: PointerEvent): void {
+    this.lastPointerType = e.pointerType || "mouse";
+    const downTarget = e.target instanceof Element ? e.target : null;
+    if (e.pointerType === "touch" && downTarget) {
+      this.touches.set(e.pointerId, { x: e.clientX, y: e.clientY, region: this.region(downTarget) });
+      if (this.tryStartPinch(e)) return;
+    }
     if (this.state?.kind === "block" && this.state.sticky) {
       e.preventDefault();
       this.finishBlockDrag(e.clientX, e.clientY);
@@ -119,7 +160,7 @@ export class GestureHandler {
     }
     if (e.button !== 0 || this.state) return;
     const target = e.target instanceof Element ? e.target : null;
-    if (!target || target.closest(".kb-zoom, .kb-menu, .kb-dropdown, .kb-colour, .kb-modal, .kb-field-editor, .kb-checkbox, .kb-flyout-button, .kb-ws-categories")) return;
+    if (!target || target.closest(".kb-zoom, .kb-menu, .kb-dropdown, .kb-colour, .kb-modal, .kb-field-editor, .kb-checkbox, .kb-flyout-button, .kb-ws-categories, .kb-comment, .kb-numpad, .kb-angle")) return;
     const region = this.region(target);
     if (region === "other") return;
     const fieldEl = target.closest("[data-field]");
@@ -142,17 +183,77 @@ export class GestureHandler {
     if (e.pointerType === "touch") {
       pending.timer = setTimeout(() => {
         if (this.state !== pending) return;
-        this.state = null;
-        this.ws.actions.showContextMenu(region, pending.blockId, pending.startX, pending.startY);
+        // Tunggu satu frame dulu: saat main thread sibuk (mis. AI mengklasifikasi kamera), gerakan jari
+        // bisa masih antre dan timer ini menang duluan. Input yang antre diproses sebelum frame berikutnya,
+        // jadi seretan yang sebenarnya sudah dimulai tidak berubah menjadi menu tekan-lama.
+        deferToNextFrame(() => {
+          if (this.state !== pending) return;
+          this.state = null;
+          this.ws.actions.showContextMenu(region, pending.blockId, pending.startX, pending.startY);
+        });
       }, LONGPRESS);
     }
     this.state = pending;
     e.preventDefault();
   }
 
+  /** Jari kedua di workspace saat jari pertama belum menyeret blok: mulai cubit/geser dua jari. */
+  private tryStartPinch(e: PointerEvent): boolean {
+    const s = this.state;
+    if (this.touches.size !== 2) return false;
+    if (s && s.kind !== "pending" && s.kind !== "wsScroll") return false;
+    if (s?.kind === "pending" && s.region === "flyout") return false;
+    const entries = [...this.touches.entries()];
+    const [a, b] = entries;
+    if (!a || !b || a[1].region !== "workspace" || b[1].region !== "workspace") return false;
+    if (s?.kind === "pending" && s.timer) clearTimeout(s.timer);
+    const r = this.ws.main.getBoundingClientRect();
+    const v = this.ws.view;
+    this.state = {
+      kind: "pinch",
+      ids: [a[0], b[0]],
+      startDist: Math.hypot(a[1].x - b[1].x, a[1].y - b[1].y),
+      startCenter: { x: (a[1].x + b[1].x) / 2 - r.left, y: (a[1].y + b[1].y) / 2 - r.top },
+      startView: { scrollX: v.scrollX, scrollY: v.scrollY, scale: v.scale },
+    };
+    this.ws.overlay.hide();
+    e.preventDefault();
+    return true;
+  }
+
+  private movePinch(s: Pinch): void {
+    const a = this.touches.get(s.ids[0]);
+    const b = this.touches.get(s.ids[1]);
+    if (!a || !b) return;
+    const r = this.ws.main.getBoundingClientRect();
+    const center = { x: (a.x + b.x) / 2 - r.left, y: (a.y + b.y) / 2 - r.top };
+    const next = pinchView(s.startView, s.startCenter, s.startDist, center, Math.hypot(a.x - b.x, a.y - b.y));
+    this.ws.setView({ ...this.ws.view, ...next });
+  }
+
+  /** Jari terangkat saat cubit: jari yang tersisa melanjutkan sebagai geser biasa. */
+  private endPinch(s: Pinch, liftedId: number): void {
+    const rest = s.ids[0] === liftedId ? s.ids[1] : s.ids[0];
+    const t = this.touches.get(rest);
+    const v = this.ws.view;
+    this.state = t ? { kind: "wsScroll", pointerId: rest, startX: t.x, startY: t.y, startScrollX: v.scrollX, startScrollY: v.scrollY } : null;
+  }
+
   private onMove(e: PointerEvent): void {
+    const tracked = this.touches.get(e.pointerId);
+    if (tracked) {
+      tracked.x = e.clientX;
+      tracked.y = e.clientY;
+    }
     const s = this.state;
     if (!s) return;
+    if (s.kind === "pinch") {
+      if (s.ids.includes(e.pointerId)) {
+        e.preventDefault();
+        this.movePinch(s);
+      }
+      return;
+    }
     if (s.kind !== "block" || !s.sticky) {
       if ("pointerId" in s && s.pointerId !== null && s.pointerId !== e.pointerId) return;
     }
@@ -181,8 +282,13 @@ export class GestureHandler {
   }
 
   private onUp(e: PointerEvent): void {
+    this.touches.delete(e.pointerId);
     const s = this.state;
     if (!s) return;
+    if (s.kind === "pinch") {
+      if (s.ids.includes(e.pointerId)) this.endPinch(s, e.pointerId);
+      return;
+    }
     if (s.kind === "block") {
       if (s.sticky) return;
       if (s.pointerId !== e.pointerId) return;
@@ -197,7 +303,12 @@ export class GestureHandler {
   }
 
   private onCancel(e: PointerEvent): void {
+    this.touches.delete(e.pointerId);
     const s = this.state;
+    if (s?.kind === "pinch") {
+      if (s.ids.includes(e.pointerId)) this.endPinch(s, e.pointerId);
+      return;
+    }
     if (!s || ("pointerId" in s && s.pointerId !== e.pointerId)) return;
     if (s.kind === "block") this.finishBlockDrag(s.startX, s.startY, true);
     else {
@@ -346,7 +457,10 @@ export class GestureHandler {
       s.outside = outside;
       ws.container?.applyEditorEvent({ type: "drag_outside", blockId: s.session.topId, isOutside: outside });
     }
-    const preview = s.session.move(dxy, outside || this.overDeleteArea(clientX, clientY));
+    const overDelete = this.overDeleteArea(clientX, clientY);
+    ws.root.classList.toggle("kb-drag-delete", overDelete);
+    ws.extras.onDragOver?.({ clientX, clientY, outside });
+    const preview = s.session.move(dxy, outside || overDelete);
     const key = previewKey(preview);
     if (key === s.previewKey) return;
     s.previewKey = key;
@@ -365,7 +479,8 @@ export class GestureHandler {
     if (!s || s.kind !== "block") return;
     const ws = this.ws;
     this.state = null;
-    ws.root.classList.remove("kb-dragging");
+    ws.root.classList.remove("kb-dragging", "kb-drag-delete");
+    ws.extras.onDragOver?.(null);
     ws.preview = null;
     ws.hiddenTops = new Set();
     while (ws.dragLayer.firstChild) ws.dragLayer.removeChild(ws.dragLayer.firstChild);
@@ -389,8 +504,19 @@ export class GestureHandler {
       void showAlert(ws.root, ws.locale, msg(ws.locale, "PROCEDURE_USED"));
       return;
     }
-    const inverse = ws.applyRaw(result.events);
-    ws.undoStack.push({ forward: [...s.forward, ...result.events], inverse: [...inverse, ...s.inverse] });
+    // Komentar blok ikut pindah bersama skripnya (ScratchBlockComment mengikuti blok).
+    const deleted = result.events.some((ev) => ev.type === "delete");
+    const commentMoves: EditorWorkspaceEvent[] = [];
+    if (!deleted && ws.target?.comments && (dxy.x !== 0 || dxy.y !== 0)) {
+      for (const c of Object.values(ws.target.comments)) {
+        if (c.blockId && s.session.dragged.has(c.blockId)) {
+          commentMoves.push({ type: "comment_move", commentId: c.id, x: Math.round(c.x + dxy.x), y: Math.round(c.y + dxy.y) });
+        }
+      }
+    }
+    const events = [...result.events, ...commentMoves];
+    const inverse = ws.applyRaw(events);
+    ws.undoStack.push({ forward: [...s.forward, ...events], inverse: [...inverse, ...s.inverse] });
     ws.changed(true);
   }
 
@@ -439,6 +565,9 @@ export class GestureHandler {
   }
 
   dispose(): void {
+    if (this.state?.kind === "pending" && this.state.timer) clearTimeout(this.state.timer);
+    this.state = null;
+    this.touches.clear();
     for (const [t, type, fn, opts] of this.listeners) t.removeEventListener(type, fn, opts);
     this.listeners.length = 0;
   }

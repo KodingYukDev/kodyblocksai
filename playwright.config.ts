@@ -25,6 +25,8 @@ const launchOptions = {
 
 export default defineConfig({
   testDir: "tests/e2e",
+  // tests/e2e/prod memakai build produksi: playwright.prod.config.ts
+  testIgnore: "**/prod/**",
   outputDir: process.env.PW_OUTPUT_DIR ?? "test-results",
   timeout: 90_000,
   workers: 1,

@@ -1,3 +1,5 @@
+import type { TrainedKind } from "./types";
+
 /**
  * Aturan keamanan AI (final, dipakai semua ekstensi AI):
  * - model hanya dari origin sendiri (/models/...), tidak ada CDN / URL dari project;
@@ -9,9 +11,14 @@ export const AI_LIMITS = {
   maxLabels: 50,
   maxTextInputLength: 2000,
   maxTrainedPayloadBytes: 8 * 1024 * 1024,
+  /** File model yang diimpor (pembungkus JSON + payload). */
+  maxModelFileBytes: 8 * 1024 * 1024 + 256 * 1024,
   /** Analisis kamera maksimum per detik (hemat CPU, juga di HP murah). */
   maxAnalysesPerSecond: 15,
 } as const;
+
+/** Jenis model terlatih yang dikenal (dibaca dari project = input tak tepercaya). */
+export const TRAINED_KINDS: readonly TrainedKind[] = ["image", "text", "audio", "pose", "hand"];
 
 /** Prefix path model yang diizinkan (disajikan dari app/public/models). */
 export const MODEL_BASE_PATH = "/models/";
@@ -42,7 +49,7 @@ export function validateTrainedClassifier(value: unknown): string[] {
   const problems: string[] = [];
   if (typeof value !== "object" || value === null) return ["bukan objek"];
   const v = value as Record<string, unknown>;
-  if (v.kind !== "image" && v.kind !== "text" && v.kind !== "audio") problems.push("kind tidak valid");
+  if (!TRAINED_KINDS.includes(v.kind as TrainedKind)) problems.push("kind tidak valid");
   if (v.version !== 1) problems.push("versi tidak didukung");
   if (!Array.isArray(v.labels)) problems.push("labels bukan array");
   else {

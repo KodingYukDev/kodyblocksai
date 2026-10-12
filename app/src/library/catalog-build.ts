@@ -7,9 +7,11 @@ import { defaultSvgRotationCenter } from "../costume-tab/costume-upload";
 import { encodeWav } from "../sound-tab/wav";
 import type { BackdropArt, CostumeArt, SoundArt, SpriteArt } from "./art/art-types";
 import { backdropArts } from "./art/backdrops";
+import { extraBackdropArts } from "./art/backdrops-extra";
 import { kodySprites } from "./art/kody";
 import { creatureSprites } from "./art/sprites-creatures";
 import { objectSprites } from "./art/sprites-objects";
+import { extraSprites } from "./art/sprites-extra";
 import { soundArts } from "./audio/sound-recipes";
 import type {
   LibraryBackdropEntry,
@@ -46,6 +48,9 @@ const CATEGORY_NAMES: Record<string, [string, string]> = {
   musik: ["Musik", "Music"],
   game: ["Game", "Game"],
   perkusi: ["Perkusi", "Percussion"],
+  orang: ["Orang", "People"],
+  ai: ["Proyek AI", "AI Projects"],
+  huruf: ["Huruf & Angka", "Letters & Numbers"],
 };
 
 function categories(ids: Iterable<string>): LibraryCategory[] {
@@ -85,7 +90,7 @@ export function buildLibrary(): BuiltLibrary {
     soundById.set(art.id, { art, sound: { name: art.name, assetId, md5ext, dataFormat: "wav", rate: art.rate, sampleCount: art.samples.length } });
   }
 
-  const spriteArts: SpriteArt[] = [...kodySprites(), ...creatureSprites(), ...objectSprites()];
+  const spriteArts: SpriteArt[] = [...kodySprites(), ...creatureSprites(), ...extraSprites(), ...objectSprites()];
   const sprites: LibrarySpriteEntry[] = spriteArts.map((s) => ({
     kind: "sprite",
     id: s.id,
@@ -105,7 +110,7 @@ export function buildLibrary(): BuiltLibrary {
     s.costumes.map((c) => ({ kind: "costume" as const, id: `${s.id}/${c.name}`, name: c.name, nameEn: `${s.nameEn} ${c.name.slice(-1)}`, category: s.category, tags: [...s.tags, s.name.toLowerCase()], costume: c })),
   );
 
-  const backdrops: LibraryBackdropEntry[] = backdropArts().map((b: BackdropArt) => ({
+  const backdrops: LibraryBackdropEntry[] = [...backdropArts(), ...extraBackdropArts()].map((b: BackdropArt) => ({
     kind: "backdrop",
     id: b.id,
     name: b.name,

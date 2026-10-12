@@ -1,24 +1,125 @@
 # KodyBlocks AI v2 - Status integrasi
 
-Tanggal: 2026-10-10. Ditulis oleh agent integrasi setelah semua agent build selesai.
-Semua angka di bawah berasal dari perintah yang benar-benar dijalankan hari ini (lihat bagian "Cara mengulang").
+Tanggal: 2026-10-12 (putaran "siap produksi + tablet/iPad + belajar AI"). Ditulis oleh agent integrasi.
+Semua angka di bawah berasal dari perintah yang benar-benar dijalankan hari ini (lihat "Cara mengulang").
+Putaran 2026-10-10 ada di bagian bawah sebagai riwayat.
 
-## Ringkasan
-
-App sudah jalan dari awal sampai akhir di browser (dev dan build produksi):
-buka app -> project default (Kody + latar putih) -> seret "ketika bendera diklik", "gerak 10 langkah",
-"katakan Halo!" -> klik bendera -> Kody bergeser ke x=10 dan balon "Halo!" muncul -> simpan .sb3 ->
-"Baru" -> muat .sb3 -> skrip, nama sprite, dan posisi kembali. Alur ini diuji Playwright di desktop
-1280x800 dan tablet 820x1180 (lulus), screenshot di `docs/screenshots/`.
+## Ringkasan 2026-10-12
 
 | Pemeriksaan | Hasil |
 |---|---|
 | `npx tsc --noEmit -p .` | 0 error |
-| `npx vitest run` (semua) | 99 file, 1528 lulus, 3 skip (3 skip = kasus parity yang masih beda, lihat bawah) |
-| `npm run check:no-scratch-import` | OK (packages/ dan app/ tidak mengimpor scratch-*/blockly) |
-| `npx vite build` | sukses, `dist/` 7.4 MB + `dist/models` 69 MB (model AI) |
-| Playwright `tests/e2e` (desktop + tablet) | 4/4 lulus |
-| Build produksi + header CSP dari `app/public/_headers` | app, ekstensi Pena/Musik/AI, AI Lab tampil tanpa error konsol dan tanpa pelanggaran CSP |
+| `npx vitest run --pool=forks --poolOptions.forks.maxForks=2` (semua) | 117 file, 1663 lulus, 3 skip (3 skip = kasus parity yang masih beda) |
+| Parity (`REQUIRED_PASS`) | 94/97 identik (97%), tidak berubah; 3 beda yang sama seperti sebelumnya |
+| `npm run check:no-scratch-import` | OK |
+| `npm run build` | sukses. `dist/` 78 MB total (69 MB model AI di `dist/models`). Entry JS `index-*.js` 830 KB (263 KB gzip) + `react-vendor` 186 KB (59 KB gzip). tfjs (1.28 MB) dan MediaPipe tetap lazy |
+| `dist/` PWA | `sw.js`, `sw-register.js`, `manifest.webmanifest`, `favicon.ico`, `apple-touch-icon.png`, `icons/` ada; `index.html` memuat `/sw-register.js` |
+| Playwright `tests/e2e` (desktop 1280x800 + tablet 820x1180, chrome-headless-shell) | 4/4 lulus |
+| Smoke build produksi + CSP dari `_headers` (iPad 820x1180 dan 1180x820, sentuh, dpr 2) | tanpa error konsol / pelanggaran CSP, service worker `ready`, tanpa scroll horizontal; Belajar AI -> 6 kartu -> "Batu Gunting Kertas" terbuka (judul benar, skrip tidak bertumpuk) -> "Latih AI (Gambar)" membuka AI Lab dengan kelas batu/gunting/kertas |
+
+Belum diuji di perangkat nyata: iPad/iPhone Safari, tablet Android, kamera/mikrofon sungguhan,
+Apple Pencil, Share sheet "Simpan ke File", instalasi PWA dan mode offline. Semua uji browser memakai
+chrome-headless-shell (SwiftShader) dengan sentuhan disimulasikan.
+
+## QA akhir 2026-10-12 (e2e build produksi)
+
+E2E baru di `tests/e2e/prod/` dijalankan terhadap `dist/` (hasil `npm run build`) yang disajikan
+`tests/e2e/serve-prod.mjs` dengan header asli dari `_headers` (CSP, cache, fallback SPA):
+`npm run test:e2e:prod` (= `playwright test -c playwright.prod.config.ts`; `PW_WEBKIT=1` menambah iPad WebKit).
+
+| Proyek | Hasil |
+|---|---|
+| Chromium: desktop 1280x800, iPad lanskap 1180x820, iPad potret 820x1180, ponsel 390x844 (sentuh, isMobile, UA iPad/iPhone) | 35 lulus, 1 skip (tes "mouse di perangkat sentuh" tidak berlaku di desktop) |
+| WebKit 27.2 (Playwright): iPad lanskap + potret | 16 lulus, 2 skip (latih AI gambar: kamera palsu hanya ada di Chromium) |
+| `tests/e2e` lama (dev server) | 4/4 lulus |
+| Vitest semua | 117 file, 1664 lulus, 3 skip |
+
+Yang dicakup: app terbuka tanpa error konsol / pelanggaran CSP / scroll horizontal, layar memuat hilang;
+seret blok dengan jari (CDP touch) dan mouse, bendera hijau menjalankan, Berhenti menghentikan; sprite dari
+pustaka, kostum digambar (alat Kotak), unggah WAV + rekam mikrofon palsu, simpan .sb3 (di UA iPad lewat
+`navigator.share` yang distub) lalu buka lagi; AI Lab gambar dengan kamera palsu (2 kelas, latih, batang
+kepercayaan, kelas muncul di dropdown blok, "label dari kamera" mengembalikan kelas, simpan/buka lagi -> model
+dan nama kelas masih ada); AI Lab teks (latih, uji langsung, blok "label dari teks"); keenam contoh AI terbuka
+tanpa skrip bertumpuk; manifest + semua ikon (ukuran PNG dicek), header CSP/cache, service worker aktif,
+muat ulang offline membuka editor dari cache.
+
+Bug yang ditemukan dan diperbaiki saat QA:
+- Contoh "Pengendali Gestur Tangan": skrip kedua (x=420) tertutup blok "pergi ke x: (posisi jari) y: (...)"
+  yang lebarnya > 380 px. Sekarang satu kolom (`packages/ai/src/examples/ai-examples.ts`).
+- Ponsel: pil "Kamera aktif" (z-index 600) menutupi menu File/Belajar AI yang terbuka sehingga "Baru" tidak bisa
+  diketuk selama kamera menyala. Pil disembunyikan selama menu bar terbuka (`app/src/styles/app.css`).
+- Palet: area sentuh kotak centang monitor melebar ke kanan ke arah blok; di Chrome (penyesuaian sentuh Android)
+  seret reporter dari tepi kirinya malah mengenai kotak centang. Area sentuh kini hanya melebar ke kiri/atas/bawah
+  (`packages/blocks-ui/src/flyout/flyout-view.ts`).
+- Tekan-lama di editor blok: menu baru dibuka satu frame setelah timer, supaya gerakan jari yang masih antre
+  (main thread sibuk, mis. AI mengklasifikasi kamera) memulai seretan, bukan membuka menu
+  (`packages/blocks-ui/src/workspace/gesture.ts`, tes baru di `editor.touch.dom.test.ts`). Catatan jujur: bug ini
+  terbukti di tes unit; di e2e kegagalan awalnya ternyata artefak harness (gerakan CDP dikirim berurutan).
+- `data-opcode` ditambahkan pada `<g class="kb-block">` (selector e2e tanpa kait `window.__kody` di produksi).
+
+Tetap belum terverifikasi: Safari/iPadOS sungguhan (WebKit Playwright di Windows bukan Safari iPad; seret sentuh di
+WebKit memakai PointerEvent sintetis), kamera/mikrofon sungguhan, Apple Pencil, share sheet asli, pemasangan PWA.
+`/sw-register.js` sengaja tidak di-cache SW, jadi saat offline permintaannya gagal (tanpa efek; SW sudah aktif).
+Catatan UX: "label dari kamera" / "kepercayaan untuk" mengembalikan kosong/0 bila "mulai klasifikasi kamera" atau
+"analisis gambar" belum dijalankan (sama seperti Video Sensing Scratch); anak perlu tahu urutan itu.
+
+## Fitur (keadaan sekarang)
+
+**Belajar & melatih AI**
+- AI Lab ala Teachable Machine, 5 tab: Gambar, Pose Tubuh, Gestur Tangan, Suara (kelas wajib "Suara latar"), Teks.
+  Tambah/ganti nama/hapus kelas, tambah/hapus contoh dengan thumbnail (pose/tangan/suara digambar ulang, bukan foto),
+  tahan-untuk-merekam dengan jari atau mouse, unggah banyak gambar sekaligus, progres latihan, perkiraan akurasi,
+  panel uji langsung dengan batang kepercayaan per kelas.
+- Model tersimpan di project (.sb3) otomatis; dropdown kelas di blok langsung berganti tanpa muat ulang.
+  Berbagi model antar anak lewat file `.kodyai.json` (divalidasi ketat saat impor).
+- Blok AI: klasifikasi gambar/pose/tangan/suara/teks terlatih, "kepercayaan untuk <kelas>", hat
+  "ketika AI mengenali/mendengar <kelas>", mulai/berhenti klasifikasi terus-menerus, kamera depan/belakang,
+  bicara (TTS) dan pengenalan ucapan (perlu persetujuan internet).
+- Menu **Belajar AI**: "Tutorial & Contoh AI" (6 contoh: batu-gunting-kertas, wajah-pengikut, pengendali-gestur,
+  perintah-suara, chatbot-perasaan dengan model teks siap pakai, pose-pahlawan) dengan langkah-langkah, dan
+  "Latih AI-mu (AI Lab)". Dari kartu tutorial, AI Lab dibuka di tab yang tepat dengan nama kelas tutorial terisi
+  (hanya bila tab itu masih kosong).
+- Persetujuan internet lewat dialog di dalam app yang default-nya menolak (bukan `window.confirm`).
+- Pustaka punya kategori "Proyek AI" (tangan batu/gunting/kertas, wajah emosi, lampu lalu lintas, tempat sampah).
+
+**Tablet / iPad**
+- Tiga tata letak (`app/src/shell/layout.ts`): lebar (ala Scratch), split untuk tablet potret (panggung +
+  sprite di atas, kode di bawah), ponsel (tab "Sprite"). Tanpa scroll halaman, safe-area, 100dvh, target sentuh >= 44px.
+- Editor blok: pinch-zoom dan geser dua jari, tekan-lama untuk menu (tanpa salah pilih saat jari diangkat),
+  papan angka di layar (ada minus), dial sudut, piano not, komentar blok/workspace, seret skrip ke sprite lain.
+- Tombol panah + Spasi di layar di bawah panggung (juga saat layar penuh), layar penuh sungguhan.
+- Simpan .sb3 di iPad lewat Share sheet; buka .sb3/.sprite3 di iPad (filter file dimatikan di iOS, dicek setelahnya).
+- Audio iOS: AudioContext dibuka dari ketukan dan dilanjutkan lagi setelah iPad men-suspend-nya; untuk AI,
+  mikrofon dan speechSynthesis dibuka pada ketukan pertama setelah ekstensi AI dipakai.
+
+**Aset & project**
+- Impor/ekspor `.sprite3`; ganti nama sprite/kostum/suara memperbarui blok yang merujuknya.
+- Unggah suara m4a/aac/ogg/webm/flac (dikonversi ke WAV), foto HEIC/WebP/AVIF (dikonversi ke PNG), kamera depan.
+- Pustaka: 87 sprite, 26 latar, 50 suara (semua orisinal).
+- Autosave ke IndexedDB (3 dtk setelah perubahan, maks tiap 10 dtk, juga saat tab disembunyikan) + dialog
+  "Lanjutkan project terakhir?"; peringatan sebelum menutup bila belum disimpan.
+
+**Produksi**
+- Layar crash dengan Kody ("Coba lagi" / "Muat ulang"), layar memuat sampai engine siap.
+- Kesalahan saat skrip berjalan (`RUNTIME_ERROR`) muncul sebagai pemberitahuan ramah (paling sering sekali/15 dtk;
+  blok AI punya pemberitahuan sendiri).
+- Ikon/PWA (manifest, apple-touch-icon, maskable), service worker (HTML network-first 4 dtk, `/assets/*` cache-first,
+  model AI di-cache saat pertama dipakai), header cache di `_headers`, CSP tetap ketat (+ `manifest-src 'self'`).
+- Renderer: devicePixelRatio dibatasi 2x dan 2048 px; kegagalan `draw()` tidak menghentikan frame.
+
+## Yang dikerjakan agent integrasi 2026-10-12
+
+- Memeriksa semua sambungan antar-area: dialog persetujuan AI, menu contoh AI, refresh dropdown kelas,
+  ganti nama aset -> blok, ErrorBoundary/autosave/layar memuat, pendaftaran service worker. Semua sudah tersambung.
+- `packages/ai/src/examples/script-builder.ts`: skrip contoh dalam satu kolom kini ditumpuk otomatis menurut
+  perkiraan tingginya (sebelumnya hat "ketika AI mengenali" menutupi blok di "Batu Gunting Kertas"). Tes baru di
+  `examples.test.ts`.
+- `packages/ai/src/lab/lab-session.ts` (`presetClasses`) + `AiLab.tsx` (`initialClasses`) + `AiTutorials.tsx`/
+  `KodyShell.tsx`/`App.tsx`: kartu tutorial meneruskan nama kelas ke AI Lab. Tes baru di `lab.test.ts`.
+- `app/src/App.tsx`: buka audio/ucapan AI dari gestur pertama (iOS), dan tampilkan `RUNTIME_ERROR` sebagai
+  pemberitahuan ramah.
+- Catatan kontrak: `packages/ai/src/examples/ai-examples.ts` mengimpor `@kody/project` secara dinamis (ai -> project).
+  Vite memberi peringatan bahwa impor dinamis itu tidak memecah chunk (project sudah di bundle utama); tidak berbahaya.
 
 ## Parity dengan Scratch 3 (angka dari harness `tests/parity`)
 
@@ -70,7 +171,73 @@ balon, monitor, thread, urutan eksekusi). Renderer punya tes oracle sendiri terh
 terhadap fixture keluaran scratch3_pen/scratch3_music (lulus). Tetap belum ada bukti parity 100% untuk
 semua kombinasi blok; korpus parity bisa diperluas.
 
-## Yang dikerjakan agent integrasi
+## Masalah terbuka
+
+1. **Belum diuji di perangkat nyata** (iPad/iPhone Safari, tablet Android): kamera + MediaPipe/MobileNet,
+   tahan-untuk-merekam, mikrofon, AudioContext/speechSynthesis iOS, Share sheet, pemilih file iOS (.sb3/.sprite3),
+   Fullscreen API iPadOS, safe-area notch, blokir pinch Safari, Apple Pencil, instalasi PWA dan offline.
+2. **Belum di-commit dan belum di-deploy** putaran ini (sesuai instruksi). Live di kodyblocksai.kodingyuk.id
+   belum berisi perubahan ini.
+3. Header `! Cache-Control` untuk `/assets/library/library.json` di `_headers` belum diverifikasi di Worker Cloudflare.
+4. File `/models/*` immutable 1 tahun dengan nama tetap: bila model di-vendor ulang di path yang sama, browser lama
+   gagal cek SHA-256. Solusi: nama file model berhash.
+5. Tab yang dibiarkan terbuka melewati deploy bisa gagal memuat chunk lazy yang belum pernah diambil
+   (fallback SPA Cloudflare mengembalikan index.html). Muat ulang memperbaiki.
+6. Bila Safari tidak pernah memulihkan konteks WebGL yang hilang, panggung kosong sampai muat ulang.
+7. API ES2022 (`.at()`, `structuredClone`) tanpa polyfill: butuh iPadOS/iOS 15.4+.
+8. Tombol layar hanya panah + Spasi; game dengan tombol huruf perlu keyboard.
+9. Komentar blok tidak ikut pindah saat "rapikan" atau saat engine memindahkan skrip.
+10. Project dengan ekstensi Scratch yang tidak kita punya (TTS Scratch, Video Sensing, Translate, LEGO, micro:bit)
+    masih ditolak (pesannya kini ramah). `.sprite2` tidak didukung.
+11. Contoh latihan yang belum dilatih hilang saat AI Lab ditutup (ada konfirmasi); hanya model terlatih yang disimpan.
+    Model teks menyimpan bigram (kalimat 2 kata bisa dibaca ulang; dicatat di AI-SAFETY.md).
+12. AI Lab tidak memuat ekstensi AI yang cocok secara otomatis setelah melatih (contoh tutorial sudah memuatnya).
+13. Palet Musik yang lebar terpotong; font costume Scratch jatuh ke font sistem (sama seperti sebelumnya).
+14. Ukuran palet: membangun ulang palet penuh ~0.7-1 dtk di jsdom; biaya di tablet murah belum diukur.
+
+Masalah lama 4 (.sprite3), 5 (ganti nama aset) dan 6 (menu dinamis AI) dari 2026-10-10 sudah ditutup.
+
+## Cara mengulang
+
+```bash
+export TEMP='D:\tmp' TMP='D:\tmp' npm_config_cache='D:\npm-cache'
+npx tsc --noEmit -p .
+npm run check:no-scratch-import
+npx vitest run --pool=forks --poolOptions.forks.maxForks=2 --testTimeout=120000   # tabel parity dicetak di akhir
+npm run build
+
+# e2e: chrome-headless-shell di D:\pw-browsers (drive C: penuh)
+export PW_PORT=5419 PW_EXECUTABLE='D:/pw-browsers/chromium_headless_shell-1248/chrome-headless-shell-win64/chrome-headless-shell.exe'
+export PW_BROWSER_HOME='D:/tmp/kody-int/home' PW_OUTPUT_DIR='D:/tmp/kody-int/results'
+npx playwright test
+```
+
+---
+
+# Riwayat: putaran 2026-10-10
+
+
+Tanggal: 2026-10-10. Ditulis oleh agent integrasi setelah semua agent build selesai.
+Semua angka di bawah berasal dari perintah yang benar-benar dijalankan hari ini (lihat bagian "Cara mengulang").
+
+## Ringkasan (2026-10-10)
+
+App sudah jalan dari awal sampai akhir di browser (dev dan build produksi):
+buka app -> project default (Kody + latar putih) -> seret "ketika bendera diklik", "gerak 10 langkah",
+"katakan Halo!" -> klik bendera -> Kody bergeser ke x=10 dan balon "Halo!" muncul -> simpan .sb3 ->
+"Baru" -> muat .sb3 -> skrip, nama sprite, dan posisi kembali. Alur ini diuji Playwright di desktop
+1280x800 dan tablet 820x1180 (lulus), screenshot di `docs/screenshots/`.
+
+| Pemeriksaan | Hasil |
+|---|---|
+| `npx tsc --noEmit -p .` | 0 error |
+| `npx vitest run` (semua) | 99 file, 1528 lulus, 3 skip (3 skip = kasus parity yang masih beda, lihat bawah) |
+| `npm run check:no-scratch-import` | OK (packages/ dan app/ tidak mengimpor scratch-*/blockly) |
+| `npx vite build` | sukses, `dist/` 7.4 MB + `dist/models` 69 MB (model AI) |
+| Playwright `tests/e2e` (desktop + tablet) | 4/4 lulus |
+| Build produksi + header CSP dari `app/public/_headers` | app, ekstensi Pena/Musik/AI, AI Lab tampil tanpa error konsol dan tanpa pelanggaran CSP |
+
+## Yang dikerjakan agent integrasi (2026-10-10)
 
 - `app/src/host/runtime-host.ts`: merakit audio engine, runtime (CORE_BLOCK_PACKAGES didaftarkan engine,
   tidak didaftar ulang), renderer saat kanvas panggung terpasang, media loader, ekstensi, ShellController,
@@ -107,7 +274,7 @@ semua kombinasi blok; korpus parity bisa diperluas.
   (`window.confirm`) per sesi. Default lama = selalu ditolak; ini keputusan produk yang perlu dikonfirmasi.
 - `window.__kody` (akses runtime untuk tes) hanya ada di mode dev, tidak di build produksi (dicek).
 
-## Masalah terbuka
+## Masalah terbuka (2026-10-10)
 
 1. **Belum di-deploy dan belum ada commit git.** Repo `kodyblocks-ai-v2` masih tanpa commit. Permintaan
    user "push ke prod" belum dijalankan oleh agent ini: perlu keputusan target (domain/worker Cloudflare,
@@ -128,7 +295,7 @@ semua kombinasi blok; korpus parity bisa diperluas.
 9. Drive C: penuh terus-menerus selama sesi (diisi proses lain). Semua tes dijalankan dengan
    `TEMP/TMP=D:\tmp`; tanpa itu vitest/Chrome gagal ENOSPC.
 
-## Langkah berikutnya
+## Langkah berikutnya (2026-10-10)
 
 1. Putuskan target deploy, buat repo GitHub, commit, lalu deploy `dist/` (Cloudflare Workers static
    assets membaca `_headers`). Jalankan `npm run check` dan Playwright dulu.
@@ -137,7 +304,7 @@ semua kombinasi blok; korpus parity bisa diperluas.
    jalankan `PARITY_STRICT=1` sebelum rilis.
 4. Tutup masalah terbuka 4-6.
 
-## Cara mengulang
+## Cara mengulang (2026-10-10)
 
 ```bash
 # drive C: penuh -> arahkan temp ke D:

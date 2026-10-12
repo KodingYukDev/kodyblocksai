@@ -2,33 +2,42 @@
 import { useRef, type KeyboardEvent, type ReactNode } from "react";
 import type { EditorTab } from "../app-events";
 import { useT } from "./i18n";
-import { BrushIcon, CodeIcon, SoundIcon } from "./icons";
+import { BrushIcon, CatIcon, CodeIcon, SoundIcon } from "./icons";
+
+/** Tab shell: tiga tab editor + tab "Sprite" (panel sprite) di layar sempit. */
+export type ShellTab = EditorTab | "sprites";
 
 interface EditorTabsProps {
-  active: EditorTab;
+  active: ShellTab;
   isStage: boolean;
-  onChange(tab: EditorTab): void;
+  onChange(tab: ShellTab): void;
   panels: Record<EditorTab, ReactNode>;
+  /** Isi tab "Sprite"; undefined = tab tidak ditampilkan. */
+  spritesPanel?: ReactNode;
 }
 
-const ORDER: EditorTab[] = ["code", "costumes", "sounds"];
+const BASE_ORDER: ShellTab[] = ["code", "costumes", "sounds"];
 
-export function EditorTabs({ active, isStage, onChange, panels }: EditorTabsProps) {
+export function EditorTabs({ active, isStage, onChange, panels, spritesPanel }: EditorTabsProps) {
   const t = useT();
   const refs = useRef<Record<string, HTMLButtonElement | null>>({});
-  const labels: Record<EditorTab, string> = {
+  const ORDER: ShellTab[] = spritesPanel === undefined ? BASE_ORDER : [...BASE_ORDER, "sprites"];
+  const allPanels: Record<ShellTab, ReactNode> = { ...panels, sprites: spritesPanel ?? null };
+  const labels: Record<ShellTab, string> = {
     code: t("tab.code"),
     costumes: isStage ? t("tab.backdrops") : t("tab.costumes"),
     sounds: t("tab.sounds"),
+    sprites: t("tab.sprites"),
   };
-  const icons: Record<EditorTab, ReactNode> = {
+  const icons: Record<ShellTab, ReactNode> = {
     code: <CodeIcon size={16} />,
     costumes: <BrushIcon size={16} />,
     sounds: <SoundIcon size={16} />,
+    sprites: <CatIcon size={16} />,
   };
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>): void => {
     const i = ORDER.indexOf(active);
-    let next: EditorTab | undefined;
+    let next: ShellTab | undefined;
     if (e.key === "ArrowRight") next = ORDER[(i + 1) % ORDER.length];
     else if (e.key === "ArrowLeft") next = ORDER[(i - 1 + ORDER.length) % ORDER.length];
     else if (e.key === "Home") next = ORDER[0];
@@ -71,7 +80,7 @@ export function EditorTabs({ active, isStage, onChange, panels }: EditorTabsProp
           aria-hidden={active !== tab}
         >
           {/* Workspace kode tetap terpasang (seperti scratch-gui) agar state editor tidak hilang. */}
-          {tab === "code" || active === tab ? panels[tab] : null}
+          {tab === "code" || active === tab ? allPanels[tab] : null}
         </div>
       ))}
     </div>

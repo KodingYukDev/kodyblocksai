@@ -3,7 +3,7 @@
  * latar, suara, klon, "of" (sensing_of), plus menu ekstensi dari getInfo().menus.
  * Opsi = [teks, nilai]. Nilai khusus (_mouse_, _random_, _stage_, _myself_, _edge_) sama dengan Scratch.
  */
-import type { Block, IBlocksContainer, IRuntime, ITarget } from "@kody/engine";
+import type { Block, ExtensionMenuItem, ExtensionModule, IBlocksContainer, IRuntime, ITarget } from "@kody/engine";
 import type { Locale } from "./i18n";
 import { compareStrings } from "./variables";
 
@@ -131,8 +131,23 @@ function extensionMenu(ctx: MenuContext, opcode: string, fieldName: string): Opt
   if (!extId || !menuName || menuName !== fieldName) return null;
   const info = ctx.runtime.getExtensionInfo(extId);
   const menu = info?.menus?.[menuName];
-  if (!menu || typeof menu.items === "string") return null;
-  return menu.items.map((it) => (typeof it === "string" ? ([it, it] as Option) : ([it.text, it.value] as Option)));
+  if (!menu) return null;
+  let items: readonly (string | ExtensionMenuItem)[];
+  if (typeof menu.items === "string") {
+    // Menu dinamis (mis. kelas AI hasil latihan): selalu diminta ulang ke modul, bukan snapshot saat registrasi.
+    const runtime = ctx.runtime as { getExtensionModule?(id: string): ExtensionModule | undefined };
+    const fn = runtime.getExtensionModule?.(extId)?.getDynamicMenus?.()[menu.items];
+    if (!fn) return null;
+    try {
+      items = fn(ctx.target?.id ?? null);
+    } catch {
+      return null;
+    }
+    if (!items.length) return [["", ""]];
+  } else {
+    items = menu.items;
+  }
+  return items.map((it) => (typeof it === "string" ? ([it, it] as Option) : ([String(it.text), String(it.value)] as Option)));
 }
 
 /** Teks tampilan untuk nilai field dropdown (label opsi yang cocok, atau nilai mentah). */

@@ -136,8 +136,9 @@ describe("BlocksWorkspace (DOM)", () => {
     const block = env.host.querySelector('.kb-main-svg [data-block-id="a1"] > path')!;
     block.dispatchEvent(new MouseEvent("contextmenu", { bubbles: true, cancelable: true, clientX: 5, clientY: 5 }));
     const items = Array.from(env.host.querySelectorAll(".kb-menu-item"));
-    expect(items.map((i) => i.textContent)).toEqual(["Duplicate", "Delete Block"]);
-    pointer(items[1]!, "pointerup", 0, 0);
+    expect(items.map((i) => i.textContent)).toEqual(["Duplicate", "Add Comment", "Delete Block"]);
+    pointer(items[2]!, "pointerdown", 0, 0);
+    pointer(items[2]!, "pointerup", 0, 0);
     expect(env.container.reducer.blocks.a1).toBeUndefined();
     env.ws.undo();
     expect(env.container.reducer.blocks.a1).toBeTruthy();

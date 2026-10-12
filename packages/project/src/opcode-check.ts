@@ -46,6 +46,11 @@ const SCRATCH_ONLY_EXTENSIONS: Readonly<Record<string, string>> = {
   gdxfor: "Go Direct Force & Acceleration",
 };
 
+/** Nama ramah ekstensi (Scratch resmi atau id apa adanya). */
+export function extensionDisplayName(id: string): string {
+  return SCRATCH_ONLY_EXTENSIONS[id] ?? id;
+}
+
 /**
  * Id ekstensi non-core untuk sebuah opcode, atau undefined untuk opcode core / tanpa prefix.
  * Karakter di luar [\w-] diganti "-" (tidak pernah menghasilkan URL).

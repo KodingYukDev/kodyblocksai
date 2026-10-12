@@ -2,7 +2,7 @@
  * Tombol tambah bulat ala scratch-gui ActionMenu: klik utama = aksi pertama (pustaka), arahkan
  * kursor / fokus untuk membuka pilihan lain (gambar, unggah, kamera, kejutan, rekam).
  */
-import { useId, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 
 export interface AddMenuItem {
   key: string;
@@ -25,6 +25,19 @@ export function AddMenu({ main, items, className }: AddMenuProps) {
   const [open, setOpen] = useState(false);
   const closeTimer = useRef<number | null>(null);
   const menuId = useId();
+  const rootRef = useRef<HTMLDivElement>(null);
+  /** Sentuhan pertama pada tombol utama membuka menu (tablet tidak punya hover), seperti scratch-gui. */
+  const touchOpens = useRef(false);
+
+  // Tutup bila mengetuk di luar menu (sentuhan tidak memicu pointerleave yang berguna).
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: PointerEvent): void => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    window.addEventListener("pointerdown", onDown);
+    return () => window.removeEventListener("pointerdown", onDown);
+  }, [open]);
 
   const cancelClose = (): void => {
     if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
@@ -37,9 +50,16 @@ export function AddMenu({ main, items, className }: AddMenuProps) {
 
   return (
     <div
+      ref={rootRef}
       className={`kb-addmenu${open ? " kb-addmenu--open" : ""}${className ? ` ${className}` : ""}`}
-      onPointerEnter={() => (cancelClose(), setOpen(true))}
-      onPointerLeave={scheduleClose}
+      onPointerEnter={(e) => {
+        if (e.pointerType !== "mouse") return;
+        cancelClose();
+        setOpen(true);
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType === "mouse") scheduleClose();
+      }}
       onFocus={() => (cancelClose(), setOpen(true))}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node | null)) scheduleClose();
@@ -65,7 +85,16 @@ export function AddMenu({ main, items, className }: AddMenuProps) {
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={open ? menuId : undefined}
+        onPointerDown={(e) => {
+          touchOpens.current = e.pointerType !== "mouse" && !open;
+        }}
         onClick={() => {
+          if (touchOpens.current) {
+            touchOpens.current = false;
+            cancelClose();
+            setOpen(true);
+            return;
+          }
           setOpen(false);
           main.onClick?.();
         }}

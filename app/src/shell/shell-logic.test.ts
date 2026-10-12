@@ -1,7 +1,8 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { createMemoryAutosaveStore, createShellAutosaver } from "./autosave";
 import { makeTranslate, MESSAGES } from "./i18n";
 import { computeShellLayout, nextSizeMode } from "./layout";
-import { getProjectFilename, getProjectTitleFromFilename, normalizeTitle } from "./project-file";
+import { acceptForDevice, getProjectFilename, getProjectTitleFromFilename, isAppleTouchDevice, matchesAccept, normalizeTitle, saveFile } from "./project-file";
 import { collectExtensions, getExtensionIdForOpcode, monitorRecordToState } from "./runtime-model";
 import { DEFAULT_MONITOR, type TargetState } from "@kody/engine";
 
@@ -56,6 +57,141 @@ describe("tata letak shell", () => {
     expect(nextSizeMode("fullscreen", "normal", "normal")).toBe("normal");
     expect(nextSizeMode("small", "fullscreen", "small")).toBe("fullscreen");
     expect(nextSizeMode("normal", "small", "normal")).toBe("small");
+  });
+});
+
+describe("tata letak tablet & ponsel", () => {
+  const VIEWPORTS: [number, number][] = [
+    [1024, 768],
+    [1180, 820],
+    [1366, 1024],
+    [768, 1024],
+    [820, 1180],
+    [1280, 800],
+    [800, 1280],
+    [390, 844],
+    [844, 390],
+    [1440, 900],
+  ];
+  it("panggung selalu muat (lebar & tinggi), rasio 4:3, untuk semua ukuran & mode", () => {
+    for (const [w, h] of VIEWPORTS) {
+      for (const mode of ["normal", "small"] as const) {
+        for (const keypad of [false, true]) {
+          const l = computeShellLayout({ width: w, height: h }, mode, { keypad });
+          expect(l.dims.width + 2 + 16).toBeLessThanOrEqual(w);
+          expect(Math.abs(l.dims.height - l.dims.width * 0.75)).toBeLessThanOrEqual(1);
+          const used = 48 + 44 + l.dims.height + 2 + 8 + (keypad ? 60 : 0);
+          expect(used).toBeLessThanOrEqual(h);
+          if (l.mode === "wide" && !l.spritesInTab) expect(h - used).toBeGreaterThanOrEqual(200);
+          if (l.mode === "split" || l.mode === "phone") expect(h - (l.topRowHeight + 48 + 8)).toBeGreaterThanOrEqual(300);
+        }
+      }
+    }
+  });
+  it("mode per ukuran", () => {
+    expect(computeShellLayout({ width: 1024, height: 768 }, "normal").mode).toBe("wide");
+    expect(computeShellLayout({ width: 768, height: 1024 }, "normal").mode).toBe("split");
+    expect(computeShellLayout({ width: 800, height: 1280 }, "normal").mode).toBe("split");
+    expect(computeShellLayout({ width: 390, height: 844 }, "normal").mode).toBe("phone");
+    const land = computeShellLayout({ width: 844, height: 390 }, "normal");
+    expect(land.mode).toBe("wide");
+    expect(land.spritesInTab).toBe(true);
+  });
+  it("tablet potret: panggung kecil lebih kecil, panel sprite lebih lebar", () => {
+    const n = computeShellLayout({ width: 768, height: 1024 }, "normal");
+    const s = computeShellLayout({ width: 768, height: 1024 }, "small");
+    expect(s.dims.width).toBeLessThan(n.dims.width);
+    expect(n.dims.width).toBeGreaterThanOrEqual(400);
+  });
+  it("layar penuh dengan keypad menyisakan ruang untuk tombol", () => {
+    const a = computeShellLayout({ width: 1024, height: 768 }, "fullscreen");
+    const b = computeShellLayout({ width: 1024, height: 768 }, "fullscreen", { keypad: true });
+    expect(b.dims.height).toBe(a.dims.height - 60);
+  });
+});
+
+describe("file project di iPad", () => {
+  it("deteksi iPad/iPhone termasuk iPadOS desktop UA", () => {
+    expect(isAppleTouchDevice({ userAgent: "Mozilla/5.0 (iPad; CPU OS 15_0 like Mac OS X)", maxTouchPoints: 5 })).toBe(true);
+    expect(isAppleTouchDevice({ userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)", maxTouchPoints: 5 })).toBe(true);
+    expect(isAppleTouchDevice({ userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)", maxTouchPoints: 0 })).toBe(false);
+    expect(isAppleTouchDevice({ userAgent: "Mozilla/5.0 (Linux; Android 13; SM-X200)", maxTouchPoints: 10 })).toBe(false);
+  });
+  it("accept dimatikan di iOS untuk .sb3, gambar tetap", () => {
+    expect(acceptForDevice(".sb3,.sb,.sb2,.kb", true)).toBe("");
+    expect(acceptForDevice(".sb3,.sb,.sb2,.kb", false)).toBe(".sb3,.sb,.sb2,.kb");
+    expect(acceptForDevice(".svg,.png,.jpg", true)).toBe(".svg,.png,.jpg");
+    expect(matchesAccept("Game.SB3", ".sb3,.sb2")).toBe(true);
+    expect(matchesAccept("foto.png", ".sb3,.sb2")).toBe(false);
+    expect(matchesAccept("apa.saja", "")).toBe(true);
+  });
+  it("iOS: simpan lewat lembar Bagikan; ditolak tanpa gesture -> needs-gesture; dibatalkan -> cancelled", async () => {
+    const bytes = new Uint8Array([1, 2, 3]);
+    const mk = (err?: string) =>
+      ({
+        canShare: () => true,
+        share: vi.fn(async () => {
+          if (err) {
+            const e = new Error(err);
+            e.name = err;
+            throw e;
+          }
+        }),
+      }) as unknown as Navigator;
+    expect(await saveFile("a.sb3", bytes, "x", { appleTouch: true, nav: mk() })).toBe("shared");
+    expect(await saveFile("a.sb3", bytes, "x", { appleTouch: true, nav: mk("NotAllowedError") })).toBe("needs-gesture");
+    expect(await saveFile("a.sb3", bytes, "x", { appleTouch: true, nav: mk("AbortError") })).toBe("cancelled");
+  });
+});
+
+describe("simpan otomatis", () => {
+  it("debounce, satu simpan per rentetan perubahan, markSaved membersihkan, reset menghapus", async () => {
+    let now = 100_000;
+    const timers: { fn: () => void; at: number }[] = [];
+    const store = createMemoryAutosaveStore();
+    const serialize = vi.fn(async () => new Uint8Array([9]));
+    const a = createShellAutosaver({
+      store,
+      serialize,
+      getTitle: () => "Game",
+      now: () => now,
+      setTimer: (fn, ms) => {
+        const t = { fn, at: now + ms };
+        timers.push(t);
+        return t;
+      },
+      clearTimer: (h) => {
+        const i = timers.indexOf(h as (typeof timers)[number]);
+        if (i >= 0) timers.splice(i, 1);
+      },
+    });
+    const run = async (ms: number) => {
+      now += ms;
+      for (const t of timers.filter((x) => x.at <= now)) {
+        timers.splice(timers.indexOf(t), 1);
+        t.fn();
+      }
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+    };
+    a.changed();
+    a.changed();
+    a.changed();
+    expect(a.dirty).toBe(true);
+    await run(3000);
+    expect(serialize).toHaveBeenCalledTimes(1);
+    expect(store.record).toMatchObject({ title: "Game", dirty: true });
+    a.markSaved();
+    await run(0);
+    expect(a.dirty).toBe(false);
+    expect(store.record?.dirty).toBe(false);
+    a.changed();
+    a.reset();
+    await run(20_000);
+    expect(serialize).toHaveBeenCalledTimes(1);
+    expect(store.record).toBeNull();
+    a.dispose();
   });
 });
 

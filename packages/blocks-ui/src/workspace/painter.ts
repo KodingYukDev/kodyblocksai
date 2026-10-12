@@ -88,7 +88,7 @@ function paintField(opts: PaintOptions, g: SVGGElement, layout: BlockLayout, el:
 export function paintBlock(opts: PaintOptions, layout: BlockLayout, x: number, y: number, parentColours?: CategoryColours): SVGGElement {
   const doc = opts.doc;
   const marker = isMarker(layout.id);
-  const g = svg(doc, "g", { class: "kb-block", "data-block-id": layout.id, transform: `translate(${x},${y})` });
+  const g = svg(doc, "g", { class: "kb-block", "data-block-id": layout.id, "data-opcode": layout.info.opcode, transform: `translate(${x},${y})` });
   if (layout.shadow) g.setAttribute("data-shadow", "true");
   const colours = layout.shadow && parentColours ? { ...layout.info.colours, tertiary: parentColours.tertiary } : layout.info.colours;
   const { fill, stroke } = fillFor({ ...layout, info: { ...layout.info, colours } });

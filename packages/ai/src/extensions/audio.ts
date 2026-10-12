@@ -10,7 +10,7 @@
  */
 import { Cast } from "@kody/engine";
 import type { ExtensionFactory, ExtensionInfo, ExtensionModule, IRuntime } from "@kody/engine";
-import { SILENCE_LEVEL } from "../classifier/audio-features";
+import { BACKGROUND_LABEL, SILENCE_LEVEL } from "../classifier/audio-features";
 import { TrainedModelCache } from "../classifier/storage";
 import { AI_COLOURS } from "../colours";
 import { AudioListener } from "../devices/audio-listener";
@@ -19,7 +19,10 @@ import type { AiServices } from "../services";
 import { DEFAULT_SPEECH_LANGUAGE, parseLanguage } from "../speech/language";
 import { TTS_LANGUAGES } from "../speech/tts";
 import type { ClassificationResult } from "../types";
-import { classMenuItems } from "./class-menu";
+import { round2 } from "../vision/coords";
+import { classMenuItems, watchProjectModels } from "./class-menu";
+
+export { BACKGROUND_LABEL };
 
 export const AIAUDIO_ID = "aiAudio";
 /** Jumlah frame minimum di jendela sebelum diklasifikasi. */
@@ -31,19 +34,26 @@ export function getAiAudioInfo(): ExtensionInfo {
     name: "Suara AI",
     ...AI_COLOURS,
     blocks: [
-      { opcode: "startListening", blockType: "command", text: "mulai dengarkan suara" },
-      { opcode: "stopListening", blockType: "command", text: "berhenti dengarkan suara" },
-      { opcode: "soundClass", blockType: "reporter", text: "kelas suara" },
+      { opcode: "startListening", blockType: "command", text: "mulai klasifikasi suara" },
+      { opcode: "stopListening", blockType: "command", text: "berhenti klasifikasi suara" },
+      { opcode: "soundClass", blockType: "reporter", text: "label dari suara" },
+      {
+        opcode: "soundConfidence",
+        blockType: "reporter",
+        text: "kepercayaan untuk [CLASS] (%)",
+        disableMonitor: true,
+        arguments: { CLASS: { type: "string", menu: "CLASS" } },
+      },
       {
         opcode: "isSoundClass",
         blockType: "Boolean",
-        text: "suara adalah [CLASS]?",
+        text: "AI mendengar [CLASS]?",
         arguments: { CLASS: { type: "string", menu: "CLASS" } },
       },
       {
         opcode: "whenSoundClass",
         blockType: "hat",
-        text: "ketika terdengar [CLASS]",
+        text: "ketika AI mendengar [CLASS]",
         isEdgeActivated: true,
         arguments: { CLASS: { type: "string", menu: "CLASS" } },
       },
@@ -63,6 +73,12 @@ export function getAiAudioInfo(): ExtensionInfo {
   };
 }
 
+function silentResult(labels: readonly string[]): ClassificationResult {
+  const scores: Record<string, number> = {};
+  for (const l of labels) scores[l] = l === BACKGROUND_LABEL ? 1 : 0;
+  return { label: BACKGROUND_LABEL, confidence: 1, scores };
+}
+
 export const createAiAudioExtension: ExtensionFactory = (runtime: IRuntime): ExtensionModule => {
   let cache: TrainedModelCache<"audio"> | null = null;
   let warnedNoModel = false;
@@ -77,11 +93,12 @@ export const createAiAudioExtension: ExtensionFactory = (runtime: IRuntime): Ext
 
   const classifyWindow = (listener: AudioListener): void => {
     if (listener.window.size < MIN_FRAMES) return;
+    const clf = model().get();
     if (listener.window.level() < SILENCE_LEVEL) {
-      result = null;
+      // Hening: anggap suara latar bila model punya kelas itu, selain itu tidak ada label.
+      result = clf?.isTrained() && clf.labels.includes(BACKGROUND_LABEL) ? silentResult(clf.labels) : null;
       return;
     }
-    const clf = model().get();
     const features = listener.window.features();
     result = clf && clf.isTrained() && features ? clf.predict(features) : null;
   };
@@ -98,6 +115,10 @@ export const createAiAudioExtension: ExtensionFactory = (runtime: IRuntime): Ext
     state = { services, listener, offReset };
     return state;
   };
+
+  const offProject = watchProjectModels(runtime, "audio", () => {
+    warnedNoModel = false;
+  });
 
   const isClass = (label: unknown): boolean => {
     const wanted = Cast.toString(label);
@@ -123,6 +144,7 @@ export const createAiAudioExtension: ExtensionFactory = (runtime: IRuntime): Ext
         result = null;
       },
       soundClass: () => result?.label ?? "",
+      soundConfidence: (args) => round2((result?.scores[Cast.toString(args.CLASS)] ?? 0) * 100),
       isSoundClass: (args) => isClass(args.CLASS),
       whenSoundClass: (args) => isClass(args.CLASS),
       recognizeSpeech: async (args) => {
@@ -135,6 +157,7 @@ export const createAiAudioExtension: ExtensionFactory = (runtime: IRuntime): Ext
       getClassMenu: () => classMenuItems(model().labels()),
     }),
     dispose: () => {
+      offProject();
       if (!state) return;
       const s = state;
       state = null;

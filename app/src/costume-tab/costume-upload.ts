@@ -7,10 +7,13 @@
  */
 import { STAGE_HEIGHT, STAGE_WIDTH } from "@kody/engine";
 
-export type CostumeFileKind = "svg" | "png" | "jpg" | "bmp" | "gif";
+/** "raster" = gambar lain yang bisa didekode browser (webp, heic dari iPad, avif): disimpan sebagai PNG. */
+export type CostumeFileKind = "svg" | "png" | "jpg" | "bmp" | "gif" | "raster";
 
 export const MAX_COSTUME_UPLOAD_BYTES = 10 * 1024 * 1024;
-export const COSTUME_ACCEPT = ".svg, .png, .bmp, .jpg, .jpeg, .gif";
+/** `image/*` agar pemilih iPad menampilkan Foto (Safari mengubah HEIC ke JPEG bila perlu). */
+export const COSTUME_ACCEPT = "image/*,.svg,.png,.bmp,.jpg,.jpeg,.gif,.webp";
+const RASTER_EXT = new Set(["webp", "heic", "heif", "avif"]);
 
 /** extractFileName: teks sebelum titik pertama. */
 export function extractFileName(nameExt: string): string {
@@ -30,6 +33,11 @@ export function classifyCostumeFile(name: string, mime: string, bytes?: Uint8Arr
       return "bmp";
     case "image/gif":
       return "gif";
+    case "image/webp":
+    case "image/heic":
+    case "image/heif":
+    case "image/avif":
+      return "raster";
     default:
       break;
   }
@@ -39,6 +47,7 @@ export function classifyCostumeFile(name: string, mime: string, bytes?: Uint8Arr
   if (ext === "jpg" || ext === "jpeg") return "jpg";
   if (ext === "bmp") return "bmp";
   if (ext === "gif") return "gif";
+  if (RASTER_EXT.has(ext)) return "raster";
   if (bytes) return sniffImage(bytes);
   return null;
 }
@@ -51,6 +60,8 @@ export function sniffImage(b: Uint8Array): CostumeFileKind | null {
   if (b[0] === 0x42 && b[1] === 0x4d) return "bmp";
   const head = new TextDecoder().decode(b.subarray(0, 512)).trimStart().toLowerCase();
   if (head.startsWith("<svg") || (head.startsWith("<?xml") && head.includes("<svg"))) return "svg";
+  // RIFF....WEBP
+  if (b[0] === 0x52 && b[1] === 0x49 && b[2] === 0x46 && b[3] === 0x46 && b[8] === 0x57 && b[9] === 0x45 && b[10] === 0x42 && b[11] === 0x50) return "raster";
   return null;
 }
 

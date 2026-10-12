@@ -21,9 +21,20 @@
   color: var(--kb-text-primary);
   background: var(--kb-ui-primary);
   overflow: hidden;
+  /* Tahan-lama di tablet tidak memunculkan seleksi teks / menu salin iOS. */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.kb-shell input,
+.kb-shell textarea,
+.kb-shell [contenteditable="true"] {
+  -webkit-user-select: text;
+  user-select: text;
 }
 .kb-shell button {
   font-family: inherit;
+  touch-action: manipulation;
 }
 .kb-shell :focus-visible {
   outline: none;
@@ -34,12 +45,14 @@
 .kb-shell .kb-menu-bar {
   position: relative;
   z-index: 50;
-  height: var(--kb-menu-bar-height);
+  /* Area aman: latar menu bar memenuhi poni/notch, isinya tidak. */
+  height: calc(var(--kb-menu-bar-height) + env(safe-area-inset-top, 0px));
   flex: none;
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  padding: 0 0.75rem 0 1rem;
+  padding: env(safe-area-inset-top, 0px) calc(0.75rem + env(safe-area-inset-right, 0px)) 0
+    calc(1rem + env(safe-area-inset-left, 0px));
   background: var(--kb-menu-bar-bg);
   color: var(--kb-menu-bar-text);
   font-size: 0.75rem;
@@ -79,9 +92,24 @@
   border: 0;
   cursor: pointer;
 }
-.kb-shell .kb-menu-bar__item:hover,
 .kb-menu-bar__item--open {
   background: rgba(0, 0, 0, 0.15);
+}
+@media (hover: hover) {
+  .kb-shell .kb-menu-bar__item:hover {
+    background: rgba(0, 0, 0, 0.15);
+  }
+}
+.kb-shell .kb-menu-bar__item--highlight {
+  margin: 0 0.25rem;
+  height: 2.25rem;
+  align-self: center;
+  padding: 0 0.75rem;
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+}
+.kb-shell .kb-menu-bar__item--highlight.kb-menu-bar__item--open {
+  background: rgba(0, 0, 0, 0.2);
 }
 .kb-menu-bar__caret {
   opacity: 0.8;
@@ -91,6 +119,7 @@
   top: 100%;
   left: 0;
   min-width: 12rem;
+  max-width: calc(100vw - 1rem);
   padding: 0.25rem 0;
   background: #0f2b3d;
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -154,13 +183,15 @@
   outline: none;
 }
 
-/* ---------- tata letak ---------- */
+/* ---------- tata letak (mode dihitung di layout.ts) ---------- */
 .kb-shell__body {
   flex: 1 1 auto;
   display: flex;
   min-height: 0;
-  padding: 0 0.5rem 0.5rem;
+  padding: 0 calc(0.5rem + env(safe-area-inset-right, 0px)) calc(0.5rem + env(safe-area-inset-bottom, 0px))
+    calc(0.5rem + env(safe-area-inset-left, 0px));
   gap: 0.5rem;
+  overflow: hidden;
 }
 .kb-shell__editor {
   flex: 1 1 auto;
@@ -174,20 +205,37 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
+  min-width: 0;
 }
+/* Tablet potret: [panggung | panel sprite] di atas, kode di bawah. */
 .kb-shell--stacked .kb-shell__body {
   flex-direction: column;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 .kb-shell--stacked .kb-shell__stage-column {
   order: -1;
   width: 100%;
+}
+.kb-shell--split .kb-shell__stage-column {
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+.kb-shell--split .kb-target-pane {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  margin-top: var(--kb-stage-menu-height);
+}
+/* Ponsel: panggung di tengah, panel sprite di tab "Sprite". */
+.kb-shell--phone .kb-shell__stage-column {
   align-items: center;
 }
-.kb-shell--stacked .kb-shell__editor {
-  flex: none;
-  height: max(26rem, 70vh);
+.kb-tabpanel .kb-target-pane {
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+  margin: 0;
+  padding: 0.5rem;
 }
 
 /* ---------- tab editor ---------- */
@@ -226,9 +274,11 @@
 .kb-shell .kb-tab:first-child {
   margin-left: 0;
 }
-.kb-shell .kb-tab:hover {
-  background: var(--kb-ui-secondary);
-  opacity: 1;
+@media (hover: hover) {
+  .kb-shell .kb-tab:hover {
+    background: var(--kb-ui-secondary);
+    opacity: 1;
+  }
 }
 .kb-shell .kb-tab--active,
 .kb-shell .kb-tab--active:hover {
@@ -427,6 +477,9 @@
   .kb-menu-bar__hide-narrow {
     display: none;
   }
+  .kb-shell .kb-tab svg {
+    display: none;
+  }
   .kb-shell .kb-menu-bar {
     padding: 0 0.5rem;
   }
@@ -440,8 +493,40 @@
     padding: 0 0.75rem;
   }
 }
-@media (max-width: 420px) {
+@media (max-width: 360px) {
   .kb-menu-bar__brand {
     display: none;
+  }
+}
+
+/* ---------- layar sentuh: target sentuh >= 44px ---------- */
+@media (any-pointer: coarse) {
+  .kb-menu__item {
+    min-height: 44px;
+    font-size: 0.85rem;
+  }
+  .kb-context-menu__item {
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+  }
+  .kb-alert__close {
+    width: 2.75rem;
+    height: 2.75rem;
+    margin: -0.5rem -0.5rem -0.5rem 0;
+  }
+  .kb-shell .kb-tab {
+    height: 90%;
+  }
+  .kb-shell .kb-tab--active,
+  .kb-shell .kb-tab--active:hover {
+    height: 100%;
+  }
+  .kb-button {
+    min-height: 44px;
+  }
+  /* Safari iOS memperbesar halaman saat input < 16px difokus. */
+  .kb-shell .kb-menu-bar__title,
+  .kb-modal__field input {
+    font-size: 16px;
   }
 }

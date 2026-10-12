@@ -411,7 +411,12 @@ export class Runtime implements IRuntimeInternal, ExtensionHost {
     // Thread yang selesai dalam satu frame tetap dihitung agar bendera hijau menyala.
     this.glows.updateRunStatus(all);
     this.lastStepDoneThreads = doneThreads;
-    this._renderer?.draw();
+    try {
+      this._renderer?.draw();
+    } catch (error) {
+      // Mis. konteks WebGL hilang di tablet: frame berikutnya mencoba lagi, event frame tetap dikirim.
+      this.emit("RUNTIME_ERROR", { error, blockId: null, opcode: null });
+    }
     if (this._refreshTargets) {
       this.emit("TARGETS_UPDATE", { emitProjectChanged: false });
       this._refreshTargets = false;

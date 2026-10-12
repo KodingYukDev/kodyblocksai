@@ -47,13 +47,22 @@
 }
 
 .kb-code-panel__lab {
-  font-size: 11px;
+  width: 52px;
+  min-height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  font-size: 10px;
   font-weight: 700;
+  line-height: 1.1;
   color: #fff;
-  background: #08786f;
-  border-radius: 4px;
-  padding: 4px 6px;
-  min-height: 24px;
+  background: linear-gradient(160deg, #15364c, #08786f);
+  border-radius: 6px;
+  padding: 3px 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+  touch-action: manipulation;
 }
 
 .kb-extlib {
@@ -181,9 +190,12 @@
   position: relative;
   background: #fff;
   border-radius: 8px;
-  max-width: min(720px, 100%);
+  max-width: min(1120px, 100%);
   max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
   overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .kb-ailab__close {
@@ -205,11 +217,44 @@
 
 /* Ruang untuk tombol Tambah Ekstensi & AI Lab di bawah menu kategori (scratch-gui: area tetap di kiri bawah). */
 .kb-code-panel .kb-ws-categories {
-  padding-bottom: 96px;
+  padding-bottom: 116px;
   overflow-y: auto;
 }
 .kb-code-panel__actions {
   background: #fff;
   border-top: 1px solid #d9e3f2;
   pointer-events: auto;
+}
+
+.kb-code-panel__ext {
+  touch-action: manipulation;
+}
+
+/* Sprite/panggung yang akan menerima skrip yang diseret ke daftar sprite. */
+.kb-drop-hover {
+  outline: 3px solid #08786f;
+  outline-offset: -3px;
+  border-radius: 8px;
+  transform: scale(1.06);
+  transition: transform 0.12s ease-out;
+}
+
+.kb-drop-received {
+  animation: kb-drop-wiggle 0.5s ease-in-out;
+}
+
+@keyframes kb-drop-wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-6deg); }
+  75% { transform: rotate(6deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kb-drop-hover { transform: none; transition: none; }
+  .kb-drop-received { animation: none; }
+}
+
+@media (pointer: coarse) {
+  .kb-extlib__back { min-height: 40px; padding: 8px 16px; }
+  .kb-ailab__close { min-width: 44px; min-height: 44px; }
 }

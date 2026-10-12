@@ -110,3 +110,17 @@
   box-shadow: 0 0 0 3px rgba(207, 99, 207, 0.25);
 }
 
+
+/* Tablet / iPad. */
+@media (pointer: coarse) {
+  .kb-sound__effect {
+    min-height: 48px;
+    min-width: 96px;
+    font-size: 14px;
+  }
+
+  .kb-sound__wave {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}

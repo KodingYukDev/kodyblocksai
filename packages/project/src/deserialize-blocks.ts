@@ -37,11 +37,13 @@ export interface BlockBuildContext {
 }
 
 type Entry = Json | Block;
+/** Penyimpanan kerja. Map (bukan objek + delete) agar tetap cepat untuk project besar; urutan sisip sama. */
+type Store = Map<string, Entry>;
 
-function freshId(ctx: BlockBuildContext, blocks: Record<string, Entry>, raw: JsonObject): string {
+function freshId(ctx: BlockBuildContext, blocks: Store, raw: JsonObject): string {
   for (let i = 0; i < 1000; i++) {
     const id = ctx.makeId();
-    if (!hasOwn(blocks, id) && !hasOwn(raw, id)) return id;
+    if (!blocks.has(id) && !hasOwn(raw, id)) return id;
   }
   throw new Error("makeId menghasilkan id bentrok terus-menerus");
 }
@@ -58,7 +60,7 @@ function deserializePrimitive(
   desc: Json[],
   parentId: string | null,
   isShadow: boolean,
-  blocks: Record<string, Entry>,
+  blocks: Store,
   raw: JsonObject,
 ): string | null {
   const kind = desc[0] as number;
@@ -86,7 +88,7 @@ function deserializePrimitive(
     block.x = desc[3] as number;
     block.y = desc[4] as number;
   }
-  blocks[id] = block;
+  blocks.set(id, block);
   return id;
 }
 
@@ -95,7 +97,7 @@ function inputDesc(
   v: Json | undefined,
   parentId: string,
   isShadow: boolean,
-  blocks: Record<string, Entry>,
+  blocks: Store,
   raw: JsonObject,
 ): string | null {
   if (Array.isArray(v)) return deserializePrimitive(ctx, v, parentId, isShadow, blocks, raw);
@@ -106,7 +108,7 @@ function deserializeInputs(
   ctx: BlockBuildContext,
   inputs: Json | undefined,
   parentId: string,
-  blocks: Record<string, Entry>,
+  blocks: Store,
   raw: JsonObject,
 ): Record<string, BlockInput> {
   const out: Record<string, BlockInput> = {};
@@ -156,7 +158,7 @@ function deserializeBlockObject(
   ctx: BlockBuildContext,
   id: string,
   b: JsonObject,
-  blocks: Record<string, Entry>,
+  blocks: Store,
   raw: JsonObject,
 ): Block {
   const block: Block = {
@@ -195,20 +197,21 @@ function repairDanglingRefs(blocks: Record<string, Block>): void {
  * dibuat ulang dengan id baru di akhir; primitif input ditambahkan di akhir sesuai urutan dibuat.
  */
 export function deserializeBlocks(ctx: BlockBuildContext, raw: JsonObject): Record<string, Block> {
-  const blocks: Record<string, Entry> = {};
+  const blocks: Store = new Map();
   const ids = Object.keys(raw);
-  for (const id of ids) blocks[id] = raw[id] as Json;
+  for (const id of ids) blocks.set(id, raw[id] as Json);
   for (const id of ids) {
     const entry = raw[id];
     if (Array.isArray(entry)) {
-      delete blocks[id];
+      blocks.delete(id);
       deserializePrimitive(ctx, entry, null, false, blocks, raw);
       continue;
     }
-    if (isObject(entry)) blocks[id] = deserializeBlockObject(ctx, id, entry, blocks, raw);
-    else delete blocks[id];
+    if (isObject(entry)) blocks.set(id, deserializeBlockObject(ctx, id, entry, blocks, raw));
+    else blocks.delete(id);
   }
-  const result = blocks as Record<string, Block>;
+  const result: Record<string, Block> = {};
+  for (const [id, b] of blocks) result[id] = b as Block;
   repairDanglingRefs(result);
   return result;
 }

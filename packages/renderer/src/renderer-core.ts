@@ -63,6 +63,20 @@ export interface RenderStats {
   backend: RenderBackend["kind"];
 }
 
+/** devicePixelRatio maksimum untuk buffer panggung (iPhone 3x -> 2x: piksel 2.25x lebih sedikit). */
+export const MAX_PIXEL_RATIO = 2;
+/** Sisi buffer terpanjang: aman untuk MAX_TEXTURE_SIZE/renderbuffer iPad lama dan GPU tablet murah. */
+export const MAX_BUFFER_DIMENSION = 2048;
+
+/** Rasio piksel buffer: dpr dibatasi MAX_PIXEL_RATIO, lalu diperkecil bila sisi buffer > MAX_BUFFER_DIMENSION. */
+export function bufferRatio(cssWidth: number, cssHeight: number, devicePixelRatio: number): number {
+  const dpr = Number.isFinite(devicePixelRatio) && devicePixelRatio > 0 ? devicePixelRatio : 1;
+  let ratio = Math.min(dpr, MAX_PIXEL_RATIO);
+  const longest = Math.max(cssWidth, cssHeight) * ratio;
+  if (longest > MAX_BUFFER_DIMENSION) ratio *= MAX_BUFFER_DIMENSION / longest;
+  return ratio;
+}
+
 export class KodyRenderer implements IRenderer, SceneView {
   readonly canvas: HTMLCanvasElement | null;
   private backend: RenderBackend;
@@ -135,14 +149,20 @@ export class KodyRenderer implements IRenderer, SceneView {
     this.backgroundColor3b[2] = blue * 255;
   }
 
-  /** Ukuran CSS kanvas; buffer = CSS x devicePixelRatio. Koordinat logis tidak berubah. */
+  /**
+   * Ukuran CSS kanvas; buffer = CSS x devicePixelRatio (dibatasi, lihat bufferRatio). Koordinat logis
+   * tidak berubah.
+   */
   resize(pixelsWide: number, pixelsTall: number): void {
-    const ratio = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
-    const w = Math.max(1, Math.round(pixelsWide * ratio));
-    const h = Math.max(1, Math.round(pixelsTall * ratio));
+    const cssW = Number.isFinite(pixelsWide) && pixelsWide > 0 ? pixelsWide : this.nativeSize[0];
+    const cssH = Number.isFinite(pixelsTall) && pixelsTall > 0 ? pixelsTall : this.nativeSize[1];
+    const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+    const ratio = bufferRatio(cssW, cssH, dpr);
+    const w = Math.max(1, Math.round(cssW * ratio));
+    const h = Math.max(1, Math.round(cssH * ratio));
     if (this.canvas && this.setCssSize) {
-      this.canvas.style.width = `${pixelsWide}px`;
-      this.canvas.style.height = `${pixelsTall}px`;
+      this.canvas.style.width = `${cssW}px`;
+      this.canvas.style.height = `${cssH}px`;
     }
     const [cw, ch] = this.backend.getBufferSize();
     if (cw !== w || ch !== h) {

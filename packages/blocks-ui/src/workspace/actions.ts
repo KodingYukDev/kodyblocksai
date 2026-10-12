@@ -30,9 +30,12 @@ import {
   variableDropdownOptions,
 } from "./variables";
 import { colourPicker, contextMenu, dropdownMenu, reportBubble, type MenuOption } from "./widgets";
+import { COMMENT_DEFAULT_SIZE } from "./comments";
+import { openTextEditor, numberRestrictor, type FieldSpec } from "./field-editor";
+
+export { numberRestrictor };
 
 type Region = "workspace" | "flyout" | "other";
-type FieldSpec = Exclude<ArgSpec, { type: "input_value" } | { type: "input_statement" } | { type: "field_image" }>;
 
 const VAR_TYPES: Record<string, VariableType> = { VARIABLE: "", LIST: "list", BROADCAST_OPTION: "broadcast_msg" };
 
@@ -54,13 +57,13 @@ export class EditorActions {
 
   showContextMenu(region: Region, blockId: string | null, clientX: number, clientY: number): void {
     const ws = this.ws;
-    const options = region === "flyout" ? this.flyoutMenu(blockId) : blockId ? this.blockMenu(blockId, clientX, clientY) : this.workspaceMenu();
+    const options = region === "flyout" ? this.flyoutMenu(blockId) : blockId ? this.blockMenu(blockId, clientX, clientY) : this.workspaceMenu(clientX, clientY);
     if (!options.length) return;
     const pos = this.rootLocal(clientX, clientY);
     ws.overlay.show(contextMenu(ws.doc, options, () => ws.overlay.hide()), pos.x, pos.y);
   }
 
-  private workspaceMenu(): MenuOption[] {
+  private workspaceMenu(clientX?: number, clientY?: number): MenuOption[] {
     const ws = this.ws;
     const blocks = ws.blocks();
     const tops = getTopBlocks(blocks);
@@ -69,6 +72,14 @@ export class EditorActions {
       { text: msg(this.L, "UNDO"), enabled: ws.undoStack.canUndo(), callback: () => ws.undo() },
       { text: msg(this.L, "REDO"), enabled: ws.undoStack.canRedo(), callback: () => ws.redo() },
       { text: msg(this.L, "CLEAN_UP"), enabled: tops.length > 1, callback: () => ws.cleanUp() },
+      {
+        text: msg(this.L, "ADD_COMMENT"),
+        enabled: !!ws.target,
+        callback: () => {
+          const xy = clientX !== undefined && clientY !== undefined ? ws.clientToWorkspace(clientX, clientY) : { x: (-ws.view.scrollX + 40) / ws.view.scale, y: (-ws.view.scrollY + 40) / ws.view.scale };
+          this.addComment(null, xy.x, xy.y);
+        },
+      },
       {
         text: deleteCount === 1 ? msg(this.L, "DELETE_BLOCK") : msg(this.L, "DELETE_X_BLOCKS", String(deleteCount)),
         enabled: deleteCount > 0,
@@ -91,7 +102,7 @@ export class EditorActions {
     const blocks = ws.blocks();
     const id = resolveDraggable(blocks, rawId);
     const block = id ? blocks[id] : undefined;
-    if (!id || !block) return this.workspaceMenu();
+    if (!id || !block) return this.workspaceMenu(clientX, clientY);
     const L = this.L;
     const count = countDeleteBlocks(blocks, id);
     const del: MenuOption = {
@@ -100,10 +111,14 @@ export class EditorActions {
       callback: () => void this.deleteBlock(id),
     };
     const dup: MenuOption = { text: msg(L, "DUPLICATE"), enabled: true, callback: () => this.duplicate(id, clientX, clientY) };
+    const existing = block.comment && ws.target?.comments?.[block.comment] ? block.comment : null;
+    const comment: MenuOption = existing
+      ? { text: msg(L, "REMOVE_COMMENT"), enabled: true, callback: () => ws.apply([{ type: "comment_delete", commentId: existing }], { refreshFlyout: false }) }
+      : { text: msg(L, "ADD_COMMENT"), enabled: !!ws.target, callback: () => this.addBlockComment(id) };
     if (block.opcode === "procedures_definition") {
-      return [del, { text: msg(L, "EDIT_PROCEDURE"), enabled: true, callback: () => void this.editProcedure(id) }];
+      return [comment, del, { text: msg(L, "EDIT_PROCEDURE"), enabled: true, callback: () => void this.editProcedure(id) }];
     }
-    const out: MenuOption[] = [dup, del];
+    const out: MenuOption[] = [dup, comment, del];
     if (block.opcode === "procedures_call") {
       out.push({ text: msg(L, "EDIT_PROCEDURE"), enabled: true, callback: () => void this.editProcedure(id) });
     }
@@ -146,6 +161,32 @@ export class EditorActions {
   }
 
   // ---------------------------------------------------------------------------
+  // Komentar
+  // ---------------------------------------------------------------------------
+
+  /** Buat komentar (workspace bila blockId null) di koordinat workspace lalu fokus ke teksnya. */
+  addComment(blockId: string | null, x: number, y: number): string | null {
+    const ws = this.ws;
+    if (!ws.target) return null;
+    const id = ws.newId();
+    ws.apply(
+      [{ type: "comment_create", commentId: id, blockId, text: "", x: Math.round(x), y: Math.round(y), width: COMMENT_DEFAULT_SIZE.width, height: COMMENT_DEFAULT_SIZE.height, minimized: false }],
+      { refreshFlyout: false },
+    );
+    ws.comments.focus(id);
+    return id;
+  }
+
+  /** Komentar blok di kanan blok (ScratchBlockComment). */
+  addBlockComment(blockId: string): string | null {
+    const ws = this.ws;
+    const p = allPlacements(ws.deps()).find((pl) => pl.layout.id === blockId);
+    const x = p ? p.x + p.layout.width + 32 : 0;
+    const y = p ? p.y : 0;
+    return this.addComment(blockId, x, y);
+  }
+
+  // ---------------------------------------------------------------------------
   // Hapus / duplikat
   // ---------------------------------------------------------------------------
 
@@ -177,11 +218,19 @@ export class EditorActions {
     const ws = this.ws;
     const blocks = ws.blocks();
     const pos = allPlacements(ws.deps(blocks)).find((p) => p.layout.id === id);
-    const xy = pos ? { x: pos.x, y: pos.y } : { x: 0, y: 0 };
+    const touch = ws.gesture.lastPointerType === "touch" || ws.gesture.lastPointerType === "pen";
+    // Di tablet tidak ada kursor yang bisa diikuti: salinan langsung diletakkan sedikit di kanan bawah.
+    const xy = pos ? { x: pos.x + (touch ? 24 : 0), y: pos.y + (touch ? 24 : 0) } : { x: 0, y: 0 };
     const copy = copyTree(blocks, id, ws.newId, xy, true);
     const root = copy[0];
     if (!root) return;
     const forward: EditorWorkspaceEvent[] = [{ type: "create", blocks: copy }];
+    if (touch) {
+      ws.apply(forward);
+      ws.selected = root.id;
+      ws.render();
+      return;
+    }
     const inverse = ws.applyRaw(forward);
     ws.gesture.beginDrag(root.id, null, clientX, clientY, forward, inverse, true);
   }
@@ -296,47 +345,7 @@ export class EditorActions {
       ws.overlay.show(picker, pos.x, pos.y);
       return;
     }
-    this.textEditor(spec, block, name, rect, commit);
-  }
-
-  private textEditor(spec: FieldSpec, block: Block, name: string, rect: DOMRect, commit: (v: string) => void): void {
-    const ws = this.ws;
-    const input = ws.doc.createElement("input");
-    input.type = "text";
-    input.className = "kb-field-editor";
-    const original = String(block.fields[name]?.value ?? "");
-    input.value = original;
-    const local = this.rootLocal(rect.left, rect.top);
-    input.style.left = `${local.x}px`;
-    input.style.top = `${local.y}px`;
-    input.style.minWidth = `${Math.max(rect.width, 40)}px`;
-    input.style.height = `${rect.height}px`;
-    input.style.borderRadius = `${rect.height / 2}px`;
-    const restrictor = numberRestrictor(spec, block.opcode);
-    if (restrictor) {
-      input.inputMode = "decimal";
-      input.addEventListener("beforeinput", (e) => {
-        const data = (e as InputEvent).data;
-        if (data && ![...data].every((ch) => restrictor.test(ch))) e.preventDefault();
-      });
-    }
-    let done = false;
-    const finish = (save: boolean): void => {
-      if (done) return;
-      done = true;
-      input.remove();
-      if (save && input.value !== original) commit(input.value);
-    };
-    input.addEventListener("keydown", (e) => {
-      e.stopPropagation();
-      if (e.key === "Enter") finish(true);
-      else if (e.key === "Escape") finish(false);
-    });
-    input.addEventListener("blur", () => finish(true));
-    input.addEventListener("pointerdown", (e) => e.stopPropagation());
-    ws.root.appendChild(input);
-    input.focus();
-    input.select();
+    openTextEditor(ws, spec, block, name, rect, commit);
   }
 
   // ---------------------------------------------------------------------------
@@ -527,29 +536,4 @@ function simulate(blocks: BlockMap, events: EditorWorkspaceEvent[]): BlockMap {
   const reducer = new BlockReducer(Object.values(blocks));
   for (const ev of events) reducer.apply(ev);
   return reducer.blocks;
-}
-
-/** FieldNumber.getNumRestrictor: digit, '.' bila desimal, '-' bila negatif, 'e' bila desimal. */
-export function numberRestrictor(spec: FieldSpec, shadowOpcode: string): RegExp | null {
-  let min: number | undefined;
-  let precision: number | undefined;
-  if (spec.type === "field_number") {
-    min = spec.min;
-    precision = spec.precision;
-  } else if (spec.type !== "field_angle") {
-    return null;
-  }
-  if (shadowOpcode === "math_positive_number") min = 0;
-  if (shadowOpcode === "math_whole_number") {
-    min = 0;
-    precision = 1;
-  }
-  if (shadowOpcode === "math_integer") precision = 1;
-  const decimal = precision === undefined || Number.isNaN(precision) || precision === 0 || Math.floor(precision) !== precision;
-  const negative = min === undefined || Number.isNaN(min) || min < 0;
-  let pattern = "[\\d]";
-  if (decimal) pattern += "|[\\.]";
-  if (negative) pattern += "|[-]";
-  if (decimal) pattern += "|[eE]";
-  return new RegExp(pattern);
 }

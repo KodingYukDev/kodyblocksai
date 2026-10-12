@@ -22,7 +22,9 @@ import { dynamicMenuOptions, optionLabel, type MenuContext } from "./dynamic-men
 import { GestureHandler } from "./gesture";
 import { msg, type Locale } from "./i18n";
 import { genUid } from "./ids";
-import { layoutStack, type LayoutDeps, type TextMeasurer } from "./layout";
+import { createStackMemo, forEachPlacement, layoutStack, type LayoutDeps, type StackLayout, type TextMeasurer } from "./layout";
+import { CommentLayer, withCommentDeletes } from "./comments";
+import { shareBlocksToTarget } from "./share-blocks";
 import { glowFilters, paintStack } from "./painter";
 import type { PreviewState } from "./preview";
 import { allProcedures } from "./procedures";
@@ -43,7 +45,12 @@ export interface WorkspaceExtras {
   onDropOutside?: (blocks: Block[], clientX: number, clientY: number) => void;
   /** Tampilkan opsi variabel awan (butuh server cloud). Default false. */
   allowCloudVariables?: boolean;
+  /** Dipanggil selama blok diseret (posisi klien) dan sekali dengan null saat seret selesai. */
+  onDragOver?: (point: { clientX: number; clientY: number; outside: boolean } | null) => void;
 }
+
+/** Jeda minimum (ms) antar pembaruan palet karena TARGETS_UPDATE. */
+export const TARGETS_UPDATE_INTERVAL = 250;
 
 interface SavedView {
   scrollX: number;
@@ -69,6 +76,9 @@ export class BlocksWorkspace implements WorkspaceController {
   readonly filters: { stack: string; replace: string };
   readonly actions: EditorActions;
   readonly gesture: GestureHandler;
+  readonly comments: CommentLayer;
+  /** Cache layout stack (dibuang lewat invalidateLayout saat bahasa/definisi/nama berubah). */
+  readonly memo = createStackMemo();
   locale: Locale;
   target: ITarget | null = null;
   view: Viewport;
@@ -80,6 +90,11 @@ export class BlocksWorkspace implements WorkspaceController {
   readonly glowing = new Set<string>();
   private defs = new Map<string, BlockDefinition>();
   private savedViews = new Map<string, SavedView>();
+  /** Elemen SVG stack yang sudah digambar, dipakai ulang bila layout & sorotannya sama. */
+  private paintCache = new Map<string, { layout: StackLayout; key: string; g: SVGGElement }>();
+  private stackIdsCache = new WeakMap<StackLayout, Set<string>>();
+  private rectCache: Rect | null = null;
+  private lastAssetSignature = "";
   private unsubs: (() => void)[] = [];
   private renderQueued = 0;
   private flyoutQueued = 0;
@@ -117,6 +132,7 @@ export class BlocksWorkspace implements WorkspaceController {
     svg(doc, "circle", { cx: 1, cy: 1, r: 1, fill: "#ddd" }, grid);
     svg(doc, "rect", { width: "100%", height: "100%", fill: `url(#${prefix}-grid)`, class: "kb-grid" }, this.mainSvg);
     this.canvas = svg(doc, "g", { class: "kb-canvas" }, this.mainSvg);
+    this.comments = new CommentLayer(this);
     this.dragSvg = svg(doc, "svg", { class: "kb-drag-surface" }, this.root);
     this.dragSvg.setAttribute("style", "position:absolute;inset:0;pointer-events:none;z-index:30;overflow:visible");
     const dragDefs = svg(doc, "defs", {}, this.dragSvg);
@@ -148,6 +164,15 @@ export class BlocksWorkspace implements WorkspaceController {
     }
     for (const d of allCoreDefinitions()) this.defs.set(d.opcode, d);
     for (const d of this.extras.definitions ?? []) this.defs.set(d.opcode, d);
+    this.invalidateLayout();
+  }
+
+  /** Buang cache layout & gambar (bahasa, definisi, nama variabel/aset/kelas AI berubah). */
+  invalidateLayout(): void {
+    this.memo.epoch++;
+    this.memo.map.clear();
+    this.paintCache.clear();
+    this.rectCache = null;
   }
 
   readonly lookup = (opcode: string): BlockDefinition | undefined => this.defs.get(opcode);
@@ -192,7 +217,10 @@ export class BlocksWorkspace implements WorkspaceController {
   }
 
   deps(blocks: BlockMap = this.blocks(), container: IBlocksContainer | null = this.container): LayoutDeps {
-    return { blocks, lookup: this.lookup, measure: this.measure, fieldText: (b, n) => this.fieldText(b, n, container) };
+    const deps: LayoutDeps = { blocks, lookup: this.lookup, measure: this.measure, fieldText: (b, n) => this.fieldText(b, n, container) };
+    // Palet memakai id baru setiap dibangun: cache hanya untuk workspace.
+    if (container === this.container) deps.memo = this.memo;
+    return deps;
   }
 
   variablesOfType(type: VariableType) {
@@ -212,6 +240,10 @@ export class BlocksWorkspace implements WorkspaceController {
         const v = local ?? stage?.variables[id];
         return v ? { id: v.id, name: v.name, type: v.type, isLocal: !!local, isCloud: v.isCloud } : undefined;
       },
+      getComment: (id) => {
+        const c = this.target?.comments?.[id];
+        return c ? { ...c } : undefined;
+      },
     };
   }
 
@@ -219,7 +251,10 @@ export class BlocksWorkspace implements WorkspaceController {
   applyRaw(events: readonly EditorWorkspaceEvent[]): EditorWorkspaceEvent[] {
     const container = this.container;
     if (!container) return [];
-    return applyWithInverse(events, this.inverseDeps(), (ev) => {
+    this.rectCache = null;
+    const comments = this.target?.comments;
+    const expanded = comments ? withCommentDeletes(events, comments, this.blocks()) : events;
+    return applyWithInverse(expanded, this.inverseDeps(), (ev) => {
       try {
         container.applyEditorEvent(ev);
       } catch (error) {
@@ -237,9 +272,67 @@ export class BlocksWorkspace implements WorkspaceController {
   }
 
   changed(refreshFlyout: boolean): void {
+    const flyoutStale = refreshFlyout && this.flyoutSignature() !== this.lastFlyoutSignature;
+    // Nama variabel/list/procedure ikut tampil di blok workspace: cache layout harus dibuang.
+    if (flyoutStale) this.invalidateLayout();
     this.render();
-    if (refreshFlyout && this.flyoutSignature() !== this.lastFlyoutSignature) this.refreshFlyout();
+    if (flyoutStale) this.refreshFlyout();
     this.props.onChange?.();
+  }
+
+  /**
+   * Tanda isi dropdown yang bergantung pada aset/target: nama kostum, latar, suara, sprite, dan
+   * menu dinamis ekstensi (mis. kelas AI hasil latihan). Berubah -> palet & label dibangun ulang.
+   */
+  assetSignature(): string {
+    const parts: string[] = [];
+    try {
+      const t = this.target;
+      const stage = this.runtime.getTargetForStage();
+      parts.push((t?.getCostumes() ?? []).map((c) => c.name).join("/"));
+      parts.push((t?.getSounds() ?? []).map((c) => c.name).join("/"));
+      parts.push((stage?.getCostumes() ?? []).map((c) => c.name).join("/"));
+      parts.push(this.runtime.targets.filter((x) => x.isOriginal && !x.isStage).map((x) => x.sprite.name).join("/"));
+      const rt = this.runtime as { getExtensionModule?(id: string): { getDynamicMenus?(): Record<string, (id: string | null) => unknown[]> } | undefined };
+      for (const [extId, menuName] of this.dynamicMenus()) {
+        const items = this.runtime.getExtensionInfo(extId)?.menus?.[menuName]?.items;
+        if (typeof items !== "string") continue;
+        const list = rt.getExtensionModule?.(extId)?.getDynamicMenus?.()[items]?.(t?.id ?? null) ?? [];
+        parts.push(`${extId}.${menuName}=${JSON.stringify(list)}`);
+      }
+    } catch {
+      /* runtime tiruan */
+    }
+    return parts.join("|");
+  }
+
+  /** Pasangan [ekstensi, menu] dari opcode menu ekstensi yang terdaftar. */
+  private dynamicMenus(): [string, string][] {
+    const out: [string, string][] = [];
+    for (const op of this.defs.keys()) {
+      const m = /^([A-Za-z0-9]+)_menu_(.+)$/.exec(op);
+      if (m?.[1] && m[2]) out.push([m[1], m[2]]);
+    }
+    return out;
+  }
+
+  /** Bangun ulang palet dan label blok (mis. setelah melatih model AI atau ganti nama aset). */
+  refreshToolbox(): void {
+    this.invalidateLayout();
+    this.render();
+    this.refreshFlyout();
+  }
+
+  /** Posisi tampilan terakhir untuk target lain (dipakai saat salin skrip ke sprite). */
+  viewFor(targetId: string): SavedView {
+    if (this.target?.id === targetId) return { scrollX: this.view.scrollX, scrollY: this.view.scrollY, scale: this.view.scale };
+    return this.savedViews.get(targetId) ?? { scrollX: 0, scrollY: 0, scale: this.props.initialScale ?? ZOOM_OPTIONS.startScale };
+  }
+
+  /** Salin skrip ke target lain (seret skrip ke sprite). Mengembalikan jumlah blok yang disalin. */
+  shareBlocks(blocks: Block[], targetId: string): number {
+    if (!this.target || targetId === this.target.id) return 0;
+    return shareBlocksToTarget(this.runtime, blocks, targetId, this.target.id, this.viewFor(targetId));
   }
 
   private lastFlyoutSignature = "";
@@ -273,7 +366,9 @@ export class BlocksWorkspace implements WorkspaceController {
   // Render
   // ---------------------------------------------------------------------------
 
-  contentRect(blocks: BlockMap = this.blocks()): Rect {
+  contentRect(given?: BlockMap): Rect {
+    if (!given && this.rectCache && !this.preview) return this.rectCache;
+    const blocks = given ?? this.blocks();
     const deps = this.deps(blocks);
     let r: Rect | null = null;
     for (const top of getTopBlocks(blocks)) {
@@ -291,25 +386,67 @@ export class BlocksWorkspace implements WorkspaceController {
   applyTransform(): void {
     const v = this.view;
     this.canvas.setAttribute("transform", `translate(${v.scrollX},${v.scrollY}) scale(${v.scale})`);
+    this.comments.applyTransform();
   }
 
   render(): void {
     if (this.disposed) return;
     const blocks = this.preview?.blocks ?? this.blocks();
     const deps = this.deps(blocks);
-    clear(this.canvas);
     const opts = { doc: this.doc, highlight: this.preview?.highlight ?? null, selected: this.selected };
+    const sel = this.selected;
+    const hl = this.preview?.highlight ?? null;
+    const nextCache = new Map<string, { layout: StackLayout; key: string; g: SVGGElement }>();
+    const nodes: SVGGElement[] = [];
+    let rect: Rect | null = null;
     for (const top of getTopBlocks(blocks)) {
-      if (this.hiddenTops.has(top)) continue;
       const b = blocks[top];
-      const g = paintStack(opts, layoutStack(deps, top), b?.x ?? 0, b?.y ?? 0);
-      if (this.glowing.has(top)) {
-        g.classList.add("kb-glow");
-        g.setAttribute("filter", `url(#${this.filters.stack})`);
+      const x = b?.x ?? 0;
+      const y = b?.y ?? 0;
+      const layout = layoutStack(deps, top);
+      rect = rect
+        ? { left: Math.min(rect.left, x), top: Math.min(rect.top, y), right: Math.max(rect.right, x + layout.width), bottom: Math.max(rect.bottom, y + layout.height) }
+        : { left: x, top: y, right: x + layout.width, bottom: y + layout.height };
+      if (this.hiddenTops.has(top)) continue;
+      const ids = this.stackIds(layout);
+      const key = `${sel && ids.has(sel) ? sel : ""}|${hl && ids.has(hl.blockId) ? `${hl.blockId}/${hl.input}` : ""}`;
+      const prev = this.paintCache.get(top);
+      let g: SVGGElement;
+      if (prev && prev.layout === layout && prev.key === key) {
+        g = prev.g;
+        g.setAttribute("transform", `translate(${x},${y})`);
+      } else {
+        g = paintStack(opts, layout, x, y);
       }
-      this.canvas.appendChild(g);
+      const glow = this.glowing.has(top);
+      g.classList.toggle("kb-glow", glow);
+      if (glow) g.setAttribute("filter", `url(#${this.filters.stack})`);
+      else g.removeAttribute("filter");
+      nextCache.set(top, { layout, key, g });
+      nodes.push(g);
     }
+    this.paintCache = nextCache;
+    if (!this.preview) {
+      this.rectCache = rect ?? { left: 0, top: 0, right: 0, bottom: 0 };
+      // Buang cache layout stack yang sudah tidak ada.
+      for (const id of [...this.memo.map.keys()]) if (!blocks[id]?.topLevel) this.memo.map.delete(id);
+    }
+    clear(this.canvas);
+    this.canvas.appendChild(this.comments.lines);
+    for (const g of nodes) this.canvas.appendChild(g);
+    this.comments.render(blocks, deps, this.hiddenTops);
     this.applyTransform();
+  }
+
+  private stackIds(layout: StackLayout): Set<string> {
+    let ids = this.stackIdsCache.get(layout);
+    if (!ids) {
+      const set = new Set<string>();
+      forEachPlacement(layout, 0, 0, (p) => set.add(p.layout.id));
+      ids = set;
+      this.stackIdsCache.set(layout, ids);
+    }
+    return ids;
   }
 
   scheduleRender(): void {
@@ -348,6 +485,7 @@ export class BlocksWorkspace implements WorkspaceController {
     this.syncFlyoutContainer(content);
     this.flyoutContent = content;
     this.lastFlyoutSignature = this.flyoutSignature();
+    this.lastAssetSignature = this.assetSignature();
     this.categories.setSections(content.sections);
     this.renderFlyout();
   }
@@ -467,7 +605,8 @@ export class BlocksWorkspace implements WorkspaceController {
     this.on("EDITING_TARGET_CHANGED", ({ target }) => {
       if (target !== this.target) this.reload(target?.id ?? null);
     });
-    this.on("TARGETS_UPDATE", () => this.actions.updateFlyoutPositions());
+    // TARGETS_UPDATE datang tiap frame selama sprite bergerak: perbarui palet paling sering 4x per detik.
+    this.on("TARGETS_UPDATE", () => this.throttledTargetsUpdate());
     this.on("MONITORS_UPDATE", () => {
       for (const item of this.flyoutContent.items) if (item.kind === "block" && item.checkbox) this.flyout.setChecked(item.rootId, this.isMonitorChecked(item.rootId));
     });
@@ -477,8 +616,40 @@ export class BlocksWorkspace implements WorkspaceController {
     });
     this.on("BLOCKSINFO_UPDATE", () => {
       this.rebuildDefinitions();
+      this.scheduleRender();
       this.scheduleFlyoutRefresh();
     });
+  }
+
+  private targetsTimer: ReturnType<typeof setTimeout> | null = null;
+  private targetsPending = false;
+
+  private throttledTargetsUpdate(): void {
+    if (this.targetsTimer) {
+      this.targetsPending = true;
+      return;
+    }
+    this.onTargetsUpdate();
+    this.targetsTimer = setTimeout(() => {
+      this.targetsTimer = null;
+      if (this.targetsPending && !this.disposed) {
+        this.targetsPending = false;
+        this.throttledTargetsUpdate();
+      }
+    }, TARGETS_UPDATE_INTERVAL);
+  }
+
+  /** onTargetsUpdate scratch-gui: posisi x/y di palet + nama aset/kelas AI di dropdown. */
+  private onTargetsUpdate(): void {
+    if (this.disposed) return;
+    this.actions.updateFlyoutPositions();
+    const sig = this.assetSignature();
+    if (sig !== this.lastAssetSignature) {
+      this.lastAssetSignature = sig;
+      this.invalidateLayout();
+      this.scheduleRender();
+      this.scheduleFlyoutRefresh();
+    }
   }
 
   glowStack(id: string, on: boolean): void {
@@ -511,6 +682,7 @@ export class BlocksWorkspace implements WorkspaceController {
     this.glowing.clear();
     this.selected = null;
     this.overlay.hide();
+    this.invalidateLayout();
     const saved = this.target ? this.savedViews.get(this.target.id) : undefined;
     this.onResize();
     if (saved) {
@@ -534,11 +706,14 @@ export class BlocksWorkspace implements WorkspaceController {
 
   dispose(): void {
     this.disposed = true;
+    if (this.targetsTimer) clearTimeout(this.targetsTimer);
+    this.targetsTimer = null;
     for (const u of this.unsubs) u();
     this.unsubs = [];
     this.resizeObserver?.disconnect();
     this.gesture.dispose();
     this.overlay.hide();
+    this.comments.dispose();
     this.flyout.dispose();
     this.root.remove();
   }

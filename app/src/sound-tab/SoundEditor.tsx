@@ -239,6 +239,10 @@ export function SoundEditor(props: SoundEditorProps) {
           setSelection(sel);
           if (sel) play(pcm, sel);
         }}
+        onPointerCancel={() => {
+          drag.current = null;
+          setDragSel(null);
+        }}
       >
         <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" aria-hidden="true">
           <path d={path} className="kb-sound__path" />

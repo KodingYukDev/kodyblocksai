@@ -38,5 +38,5 @@
       "@kody/ext-music/*": ["packages/ext-music/src/*"]
     }
   },
-  "include": ["packages", "app", "tests", "scripts/*.ts", "vite.config.ts", "vitest.config.ts", "playwright.config.ts", "aliases.ts"]
+  "include": ["packages", "app", "tests", "scripts/*.ts", "vite.config.ts", "vitest.config.ts", "playwright.config.ts", "playwright.prod.config.ts", "aliases.ts"]
 }

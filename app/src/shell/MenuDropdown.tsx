@@ -19,9 +19,11 @@ interface MenuDropdownProps {
   items: readonly DropdownItem[];
   /** Nama untuk pembaca layar bila label hanya ikon. */
   ariaLabel?: string;
+  /** Tonjolkan menu (mis. "Belajar AI"). */
+  highlight?: boolean;
 }
 
-export function MenuDropdown({ label, icon, items, ariaLabel }: MenuDropdownProps) {
+export function MenuDropdown({ label, icon, items, ariaLabel, highlight }: MenuDropdownProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const menuId = useId();
@@ -54,7 +56,7 @@ export function MenuDropdown({ label, icon, items, ariaLabel }: MenuDropdownProp
     <div className="kb-menu-dropdown" ref={ref} onKeyDown={onKeyDown}>
       <button
         type="button"
-        className={`kb-menu-bar__item${open ? " kb-menu-bar__item--open" : ""}`}
+        className={`kb-menu-bar__item${open ? " kb-menu-bar__item--open" : ""}${highlight ? " kb-menu-bar__item--highlight" : ""}`}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={open ? menuId : undefined}
@@ -62,7 +64,7 @@ export function MenuDropdown({ label, icon, items, ariaLabel }: MenuDropdownProp
         onClick={() => setOpen((v) => !v)}
       >
         {icon}
-        {label !== null && <span className="kb-menu-bar__label">{label}</span>}
+        {label !== null && label !== undefined && <span className="kb-menu-bar__label">{label}</span>}
         <CaretIcon className="kb-menu-bar__caret" />
       </button>
       {open && (

@@ -316,3 +316,17 @@ export function stringifyProject(project: SB3Project): string {
     return value;
   });
 }
+
+/**
+ * Satu sprite -> objek sprite.json (.sprite3), seperti sb3.serialize(runtime, targetId): target tunggal
+ * tanpa layerOrder. Daftar ekstensi ditambahkan sebagai `extensions` (diabaikan scratch-parser, membantu
+ * pemuat kita memasang ekstensi lebih dulu).
+ */
+export function serializeSprite(target: TargetState, options: SerializeOptions = {}): SB3Target & { extensions: string[] } {
+  if (target.isStage) throw new Error("Stage tidak bisa diekspor sebagai sprite");
+  const extensions = new Set<string>();
+  const obj = serializeTarget(target, 1, extensions, options) as SB3Target & { extensions: string[] };
+  delete (obj as Partial<SB3Target>).layerOrder;
+  obj.extensions = Array.from(extensions);
+  return obj;
+}

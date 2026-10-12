@@ -16,7 +16,7 @@ import { DEFAULT_SPEECH_LANGUAGE, parseLanguage } from "../speech/language";
 import { TTS_LANGUAGES } from "../speech/tts";
 import { round2 } from "../vision/coords";
 import type { ClassificationResult } from "../types";
-import { classMenuItems } from "./class-menu";
+import { classMenuItems, watchProjectModels } from "./class-menu";
 
 export const AITEXT_ID = "aiText";
 
@@ -29,20 +29,20 @@ export function getAiTextInfo(): ExtensionInfo {
       {
         opcode: "classifyText",
         blockType: "reporter",
-        text: "kelas dari teks [TEXT]",
+        text: "label dari teks [TEXT]",
         disableMonitor: true,
         arguments: { TEXT: { type: "string", defaultValue: "halo" } },
       },
       {
         opcode: "isTextClass",
         blockType: "Boolean",
-        text: "teks [TEXT] adalah [CLASS]?",
+        text: "AI menganggap teks [TEXT] sebagai [CLASS]?",
         arguments: { TEXT: { type: "string", defaultValue: "halo" }, CLASS: { type: "string", menu: "CLASS" } },
       },
       {
         opcode: "textConfidence",
         blockType: "reporter",
-        text: "keyakinan [CLASS] untuk teks [TEXT] (%)",
+        text: "kepercayaan untuk [CLASS] dari teks [TEXT] (%)",
         disableMonitor: true,
         arguments: { CLASS: { type: "string", menu: "CLASS" }, TEXT: { type: "string", defaultValue: "halo" } },
       },
@@ -84,6 +84,10 @@ export const createAiTextExtension: ExtensionFactory = (runtime: IRuntime): Exte
     return s;
   };
 
+  const offProject = watchProjectModels(runtime, "text", () => {
+    warnedNoModel = false;
+  });
+
   const classify = (text: unknown): ClassificationResult | null => {
     const clf = model().get();
     if (!clf || !clf.isTrained()) {
@@ -118,6 +122,7 @@ export const createAiTextExtension: ExtensionFactory = (runtime: IRuntime): Exte
       getClassMenu: () => classMenuItems(model().labels()),
     }),
     dispose: () => {
+      offProject();
       if (held) getAiServices(runtime).release(AITEXT_ID);
       held = false;
     },

@@ -131,7 +131,7 @@ test("alur bendera hijau: seret blok, jalankan, simpan .sb3, muat ulang", async 
   // 5. Simpan .sb3.
   await page.getByRole("button", { name: "File" }).click();
   const downloadPromise = page.waitForEvent("download");
-  await page.getByText("Simpan ke komputer").click();
+  await page.getByText("Simpan .sb3").click();
   const download = await downloadPromise;
   const sb3Path = info.outputPath("project.sb3");
   await download.saveAs(sb3Path);
@@ -147,7 +147,7 @@ test("alur bendera hijau: seret blok, jalankan, simpan .sb3, muat ulang", async 
   });
   await page.getByRole("button", { name: "File" }).click();
   const chooserPromise = page.waitForEvent("filechooser");
-  await page.getByText("Muat dari komputer").click();
+  await page.getByText("Buka .sb3").click();
   const chooser = await chooserPromise;
   await chooser.setFiles(sb3Path);
   await page.waitForFunction(() => {

@@ -4,6 +4,7 @@ import { useT } from "../shell/i18n";
 import {
   FullscreenIcon,
   GreenFlagIcon,
+  KeyboardIcon,
   LargeStageIcon,
   SmallStageIcon,
   StopIcon,
@@ -19,6 +20,9 @@ export interface StageHeaderProps {
   onGreenFlag(): void;
   onStop(): void;
   onSizeMode(mode: StageSizeMode): void;
+  /** Tombol panah di layar: undefined = tombol toggle tidak ditampilkan. */
+  keypadOpen?: boolean;
+  onToggleKeypad?(): void;
 }
 
 export function StageHeader(props: StageHeaderProps) {
@@ -52,6 +56,18 @@ export function StageHeader(props: StageHeaderProps) {
         )}
       </div>
       <div className="kb-stage-header__sizes">
+        {props.onToggleKeypad && (
+          <button
+            type="button"
+            className={`kb-stage-size kb-stage-size--keypad${props.keypadOpen ? " kb-stage-size--selected" : ""}`}
+            aria-pressed={!!props.keypadOpen}
+            aria-label={props.keypadOpen ? t("stage.keypadHide") : t("stage.keypad")}
+            title={props.keypadOpen ? t("stage.keypadHide") : t("stage.keypad")}
+            onClick={props.onToggleKeypad}
+          >
+            <KeyboardIcon size={20} />
+          </button>
+        )}
         {!full && props.showSizeToggle && (
           <div className="kb-stage-header__toggle" role="group" aria-label="Ukuran panggung">
             <button

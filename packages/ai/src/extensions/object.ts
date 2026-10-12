@@ -27,7 +27,7 @@ export function getAiObjectInfo(): ExtensionInfo {
     name: "Deteksi Objek",
     ...AI_COLOURS,
     blocks: [
-      ...commonVisionBlocks(),
+      ...commonVisionBlocks({ startAuto: "mulai deteksi objek terus-menerus", stopAuto: "berhenti deteksi objek" }),
       "---",
       { opcode: "objectCount", blockType: "reporter", text: "jumlah objek" },
       {

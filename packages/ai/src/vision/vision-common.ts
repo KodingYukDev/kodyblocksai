@@ -29,6 +29,14 @@ export const SOURCE_MENU: ExtensionMenu = {
   ],
 };
 
+export const CAMERA_MENU: ExtensionMenu = {
+  acceptReporters: false,
+  items: [
+    { text: "depan", value: "user" },
+    { text: "belakang", value: "environment" },
+  ],
+};
+
 export const AXIS_MENU: ExtensionMenu = {
   acceptReporters: false,
   items: [
@@ -37,7 +45,13 @@ export const AXIS_MENU: ExtensionMenu = {
   ],
 };
 
-export const commonVisionBlocks = (): ExtensionBlock[] => [
+export interface VisionBlockTexts {
+  /** Teks blok mulai analisis terus-menerus (mis. "mulai klasifikasi kamera"). */
+  startAuto?: string;
+  stopAuto?: string;
+}
+
+export const commonVisionBlocks = (texts: VisionBlockTexts = {}): ExtensionBlock[] => [
   {
     opcode: "videoToggle",
     blockType: "command",
@@ -51,6 +65,18 @@ export const commonVisionBlocks = (): ExtensionBlock[] => [
     arguments: { TRANSPARENCY: { type: "number", defaultValue: 50 } },
   },
   {
+    opcode: "setCamera",
+    blockType: "command",
+    text: "pakai kamera [CAMERA]",
+    arguments: { CAMERA: { type: "string", menu: "CAMERA", defaultValue: "user" } },
+  },
+  {
+    opcode: "startAuto",
+    blockType: "command",
+    text: texts.startAuto ?? "mulai deteksi kamera terus-menerus",
+  },
+  { opcode: "stopAuto", blockType: "command", text: texts.stopAuto ?? "berhenti deteksi" },
+  {
     opcode: "analyse",
     blockType: "command",
     text: "analisis gambar dari [SOURCE]",
@@ -58,16 +84,22 @@ export const commonVisionBlocks = (): ExtensionBlock[] => [
   },
 ];
 
+/** Opcode bersama semua ekstensi visi (dipakai katalog). */
+export const COMMON_VISION_OPCODES = ["videoToggle", "setVideoTransparency", "setCamera", "startAuto", "stopAuto", "analyse"] as const;
+
 export const commonVisionMenus = (): Record<string, ExtensionMenu> => ({
   VIDEO_STATE: VIDEO_STATE_MENU,
   SOURCE: SOURCE_MENU,
+  CAMERA: CAMERA_MENU,
 });
 
 export interface VisionCore<R> {
   readonly services: AiServices;
   /** Hasil analisis terakhir (kosong setelah stop / kamera mati). */
   result(): R;
-  primitives: Record<"videoToggle" | "setVideoTransparency" | "analyse", PrimitiveFn>;
+  /** true selama analisis terus-menerus berjalan. */
+  readonly running: boolean;
+  primitives: Record<(typeof COMMON_VISION_OPCODES)[number], PrimitiveFn>;
   dispose(): void;
 }
 
@@ -85,15 +117,27 @@ export function parseVideoState(value: unknown): "off" | "on" | "on-flipped" {
 
 export function createVisionCore<R>(runtime: IRuntime, opts: VisionCoreOptions<R>): VisionCore<R> {
   // Lazy: layanan (kamera, model) baru disentuh saat blok pertama dijalankan.
-  let state: { services: AiServices; gate: AnalysisGate<R>; offReset: () => void } | null = null;
-  const init = (): { services: AiServices; gate: AnalysisGate<R>; offReset: () => void } => {
+  type State = { services: AiServices; gate: AnalysisGate<R>; offReset: () => void; loop: unknown };
+  let state: State | null = null;
+  const stopLoop = (s: State | null): void => {
+    if (s && s.loop !== null) {
+      s.services.timers.clearInterval(s.loop);
+      s.loop = null;
+    }
+  };
+  const init = (): State => {
     if (state && !state.services.isDisposed) return state;
     const services = getAiServices(runtime);
     services.hold(opts.extensionId);
     const now = (): number => (typeof performance !== "undefined" ? performance.now() : Date.now());
     const gate = new AnalysisGate<R>(opts.empty, 1000 / AI_LIMITS.maxAnalysesPerSecond, now);
-    const offReset = services.events.on("reset", () => gate.invalidate());
-    state = { services, gate, offReset };
+    const s: State = { services, gate, offReset: () => {}, loop: null };
+    // Stop / tab tersembunyi / project baru: hasil lama dibuang DAN analisis terus-menerus berhenti.
+    s.offReset = services.events.on("reset", () => {
+      stopLoop(s);
+      gate.invalidate();
+    });
+    state = s;
     return state;
   };
 
@@ -124,6 +168,36 @@ export function createVisionCore<R>(runtime: IRuntime, opts: VisionCoreOptions<R
     setVideoTransparency: (args: BlockArgs) => {
       init().services.setVideoTransparency(Cast.toNumber(args.TRANSPARENCY));
     },
+    setCamera: async (args: BlockArgs) => {
+      const { services } = init();
+      await services.setCameraFacing(Cast.toString(args.CAMERA) === "environment" ? "environment" : "user");
+    },
+    startAuto: async () => {
+      const s = init();
+      if (s.loop !== null) return;
+      if (!(await s.services.ensureCamera(opts.extensionId))) return;
+      if (s.loop !== null || state !== s) return;
+      const tick = (): void => {
+        // Kamera dimatikan (tombol Matikan, izin dicabut): berhenti, jangan minta izin berulang-ulang.
+        if (!s.services.camera.enabled) {
+          stopLoop(s);
+          s.gate.invalidate();
+          return;
+        }
+        // Error (mis. model gagal dimuat) menghentikan loop supaya notice tidak berulang 15x per detik.
+        void s.gate.run(() =>
+          analyseOnce(s.services, "camera").catch((err: unknown) => {
+            stopLoop(s);
+            throw err;
+          }),
+        );
+      };
+      s.loop = s.services.timers.setInterval(tick, Math.ceil(1000 / AI_LIMITS.maxAnalysesPerSecond));
+      tick();
+    },
+    stopAuto: () => {
+      stopLoop(state);
+    },
     analyse: async (args: BlockArgs) => {
       const { services, gate } = init();
       const source: AiSource = Cast.toString(args.SOURCE) === "stage" ? "stage" : "camera";
@@ -136,11 +210,15 @@ export function createVisionCore<R>(runtime: IRuntime, opts: VisionCoreOptions<R
       return init().services;
     },
     result: () => state?.gate.result ?? opts.empty(),
+    get running() {
+      return state !== null && state.loop !== null;
+    },
     primitives,
     dispose: () => {
       if (!state) return;
       const s = state;
       state = null;
+      stopLoop(s);
       s.offReset();
       s.gate.invalidate();
       s.services.release(opts.extensionId);

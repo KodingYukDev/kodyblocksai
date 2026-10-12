@@ -6,9 +6,8 @@
   flex: none;
   max-width: 100%;
 }
-.kb-shell--stacked .kb-stage-pane {
+.kb-shell--phone .kb-stage-pane {
   align-items: center;
-  width: 100%;
 }
 .kb-shell .kb-stage-header {
   display: flex;
@@ -43,9 +42,11 @@
 .kb-shell .kb-stop::before {
   content: none;
 }
-.kb-shell .kb-flag:hover,
-.kb-shell .kb-stop:hover {
-  background: var(--kb-looks-light);
+@media (hover: hover) {
+  .kb-shell .kb-flag:hover,
+  .kb-shell .kb-stop:hover {
+    background: var(--kb-looks-light);
+  }
 }
 .kb-flag--active {
   background: var(--kb-looks-transparent) !important;
@@ -125,7 +126,9 @@
   inset: 0;
   z-index: 900;
   align-items: center;
-  padding: 0 0.1875rem;
+  max-width: none;
+  padding: env(safe-area-inset-top, 0px) calc(0.1875rem + env(safe-area-inset-right, 0px))
+    env(safe-area-inset-bottom, 0px) calc(0.1875rem + env(safe-area-inset-left, 0px));
   background: #fff;
 }
 .kb-stage-pane--fullscreen .kb-stage-header {
@@ -374,4 +377,87 @@
   border: 0;
   border-radius: 50%;
   cursor: pointer;
+}
+
+/* ---------- tombol panah di layar ---------- */
+.kb-stage-size--keypad {
+  margin-right: 0.25rem;
+  border-radius: 0.25rem;
+}
+.kb-keypad {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  max-width: 100%;
+  height: 52px;
+  margin-top: 8px;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.kb-stage-pane--fullscreen .kb-keypad {
+  align-self: center;
+}
+.kb-keypad__arrows {
+  display: flex;
+  flex: 1 1 auto;
+  gap: 0.375rem;
+  min-width: 0;
+}
+.kb-keypad__key {
+  display: grid;
+  place-items: center;
+  flex: 1 1 0;
+  min-width: 36px;
+  max-width: 56px;
+  height: 48px;
+  padding: 0;
+  font-family: var(--kb-font);
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--kb-text-primary);
+  background: #fff;
+  border: 2px solid var(--kb-ui-tertiary);
+  border-bottom-width: 4px;
+  border-radius: 12px;
+  cursor: pointer;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.kb-keypad__key:active {
+  color: #fff;
+  background: var(--kb-motion-primary);
+  border-color: #3373cc;
+  transform: translateY(2px);
+}
+.kb-keypad__key--space {
+  flex: 0 1 9rem;
+  max-width: 9rem;
+  min-width: 4rem;
+}
+
+/* ---------- layar sentuh ---------- */
+@media (any-pointer: coarse) {
+  .kb-shell .kb-flag,
+  .kb-shell .kb-stop {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  .kb-stage-size {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .kb-question__input {
+    height: 2.75rem;
+    font-size: 16px;
+  }
+  .kb-question__submit {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  .kb-list-input {
+    font-size: 16px;
+  }
 }

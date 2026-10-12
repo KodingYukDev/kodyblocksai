@@ -6,6 +6,10 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { IconClose } from "./icons";
 import type { TabStrings } from "./strings";
+import { useTouchReorder } from "./use-touch-reorder";
+
+/** Seret HTML5 hanya untuk mouse; di iPad `draggable` memicu seret sistem yang bentrok dengan tahan-lama. */
+const FINE_POINTER = typeof window !== "undefined" && typeof window.matchMedia === "function" && window.matchMedia("(pointer: fine)").matches;
 
 export interface AssetListItem {
   key: string;
@@ -41,6 +45,22 @@ export function AssetList(props: AssetListProps) {
   const [dragFrom, setDragFrom] = useState<number | null>(null);
   const [dropAt, setDropAt] = useState<number | null>(null);
   const listRef = useRef<HTMLOListElement>(null);
+  const touch = useTouchReorder(listRef, {
+    onArm: (i) => (setDragFrom(i), setDropAt(i)),
+    onHover: (i) => setDropAt(i),
+    onDrop: (from, to) => {
+      setDragFrom(null);
+      setDropAt(null);
+      props.onReorder(from, to);
+    },
+    onMenu: (i, x, y) => {
+      setDragFrom(null);
+      setDropAt(null);
+      props.onSelect(i);
+      setMenu({ index: i, x, y });
+    },
+    onCancel: () => (setDragFrom(null), setDropAt(null)),
+  });
 
   useEffect(() => {
     if (!menu) return;
@@ -94,10 +114,18 @@ export function AssetList(props: AssetListProps) {
             className={
               "kb-assetlist__tile" +
               (i === selectedIndex ? " kb-assetlist__tile--selected" : "") +
-              (dropAt === i && dragFrom !== null && dragFrom !== i ? " kb-assetlist__tile--drop" : "")
+              (dropAt === i && dragFrom !== null && dragFrom !== i ? " kb-assetlist__tile--drop" : "") +
+              (dragFrom === i ? " kb-assetlist__tile--dragging" : "")
             }
-            draggable
-            onClick={() => props.onSelect(i)}
+            draggable={FINE_POINTER}
+            onClick={() => {
+              if (touch.consumeClick()) return;
+              props.onSelect(i);
+            }}
+            onPointerDown={(e) => touch.onPointerDown(e, i)}
+            onPointerMove={touch.onPointerMove}
+            onPointerUp={touch.onPointerUp}
+            onPointerCancel={touch.onPointerCancel}
             onKeyDown={(e) => onKey(e, i)}
             onContextMenu={(e) => {
               e.preventDefault();
@@ -150,7 +178,12 @@ export function AssetList(props: AssetListProps) {
       </ol>
       <div className="kb-assetlist__add">{props.addMenu}</div>
       {menu ? (
-        <ul className="kb-contextmenu" role="menu" style={{ left: menu.x, top: menu.y }} onPointerDown={(e) => e.stopPropagation()}>
+        <ul
+          className="kb-contextmenu"
+          role="menu"
+          style={{ left: Math.max(4, Math.min(menu.x, (typeof window !== "undefined" ? window.innerWidth : 9999) - 180)), top: Math.max(4, Math.min(menu.y, (typeof window !== "undefined" ? window.innerHeight : 9999) - 160)) }}
+          onPointerDown={(e) => e.stopPropagation()}
+        >
           <li role="none">
             <button type="button" role="menuitem" onClick={() => (props.onDuplicate(menu.index), setMenu(null))}>
               {t.duplicate}

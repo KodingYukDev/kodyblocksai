@@ -15,7 +15,7 @@ import { createLoudnessMeter, type LoudnessMeter } from "./loudness";
 import { SoundPlayer } from "./sound-player";
 import type { AudioEngineOptions, KodyAudioEngine } from "./types";
 
-const GESTURE_EVENTS = ["pointerdown", "mousedown", "touchend", "keydown"] as const;
+const GESTURE_EVENTS = ["pointerdown", "mousedown", "touchstart", "touchend", "keydown"] as const;
 
 function defaultCreateContext(): AudioContext | null {
   const g = globalThis as unknown as {
@@ -85,19 +85,49 @@ class AudioEngineImpl implements KodyAudioEngine {
     return ctx;
   }
 
+  /**
+   * iOS/iPadOS Safari: AudioContext baru selalu "suspended" sampai ada gesture, dan bisa kembali
+   * "suspended"/"interrupted" setelah app ke latar belakang, telepon masuk, atau layar dikunci.
+   * Karena itu listener gesture tetap terpasang (cek state murah) sampai dispose, dan saat tab
+   * kembali terlihat context dicoba di-resume. Gesture pertama juga memutar buffer hening 1 sampel:
+   * WebKit lama hanya "membuka kunci" audio bila ada sumber yang benar-benar diputar dalam gesture.
+   */
   private installGestureResume(): void {
     const wanted = this.opts.resumeOnGesture ?? typeof document !== "undefined";
     if (!wanted || typeof document === "undefined") return;
+    let unlocked = false;
     const handler = (): void => {
-      void this.resume().then(() => {
-        if (this.ctx?.state === "running") this.gestureCleanup?.();
-      });
+      const ctx = this.ctx;
+      if (!ctx || this.disposed) return;
+      if (!unlocked) {
+        unlocked = true;
+        this.playSilentBuffer(ctx);
+      }
+      if (ctx.state !== "running") void this.resume();
     };
-    for (const ev of GESTURE_EVENTS) document.addEventListener(ev, handler, true);
+    const onVisible = (): void => {
+      if (document.visibilityState === "visible" && this.ctx && this.ctx.state !== "running") void this.resume();
+    };
+    const listenOpts: AddEventListenerOptions = { capture: true, passive: true };
+    for (const ev of GESTURE_EVENTS) document.addEventListener(ev, handler, listenOpts);
+    document.addEventListener("visibilitychange", onVisible);
     this.gestureCleanup = () => {
-      for (const ev of GESTURE_EVENTS) document.removeEventListener(ev, handler, true);
+      for (const ev of GESTURE_EVENTS) document.removeEventListener(ev, handler, listenOpts);
+      document.removeEventListener("visibilitychange", onVisible);
       this.gestureCleanup = null;
     };
+  }
+
+  private playSilentBuffer(ctx: AudioContext): void {
+    try {
+      const buffer = ctx.createBuffer(1, 1, ctx.sampleRate || 22050);
+      const source = ctx.createBufferSource();
+      source.buffer = buffer;
+      source.connect(ctx.destination);
+      source.start(0);
+    } catch {
+      // Context tertutup atau mock tanpa dukungan: tidak penting, resume() tetap dicoba.
+    }
   }
 
   private getChain(soundId: string): EffectChain | null {

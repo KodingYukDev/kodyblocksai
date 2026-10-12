@@ -72,6 +72,8 @@ export function PaintEditor({ costume, costumeIndex, strings: t, onSave, onRenam
   const savedAssetId = useRef<string | null>(null);
   const saveTimer = useRef<number | null>(null);
   const pendingSave = useRef<(() => Promise<void>) | null>(null);
+  /** Satu jari/pensil sekaligus: jari kedua (atau telapak tangan saat memakai Apple Pencil) diabaikan. */
+  const activePointer = useRef<number | null>(null);
 
   // ---- simpan (debounce) ----
   const flushSave = useCallback(() => {
@@ -142,11 +144,11 @@ export function PaintEditor({ costume, costumeIndex, strings: t, onSave, onRenam
     if (mode === "bitmap" && canvasRef.current) paintPixels(canvasRef.current, pixels);
   }, [mode, pixels, pixVer]);
 
-  const previewUrl = useMemo(() => {
-    if (mode !== "vector" || typeof URL.createObjectURL !== "function") return null;
-    return URL.createObjectURL(new Blob([previewSvg(doc)], { type: "image/svg+xml" }));
-  }, [doc, mode]);
-  useEffect(() => () => void (previewUrl && URL.revokeObjectURL(previewUrl)), [previewUrl]);
+  // data: URL (bukan blob:) supaya tidak ada URL yang dicabut saat <img> masih memuat (StrictMode / goresan cepat).
+  const previewUrl = useMemo(
+    () => (mode === "vector" ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(previewSvg(doc))}` : null),
+    [doc, mode],
+  );
 
   // ---- riwayat ----
   const commitVector = (before: VectorDoc, after: VectorDoc): void => {
@@ -195,7 +197,14 @@ export function PaintEditor({ costume, costumeIndex, strings: t, onSave, onRenam
 
   const onDown = (e: RPointerEvent<HTMLDivElement>): void => {
     if (e.button !== 0 || textAt) return;
-    e.currentTarget.setPointerCapture?.(e.pointerId);
+    if (activePointer.current !== null && activePointer.current !== e.pointerId) return;
+    activePointer.current = e.pointerId;
+    e.preventDefault();
+    try {
+      e.currentTarget.setPointerCapture?.(e.pointerId);
+    } catch {
+      // pointer sudah dilepas (Safari bisa melempar InvalidPointerId)
+    }
     const p = toCanvas(e);
     if (mode === "vector") {
       const s = new VectorToolSession(tool, settings);
@@ -227,6 +236,7 @@ export function PaintEditor({ costume, costumeIndex, strings: t, onSave, onRenam
   };
 
   const onMove = (e: RPointerEvent<HTMLDivElement>): void => {
+    if (activePointer.current !== e.pointerId) return;
     const p = toCanvas(e);
     const mods = { shift: e.shiftKey };
     if (mode === "vector" && vSession.current) {
@@ -243,6 +253,8 @@ export function PaintEditor({ costume, costumeIndex, strings: t, onSave, onRenam
   };
 
   const onUp = (e: RPointerEvent<HTMLDivElement>): void => {
+    if (activePointer.current !== e.pointerId) return;
+    activePointer.current = null;
     const p = toCanvas(e);
     const mods = { shift: e.shiftKey };
     if (mode === "vector" && vSession.current) {
@@ -403,6 +415,12 @@ export function PaintEditor({ costume, costumeIndex, strings: t, onSave, onRenam
             <button type="button" className="kb-btn" onClick={() => void convert()}>
               {mode === "vector" ? t.convertToBitmap : t.convertToVector}
             </button>
+            {(mode === "vector" && selectedId !== null) || (mode === "bitmap" && selection) ? (
+              // Tablet tidak punya tombol Delete: hapus pilihan lewat tombol.
+              <button type="button" className="kb-btn" onClick={deleteSelected}>
+                {t.deleteSelection}
+              </button>
+            ) : null}
             <span className="kb-paint__mode">{mode === "vector" ? t.vectorMode : t.bitmapMode}</span>
           </div>
         </div>

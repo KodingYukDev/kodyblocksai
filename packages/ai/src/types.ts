@@ -50,8 +50,10 @@ export interface ObjectResult extends BoxResult {
 export type AiSource = "camera" | "stage";
 
 /** Model terlatih dari AI Lab yang disimpan di project (TargetState.extensionState). */
+export type TrainedKind = "image" | "text" | "audio" | "pose" | "hand";
+
 export interface TrainedClassifier {
-  kind: "image" | "text" | "audio";
+  kind: TrainedKind;
   version: 1;
   labels: string[];
   /** Data model (bobot KNN / dense head) ter-serialisasi; ukuran dibatasi AI_LIMITS. */
@@ -94,6 +96,9 @@ export interface DetectorFactories {
 export type DetectorKind = keyof DetectorFactories;
 
 export type AiDevice = "camera" | "microphone";
+
+/** Kamera depan (selfie, dicerminkan) atau belakang (tidak dicerminkan). */
+export type CameraFacing = "user" | "environment";
 
 export type AiNoticeLevel = "info" | "warning" | "error";
 

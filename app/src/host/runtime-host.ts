@@ -9,7 +9,7 @@ import type { IRenderer, IRuntime } from "@kody/engine";
 import { createRuntime } from "@kody/engine";
 import { createAudioEngine, type KodyAudioEngine } from "@kody/audio";
 import { createRenderer } from "@kody/renderer";
-import { configureAiServices } from "@kody/ai";
+import { aiNetworkConsent, configureAiServices, type NetworkFeature } from "@kody/ai";
 import { createRuntimeController } from "../shell/runtime-controller";
 import { runtimeToModel } from "../shell/runtime-model";
 import type { ShellController } from "../shell/types";
@@ -21,6 +21,7 @@ import { createRuntimeAssetHost } from "./asset-host";
 import { ExtensionHost } from "./extensions";
 import { createMediaLoader } from "./media-loader";
 import { createProjectIO } from "./project-io";
+import { exportSprite } from "./sprite-install";
 
 export interface RuntimeHostOptions {
   kodySvg: string;
@@ -55,13 +56,8 @@ export function createRuntimeHost(opts: RuntimeHostOptions): RuntimeHost {
   const media = createMediaLoader({ getRenderer: () => runtime.renderer, getAudio: () => audio });
 
   // Kamera bersama + izin internet AI (speech recognition online) hanya setelah persetujuan pengguna.
-  const consent =
-    opts.requestNetworkConsent ??
-    ((feature: string) =>
-      Promise.resolve(
-        typeof window !== "undefined" &&
-          window.confirm(`Fitur "${feature}" memakai layanan internet browser. Izinkan untuk sesi ini?`),
-      ));
+  // Default: dialog di dalam app (AiConsentDialog di App.tsx); tanpa dialog terpasang = ditolak.
+  const consent = opts.requestNetworkConsent ?? ((feature: string) => aiNetworkConsent.request(feature as NetworkFeature));
   configureAiServices(runtime, { requestNetworkConsent: (f) => consent(String(f)) });
 
   const projectIO = createProjectIO({
@@ -105,6 +101,8 @@ export function createRuntimeHost(opts: RuntimeHostOptions): RuntimeHost {
     loader: opts.loader,
     chooseFromLibrary: opts.chooseFromLibrary,
     locale: opts.locale ?? "id",
+    loadExtensions: (ids) => extensions.loadForProject(ids),
+    ...(opts.onWarnings ? { onWarnings: opts.onWarnings } : {}),
   });
 
   const base = createRuntimeController({
@@ -125,6 +123,21 @@ export function createRuntimeHost(opts: RuntimeHostOptions): RuntimeHost {
     resizeStage(w, h) {
       lastSize = [w, h];
       base.resizeStage(w, h);
+    },
+    renameSprite(id, newName) {
+      // vm.renameSprite: menu blok yang menyebut sprite ini (ke arah, sentuh, kloning, dst.) ikut berganti.
+      const t = runtime.getTargetById(id);
+      const oldName = t?.sprite.name;
+      base.renameSprite(id, newName);
+      const name = t?.sprite.name;
+      if (oldName !== undefined && name !== undefined && name !== oldName) {
+        type Renamer = { updateAssetName?(o: string, n: string, k: string): void };
+        for (const other of runtime.targets) (other.blocks as Renamer).updateAssetName?.(oldName, name, "sprite");
+        runtime.emitProjectChanged();
+      }
+    },
+    exportSprite(id) {
+      return exportSprite(runtime, id);
     },
     greenFlag() {
       // Gesture pengguna: buka kunci AudioContext seperti scratch-gui.

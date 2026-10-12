@@ -4,7 +4,7 @@
  * sehingga undo cukup menerapkan daftar kebalikan dalam urutan terbalik.
  * Stack dikosongkan saat ganti target (scratch-gui: workspace.clearUndo() di onWorkspaceUpdate).
  */
-import type { Block, EditorWorkspaceEvent, VariableType } from "@kody/engine";
+import type { Block, CommentState, EditorWorkspaceEvent, VariableType } from "@kody/engine";
 
 export type BlockGetter = (id: string) => Block | undefined;
 
@@ -19,6 +19,8 @@ export interface VarInfo {
 export interface InverseDeps {
   getBlock: BlockGetter;
   getVariable(id: string): VarInfo | undefined;
+  /** Komentar target (untuk undo komentar). */
+  getComment?(id: string): CommentState | undefined;
 }
 
 /** Batas jumlah grup (Blockly.Workspace.prototype.MAX_UNDO). */
@@ -129,6 +131,30 @@ export function inverseOf(ev: EditorWorkspaceEvent, deps: InverseDeps): EditorWo
     case "var_rename": {
       const v = deps.getVariable(ev.varId);
       return v ? [{ type: "var_rename", varId: v.id, newName: v.name }] : [];
+    }
+    case "comment_create":
+      return [{ type: "comment_delete", commentId: ev.commentId }];
+    case "comment_delete": {
+      const c = deps.getComment?.(ev.commentId);
+      return c
+        ? [{ type: "comment_create", commentId: c.id, blockId: c.blockId, text: c.text, x: c.x, y: c.y, width: c.width, height: c.height, minimized: c.minimized }]
+        : [];
+    }
+    case "comment_change": {
+      const c = deps.getComment?.(ev.commentId);
+      if (!c) return [];
+      const back: Extract<EditorWorkspaceEvent, { type: "comment_change" }> = { type: "comment_change", commentId: c.id };
+      if (ev.text !== undefined) back.text = c.text;
+      if (ev.minimized !== undefined) back.minimized = c.minimized;
+      if (ev.width !== undefined && ev.height !== undefined) {
+        back.width = c.width;
+        back.height = c.height;
+      }
+      return [back];
+    }
+    case "comment_move": {
+      const c = deps.getComment?.(ev.commentId);
+      return c ? [{ type: "comment_move", commentId: c.id, x: c.x, y: c.y }] : [];
     }
     default:
       return [];

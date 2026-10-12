@@ -74,6 +74,8 @@ export interface ShellController {
   renameSprite(targetId: string, newName: string): void;
   duplicateSprite(targetId: string): Promise<void>;
   deleteSprite(targetId: string): void;
+  /** Ekspor sprite sebagai .sprite3 (vm.exportSprite). Opsional: tidak ada di mock. */
+  exportSprite?(targetId: string): Promise<{ data: Uint8Array; fileName: string }>;
   addSprite(method: AddMethod, files?: readonly PickedFile[]): Promise<void>;
   addBackdrop(method: AddMethod, files?: readonly PickedFile[]): Promise<void>;
 

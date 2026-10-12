@@ -86,6 +86,55 @@ const CSS = `
 .kb-proc-adders button{flex:1;min-width:100px;padding:10px 8px;border-radius:8px;border:1px solid hsla(0,0%,0%,.15);background:#fff;cursor:pointer;
   font-size:.75rem;white-space:pre-line;color:${UI_COLOURS.textFieldText}}
 .kb-proc-adders button:hover{border-color:${UI_COLOURS.toolboxHover}}
+.kb-ws{-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:contain}
+.kb-ws-categories,.kb-dropdown{touch-action:pan-y;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.kb-drag-delete .kb-drag-surface{opacity:.5}
+.kb-drag-delete .kb-ws-flyout{box-shadow:inset 0 0 0 3px hsla(0,80%,60%,.35)}
+.kb-comments{position:absolute;left:0;top:0;width:0;height:0;transform-origin:0 0;z-index:2;pointer-events:none}
+.kb-comment{position:absolute;display:flex;flex-direction:column;pointer-events:auto;background:#fef49c;border:1px solid #bca903;
+  border-radius:8px;box-shadow:0 2px 4px hsla(0,0%,0%,.15);overflow:hidden;touch-action:none}
+.kb-comment-top{flex:none;height:32px;display:flex;align-items:center;gap:4px;padding:0 4px;background:#feec5c;cursor:move;touch-action:none}
+.kb-comment-label{flex:1;min-width:0;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#575e75}
+.kb-comment-toggle,.kb-comment-close{flex:none;width:28px;height:28px;border:none;border-radius:6px;background:transparent;color:#575e75;
+  font-size:16px;line-height:28px;cursor:pointer;padding:0}
+.kb-comment-close{margin-left:auto}
+.kb-comment-toggle:hover,.kb-comment-close:hover{background:hsla(0,0%,0%,.08)}
+.kb-comment-text{flex:1;min-height:0;width:100%;resize:none;border:none;outline:none;background:transparent;padding:6px 8px 16px;
+  font:12px ${FONT_FAMILY};color:#575e75;touch-action:pan-y;user-select:text;-webkit-user-select:text}
+.kb-comment--min .kb-comment-text,.kb-comment--min .kb-comment-resize{display:none}
+.kb-comment-resize{position:absolute;right:0;bottom:0;width:20px;height:20px;cursor:nwse-resize;touch-action:none;
+  background:linear-gradient(135deg,transparent 50%,#bca903 50%,#bca903 60%,transparent 60%,transparent 75%,#bca903 75%,#bca903 85%,transparent 85%)}
+.kb-numpad{position:absolute;z-index:61;display:grid;grid-template-columns:repeat(3,52px);gap:6px;padding:8px;background:#fff;border-radius:8px;
+  box-shadow:0 0 8px 1px hsla(0,0%,0%,.3)}
+.kb-numpad-key{height:48px;border:1px solid hsla(0,0%,0%,.15);border-radius:8px;background:#f4f6fa;font:bold 20px ${FONT_FAMILY};
+  color:${UI_COLOURS.textFieldText};cursor:pointer;touch-action:manipulation;padding:0}
+.kb-numpad-key:active{background:#d9e3f2}
+.kb-numpad-back{grid-column:span 1}
+.kb-numpad-done{grid-column:span 2;background:${UI_COLOURS.toolboxHover};border-color:${UI_COLOURS.toolboxHover};color:#fff;font-size:16px}
+.kb-angle{position:absolute;z-index:61;background:#fff;border-radius:50%;padding:6px;box-shadow:0 0 8px 1px hsla(0,0%,0%,.3);touch-action:none}
+.kb-angle svg{width:140px;height:140px;cursor:pointer}
+.kb-piano{position:absolute;z-index:61;background:#fff;border-radius:8px;padding:8px;box-shadow:0 0 8px 1px hsla(0,0%,0%,.3)}
+.kb-piano-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;font-size:13px;color:${UI_COLOURS.textFieldText}}
+.kb-piano-oct{width:40px;height:36px;border:1px solid hsla(0,0%,0%,.15);border-radius:8px;background:#f4f6fa;cursor:pointer}
+.kb-piano-keys{display:flex;gap:2px}
+.kb-piano-key{width:30px;height:84px;border:1px solid #c6c6c6;border-radius:0 0 6px 6px;background:#fff;font-size:9px;display:flex;
+  align-items:flex-end;justify-content:center;padding:0 0 4px;cursor:pointer;color:#575e75;touch-action:manipulation}
+.kb-piano-black{background:#575e75;color:#fff;height:60px}
+.kb-piano-key.kb-selected{background:#cf63cf;color:#fff}
+.kb-ws .kb-checkbox rect.kb-hit{fill:transparent;stroke:none;pointer-events:all}
+@media (pointer:coarse){
+  .kb-zoom button{width:48px;height:48px}
+  .kb-zoom svg{width:24px;height:24px}
+  .kb-menu{font-size:15px;min-width:180px}
+  .kb-menu-item{padding:12px 20px 12px 28px;min-height:44px}
+  .kb-dropdown{max-height:min(60vh,420px)}
+  .kb-dropdown-item{padding:12px 16px 12px 32px;min-height:44px}
+  .kb-ws-cat{padding:.5rem 0}
+  .kb-comment-text,.kb-field-editor{font-size:16px}
+  .kb-colour{width:260px}
+  .kb-colour input[type=range]{height:32px}
+  .kb-dialog input[type=text]{font-size:16px}
+}
 `;
 
 export function injectStyles(doc: Document): void {

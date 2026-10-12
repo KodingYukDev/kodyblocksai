@@ -315,7 +315,7 @@
 }
 
 /* ---------- modal ---------- */
-.kb-modal {
+.kb-amodal {
   position: fixed;
   inset: 0;
   z-index: 100;
@@ -328,7 +328,7 @@
   color: var(--kb-text-primary, #575e75);
 }
 
-.kb-modal__box {
+.kb-amodal__box {
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -339,7 +339,7 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
-.kb-modal__header {
+.kb-amodal__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -350,12 +350,12 @@
   color: #ffffff;
 }
 
-.kb-modal__header h2 {
+.kb-amodal__header h2 {
   margin: 0;
   font-size: 16px;
 }
 
-.kb-modal__close,
+.kb-amodal__close,
 .kb-library__back {
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 16px;
@@ -366,7 +366,7 @@
   cursor: pointer;
 }
 
-.kb-modal__footer {
+.kb-amodal__footer {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
@@ -463,5 +463,61 @@
 @media (prefers-reduced-motion: reduce) {
   .kb-record__meter span {
     transition: none;
+  }
+}
+
+.kb-assetlist__tile {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+
+.kb-assetlist__tile--dragging {
+  opacity: 0.55;
+  transform: scale(0.96);
+}
+
+.kb-camera,
+.kb-record {
+  max-width: 100%;
+}
+
+/* Tablet / iPad: target sentuh minimal 44px, menu & tombol lebih besar. */
+@media (pointer: coarse) {
+  .kb-assetlist {
+    width: 108px;
+    flex-basis: 108px;
+  }
+
+  .kb-assetlist__thumb {
+    width: 68px;
+    height: 54px;
+  }
+
+  .kb-assetlist__tile {
+    font-size: 12px;
+  }
+
+  .kb-assetlist__delete {
+    top: -8px;
+    right: -8px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .kb-contextmenu button {
+    min-height: 44px;
+    font-size: 15px;
+  }
+
+  .kb-btn {
+    min-height: 44px;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 15px;
+  }
+
+  .kb-amodal__close {
+    min-height: 44px;
+    min-width: 44px;
   }
 }

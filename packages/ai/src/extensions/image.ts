@@ -11,7 +11,7 @@ import { AI_COLOURS } from "../colours";
 import { getAiServices } from "../services";
 import type { ClassificationResult } from "../types";
 import { round2 } from "../vision/coords";
-import { classMenuItems } from "./class-menu";
+import { classMenuItems, watchProjectModels } from "./class-menu";
 import { commonVisionBlocks, commonVisionMenus, createVisionCore } from "../vision/vision-common";
 
 export const AIIMAGE_ID = "aiImage";
@@ -22,26 +22,26 @@ export function getAiImageInfo(): ExtensionInfo {
     name: "Klasifikasi Gambar",
     ...AI_COLOURS,
     blocks: [
-      ...commonVisionBlocks(),
+      ...commonVisionBlocks({ startAuto: "mulai klasifikasi kamera", stopAuto: "berhenti klasifikasi" }),
       "---",
-      { opcode: "classLabel", blockType: "reporter", text: "kelas gambar" },
+      { opcode: "classLabel", blockType: "reporter", text: "label dari kamera" },
       {
         opcode: "classConfidence",
         blockType: "reporter",
-        text: "keyakinan [CLASS] (%)",
+        text: "kepercayaan untuk [CLASS] (%)",
         disableMonitor: true,
         arguments: { CLASS: { type: "string", menu: "CLASS" } },
       },
       {
         opcode: "isClass",
         blockType: "Boolean",
-        text: "gambar adalah [CLASS]?",
+        text: "AI melihat [CLASS]?",
         arguments: { CLASS: { type: "string", menu: "CLASS" } },
       },
       {
         opcode: "whenClass",
         blockType: "hat",
-        text: "ketika gambar dikenali sebagai [CLASS]",
+        text: "ketika AI mengenali [CLASS]",
         isEdgeActivated: true,
         arguments: { CLASS: { type: "string", menu: "CLASS" } },
       },
@@ -82,6 +82,10 @@ export const createAiImageExtension: ExtensionFactory = (runtime: IRuntime): Ext
     },
   });
 
+  const offProject = watchProjectModels(runtime, "image", () => {
+    warnedNoModel = false;
+  });
+
   const isClass = (label: unknown): boolean => {
     const r = core.result();
     const wanted = Cast.toString(label);
@@ -100,6 +104,9 @@ export const createAiImageExtension: ExtensionFactory = (runtime: IRuntime): Ext
     getDynamicMenus: () => ({
       getClassMenu: () => classMenuItems(model().labels()),
     }),
-    dispose: () => core.dispose(),
+    dispose: () => {
+      offProject();
+      core.dispose();
+    },
   };
 };

@@ -73,6 +73,13 @@ const RECIPES: Recipe[] = [
   { id: "gitar", name: "Petik Gitar", nameEn: "Guitar Pluck", category: "musik", tags: ["gitar", "senar"], make: () => mix(1.2, [pluck(midi(52), 1.2, 80)], [pluck(midi(59), 1.1, 81), 0.04], [pluck(midi(64), 1.0, 82), 0.08]) },
   { id: "xilofon", name: "Xilofon", nameEn: "Xylophone", category: "musik", tags: ["nada", "pukul"], make: () => concat(...[72, 76, 79, 84].map((n) => tone(midi(n), 0.18, "sine", { attack: 0.001, decay: 0.17, sustain: 0, release: 0.01 }, 0.5))) },
   { id: "bass", name: "Bass", nameEn: "Bass", category: "musik", tags: ["nada", "rendah"], make: () => pluck(midi(36), 0.9, 90, 0.8, 0.998) },
+  // Bunyi khas Indonesia & tambahan (disintesis sendiri).
+  { id: "angklung", name: "Angklung", nameEn: "Angklung", category: "musik", tags: ["bambu", "sunda", "indonesia", "nada"], make: () => tremolo(mix(1, [tone(midi(72), 1, "triangle", { attack: 0.01, decay: 0.9, sustain: 0, release: 0.05 }, 0.45)], [tone(midi(84), 0.8, "sine", { attack: 0.01, decay: 0.7, sustain: 0, release: 0.05 }, 0.25)]), 14, 0.7) },
+  { id: "gong", name: "Gong", nameEn: "Gong", category: "musik", tags: ["gamelan", "jawa", "indonesia", "pukul"], make: () => mix(1.9, [tone(vib(110, 4, 0.01), 1.9, "sine", { attack: 0.01, decay: 1.85, sustain: 0, release: 0.05 }, 0.55)], [tone(220.5, 1.6, "sine", { attack: 0.01, decay: 1.5, sustain: 0, release: 0.05 }, 0.25)], [tone(331, 1, "sine", { attack: 0.01, decay: 0.9, sustain: 0, release: 0.05 }, 0.12)]) },
+  { id: "kentongan", name: "Kentongan", nameEn: "Wooden Knock", category: "perkusi", tags: ["kayu", "pukul", "indonesia", "ronda"], make: () => concat(...[0, 1].map(() => concat(mix(0.12, [tone(exp(900, 600, 0.05), 0.12, "sine", { attack: 0.001, decay: 0.1, sustain: 0, release: 0.01 }, 0.6)], [noise(0.02, 91, { attack: 0.0005, release: 0.015 }, 0.4, 4000, 600)]), new Float32Array(2600)))) },
+  { id: "hore", name: "Hore!", nameEn: "Hooray", category: "efek", tags: ["menang", "senang", "sorak", "berhasil"], make: () => mix(1.2, [noise(1.1, 93, { attack: 0.05, decay: 0.9, sustain: 0.2, release: 0.2 }, 0.35, 3500, 400)], [arpeggio([72, 76, 79, 84], 0.12, "triangle", 0.4), 0.05]) },
+  { id: "jam", name: "Tik Tok Jam", nameEn: "Clock Tick", category: "efek", tags: ["waktu", "detik", "menunggu"], make: () => concat(...[1800, 1400, 1800].map((hz) => concat(tone(hz, 0.03, "square", { attack: 0.0005, release: 0.02 }, 0.3), new Float32Array(Math.round(SYNTH_RATE * 0.47))))) },
+  { id: "notifikasi", name: "Notifikasi", nameEn: "Notification", category: "antarmuka", tags: ["pesan", "ding", "pemberitahuan", "ai"], make: () => concat(bell(midi(88), 0.25), bell(midi(93), 0.5)) },
 ];
 
 /** Bangun semua suara (dinormalisasi ke puncak 0.8). */

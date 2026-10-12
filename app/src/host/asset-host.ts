@@ -152,7 +152,11 @@ export function createRuntimeAssetHost(runtime: IRuntime, media: IMediaLoader): 
         .map((x) => x.name);
       const name = StringUtil.unusedName(newName, others);
       if (name === c.name) return;
+      const oldName = c.name;
       c.name = name;
+      // RenderedTarget.renameCostume: perbarui menu kostum/latar di blok.
+      if (t.isStage) for (const other of runtime.targets) renameAssetRefs(other, oldName, name, "backdrop");
+      else renameAssetRefs(t, oldName, name, "costume");
       notifyRuntime();
     },
     reorderCostume(from, to) {
@@ -209,7 +213,10 @@ export function createRuntimeAssetHost(runtime: IRuntime, media: IMediaLoader): 
         .map((x) => x.name);
       const name = StringUtil.unusedName(newName, others);
       if (name === s.name) return;
+      const oldName = s.name;
       s.name = name;
+      // vm.renameSound: perbarui menu suara di blok.
+      renameAssetRefs(t, oldName, name, "sound");
       notifyRuntime();
     },
     reorderSound(from, to) {
@@ -232,4 +239,10 @@ export function createRuntimeAssetHost(runtime: IRuntime, media: IMediaLoader): 
       listeners.clear();
     },
   };
+}
+
+/** blocks.updateAssetName (scratch-vm) bila container mendukungnya. */
+function renameAssetRefs(target: ITarget, oldName: string, newName: string, type: "costume" | "sound" | "backdrop"): void {
+  const blocks = target.blocks as { updateAssetName?(o: string, n: string, t: string): void };
+  blocks.updateAssetName?.(oldName, newName, type);
 }

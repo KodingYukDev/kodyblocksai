@@ -39,6 +39,50 @@ export interface LayoutDeps {
   measure: TextMeasurer;
   /** Teks tampilan field (label opsi dropdown, nama variabel, dst). */
   fieldText(block: Block, fieldName: string): string;
+  /** Cache layout stack top-level (opsional, dipakai workspace agar proyek besar tetap lancar). */
+  memo?: StackMemo;
+}
+
+/**
+ * Cache layout per stack top-level. Kunci = isi semua blok di stack (tanpa x/y blok atas) +
+ * `epoch`. Naikkan `epoch` bila sesuatu di luar blok mengubah tampilan (bahasa, definisi, nama
+ * variabel/aset): semua entri otomatis tidak cocok lagi.
+ */
+export interface StackMemo {
+  epoch: number;
+  map: Map<string, { sig: string; layout: StackLayout }>;
+}
+
+export function createStackMemo(): StackMemo {
+  return { epoch: 0, map: new Map() };
+}
+
+/** Tanda isi stack (top-level saja: layout blok atas tidak bergantung induk). */
+export function stackSignature(blocks: BlockMap, topId: string, epoch: number): string {
+  const parts: string[] = [String(epoch)];
+  const seen = new Set<string>();
+  const stack: (string | null)[] = [topId];
+  while (stack.length) {
+    const id = stack.pop();
+    if (!id || seen.has(id)) continue;
+    const b = blocks[id];
+    if (!b) continue;
+    seen.add(id);
+    if (id === topId) {
+      const { x: _x, y: _y, ...rest } = b;
+      parts.push(JSON.stringify(rest));
+    } else {
+      parts.push(JSON.stringify(b));
+    }
+    stack.push(b.next);
+    for (const name in b.inputs) {
+      const inp = b.inputs[name];
+      if (!inp) continue;
+      stack.push(inp.block);
+      if (inp.shadow !== inp.block) stack.push(inp.shadow);
+    }
+  }
+  return parts.join("\n");
 }
 
 export type FieldStyle = "text-in-shadow" | "dropdown" | "dropdown-in-shadow" | "colour" | "label";
@@ -281,6 +325,18 @@ function layoutStatement(deps: LayoutDeps, block: Block, info: BlockInfo): Block
 
 /** Layout stack mulai dari id mengikuti next. */
 export function layoutStack(deps: LayoutDeps, topId: string): StackLayout {
+  const memo = deps.memo;
+  const top = deps.blocks[topId];
+  if (!memo || !top || top.parent) return computeStack(deps, topId);
+  const sig = stackSignature(deps.blocks, topId, memo.epoch);
+  const hit = memo.map.get(topId);
+  if (hit && hit.sig === sig) return hit.layout;
+  const layout = computeStack(deps, topId);
+  memo.map.set(topId, { sig, layout });
+  return layout;
+}
+
+function computeStack(deps: LayoutDeps, topId: string): StackLayout {
   const items: { layout: BlockLayout; y: number }[] = [];
   let y = 0;
   let width = 0;

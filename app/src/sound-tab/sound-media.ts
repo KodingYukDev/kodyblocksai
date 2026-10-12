@@ -5,10 +5,15 @@
 import { decodeToAudioBuffer } from "@kody/audio";
 import { makeSound } from "../costume-tab/new-asset";
 import type { NewSound, SoundView } from "../costume-tab/types";
-import { downsampleIfNeeded } from "./sound-edit";
+import { downsampleIfNeeded, SoundTooLargeError } from "./sound-edit";
 import { WavFormatError, decodeWav, encodeWav, type PcmSound } from "./wav";
 
-export const SOUND_ACCEPT = ".wav, .mp3";
+/**
+ * WAV/MP3 disimpan apa adanya (format sound Scratch 3). Format lain (rekaman iPad .m4a, .aac, .ogg,
+ * .webm, .flac) didekode browser lalu disimpan sebagai WAV agar file project tetap bisa dibuka Scratch.
+ * `audio/*` membuat pemilih file iPad/Android menampilkan semua file suara.
+ */
+export const SOUND_ACCEPT = "audio/*,.wav,.mp3,.m4a,.aac,.ogg,.oga,.webm,.flac,.caf";
 export const MAX_SOUND_UPLOAD_BYTES = 10 * 1024 * 1024;
 
 export class SoundImportError extends Error {
@@ -34,9 +39,14 @@ export function setAudioContext(ctx: AudioContext): void {
   shared = ctx;
 }
 
-/** Jenis upload suara seperti file-uploader.js soundUpload (MIME), dengan cadangan ekstensi. */
-export function classifySoundFile(name: string, mime: string): "wav" | "mp3" | null {
-  switch (mime) {
+const CONVERT_EXT = new Set(["m4a", "aac", "mp4", "ogg", "oga", "opus", "webm", "flac", "caf", "3gp"]);
+
+/**
+ * Jenis upload suara seperti file-uploader.js soundUpload (MIME), dengan cadangan ekstensi.
+ * "convert" = format yang didekode lalu disimpan ulang sebagai WAV.
+ */
+export function classifySoundFile(name: string, mime: string): "wav" | "mp3" | "convert" | null {
+  switch (mime.split(";")[0]?.trim().toLowerCase()) {
     case "audio/mp3":
     case "audio/mpeg":
       return "mp3";
@@ -48,8 +58,11 @@ export function classifySoundFile(name: string, mime: string): "wav" | "mp3" | n
     default:
       break;
   }
-  const ext = name.toLowerCase().split(".").pop();
-  return ext === "wav" ? "wav" : ext === "mp3" ? "mp3" : null;
+  const ext = name.toLowerCase().split(".").pop() ?? "";
+  if (ext === "wav") return "wav";
+  if (ext === "mp3") return "mp3";
+  if (CONVERT_EXT.has(ext) || mime.toLowerCase().startsWith("audio/")) return "convert";
+  return null;
 }
 
 /** Dekode bytes suara ke PCM kanal 0. WAV PCM tanpa AudioContext; format lain lewat @kody/audio. */
@@ -64,12 +77,38 @@ export async function decodeSoundBytes(data: Uint8Array): Promise<PcmSound> {
   return { samples: new Float32Array(buf.getChannelData(0)), sampleRate: buf.sampleRate };
 }
 
+/** Tanda tangan byte: RIFF....WAVE = wav, ID3 / frame sync MPEG = mp3, lainnya null. */
+export function sniffSound(b: Uint8Array): "wav" | "mp3" | "other" | null {
+  if (b.length < 4) return null;
+  if (b[0] === 0x52 && b[1] === 0x49 && b[2] === 0x46 && b[3] === 0x46) return "wav";
+  if (b[0] === 0x49 && b[1] === 0x44 && b[2] === 0x33) return "mp3";
+  if (b[0] === 0xff && ((b[1] ?? 0) & 0xe0) === 0xe0 && ((b[1] ?? 0) & 0x06) !== 0) return "mp3";
+  return "other";
+}
+
 export async function soundFromFile(file: { name: string; type: string; bytes: Uint8Array }): Promise<NewSound> {
   if (file.bytes.length > MAX_SOUND_UPLOAD_BYTES) throw new SoundImportError(`File ${file.name} terlalu besar (maks 10 MB)`);
   const kind = classifySoundFile(file.name, file.type);
   if (!kind) throw new SoundImportError(`Jenis file tidak didukung: ${file.name}`);
-  const pcm = await decodeSoundBytes(file.bytes);
+  let pcm: PcmSound;
+  try {
+    pcm = await decodeSoundBytes(file.bytes);
+  } catch (e) {
+    if (e instanceof SoundImportError) throw e;
+    throw new SoundImportError(`Suara ${file.name} tidak bisa dibuka di browser ini`);
+  }
+  if (pcm.samples.length === 0) throw new SoundImportError(`Suara ${file.name} kosong`);
   const name = file.name.split(".", 1)[0] || "suara";
+  // Nama .mp3/.wav tetapi isinya format lain (mis. rekaman m4a yang diganti nama): simpan ulang sebagai WAV.
+  const sniffed = sniffSound(file.bytes);
+  if (kind === "convert" || (sniffed !== null && sniffed !== kind)) {
+    try {
+      return encodeSamples(name, pcm).sound;
+    } catch (e) {
+      if (e instanceof SoundTooLargeError) throw new SoundImportError(`Suara ${file.name} terlalu panjang`);
+      throw e;
+    }
+  }
   return makeSound(name, kind, file.bytes, pcm.sampleRate, pcm.samples.length);
 }
 

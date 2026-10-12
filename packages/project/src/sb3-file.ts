@@ -10,10 +10,11 @@ import { createAssetStore, referencedAssets } from "./asset-store";
 import { convertValidatedProject } from "./deserialize";
 import { readImageSize } from "./image-size";
 import { md5Hex } from "./md5";
+import { extensionDisplayName, getExtensionIdForOpcode } from "./opcode-check";
 import { formatIssue, IssueReport } from "./report";
 import type { SB3Project } from "./sb3-types";
 import { serializeProject, stringifyProject, type SerializeOptions } from "./serialize";
-import { ProjectLoadError, SB3_LIMITS, type AssetStore, type LoadedProject, type LoadSb3Options } from "./types";
+import { ProjectLoadError, SB3_LIMITS, type AssetStore, type LoadedProject, type LoadSb3Options, type ProjectIssue } from "./types";
 import { validateProjectJson } from "./validate";
 import { isZip, openLimitedZip, type LimitedZip } from "./zip-reader";
 
@@ -35,7 +36,29 @@ export function parseProjectJsonText(text: string): unknown {
   }
 }
 
-function toBytes(data: ArrayBuffer | Uint8Array): Uint8Array {
+/**
+ * Pesan penolakan yang bisa dipahami anak: bila semua error berasal dari blok ekstensi yang belum
+ * ada, sebutkan nama ekstensinya saja; selain itu ringkasan teknis 5 masalah pertama.
+ */
+export function rejectionMessage(kind: "Project" | "Sprite", errors: readonly ProjectIssue[], rename?: (path: string) => string): string {
+  const unknown = errors.filter((e) => e.code === "unknown-opcode");
+  if (unknown.length > 0 && unknown.length === errors.length) {
+    const names = new Set<string>();
+    for (const e of unknown) {
+      const opcode = /"([^"]+)"/.exec(e.message)?.[1] ?? "";
+      const ext = getExtensionIdForOpcode(opcode);
+      names.add(ext ? extensionDisplayName(ext) : opcode);
+    }
+    return `${kind} ini memakai ekstensi yang belum ada di KodyBlocks: ${[...names].slice(0, 5).join(", ")}. Hapus blok itu di Scratch lalu coba lagi.`;
+  }
+  const head = errors
+    .slice(0, 5)
+    .map((i) => formatIssue(rename ? { ...i, path: rename(i.path) } : i))
+    .join("; ");
+  return `${kind} tidak valid (${errors.length} masalah): ${head}`;
+}
+
+export function toBytes(data: ArrayBuffer | Uint8Array): Uint8Array {
   return data instanceof Uint8Array ? data : new Uint8Array(data);
 }
 
@@ -59,14 +82,19 @@ async function readProjectText(bytes: Uint8Array): Promise<{ text: string; zip: 
   return { text: new TextDecoder().decode(json), zip };
 }
 
-interface AssetSlot {
+export interface AssetSlot {
   /** Kunci asli di project.json (md5ext), dipakai hook ukuran gambar. */
   originalKey: string;
   data: Uint8Array | null;
 }
 
 /** Muat bytes semua asset yang dirujuk; key = `${targetIndex}:${c|s}:${i}`. */
-async function readAssets(project: SB3Project, zip: LimitedZip, report: IssueReport): Promise<Map<string, AssetSlot>> {
+export async function readAssets(
+  project: SB3Project,
+  zip: LimitedZip,
+  report: IssueReport,
+  onlyTargets?: ReadonlySet<number>,
+): Promise<Map<string, AssetSlot>> {
   const slots = new Map<string, AssetSlot>();
   const cache = new Map<string, Uint8Array>();
   const load = async (candidates: string[]): Promise<Uint8Array | null> => {
@@ -82,6 +110,7 @@ async function readAssets(project: SB3Project, zip: LimitedZip, report: IssueRep
     return null;
   };
   for (const [ti, t] of project.targets.entries()) {
+    if (onlyTargets && !onlyTargets.has(ti)) continue;
     for (const [i, c] of t.costumes.entries()) {
       const md5ext = c.md5ext ?? `${c.assetId}.${c.dataFormat}`;
       const data = await load([`${c.assetId}.${c.dataFormat}`, md5ext]);
@@ -109,8 +138,7 @@ export async function loadSb3(data: ArrayBuffer | Uint8Array, options: LoadSb3Op
   const validation = validateProjectJson(json, { unknownOpcodes: options.unknownOpcodes ?? "reject" });
   if (!validation.project) {
     const errors = validation.issues.filter((i) => i.severity === "error");
-    const head = errors.slice(0, 5).map(formatIssue).join("; ");
-    throw new ProjectLoadError(`Project tidak valid (${errors.length} masalah): ${head}`, validation.issues);
+    throw new ProjectLoadError(rejectionMessage("Project", errors), validation.issues);
   }
   const project = validation.project;
   const report = new IssueReport();

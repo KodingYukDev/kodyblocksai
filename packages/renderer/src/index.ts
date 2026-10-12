@@ -1,7 +1,7 @@
 /** @kody/renderer - panggung WebGL/Canvas2D, skin costume, efek, pena, tabrakan. Kontrak: docs/CONTRACTS.md. */
 export * from "./types";
 export { createRenderer, isWebGLSupported } from "./webgl-renderer";
-export { KodyRenderer } from "./renderer-core";
+export { KodyRenderer, MAX_BUFFER_DIMENSION, MAX_PIXEL_RATIO, bufferRatio } from "./renderer-core";
 export type { RendererCoreOptions, RenderStats } from "./renderer-core";
 export { Drawable, getLocalPosition } from "./drawable";
 export { Rectangle } from "./rectangle";

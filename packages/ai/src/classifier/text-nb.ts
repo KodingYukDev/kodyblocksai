@@ -53,6 +53,21 @@ export class TextClassifier {
     return label;
   }
 
+  renameLabel(oldLabel: string, raw: unknown): string {
+    const idx = this.labels.indexOf(oldLabel);
+    if (idx < 0) throw new Error(`Kelas "${oldLabel}" belum ada.`);
+    const label = sanitizeLabel(raw);
+    if (!label) throw new Error("Nama kelas tidak boleh kosong.");
+    if (label !== oldLabel && this.labels.includes(label)) throw new Error(`Kelas "${label}" sudah ada.`);
+    this.labels[idx] = label;
+    return label;
+  }
+
+  /** Salinan mandiri (untuk melatih ulang di atas model lama tanpa mengubahnya). */
+  clone(): TextClassifier {
+    return TextClassifier.fromTrained(this.toTrained(0));
+  }
+
   removeLabel(label: string): void {
     const idx = this.labels.indexOf(label);
     if (idx < 0) return;
