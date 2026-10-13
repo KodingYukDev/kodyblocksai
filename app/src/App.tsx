@@ -159,6 +159,19 @@ function AppWithHost({ host, bus, locale, loader, notify, onDeviceActive, librar
     },
     [runtime],
   );
+  // Monitor label for extension reporters (Scratch: runtime.getLabelForOpcode), e.g. "Deteksi Wajah: jumlah wajah".
+  const extensionLabel = useCallback(
+    (opcode: string) => {
+      const sep = opcode.indexOf("_");
+      if (sep < 0) return undefined;
+      const info = runtime.getExtensionInfo(opcode.slice(0, sep));
+      const block = info?.blocks.find((b) => b !== "---" && b.opcode === opcode.slice(sep + 1));
+      if (!info || !block || block === "---") return undefined;
+      const text = Array.isArray(block.text) ? block.text.join(" ") : block.text;
+      return { label: `${info.name}: ${text.replace(/\s*\[[^\]]*\]/g, "").trim()}` };
+    },
+    [runtime],
+  );
   const onSelect = (entry: LibraryEntry): void => {
     closeLibrary(entry.kind === "sprite" || entry.kind === "backdrop" ? entry : null);
   };
@@ -171,6 +184,7 @@ function AppWithHost({ host, bus, locale, loader, notify, onDeviceActive, librar
         initialLocale={locale}
         ready={host.ready}
         subscribeProjectChanges={subscribeProjectChanges}
+        extensionLabel={extensionLabel}
         onOpenAiLab={(tab, classes) => {
           setLabClasses(classes);
           setLabTab(tab ?? "image");

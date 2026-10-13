@@ -63,7 +63,7 @@ Aturan umum ada di `docs/CONTRACTS.md` bagian 12.
 1. **Vendor model**: jalankan `node packages/ai/tools/vendor-models.mjs` (salin ke `app/public/models`,
    hash diverifikasi). Tanpa ini blok AI menampilkan notice "Model AI gagal dimuat".
 2. **CSP** minimal yang dibutuhkan paket AI:
-   `script-src 'self' blob: 'wasm-unsafe-eval'; worker-src 'self' blob:; connect-src 'self' blob:; img-src 'self' data: blob:; media-src 'self' blob: mediastream:`.
+   `script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; connect-src 'self' blob:; img-src 'self' data: blob:; media-src 'self' blob: mediastream:`.
    Jangan izinkan origin pihak ketiga di `connect-src` (supaya T1 juga dijaga browser).
 3. **Permissions-Policy**: `camera=(self), microphone=(self)`; jangan izinkan iframe pihak ketiga.
 4. **Pasang `CameraIndicator`** di area panggung (selalu terlihat saat perangkat aktif) dan teruskan
@@ -97,5 +97,5 @@ Aturan umum ada di `docs/CONTRACTS.md` bagian 12.
 - **Hash manifest dipin di bundle.** Bila server app sendiri (bundle JS) disusupi, penyerang bisa
   mengganti bundle dan manifest sekaligus; ini di luar cakupan paket AI (lindungi pipeline deploy).
 - **Gestur & ekspresi berbasis aturan** bisa salah baca; jangan dipakai untuk keputusan penting.
-- **Blob URL wasm** butuh `blob:` di `script-src`. Bila CSP tidak mengizinkan, MediaPipe gagal dimuat
-  (ditampilkan sebagai notice), bukan diam-diam memuat dari tempat lain.
+- **Loader wasm MediaPipe** dimuat dari URL same-origin (`/models/mediapipe/wasm/*.js`, hash tetap dicek dulu),
+  karena CSP tidak mengizinkan `blob:` di `script-src`. Hanya biner wasm yang lewat blob URL.

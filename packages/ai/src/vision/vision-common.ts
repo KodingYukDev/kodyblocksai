@@ -185,12 +185,17 @@ export function createVisionCore<R>(runtime: IRuntime, opts: VisionCoreOptions<R
           return;
         }
         // Error (mis. model gagal dimuat) menghentikan loop supaya notice tidak berulang 15x per detik.
-        void s.gate.run(() =>
-          analyseOnce(s.services, "camera").catch((err: unknown) => {
-            stopLoop(s);
-            throw err;
-          }),
-        );
+        // The loop is fire-and-forget, so a failure must be shown here or the child sees nothing.
+        s.gate
+          .run(() =>
+            analyseOnce(s.services, "camera").catch((err: unknown) => {
+              stopLoop(s);
+              throw err;
+            }),
+          )
+          .catch(() => {
+            s.services.notice({ level: "error", code: "ai-model", message: "Model AI gagal dimuat. Coba muat ulang halaman." });
+          });
       };
       s.loop = s.services.timers.setInterval(tick, Math.ceil(1000 / AI_LIMITS.maxAnalysesPerSecond));
       tick();

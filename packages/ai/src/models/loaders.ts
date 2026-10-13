@@ -82,11 +82,13 @@ export function createDefaultDetectorFactories(deps: LoaderDeps): DetectorFactor
   const fileset = (): Promise<Fileset> => {
     filesetPromise ??= (async () => {
       const base = MODEL_PATHS.wasmDir + (wasmSimdSupported() ? "vision_wasm_internal" : "vision_wasm_nosimd_internal");
-      const [js, wasm] = await Promise.all([deps.fetchVerified(`${base}.js`), deps.fetchVerified(`${base}.wasm`)]);
-      const loader = URL.createObjectURL(new Blob([js], { type: "text/javascript" }));
+      // The loader script is served from our own origin and loaded by URL: the CSP allows
+      // script-src 'self' but not blob:, so a blob loader would be blocked. It is still
+      // hash-checked first; only the wasm binary goes through a blob URL (fetch, not script).
+      const [, wasm] = await Promise.all([deps.fetchVerified(`${base}.js`), deps.fetchVerified(`${base}.wasm`)]);
       const binary = URL.createObjectURL(new Blob([wasm], { type: "application/wasm" }));
-      blobUrls.push(loader, binary);
-      return { wasmLoaderPath: loader, wasmBinaryPath: binary };
+      blobUrls.push(binary);
+      return { wasmLoaderPath: `${base}.js`, wasmBinaryPath: binary };
     })();
     filesetPromise.catch(() => (filesetPromise = null));
     return filesetPromise;
